@@ -1,0 +1,47 @@
+{
+  "name": "webdriver-image-comparison",
+  "version": "0.1.0",
+  "description": "An image compare module that can be used for different NodeJS Test automation frameworks that support the webdriver protocol",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "precompile": "npm run clean",
+    "compile": "tsc --allowJs true --declaration false && tsc",
+    "lint": "tslint -p tsconfig.json",
+    "clean": "rimraf coverage build tmp",
+    "pretest": "npm run lint",
+    "test": "jasmine-ts --config=jasmine.json",
+    "watch": "npm run compile -- -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wswebcreation/webdriver-image-comparison.git"
+  },
+  "keywords": [],
+  "author": "Wim Selles - wswebcreation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wswebcreation/webdriver-image-comparison/issues"
+  },
+  "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
+  "dependencies": {
+    "canvas": "^2.2.0",
+    "chalk": "^2.4.1",
+    "fs-extra": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/fs-extra": "^5.0.4",
+    "@types/jasmine": "^3.3.1",
+    "@types/node": "^10.12.15",
+    "awesome-typescript-loader": "^5.2.1",
+    "husky": "^1.2.1",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.3.1",
+    "jasmine-ts": "^0.3.0",
+    "rimraf": "^2.6.2",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.2.2",
+    "validate-commit-msg": "^2.14.0"
+  }
+}
