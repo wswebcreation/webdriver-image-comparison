@@ -28,13 +28,13 @@ export function getAndCreatePath(folder: string, options: GetAndCreatePathOption
  */
 export function formatFileName(options: FormatFileNameOptions): string {
   let defaults: FormatFileDefaults = {
-    browserName: options.browserName,
-    deviceName: options.deviceName,
+    browserName: options.browserName || 'no-provided-browserName-in-caps',
+    deviceName: options.deviceName || 'no-provided-deviceName-in-caps',
     dpr: options.devicePixelRatio,
     height: options.isMobile ? options.screenHeight : options.outerHeight,
-    logName: options.logName,
+    logName: options.logName || 'no-provided-logName-in-caps',
     mobile: (options.isMobile && options.isTestInBrowser) ? options.browserName : options.isMobile ? 'app' : '',
-    name: options.name,
+    name: options.name || 'no-provided-name-in-caps',
     tag: options.tag,
     width: options.isMobile ? options.screenWidth : options.outerWidth
   };

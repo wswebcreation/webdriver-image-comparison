@@ -209,13 +209,6 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
 
 /**
  * Take a full page screenshots
- *
- * @param {function} takeScreenshot                The screenshot method
- * @param {function} executor                      The command to execute js in the browser
- * @param {object}   options                       The instance data
- * @param {number}   options.devicePixelRatio      The device pixel ratio
- * @param {number}   options.fullPageScrollTimeout The timeout to wait after a scroll
- * @param {number}   options.innerHeight           The innerheight
  */
 export async function getFullPageScreenshotsDataDesktop(
   takeScreenshot: TakeScreenShot,

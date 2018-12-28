@@ -5,16 +5,12 @@ import {
   FULL_PAGE_SCROLL_TIMEOUT,
 } from './constants';
 import {ClassOptions, DefaultOptions} from './options.interface';
-import {
-  DefaultImageCompareCompareOptions,
-  MethodImageCompareCompareOptions,
-  ScreenMethodImageCompareCompareOptions
-} from '../methods/images.interfaces';
+import {MethodImageCompareCompareOptions, ScreenMethodImageCompareCompareOptions} from '../methods/images.interfaces';
 
 /**
  * Determine the default options
  */
-export function defaultOptions(options:ClassOptions): DefaultOptions {
+export function defaultOptions(options: ClassOptions): DefaultOptions {
   return {
     /**
      * Module options
@@ -23,14 +19,8 @@ export function defaultOptions(options:ClassOptions): DefaultOptions {
     autoSaveBaseline: options.autoSaveBaseline || false,
     debug: options.debug || false,
     formatImageName: options.formatImageName || DEFAULT_FORMAT_STRING,
-    nativeWebScreenshot: !!options.nativeWebScreenshot,
     savePerInstance: options.savePerInstance || false,
     toolBarShadowPadding: options.toolBarShadowPadding || DEFAULT_SHADOW.TOOL_BAR,
-
-    /**
-     * Method options
-     */
-    resizeDimensions: DEFAULT_RESIZE_DIMENSIONS,
 
     /**
      * Module and method options
@@ -38,7 +28,9 @@ export function defaultOptions(options:ClassOptions): DefaultOptions {
     disableCSSAnimation: options.disableCSSAnimation || false,
     fullPageScrollTimeout: options.fullPageScrollTimeout || FULL_PAGE_SCROLL_TIMEOUT,
     hideScrollBars: options.hideScrollBars !== false,
-    // Compare options
+    /**
+     * Compare options
+     */
     compareOptions: {
       blockOutStatusBar: !!options.blockOutStatusBar,
       blockOutToolBar: !!options.blockOutToolBar,
@@ -58,7 +50,7 @@ export function defaultOptions(options:ClassOptions): DefaultOptions {
 /**
  * Determine the screen method compare options
  */
-export function screenMethodCompareOptions (options: ScreenMethodImageCompareCompareOptions): ScreenMethodImageCompareCompareOptions{
+export function screenMethodCompareOptions(options: ScreenMethodImageCompareCompareOptions): ScreenMethodImageCompareCompareOptions {
   return {
     ...('blockOutStatusBar' in options ? {blockOutStatusBar: options.blockOutStatusBar} : {}),
     ...('blockOutToolBar' in options ? {blockOutToolBar: options.blockOutToolBar} : {}),
@@ -69,7 +61,7 @@ export function screenMethodCompareOptions (options: ScreenMethodImageCompareCom
 /**
  * Determine the method compare options
  */
-export function methodCompareOptions(options: any): MethodImageCompareCompareOptions{
+export function methodCompareOptions(options: any): MethodImageCompareCompareOptions {
   return {
     ...('blockOut' in options ? {blockOut: options.blockOut} : {}),
     ...('ignoreAlpha' in options ? {ignoreAlpha: options.ignoreAlpha} : {}),
