@@ -10,6 +10,7 @@ import {Folders} from '../base.interface';
 import {SaveElementOptions} from './element.interfaces';
 import {ElementRectanglesOptions, RectanglesOutput} from '../methods/rectangles.interfaces';
 import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
+import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
 
 /**
  * Saves an image of an element
@@ -33,7 +34,7 @@ export default async function saveElement(
   const hideScrollBars: boolean = 'hideScrollBars' in saveElementOptions.method
     ? saveElementOptions.method.hideScrollBars
     : saveElementOptions.wic.hideScrollBars;
-  const resizeDimensions = saveElementOptions.method.resizeDimensions || saveElementOptions.wic.resizeDimensions;
+  const resizeDimensions = saveElementOptions.method.resizeDimensions || DEFAULT_RESIZE_DIMENSIONS;
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {

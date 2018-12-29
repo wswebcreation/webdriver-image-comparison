@@ -44,7 +44,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
       returnAllCompareData: options.returnAllCompareData || false,
       saveAboveTolerance: options.saveAboveTolerance || 0,
     },
-  }
+  };
 }
 
 /**

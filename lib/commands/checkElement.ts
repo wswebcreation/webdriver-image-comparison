@@ -24,19 +24,9 @@ export default async function checkElement(
   const saveElementOptions: SaveElementOptions = {
     wic: checkElementOptions.wic,
     method: {
-      ...(
-        'addressBarShadowPadding' in checkElementOptions.method
-          ? {addressBarShadowPadding: checkElementOptions.method.addressBarShadowPadding}
-          : {}
-      ),
       ...('disableCSSAnimation' in checkElementOptions.method ? {disableCSSAnimation: checkElementOptions.method.disableCSSAnimation} : {}),
       ...('hideScrollBars' in checkElementOptions.method ? {hideScrollBars: checkElementOptions.method.hideScrollBars} : {}),
       ...('resizeDimensions' in checkElementOptions.method ? {resizeDimensions: checkElementOptions.method.resizeDimensions} : {}),
-      ...(
-        'toolBarShadowPadding' in checkElementOptions.method
-          ? {toolBarShadowPadding: checkElementOptions.method.toolBarShadowPadding}
-          : {}
-      ),
     }
   };
   const {devicePixelRatio, fileName} = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);

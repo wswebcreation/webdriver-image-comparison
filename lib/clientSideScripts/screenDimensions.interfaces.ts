@@ -49,5 +49,5 @@ export interface ScreenDimensions {
       // The height of the screen
       screenHeight: number
     }
-  }
+  };
 }

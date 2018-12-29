@@ -121,7 +121,7 @@ export interface ImageCompareResult {
     // This following folder is optional and only if there is a mismatch
     // The folder that holds the diffs and the file name
     diff?: string;
-  },
+  };
   // The mismatch percentage
   misMatchPercentage: number;
 }

@@ -11,7 +11,7 @@ export interface SaveElementMethodOptions {
   // The padding that needs to be added to the address bar on iOS and Android
   addressBarShadowPadding?: number;
   // Disable all css animations
-  disableCSSAnimation?: boolean
+  disableCSSAnimation?: boolean;
   // Hide all scrollbars
   hideScrollBars?: boolean;
   // The resizeDimensions, for backwards compatibility this will be an object or a number

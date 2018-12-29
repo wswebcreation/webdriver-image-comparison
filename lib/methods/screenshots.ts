@@ -4,8 +4,7 @@ import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroi
 import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
 import {OFFSETS} from '../helpers/constants';
 import {calculateDprData, getScreenshotSize, waitFor} from '../helpers/utils';
-import {Executor} from './methods.interface';
-import {TakeScreenShot} from './methods.interface';
+import {Executor, TakeScreenShot} from './methods.interface';
 import {
   FullPageScreenshotOptions,
   FullPageScreenshotNativeMobileOptions,
@@ -195,7 +194,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
         imageYPosition: imageYPosition,
       }, devicePixelRatio),
       screenshot,
-    })
+    });
   }
 
   return {

@@ -26,12 +26,12 @@ export default async function saveScreen(
   const {addressBarShadowPadding, formatImageName, savePerInstance, toolBarShadowPadding} = saveScreenOptions.wic;
 
   // 1b. Set the method options to the right values
-  const hideScrollBars: boolean = 'hideScrollBars' in saveScreenOptions.method
-    ? saveScreenOptions.method.hideScrollBars
-    : saveScreenOptions.wic.hideScrollBars;
   const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveScreenOptions.method
     ? saveScreenOptions.method.disableCSSAnimation
     : saveScreenOptions.wic.disableCSSAnimation;
+  const hideScrollBars: boolean = 'hideScrollBars' in saveScreenOptions.method
+    ? saveScreenOptions.method.hideScrollBars
+    : saveScreenOptions.wic.hideScrollBars;
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {

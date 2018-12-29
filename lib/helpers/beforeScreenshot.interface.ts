@@ -13,4 +13,4 @@ export interface BeforeScreenshotOptions {
   toolBarShadowPadding: number;
 }
 
-export interface BeforeScreenshotResult extends EnrichedInstanceData {};
+export interface BeforeScreenshotResult extends EnrichedInstanceData {}

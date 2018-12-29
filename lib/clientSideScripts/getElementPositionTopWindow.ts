@@ -11,5 +11,5 @@ export default function getElementPositionTopWindow(element: HTMLElement): Eleme
     width: Math.round(rectangles.width),
     x: Math.round(rectangles.left),
     y: Math.round(rectangles.top),
-  }
+  };
 }

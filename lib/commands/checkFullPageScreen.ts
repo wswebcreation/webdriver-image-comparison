@@ -24,11 +24,6 @@ export default async function checkFullPageScreen(
     wic: checkFullPageOptions.wic,
     method: {
       ...(
-        'addressBarShadowPadding' in checkFullPageOptions.method
-          ? {addressBarShadowPadding: checkFullPageOptions.method.addressBarShadowPadding}
-          : {}
-      ),
-      ...(
         'disableCSSAnimation' in checkFullPageOptions.method
           ? {disableCSSAnimation: checkFullPageOptions.method.disableCSSAnimation}
           : {}
@@ -39,12 +34,6 @@ export default async function checkFullPageScreen(
           : {}
       ),
       ...('hideScrollBars' in checkFullPageOptions.method ? {hideScrollBars: checkFullPageOptions.method.hideScrollBars} : {}),
-      ...('resizeDimensions' in checkFullPageOptions.method ? {resizeDimensions: checkFullPageOptions.method.resizeDimensions} : {}),
-      ...(
-        'toolBarShadowPadding' in checkFullPageOptions.method
-          ? {toolBarShadowPadding: checkFullPageOptions.method.toolBarShadowPadding}
-          : {}
-      ),
     }
   };
   const {devicePixelRatio, fileName} = await saveFullPageScreen(methods, instanceData, folders, tag, saveFullPageOptions);

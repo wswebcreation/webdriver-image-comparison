@@ -9,5 +9,5 @@ export default function getElementPositionTopDom(element: HTMLElement): ElementP
     width: element.offsetWidth,
     x: element.offsetLeft,
     y: element.offsetTop,
-  }
+  };
 }

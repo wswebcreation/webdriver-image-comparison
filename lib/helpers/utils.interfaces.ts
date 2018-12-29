@@ -33,7 +33,7 @@ export interface FormatFileNameOptions {
   // The height of the screen
   screenHeight: number;
   // The width of the screen
-  screenWidth: number
+  screenWidth: number;
   // The tag of the image
   tag: string;
 }

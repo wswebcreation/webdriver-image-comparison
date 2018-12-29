@@ -1,0 +1,13 @@
+sudo: required
+dist: trusty
+
+language: node_js
+
+node_js:
+  - "stable"
+
+script:
+  - npm run test:coverage
+
+after_script:
+  - npm run coveralls

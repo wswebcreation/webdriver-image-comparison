@@ -4,7 +4,7 @@ export interface AndroidOffsets {
     STATUS_BAR: number;
     // The height of the address bar
     ADDRESS_BAR: number;
-  }
+  };
 }
 
 export interface IosOffsets {
@@ -42,5 +42,5 @@ export interface IosOffsets {
         y: number;
       };
     }
-  }
+  };
 }

@@ -13,4 +13,4 @@ export default async function compareImages(image1: Buffer, image2: Buffer, opti
       }
     });
   });
-};
+}

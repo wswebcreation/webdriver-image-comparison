@@ -9,8 +9,10 @@
     "compile": "tsc --allowJs true --declaration false && tsc",
     "lint": "tslint -p tsconfig.json",
     "clean": "rimraf coverage build tmp",
-    "pretest": "npm run lint",
+    "pretest": "npm run lint -- --fix",
     "test": "jasmine-ts --config=jasmine.json",
+    "test:coverage": "ts-node node_modules/istanbul/lib/cli.js cover -e .ts  -x \"*.d.ts\" -x \"*.spec.ts\" node_modules/jasmine/bin/jasmine.js -- JASMINE_CONFIG_PATH=jasmine.json",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "watch": "npm run compile -- -w"
   },
   "repository": {
@@ -35,13 +37,18 @@
     "@types/jasmine": "^3.3.1",
     "@types/node": "^10.12.15",
     "awesome-typescript-loader": "^5.2.1",
+    "coveralls": "^3.0.2",
     "husky": "^1.2.1",
-    "istanbul": "^0.4.5",
+    "istanbul": "^1.1.0-alpha.1",
     "jasmine": "^3.3.1",
     "jasmine-ts": "^0.3.0",
     "rimraf": "^2.6.2",
     "source-map-loader": "^0.2.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.0",
+    "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.2.2",
-    "validate-commit-msg": "^2.14.0"
+    "validate-commit-msg": "^2.14.0",
+    "vrsource-tslint-rules": "^6.0.0"
   }
 }

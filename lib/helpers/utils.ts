@@ -28,13 +28,13 @@ export function getAndCreatePath(folder: string, options: GetAndCreatePathOption
  */
 export function formatFileName(options: FormatFileNameOptions): string {
   let defaults: FormatFileDefaults = {
-    browserName: options.browserName || 'no-provided-browserName-in-caps',
-    deviceName: options.deviceName || 'no-provided-deviceName-in-caps',
+    browserName: options.browserName,
+    deviceName: options.deviceName,
     dpr: options.devicePixelRatio,
     height: options.isMobile ? options.screenHeight : options.outerHeight,
-    logName: options.logName || 'no-provided-logName-in-caps',
+    logName: options.logName,
     mobile: (options.isMobile && options.isTestInBrowser) ? options.browserName : options.isMobile ? 'app' : '',
-    name: options.name || 'no-provided-name-in-caps',
+    name: options.name,
     tag: options.tag,
     width: options.isMobile ? options.screenWidth : options.outerWidth
   };
@@ -152,5 +152,5 @@ export function getScreenshotSize(screenshot: string, devicePixelRation: number 
   return {
     height: new Buffer(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
     width: new Buffer(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
-  }
+  };
 }

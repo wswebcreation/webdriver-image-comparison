@@ -67,7 +67,7 @@ export interface DefaultOptions {
   disableCSSAnimation: boolean;
   fullPageScrollTimeout: number;
   hideScrollBars: boolean;
-  compareOptions: CompareOptions
+  compareOptions: CompareOptions;
 }
 
 interface CompareOptions {
