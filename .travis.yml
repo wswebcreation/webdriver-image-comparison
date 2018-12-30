@@ -7,6 +7,7 @@ node_js:
   - "stable"
 
 script:
+  - npm i
   - npm run test:coverage
 
 after_script:
