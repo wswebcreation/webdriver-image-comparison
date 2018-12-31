@@ -68,7 +68,6 @@ export function methodCompareOptions(options: any): MethodImageCompareCompareOpt
     ...('ignoreAntialiasing' in options ? {ignoreAntialiasing: options.ignoreAntialiasing} : {}),
     ...('ignoreColors' in options ? {ignoreColors: options.ignoreColors} : {}),
     ...('ignoreLess' in options ? {ignoreLess: options.ignoreLess} : {}),
-    ...('ignoreLess' in options ? {ignoreLess: options.ignoreLess} : {}),
     ...('ignoreNothing' in options ? {ignoreNothing: options.ignoreNothing} : {}),
     ...('ignoreTransparentPixel' in options ? {ignoreTransparentPixel: options.ignoreTransparentPixel} : {}),
     ...('rawMisMatchPercentage' in options ? {rawMisMatchPercentage: options.rawMisMatchPercentage} : {}),

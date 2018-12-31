@@ -19,7 +19,7 @@ import {
 import {FormatFileNameOptions, GetAndCreatePathOptions} from './utils.interfaces';
 import {imageString} from '../../mocks/mocks';
 
-describe('', () => {
+describe('utils', () => {
 
   describe('getAndCreatePath', () => {
     const folder = join(process.cwd(), '/.tmp');

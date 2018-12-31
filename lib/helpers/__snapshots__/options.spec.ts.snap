@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options defaultOptions should return the default options when no options are provided 1`] = `
+Object {
+  "addressBarShadowPadding": 6,
+  "autoSaveBaseline": false,
+  "compareOptions": Object {
+    "blockOutStatusBar": false,
+    "blockOutToolBar": false,
+    "ignoreAlpha": false,
+    "ignoreAntialiasing": false,
+    "ignoreColors": false,
+    "ignoreLess": false,
+    "ignoreNothing": false,
+    "ignoreTransparentPixel": false,
+    "rawMisMatchPercentage": false,
+    "returnAllCompareData": false,
+    "saveAboveTolerance": 0,
+  },
+  "debug": false,
+  "disableCSSAnimation": false,
+  "formatImageName": "{tag}-{browserName}-{width}x{height}-dpr-{dpr}",
+  "fullPageScrollTimeout": 1500,
+  "hideScrollBars": true,
+  "savePerInstance": false,
+  "toolBarShadowPadding": 6,
+}
+`;
+
+exports[`options defaultOptions should return the provided options when options are provided 1`] = `
+Object {
+  "addressBarShadowPadding": 1,
+  "autoSaveBaseline": true,
+  "compareOptions": Object {
+    "blockOutStatusBar": true,
+    "blockOutToolBar": true,
+    "ignoreAlpha": true,
+    "ignoreAntialiasing": true,
+    "ignoreColors": true,
+    "ignoreLess": true,
+    "ignoreNothing": true,
+    "ignoreTransparentPixel": true,
+    "rawMisMatchPercentage": true,
+    "returnAllCompareData": true,
+    "saveAboveTolerance": 12,
+  },
+  "debug": true,
+  "disableCSSAnimation": true,
+  "formatImageName": "{foo}-{bar}",
+  "fullPageScrollTimeout": 12345,
+  "hideScrollBars": true,
+  "savePerInstance": true,
+  "toolBarShadowPadding": 1,
+}
+`;
+
+exports[`options methodCompareOptions should not return the method options when no options are provided 1`] = `Object {}`;
+
+exports[`options methodCompareOptions should return the provided options when options are provided 1`] = `
+Object {
+  "blockOut": Array [
+    Object {
+      "height": 1,
+      "width": 2,
+      "x": 3,
+      "y": 4,
+    },
+  ],
+  "ignoreAlpha": true,
+  "ignoreAntialiasing": true,
+  "ignoreColors": true,
+  "ignoreLess": true,
+  "ignoreNothing": true,
+  "ignoreTransparentPixel": true,
+  "rawMisMatchPercentage": true,
+  "returnAllCompareData": true,
+  "saveAboveTolerance": 12,
+}
+`;
+
+exports[`options screenMethodCompareOptions should not return the screen method options when no options are provided 1`] = `Object {}`;
+
+exports[`options screenMethodCompareOptions should return the provided options when options are provided 1`] = `
+Object {
+  "blockOut": Array [
+    Object {
+      "height": 1,
+      "width": 2,
+      "x": 3,
+      "y": 4,
+    },
+  ],
+  "blockOutStatusBar": false,
+  "blockOutToolBar": false,
+  "ignoreAlpha": true,
+  "ignoreAntialiasing": true,
+  "ignoreColors": true,
+  "ignoreLess": true,
+  "ignoreNothing": true,
+  "ignoreTransparentPixel": true,
+  "rawMisMatchPercentage": true,
+  "returnAllCompareData": true,
+  "saveAboveTolerance": 12,
+}
+`;
