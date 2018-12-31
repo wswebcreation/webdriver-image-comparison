@@ -9,6 +9,7 @@ module.exports = {
   collectCoverageFrom: [
     '**/*.ts',
     '!**/node_modules/**',
+    '!**/mocks/**',
     '!**/*.spec.ts'
   ],
   coverageThreshold: {

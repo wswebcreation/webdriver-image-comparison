@@ -142,6 +142,7 @@ export function calculateDprData<T>(data: T, devicePixelRatio: number): T {
  * Wait for an amount of milliseconds
  */
 export async function waitFor(milliseconds: number): Promise<void> {
+  /* istanbul ignore next */
   return new Promise(resolve => setTimeout(() => resolve(), milliseconds));
 }
 

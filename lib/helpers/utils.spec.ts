@@ -12,9 +12,12 @@ import {
   formatFileName,
   getAddressBarShadowPadding,
   getAndCreatePath,
+  getScreenshotSize,
   getToolBarShadowPadding,
+  waitFor,
 } from './utils';
 import {FormatFileNameOptions, GetAndCreatePathOptions} from './utils.interfaces';
+import {imageString} from '../../mocks/mocks';
 
 describe('', () => {
 
@@ -365,6 +368,27 @@ describe('', () => {
       };
 
       expect(calculateDprData(data, 2)).toMatchSnapshot();
+    });
+  });
+
+  describe('waitFor', () => {
+    jest.useFakeTimers();
+
+    it('should wait for an amount of seconds and resolves the promise', () => {
+      waitFor(500);
+
+      expect(setTimeout).toHaveBeenCalledTimes(1);
+      expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
+    });
+  });
+
+  describe('getScreenshotSize', () => {
+    it('should get the screenshot size of a screenshot string with the default DPR', () => {
+      expect(getScreenshotSize(imageString)).toMatchSnapshot();
+    });
+
+    it('should get the screenshot size of a screenshot string with DRP 2', () => {
+      expect(getScreenshotSize(imageString, 2)).toMatchSnapshot();
     });
   });
 });
