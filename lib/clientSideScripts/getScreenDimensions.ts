@@ -25,7 +25,7 @@ export default function getScreenDimensions():ScreenDimensions {
         innerHeight: window.innerHeight,
         outerHeight: window.outerHeight === 0 ? html.clientHeight : window.outerHeight,
         outerWidth: window.outerWidth === 0 ? html.clientWidth : window.outerWidth,
-        devicePixelRatio: typeof window.devicePixelRatio === 'undefined' ? 1 : window.devicePixelRatio,
+        devicePixelRatio: window.devicePixelRatio,
         screenWidth: window.screen.width,
         screenHeight: window.screen.height,
       }
