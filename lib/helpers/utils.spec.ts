@@ -17,7 +17,7 @@ import {
   waitFor,
 } from './utils';
 import {FormatFileNameOptions, GetAndCreatePathOptions} from './utils.interfaces';
-import {imageString} from '../../mocks/mocks';
+import {IMAGE_STRING} from '../../mocks/mocks';
 
 describe('utils', () => {
 
@@ -384,11 +384,11 @@ describe('utils', () => {
 
   describe('getScreenshotSize', () => {
     it('should get the screenshot size of a screenshot string with the default DPR', () => {
-      expect(getScreenshotSize(imageString)).toMatchSnapshot();
+      expect(getScreenshotSize(IMAGE_STRING)).toMatchSnapshot();
     });
 
     it('should get the screenshot size of a screenshot string with DRP 2', () => {
-      expect(getScreenshotSize(imageString, 2)).toMatchSnapshot();
+      expect(getScreenshotSize(IMAGE_STRING, 2)).toMatchSnapshot();
     });
   });
 });
