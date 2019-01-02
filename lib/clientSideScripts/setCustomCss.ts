@@ -26,10 +26,9 @@ export default function setCustomCss(cssOptions: CssOptions): void {
 	const bodyTopPadding = addressBarPadding === 0 ? '' : `body{padding-top:${ addressBarPadding }px !important}`;
 	const bodyBottomPadding = toolBarPadding === 0 ? '' : `body{padding-bottom:${ toolBarPadding }px !important}`;
 	const css = (disableCSSAnimation ? disableTransformationsTransitionsAnimations : '') + bodyTopPadding + bodyBottomPadding;
-	const head = document.head || document.getElementsByTagName('head')[ 0 ];
+	const head = document.head;
 	const style = document.createElement('style');
 
-	style.type = 'text/css';
 	style.id = id;
 	style.appendChild(document.createTextNode(css));
 	head.appendChild(style);
