@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAndroidStatusAddressToolBarHeight should the the android status, address and toolbar height 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 80,
+    "width": 412,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 48,
+    "width": 412,
+    "x": 0,
+    "y": 684,
+  },
+}
+`;
