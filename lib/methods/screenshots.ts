@@ -45,9 +45,9 @@ export async function getBase64FullPageScreenshotsData(
 
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
-    const {height: statusAddressBarHeight} = (
+    const statusAddressBarHeight = (
       <StatusAddressToolBarHeight>(await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
-    ).statusAddressBar;
+    ).statusAddressBar.height;
     const androidNativeMobileOptions = {...nativeMobileOptions, statusAddressBarHeight};
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, androidNativeMobileOptions);
@@ -58,13 +58,14 @@ export async function getBase64FullPageScreenshotsData(
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
   } else if (isIos) {
     // Create a fullpage screenshot for iOS. iOS screenshots will hold the status, address and toolbar so they need to be removed
-    const {height: statusAddressBarHeight} = (
+    const statusAddressBarHeight = (
       <StatusAddressToolBarHeight>(await executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS))
-    ).statusAddressBar;
+    ).statusAddressBar.height;
     const iosNativeMobileOptions = {...nativeMobileOptions, statusAddressBarHeight};
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, iosNativeMobileOptions);
   }
+
   // Create a fullpage screenshot for all desktops
   return getFullPageScreenshotsDataDesktop(takeScreenshot, executor, desktopOptions);
 }

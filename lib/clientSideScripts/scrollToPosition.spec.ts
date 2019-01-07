@@ -1,6 +1,6 @@
 import scrollToPosition from './scrollToPosition';
 
-describe('scrollToPosition', () => {
+xdescribe('scrollToPosition', () => {
   it('should check if the scrollTo function has been called', () => {
     scrollToPosition(150);
     // I can't verify the call of the scrollToPosition with Jest, so there is no verification here, sorry :(

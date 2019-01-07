@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 //@ts-ignore
 import * as resemble from './resemble';
 import {CompareOptions} from '../methods/images.interfaces';
