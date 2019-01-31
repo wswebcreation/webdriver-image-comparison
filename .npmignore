@@ -9,3 +9,5 @@ perfecto.config.json
 local.config.json
 localBaseline/
 docs/
+lib/
+mocks/

@@ -22,9 +22,9 @@ import {IMAGE_STRING} from '../../mocks/mocks';
 describe('utils', () => {
 
   describe('getAndCreatePath', () => {
-    const folder = join(process.cwd(), '/.tmp');
+    const folder = join(process.cwd(), '/.tmp/utils');
 
-    beforeEach(() => removeSync(folder));
+    afterEach(() => removeSync(folder));
 
     it('should create the folder and return the folder name for a device that needs to have it\s own folder', () => {
       const options: GetAndCreatePathOptions = {
