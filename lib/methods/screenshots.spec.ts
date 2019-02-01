@@ -47,7 +47,12 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
-        .mockResolvedValueOnce(788);
+        .mockResolvedValueOnce(1200)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(1200);
 
       // await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
       expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
@@ -71,7 +76,12 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
-        .mockResolvedValueOnce(788);
+        .mockResolvedValueOnce(1200)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(1200);
 
       expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
@@ -81,7 +91,7 @@ describe('screenshots', () => {
         addressBarShadowPadding: 6,
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
-        innerHeight: 800,
+        innerHeight: 768,
         isAndroid: false,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: false,
@@ -93,9 +103,26 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
-        .mockResolvedValueOnce(788);
+        .mockResolvedValueOnce(3200)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(3200)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(3200)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(3200)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(3200);
 
       expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
   });
+
 });
