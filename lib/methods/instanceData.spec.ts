@@ -1,0 +1,167 @@
+import getEnrichedInstanceData from './instanceData';
+
+describe('getEnrichedInstanceData', () => {
+  it('should be able to enrich the instance data with all the defaults for desktop with no shadow padding', async () => {
+    const instanceOptions = {
+      addressBarShadowPadding: 6,
+      toolBarShadowPadding: 6,
+      browserName: 'browserName',
+      deviceName: 'deviceName',
+      logName: 'logName',
+      name: 'name',
+      nativeWebScreenshot: false,
+      platformName: 'platformName',
+    };
+    const MOCKED_EXECUTOR = jest.fn()
+    // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce(
+        {
+          body: {
+            offsetHeight: 0,
+            scrollHeight: 0,
+          },
+          html: {
+            clientHeight: 0,
+            clientWidth: 0,
+            offsetHeight: 0,
+            scrollHeight: 0,
+            scrollWidth: 0,
+          },
+          window: {
+            devicePixelRatio: 1,
+            innerHeight: 768,
+            innerWidth: 1024,
+            outerHeight: 768,
+            outerWidth: 1024,
+            screenHeight: 0,
+            screenWidth: 0,
+          },
+        }
+      );
+
+    expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
+  });
+
+  it('should be able to enrich the instance data with all the defaults for Android ChromeDriver with no shadow padding', async () => {
+    const instanceOptions = {
+      addressBarShadowPadding: 6,
+      toolBarShadowPadding: 6,
+      browserName: 'browserName',
+      deviceName: 'deviceName',
+      logName: 'logName',
+      name: 'name',
+      nativeWebScreenshot: false,
+      platformName: 'Android',
+    };
+    const MOCKED_EXECUTOR = jest.fn()
+    // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce(
+        {
+          body: {
+            offsetHeight: 0,
+            scrollHeight: 0,
+          },
+          html: {
+            clientHeight: 0,
+            clientWidth: 0,
+            offsetHeight: 0,
+            scrollHeight: 0,
+            scrollWidth: 0,
+          },
+          window: {
+            devicePixelRatio: 1,
+            innerHeight: 768,
+            innerWidth: 1024,
+            outerHeight: 768,
+            outerWidth: 1024,
+            screenHeight: 0,
+            screenWidth: 0,
+          },
+        }
+      );
+
+    expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
+  });
+
+  it('should be able to enrich the instance data with all the defaults for Android Native Webscreenshot with no shadow padding', async () => {
+    const instanceOptions = {
+      addressBarShadowPadding: 6,
+      toolBarShadowPadding: 6,
+      browserName: 'browserName',
+      deviceName: 'deviceName',
+      logName: 'logName',
+      name: 'name',
+      nativeWebScreenshot: true,
+      platformName: 'Android',
+    };
+    const MOCKED_EXECUTOR = jest.fn()
+    // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce(
+        {
+          body: {
+            offsetHeight: 0,
+            scrollHeight: 0,
+          },
+          html: {
+            clientHeight: 0,
+            clientWidth: 0,
+            offsetHeight: 0,
+            scrollHeight: 0,
+            scrollWidth: 0,
+          },
+          window: {
+            devicePixelRatio: 1,
+            innerHeight: 768,
+            innerWidth: 1024,
+            outerHeight: 768,
+            outerWidth: 1024,
+            screenHeight: 0,
+            screenWidth: 0,
+          },
+        }
+      );
+
+    expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
+  });
+
+  it('should be able to enrich the instance data with all the defaults for iOS with shadow padding', async () => {
+    const instanceOptions = {
+      addressBarShadowPadding: 6,
+      toolBarShadowPadding: 6,
+      browserName: 'browserName',
+      deviceName: 'deviceName',
+      logName: 'logName',
+      name: 'name',
+      nativeWebScreenshot: false,
+      platformName: 'iOS',
+    };
+    const MOCKED_EXECUTOR = jest.fn()
+    // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce(
+        {
+          body: {
+            offsetHeight: 0,
+            scrollHeight: 0,
+          },
+          html: {
+            clientHeight: 0,
+            clientWidth: 0,
+            offsetHeight: 0,
+            scrollHeight: 0,
+            scrollWidth: 0,
+          },
+          window: {
+            devicePixelRatio: 1,
+            innerHeight: 768,
+            innerWidth: 1024,
+            outerHeight: 768,
+            outerWidth: 1024,
+            screenHeight: 0,
+            screenWidth: 0,
+          },
+        }
+      );
+
+    expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, true)).toMatchSnapshot();
+  });
+});
