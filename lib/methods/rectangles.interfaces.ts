@@ -19,8 +19,6 @@ export interface ScreenRectanglesOptions extends RectanglesOptions {
   innerWidth: number;
   // If this is an Android ChromeDriver screenshot
   isAndroidChromeDriverScreenshot: boolean;
-  // If this is an Android native screenshot
-  isIos: boolean;
 }
 
 export interface RectanglesOutput {
