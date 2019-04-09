@@ -1,9 +1,9 @@
 import scrollToPosition from './scrollToPosition';
 
-xdescribe('scrollToPosition', () => {
+describe('scrollToPosition', () => {
   it('should check if the scrollTo function has been called', () => {
+    window.scrollTo = jest.fn();
     scrollToPosition(150);
-    // I can't verify the call of the scrollToPosition with Jest, so there is no verification here, sorry :(
-    // If you know a way, please add it here ;-)
+    expect(window.scrollTo).toBeCalledWith(0, 150);
   });
 });
