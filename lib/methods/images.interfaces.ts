@@ -46,8 +46,6 @@ export interface WicImageCompareOptions {
   ignoreLess: boolean;
   // Compare images and compare with red = 0, green = 0, blue = 0, alpha = 0, minBrightness=0, maxBrightness=255
   ignoreNothing: boolean;
-  // Will ignore all pixels that have some transparency in one of the images
-  ignoreTransparentPixel: boolean;
   // Default false. If true, return percentage will be like 0.12345678, default is 0.12
   rawMisMatchPercentage: boolean;
   // Return all the compare data object
@@ -81,8 +79,6 @@ export interface MethodImageCompareCompareOptions{
   ignoreLess?: boolean;
   // Compare images and compare with red = 0, green = 0, blue = 0, alpha = 0, minBrightness=0, maxBrightness=255
   ignoreNothing?: boolean;
-  // Will ignore all pixels that have some transparency in one of the images
-  ignoreTransparentPixel?: boolean;
   // Default false. If true, return percentage will be like 0.12345678, default is 0.12
   rawMisMatchPercentage?: boolean;
   // Return all the compare data object
@@ -129,5 +125,4 @@ export interface ImageCompareResult {
 export interface CompareOptions {
   ignore:string[];
   ignoreRectangles: RectanglesOutput[];
-  ignoreTransparentPixel: boolean;
 }

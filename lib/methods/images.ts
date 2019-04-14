@@ -124,16 +124,13 @@ export async function executeImageCompare(
     rectangles => calculateDprData(rectangles, devicePixelRatio)
   );
 
-  // 4e.		Add the ignore transparant pixel
-  const ignoreTransparentPixel = imageCompareOptions.ignoreTransparentPixel;
-
-  const compareOptions: CompareOptions = {ignore, ignoreRectangles, ignoreTransparentPixel};
+  const compareOptions: CompareOptions = {ignore, ignoreRectangles};
 
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
-  const misMatchPercentage = imageCompareOptions.rawMisMatchPercentage ?
-    data.rawMisMatchPercentage :
-    Number(data.rawMisMatchPercentage.toFixed(2));
+  const misMatchPercentage = imageCompareOptions.rawMisMatchPercentage
+    ? data.rawMisMatchPercentage
+    : Number(data.rawMisMatchPercentage.toFixed(2));
 
   // 6.		Save the diff when there is a diff or when debug mode is on
   if (misMatchPercentage > imageCompareOptions.saveAboveTolerance || debug) {
