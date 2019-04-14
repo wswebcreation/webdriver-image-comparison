@@ -1,6 +1,6 @@
 import {getBase64FullPageScreenshotsData} from './screenshots';
 import {FullPageScreenshotDataOptions} from './screenshots.interfaces';
-import {IMAGE_STRING} from '../../mocks/mocks';
+import {IMAGE_STRING} from '../mocks/mocks';
 
 describe('screenshots', () => {
   describe('getBase64FullPageScreenshotsData', () => {

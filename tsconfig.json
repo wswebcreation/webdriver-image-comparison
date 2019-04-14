@@ -16,6 +16,7 @@
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noLib": false,
+    "rootDir": "lib/",
     "outDir": "./build",
     "pretty": true,
     "removeComments": true,

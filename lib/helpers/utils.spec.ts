@@ -17,7 +17,7 @@ import {
   waitFor,
 } from './utils';
 import {FormatFileNameOptions, GetAndCreatePathOptions} from './utils.interfaces';
-import {IMAGE_STRING} from '../../mocks/mocks';
+import {IMAGE_STRING} from '../mocks/mocks';
 
 describe('utils', () => {
 
