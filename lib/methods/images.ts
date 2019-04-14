@@ -37,6 +37,7 @@ export async function checkBaselineImageExists(
 #####################################################################################
 `));
           } catch (error) {
+            /* istanbul ignore next */
             reject(red(`
 #####################################################################################
  Image could not be copied. The following error was thrown: 
