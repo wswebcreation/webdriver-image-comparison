@@ -11,6 +11,7 @@ import {CompareOptions, ImageCompareOptions, ImageCompareResult, ResizeDimension
 import {FullPageScreenshotsData} from './screenshots.interfaces';
 import {Executor} from './methods.interface';
 import {CompareData} from '../resemble/compare.interfaces';
+import {getScreenshotSize} from '../helpers/utils'
 
 const {createCanvas, loadImage} = require('canvas');
 
@@ -116,7 +117,7 @@ export async function executeImageCompare(
     blockOutToolBar: imageCompareOptions.blockOutToolBar,
   };
 
-  const ignoreRectangles = blockOut.concat(
+  const ignoredBoxes = blockOut.concat(
     // 4c.	Add the mobile rectangles that need to be ignored
     await determineStatusAddressToolBarRectangles(executor, statusAddressToolBarOptions)
   ).map(
@@ -124,7 +125,10 @@ export async function executeImageCompare(
     rectangles => calculateDprData(rectangles, devicePixelRatio)
   );
 
-  const compareOptions: CompareOptions = {ignore, ignoreRectangles};
+  const compareOptions: CompareOptions = {
+    ignore,
+    ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
+  };
 
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
@@ -140,7 +144,10 @@ export async function executeImageCompare(
     const diffFolderPath = getAndCreatePath(diffFolder, createFolderOptions);
     diffFilePath = join(diffFolderPath, fileName);
 
-    await saveBase64Image(Buffer.from(data.getBuffer()).toString('base64'), diffFilePath);
+    await saveBase64Image(
+      await addBlockOuts(Buffer.from(data.getBuffer()).toString('base64'), ignoredBoxes),
+      diffFilePath,
+    );
 
     console.log(yellow(`
 #####################################################################################
@@ -288,4 +295,46 @@ export async function makeFullPageBase64Image(screenshotsData: FullPageScreensho
  */
 export async function saveBase64Image(base64Image: string, filePath: string): Promise<void> {
   return outputFile(filePath, base64Image, 'base64');
+}
+
+/**
+ * Create a canvas with the ignore boxes if they are present
+ */
+export async function addBlockOuts(screenshot: string, ignoredBoxes: RectanglesOutput[]): Promise<string> {
+  // Create canvas and load image
+  const {height, width} = getScreenshotSize(screenshot);
+  const canvas = createCanvas(width, height);
+  const image = await loadImage(`data:image/png;base64,${screenshot}`);
+  const canvasContext = canvas.getContext('2d');
+
+  // Draw the image on canvas
+  canvasContext.drawImage(
+    image,
+    // Start at x/y pixels from the left and the top of the image (crop)
+    0, 0,
+    // 'Get' a (w * h) area from the source image (crop)
+    width, height,
+    // Place the result at 0, 0 in the canvas,
+    0, 0,
+    // With as width / height: 100 * 100 (scale)
+    width, height,
+  )
+
+  // Loop over all ignored areas and add them to the current canvas
+  ignoredBoxes.forEach(ignoredBox => {
+    const {width: ignoredBoxWidth, height: ignoredBoxHeight, x, y} = ignoredBox;
+    const ignoreCanvas = createCanvas(ignoredBoxWidth, ignoredBoxHeight);
+    const ignoreContext = ignoreCanvas.getContext('2d');
+
+    // Add a background color to the ignored box
+    ignoreContext.globalAlpha = 0.5;
+    ignoreContext.fillStyle = '#39aa56';
+    ignoreContext.fillRect(0, 0, ignoredBoxWidth, ignoredBoxHeight);
+
+    // add to canvasContext
+    canvasContext.drawImage(ignoreCanvas, x, y)
+  });
+
+  // Return the screenshot
+  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
 }

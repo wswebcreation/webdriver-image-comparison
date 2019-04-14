@@ -59,14 +59,14 @@ export interface DefaultImageCompareCompareOptions extends MethodImageCompareCom
   blockOut?: RectanglesOutput[];
 }
 
-export interface ScreenMethodImageCompareCompareOptions extends DefaultImageCompareCompareOptions, MethodImageCompareCompareOptions{
+export interface ScreenMethodImageCompareCompareOptions extends DefaultImageCompareCompareOptions, MethodImageCompareCompareOptions {
   // Block out the status bar yes or no
   blockOutStatusBar?: boolean;
   // Block out the tool bar yes or no
   blockOutToolBar?: boolean;
 }
 
-export interface MethodImageCompareCompareOptions{
+export interface MethodImageCompareCompareOptions {
   // Block out array with x, y, width and height values
   blockOut?: RectanglesOutput[];
   // Compare images and discard alpha
@@ -123,6 +123,8 @@ export interface ImageCompareResult {
 }
 
 export interface CompareOptions {
-  ignore:string[];
-  ignoreRectangles: RectanglesOutput[];
+  ignore: string[];
+  output?: {
+    ignoredBoxes?: RectanglesOutput[]
+  };
 }
