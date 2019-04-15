@@ -4,6 +4,7 @@ exports[`options defaultOptions should return the default options when no option
 Object {
   "addressBarShadowPadding": 6,
   "autoSaveBaseline": false,
+  "clearFolder": false,
   "compareOptions": Object {
     "blockOutStatusBar": false,
     "blockOutToolBar": false,
@@ -30,6 +31,7 @@ exports[`options defaultOptions should return the provided options when options 
 Object {
   "addressBarShadowPadding": 1,
   "autoSaveBaseline": true,
+  "clearFolder": false,
   "compareOptions": Object {
     "blockOutStatusBar": true,
     "blockOutToolBar": true,

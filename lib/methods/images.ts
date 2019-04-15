@@ -3,7 +3,7 @@ import {red, yellow} from 'chalk';
 import {access, copySync, outputFile, readFileSync} from 'fs-extra';
 import {join} from 'path';
 import compareImages from '../resemble/compareImages';
-import {calculateDprData, getAndCreatePath} from '../helpers/utils';
+import {calculateDprData, getAndCreatePath, getScreenshotSize} from '../helpers/utils';
 import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
 import {determineStatusAddressToolBarRectangles} from './rectangles';
 import {RectanglesOutput} from './rectangles.interfaces';
@@ -11,7 +11,6 @@ import {CompareOptions, ImageCompareOptions, ImageCompareResult, ResizeDimension
 import {FullPageScreenshotsData} from './screenshots.interfaces';
 import {Executor} from './methods.interface';
 import {CompareData} from '../resemble/compare.interfaces';
-import {getScreenshotSize} from '../helpers/utils'
 
 const {createCanvas, loadImage} = require('canvas');
 
@@ -318,7 +317,7 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: RectanglesO
     0, 0,
     // With as width / height: 100 * 100 (scale)
     width, height,
-  )
+  );
 
   // Loop over all ignored areas and add them to the current canvas
   ignoredBoxes.forEach(ignoredBox => {
@@ -332,7 +331,7 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: RectanglesO
     ignoreContext.fillRect(0, 0, ignoredBoxWidth, ignoredBoxHeight);
 
     // add to canvasContext
-    canvasContext.drawImage(ignoreCanvas, x, y)
+    canvasContext.drawImage(ignoreCanvas, x, y);
   });
 
   // Return the screenshot

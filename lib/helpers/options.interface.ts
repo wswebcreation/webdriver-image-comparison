@@ -8,6 +8,8 @@ export interface ClassOptions{
   autoSaveBaseline?: boolean;
   // The directory that will hold all the baseline images that are used to during the comparison
   baselineFolder?: string;
+  // Delete runtime folder (actual & diff) on initialisation
+  clearRuntimeFolder?: boolean;
   // Enable extra console logging or always saving the diff images during comparison
   debug?: boolean;
   // The naming of the saved images can be customized by passing the parameter `formatImageName` with a format string
@@ -58,6 +60,7 @@ export interface ClassOptions{
 export interface DefaultOptions {
   addressBarShadowPadding: number;
   autoSaveBaseline: boolean;
+  clearFolder: boolean;
   debug: boolean;
   formatImageName: string;
   savePerInstance: boolean;

@@ -1,4 +1,5 @@
 import {join, normalize} from 'path';
+import {removeSync} from 'fs-extra';
 import {defaultOptions} from './helpers/options';
 import {FOLDERS} from './helpers/constants';
 import {Folders} from './base.interface';
@@ -20,5 +21,10 @@ export default class BaseClass {
       baselineFolder,
       diffFolder: join(baseFolder, FOLDERS.DIFF),
     };
+
+    if (options.clearRuntimeFolder) {
+      removeSync(this.folders.actualFolder);
+      removeSync(this.folders.diffFolder);
+    }
   }
 }

@@ -1,6 +1,5 @@
 import {
   DEFAULT_FORMAT_STRING,
-  DEFAULT_RESIZE_DIMENSIONS,
   DEFAULT_SHADOW,
   FULL_PAGE_SCROLL_TIMEOUT,
 } from './constants';
@@ -17,6 +16,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
      */
     addressBarShadowPadding: options.addressBarShadowPadding || DEFAULT_SHADOW.ADDRESS_BAR,
     autoSaveBaseline: options.autoSaveBaseline || false,
+    clearFolder: options.clearRuntimeFolder || false,
     debug: options.debug || false,
     formatImageName: options.formatImageName || DEFAULT_FORMAT_STRING,
     savePerInstance: options.savePerInstance || false,

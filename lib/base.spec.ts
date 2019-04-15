@@ -1,3 +1,5 @@
+import {ensureDirSync, pathExistsSync} from 'fs-extra';
+import {join} from 'path';
 import BaseClass from './base';
 
 describe('BaseClass', () => {
@@ -16,5 +18,21 @@ describe('BaseClass', () => {
     expect(instance.folders.actualFolder).toBe('.tmp/actual');
     expect(instance.folders.baselineFolder).toBe('wic/baseline/');
     expect(instance.folders.diffFolder).toBe('.tmp/diff');
+  });
+
+  it('should remove the actual and diff folder if this is needed', () => {
+    // Create the folders
+    const actual = join(process.cwd(), '/.tmp/actual');
+    const diff = join(process.cwd(), '/.tmp/diff');
+    ensureDirSync(actual);
+    ensureDirSync(diff);
+
+    expect(pathExistsSync(actual)).toEqual(true);
+    expect(pathExistsSync(diff)).toEqual(true);
+
+    const instance = new BaseClass({clearRuntimeFolder: true});
+
+    expect(pathExistsSync(actual)).toEqual(false);
+    expect(pathExistsSync(diff)).toEqual(false);
   });
 });

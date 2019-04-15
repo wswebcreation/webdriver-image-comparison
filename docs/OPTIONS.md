@@ -24,6 +24,13 @@ If no baseline image is found during the comparison the image is automatically c
 
 The directory that will hold all the baseline images that are used to during the comparison.
 
+### `clearRuntimeFolder`
+- **Type:** `boolean`
+- **Mandatory:** No
+- **Default:** `false`
+
+Delete runtime folder (`actual` & `diff`) on initialisation
+
 ### `debug`
 - **Type:** `boolean`
 - **Mandatory:** No
