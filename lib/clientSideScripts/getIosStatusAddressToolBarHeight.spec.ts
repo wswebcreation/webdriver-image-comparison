@@ -1,4 +1,4 @@
-import {IOS_DEVICES, NAVIGATOR_APP_VERSIONS} from '../../mocks/mocks';
+import {IOS_DEVICES, NAVIGATOR_APP_VERSIONS} from '../mocks/mocks';
 import getIosStatusAddressToolBarHeight from './getIosStatusAddressToolBarHeight';
 import {OFFSETS} from '../helpers/constants';
 

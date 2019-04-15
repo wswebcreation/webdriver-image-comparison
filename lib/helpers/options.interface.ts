@@ -47,8 +47,6 @@ export interface ClassOptions{
   ignoreLess?: boolean;
   // Compare images and compare with `red = 0, green = 0, blue = 0, alpha = 0, minBrightness=0, maxBrightness=255`
   ignoreNothing?: boolean;
-  // Compare images and it will ignore all pixels that have some transparency in one of the images
-  ignoreTransparentPixel?: boolean;
   // If true the return percentage will be like `0.12345678`, default is `0.12`
   rawMisMatchPercentage?: boolean;
   // This will retun all compare data, not only the mismatch percentage
@@ -78,7 +76,6 @@ interface CompareOptions {
   ignoreColors: boolean;
   ignoreLess: boolean;
   ignoreNothing: boolean;
-  ignoreTransparentPixel: boolean;
   rawMisMatchPercentage: boolean;
   returnAllCompareData: boolean;
   saveAboveTolerance: number;

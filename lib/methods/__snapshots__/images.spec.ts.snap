@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`images checkBaselineImageExists should check if the baseline image exists and create a new one 1`] = `false`;
+
+exports[`images checkBaselineImageExists should check if the baseline image exists and create a new one 2`] = `true`;
+
+exports[`images checkBaselineImageExists should check if the baseline image exists and not create a new one 1`] = `false`;
+
+exports[`images checkBaselineImageExists should check if the baseline image exists and not create a new one 2`] = `false`;

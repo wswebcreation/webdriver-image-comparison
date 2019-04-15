@@ -1,5 +1,5 @@
 import {OFFSETS} from '../helpers/constants';
-import {ANDROID_DEVICES, NAVIGATOR_APP_VERSIONS} from '../../mocks/mocks';
+import {ANDROID_DEVICES, NAVIGATOR_APP_VERSIONS} from '../mocks/mocks';
 import getAndroidStatusAddressToolBarHeight from './getAndroidStatusAddressToolBarHeight';
 
 describe('getAndroidStatusAddressToolBarHeight', () => {

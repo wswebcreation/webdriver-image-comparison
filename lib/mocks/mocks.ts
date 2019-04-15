@@ -1,4 +1,4 @@
-import {BeforeScreenshotOptions} from '../lib/helpers/beforeScreenshot.interface';
+import {BeforeScreenshotOptions} from '../helpers/beforeScreenshot.interface';
 
 export const BEFORE_SCREENSHOT_OPTIONS: BeforeScreenshotOptions = {
   instanceData: {

@@ -1,5 +1,5 @@
 import {determineElementRectangles, determineScreenRectangles, determineStatusAddressToolBarRectangles} from './rectangles';
-import {IMAGE_STRING} from '../../mocks/mocks';
+import {IMAGE_STRING} from '../mocks/mocks';
 
 describe('rectangles', () => {
   describe('determineElementRectangles', () => {
