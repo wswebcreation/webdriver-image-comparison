@@ -60,13 +60,13 @@ If they can't be determined the defaults will be used.
 
 - `browserName`: The name of the device from the capabilities (default: 'no-provided-browserName-in-caps')
 - `deviceName`: The orientation from capabilities (default: 'no-provided-deviceName-in-caps')
-- `dpr`: The orientation from capabilities
-- `height`: The orientation from capabilities
-- `logName`: The orientation from capabilities (default: 'no-provided-logName-in-caps')
-- `mobile`: The orientation from capabilities
-- `name`: The orientation from capabilities (default: 'no-provided-name-in-caps')
-- `tag`: The orientation from capabilities
-- `width`: The orientation from capabilities
+- `dpr`: The device pixel ratio
+- `height`: The height of the screen
+- `logName`: The logName from capabilities
+- `mobile`: This will add _app, of browserName after the deviceName to distinguish app screenshots from browser screenshots
+- `name`: The name from capabilities
+- `tag`: The tag that is provided in the methods that is being called
+- `width`: The width of the screen
 
 #### `fullPageScrollTimeout`
 - **Type:** `number`
