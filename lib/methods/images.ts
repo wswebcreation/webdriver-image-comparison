@@ -7,7 +7,7 @@ import {calculateDprData, getAndCreatePath, getScreenshotSize} from '../helpers/
 import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
 import {determineStatusAddressToolBarRectangles} from './rectangles';
 import {RectanglesOutput} from './rectangles.interfaces';
-import {CompareOptions, ImageCompareOptions, ImageCompareResult, ResizeDimensions} from './images.interfaces';
+import {CompareOptions, IgnoreBoxes, ImageCompareOptions, ImageCompareResult, ResizeDimensions} from './images.interfaces';
 import {FullPageScreenshotsData} from './screenshots.interfaces';
 import {Executor} from './methods.interface';
 import {CompareData} from '../resemble/compare.interfaces';
@@ -121,9 +121,16 @@ export async function executeImageCompare(
     await determineStatusAddressToolBarRectangles(executor, statusAddressToolBarOptions)
   ).map(
     // 4d.	Make sure all the rectangles are equal to the dpr for the screenshot
-    rectangles => calculateDprData(rectangles, devicePixelRatio)
+    rectangles => {
+      return calculateDprData({
+        // Adjust for the ResembleJS API
+        bottom: rectangles.height,
+        right: rectangles.width,
+        left: rectangles.x,
+        top: rectangles.y,
+      }, devicePixelRatio);
+    }
   );
-
   const compareOptions: CompareOptions = {
     ignore,
     ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
@@ -299,7 +306,7 @@ export async function saveBase64Image(base64Image: string, filePath: string): Pr
 /**
  * Create a canvas with the ignore boxes if they are present
  */
-export async function addBlockOuts(screenshot: string, ignoredBoxes: RectanglesOutput[]): Promise<string> {
+export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes[]): Promise<string> {
   // Create canvas and load image
   const {height, width} = getScreenshotSize(screenshot);
   const canvas = createCanvas(width, height);
@@ -321,7 +328,7 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: RectanglesO
 
   // Loop over all ignored areas and add them to the current canvas
   ignoredBoxes.forEach(ignoredBox => {
-    const {width: ignoredBoxWidth, height: ignoredBoxHeight, x, y} = ignoredBox;
+    const {right: ignoredBoxWidth, bottom: ignoredBoxHeight, left: x, top: y} = ignoredBox;
     const ignoreCanvas = createCanvas(ignoredBoxWidth, ignoredBoxHeight);
     const ignoreContext = ignoreCanvas.getContext('2d');
 
