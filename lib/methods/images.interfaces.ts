@@ -125,6 +125,13 @@ export interface ImageCompareResult {
 export interface CompareOptions {
   ignore: string[];
   output?: {
-    ignoredBoxes?: RectanglesOutput[]
+    ignoredBoxes?: IgnoreBoxes[]
   };
+}
+
+export interface IgnoreBoxes {
+  bottom: number;
+  right: number;
+  left: number;
+  top: number;
 }

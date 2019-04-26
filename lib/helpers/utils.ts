@@ -54,7 +54,7 @@ export function formatFileName(options: FormatFileNameOptions): string {
  * Checks if it is mobile
  */
 export function checkIsMobile(platformName: string): boolean {
-  return platformName !== '';
+  return checkIsAndroid(platformName) || checkIsIos(platformName);
 }
 
 /**
