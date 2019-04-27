@@ -6,7 +6,7 @@ export interface SaveScreenOptions {
   method: SaveScreenMethodOptions;
 }
 
-interface SaveScreenMethodOptions {
+export interface SaveScreenMethodOptions {
   // Disable all css animations
   disableCSSAnimation?: boolean;
   // Hide scrollbars, this is optional

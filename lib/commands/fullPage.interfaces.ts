@@ -7,7 +7,7 @@ export interface SaveFullPageOptions {
   method: SaveFullPageMethodOptions;
 }
 
-interface SaveFullPageMethodOptions {
+export interface SaveFullPageMethodOptions {
   // The padding that needs to be added to the address bar on iOS and Android
   addressBarShadowPadding?: number;
   // Disable all css animations
