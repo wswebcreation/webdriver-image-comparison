@@ -25,6 +25,8 @@ export default async function checkScreen(
     method: {
       ...('disableCSSAnimation' in checkScreenOptions.method ? {disableCSSAnimation: checkScreenOptions.method.disableCSSAnimation} : {}),
       ...('hideScrollBars' in checkScreenOptions.method ? {hideScrollBars: checkScreenOptions.method.hideScrollBars} : {}),
+      ...{hideElements: checkScreenOptions.method.hideElements || []},
+      ...{removeElements: checkScreenOptions.method.removeElements || []},
     }
   };
   const {devicePixelRatio, fileName} = await saveScreen(methods, instanceData, folders, tag, saveScreenOptions);

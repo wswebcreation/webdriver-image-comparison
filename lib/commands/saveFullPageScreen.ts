@@ -34,13 +34,17 @@ export default async function saveFullPageScreen(
   const fullPageScrollTimeout: number = 'fullPageScrollTimeout' in saveFullPageOptions.method
     ? saveFullPageOptions.method.fullPageScrollTimeout
     : saveFullPageOptions.wic.fullPageScrollTimeout;
+  const hideElements: HTMLElement[] = saveFullPageOptions.method.hideElements || [];
+  const removeElements: HTMLElement[] = saveFullPageOptions.method.removeElements || [];
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {
     instanceData,
     addressBarShadowPadding,
     disableCSSAnimation,
+    hideElements,
     noScrollBars: hideScrollBars,
+    removeElements,
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);

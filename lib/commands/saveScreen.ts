@@ -32,13 +32,17 @@ export default async function saveScreen(
   const hideScrollBars: boolean = 'hideScrollBars' in saveScreenOptions.method
     ? saveScreenOptions.method.hideScrollBars
     : saveScreenOptions.wic.hideScrollBars;
+  const hideElements: HTMLElement[] = saveScreenOptions.method.hideElements || [];
+  const removeElements: HTMLElement[] = saveScreenOptions.method.removeElements || [];
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {
     instanceData,
     addressBarShadowPadding,
     disableCSSAnimation,
+    hideElements,
     noScrollBars: hideScrollBars,
+    removeElements,
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions);

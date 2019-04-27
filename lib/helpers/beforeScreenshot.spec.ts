@@ -17,6 +17,8 @@ describe('beforeScreenshot', () => {
       disableCSSAnimation: true,
       noScrollBars: true,
       toolBarShadowPadding: 6,
+      hideElements: [<HTMLElement><any>'<div></div>'],
+      removeElements: [<HTMLElement><any>'<div></div>'],
     };
 
     expect(await beforeScreenshot(MOCKED_EXECUTOR, options)).toMatchSnapshot();
@@ -38,6 +40,8 @@ describe('beforeScreenshot', () => {
       disableCSSAnimation: true,
       noScrollBars: true,
       toolBarShadowPadding: 6,
+      hideElements: [<HTMLElement><any>'<div></div>'],
+      removeElements: [<HTMLElement><any>'<div></div>'],
     };
 
     expect(await beforeScreenshot(MOCKED_EXECUTOR, options, true)).toMatchSnapshot();

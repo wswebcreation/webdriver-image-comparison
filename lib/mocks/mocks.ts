@@ -13,6 +13,8 @@ export const BEFORE_SCREENSHOT_OPTIONS: BeforeScreenshotOptions = {
   disableCSSAnimation: true,
   noScrollBars: true,
   toolBarShadowPadding: 6,
+  hideElements: [<HTMLElement><any>'<div></div>'],
+  removeElements: [<HTMLElement><any>'<div></div>'],
 };
 export const NAVIGATOR_APP_VERSIONS = {
   ANDROID: {
