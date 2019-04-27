@@ -25,7 +25,7 @@ interface SaveFullPageMethodOptions {
   // Elements that need to be removed (display: none) before saving a screenshot
   removeElements?: HTMLElement[];
   // Elements that need to be hidden after the first scroll for a fullpage scroll
-  hideAfterFirstScroll: HTMLElement[];
+  hideAfterFirstScroll?: HTMLElement[];
 }
 
 interface CheckOptions extends SaveFullPageMethodOptions, CheckMethodOptions {
