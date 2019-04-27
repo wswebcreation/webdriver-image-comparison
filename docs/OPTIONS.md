@@ -126,6 +126,18 @@ and reset when done
 
 Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot 
 
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements.
+
 #### `resizeDimensions`
 - **Type:** `object`
 - **Mandatory:** no
@@ -147,7 +159,19 @@ and reset when done
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot 
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements. 
 
 ### `saveFullPageScreen`
 #### `disableCSSAnimation`
@@ -170,7 +194,26 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot 
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements.
+
+#### `hideAfterFirstScroll`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods will hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+This will be handy when a page for example holds sticky elements that will scroll with the page if the page is scrolled but will give an anoying effect when a fullpage screenshot is made 
 
 ### `checkElement`
 #### `blockOut`
@@ -194,7 +237,19 @@ and reset when done
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot 
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements. 
 
 #### `resizeDimensions`
 - **Type:** `object`
@@ -228,7 +283,19 @@ and reset when done
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot  
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements.  
 
 ### `checkScreen` compare options 
 The compare options can be set as `checkScreen` options, see [Compare options](./OPTIONS.md#compare-options)
@@ -262,7 +329,26 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot  
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+
+#### `hideElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+
+#### `removeElements`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements.
+
+#### `hideAfterFirstScroll`
+- **Type:** `array`
+- **Mandatory:** no
+
+This methods will hide 1 or multiple elements by adding the property `visibility: hidden` to them by providing an array of elements.
+This will be handy when a page for example holds sticky elements that will scroll with the page if the page is scrolled but will give an anoying effect when a fullpage screenshot is made  
 
 ### `checkFullPageScreen` compare options 
 The compare options can be set as `checkFullPageScreen` options, see [Compare options](./OPTIONS.md#compare-options)
