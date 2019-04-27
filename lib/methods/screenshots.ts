@@ -12,6 +12,7 @@ import {
   FullPageScreenshotsData,
 } from './screenshots.interfaces';
 import {StatusAddressToolBarHeight} from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
+import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 
 /**
  * Take a full page screenshots for desktop / iOS / Android
@@ -25,6 +26,7 @@ export async function getBase64FullPageScreenshotsData(
     addressBarShadowPadding,
     devicePixelRatio,
     fullPageScrollTimeout,
+    hideAfterFirstScroll,
     innerHeight,
     isAndroid,
     isAndroidNativeWebScreenshot,
@@ -35,6 +37,7 @@ export async function getBase64FullPageScreenshotsData(
   const desktopOptions = {
     devicePixelRatio,
     fullPageScrollTimeout,
+    hideAfterFirstScroll,
     innerHeight,
   };
   const nativeMobileOptions = {
@@ -52,7 +55,7 @@ export async function getBase64FullPageScreenshotsData(
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, androidNativeMobileOptions);
   } else if (isAndroid && isAndroidChromeDriverScreenshot) {
-    const chromeDriverOptions = {devicePixelRatio, fullPageScrollTimeout, innerHeight};
+    const chromeDriverOptions = {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight};
 
     // Create a fullpage screenshot for Android when the ChromeDriver provides the screenshots
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
@@ -86,6 +89,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
     addressBarShadowPadding,
     devicePixelRatio,
     fullPageScrollTimeout,
+    hideAfterFirstScroll,
     innerHeight,
     statusAddressBarHeight,
     toolBarShadowPadding,
@@ -104,6 +108,11 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // Simply wait the amount of time specified for lazy-loading
     await waitFor(fullPageScrollTimeout);
+
+    // Elements that need to be hidden after the first scroll for a fullpage scroll
+    if (i === 1 && hideAfterFirstScroll.length > 0) {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+    }
 
     // Take the screenshot and get the width
     const screenshot = await takeBase64Screenshot(takeScreenshot);
@@ -136,6 +145,11 @@ export async function getFullPageScreenshotsDataNativeMobile(
     });
   }
 
+  // Put back the hidden elements to visible
+  if (hideAfterFirstScroll.length > 0) {
+    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+  }
+
   return {
     ...calculateDprData({
       fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,
@@ -154,7 +168,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, innerHeight} = options;
+  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight} = options;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
@@ -168,6 +182,11 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
 
     // Simply wait the amount of time specified for lazy-loading
     await waitFor(fullPageScrollTimeout);
+
+    // Elements that need to be hidden after the first scroll for a fullpage scroll
+    if (i === 1 && hideAfterFirstScroll.length > 0) {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+    }
 
     // Take the screenshot
     const screenshot = await takeBase64Screenshot(takeScreenshot);
@@ -198,6 +217,11 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
     });
   }
 
+  // Put back the hidden elements to visible
+  if (hideAfterFirstScroll.length > 0) {
+    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+  }
+
   return {
     ...calculateDprData({
       fullPageHeight: scrollHeight,
@@ -216,7 +240,7 @@ export async function getFullPageScreenshotsDataDesktop(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, innerHeight} = options;
+  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight} = options;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
@@ -230,6 +254,11 @@ export async function getFullPageScreenshotsDataDesktop(
 
     // Simply wait the amount of time specified for lazy-loading
     await waitFor(fullPageScrollTimeout);
+
+    // Elements that need to be hidden after the first scroll for a fullpage scroll
+    if (i === 1 && hideAfterFirstScroll.length > 0) {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+    }
 
     // Take the screenshot
     const screenshot = await takeBase64Screenshot(takeScreenshot);
@@ -262,6 +291,11 @@ export async function getFullPageScreenshotsDataDesktop(
       }, devicePixelRatio),
       screenshot,
     });
+  }
+
+  // Put back the hidden elements to visible
+  if (hideAfterFirstScroll.length > 0) {
+    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
   }
 
   return {

@@ -18,6 +18,10 @@ export interface SaveElementMethodOptions {
   resizeDimensions?: ResizeDimensions | number;
   // The padding that needs to be added to the tool bar on iOS and Android
   toolBarShadowPadding?: number;
+  // Elements that need to be hidden (visibility: hidden) before saving a screenshot
+  hideElements?: HTMLElement[];
+  // Elements that need to be removed (display: none) before saving a screenshot
+  removeElements?: HTMLElement[];
 }
 
 interface CheckOptions extends SaveElementMethodOptions, CheckMethodOptions {

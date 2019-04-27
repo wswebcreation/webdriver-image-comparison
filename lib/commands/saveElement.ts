@@ -11,6 +11,7 @@ import {SaveElementOptions} from './element.interfaces';
 import {ElementRectanglesOptions, RectanglesOutput} from '../methods/rectangles.interfaces';
 import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
 import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
+import {ResizeDimensions} from '../methods/images.interfaces';
 
 /**
  * Saves an image of an element
@@ -34,14 +35,18 @@ export default async function saveElement(
   const hideScrollBars: boolean = 'hideScrollBars' in saveElementOptions.method
     ? saveElementOptions.method.hideScrollBars
     : saveElementOptions.wic.hideScrollBars;
-  const resizeDimensions = saveElementOptions.method.resizeDimensions || DEFAULT_RESIZE_DIMENSIONS;
+  const resizeDimensions: ResizeDimensions | number = saveElementOptions.method.resizeDimensions || DEFAULT_RESIZE_DIMENSIONS;
+  const hideElements: HTMLElement[] = saveElementOptions.method.hideElements || [];
+  const removeElements: HTMLElement[] = saveElementOptions.method.removeElements || [];
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {
     instanceData,
     addressBarShadowPadding,
     disableCSSAnimation,
+    hideElements,
     noScrollBars: hideScrollBars,
+    removeElements,
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
@@ -66,6 +71,7 @@ export default async function saveElement(
   const afterOptions: AfterScreenshotOptions = {
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
+    hideElements,
     hideScrollBars,
     filePath: {
       browserName: enrichedInstanceData.browserName,
@@ -88,6 +94,7 @@ export default async function saveElement(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    removeElements,
   };
 
   // 7.  Return the data

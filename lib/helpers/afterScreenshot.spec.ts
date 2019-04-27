@@ -33,7 +33,9 @@ describe('afterScreenshot', () => {
         screenHeight: 900,
         screenWidth: 1440,
         tag: 'tag',
-      }
+      },
+      hideElements: [<HTMLElement><any>'<div></div>'],
+      removeElements: [<HTMLElement><any>'<div></div>'],
     };
 
     expect(await afterScreenshot(MOCKED_EXECUTOR, options)).toEqual({

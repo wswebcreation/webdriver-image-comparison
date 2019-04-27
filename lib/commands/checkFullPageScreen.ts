@@ -34,6 +34,9 @@ export default async function checkFullPageScreen(
           : {}
       ),
       ...('hideScrollBars' in checkFullPageOptions.method ? {hideScrollBars: checkFullPageOptions.method.hideScrollBars} : {}),
+      ...{hideElements: checkFullPageOptions.method.hideElements || []},
+      ...{removeElements: checkFullPageOptions.method.removeElements || []},
+      ...{hideAfterFirstScroll: checkFullPageOptions.method.hideAfterFirstScroll || []},
     }
   };
   const {devicePixelRatio, fileName} = await saveFullPageScreen(methods, instanceData, folders, tag, saveFullPageOptions);

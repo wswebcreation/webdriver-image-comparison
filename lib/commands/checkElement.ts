@@ -27,6 +27,8 @@ export default async function checkElement(
       ...('disableCSSAnimation' in checkElementOptions.method ? {disableCSSAnimation: checkElementOptions.method.disableCSSAnimation} : {}),
       ...('hideScrollBars' in checkElementOptions.method ? {hideScrollBars: checkElementOptions.method.hideScrollBars} : {}),
       ...('resizeDimensions' in checkElementOptions.method ? {resizeDimensions: checkElementOptions.method.resizeDimensions} : {}),
+      ...{hideElements: checkElementOptions.method.hideElements || []},
+      ...{removeElements: checkElementOptions.method.removeElements || []},
     }
   };
   const {devicePixelRatio, fileName} = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);

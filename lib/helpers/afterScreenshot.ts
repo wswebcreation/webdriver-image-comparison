@@ -6,13 +6,22 @@ import {saveBase64Image} from '../methods/images';
 import {join} from 'path';
 import {Executor} from '../methods/methods.interface';
 import {AfterScreenshotOptions, ScreenshotOutput} from './afterScreenshot.interfaces';
+import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 
 /**
  * Methods that need to be executed after a screenshot has been taken
  * to set all back to the original state
  */
-export default async function afterScreenshot(executor: Executor, options:AfterScreenshotOptions):Promise<ScreenshotOutput> {
-  const {actualFolder, base64Image, fileName: fileNameOptions, filePath, hideScrollBars: noScrollBars} = options;
+export default async function afterScreenshot(executor: Executor, options: AfterScreenshotOptions): Promise<ScreenshotOutput> {
+  const {
+    actualFolder,
+    base64Image,
+    fileName: fileNameOptions,
+    filePath,
+    hideElements,
+    hideScrollBars: noScrollBars,
+    removeElements,
+  } = options;
 
   // Get the path
   const path = getAndCreatePath(actualFolder, filePath);
@@ -25,6 +34,11 @@ export default async function afterScreenshot(executor: Executor, options:AfterS
 
   // Show the scrollbars again
   await executor(hideScrollBars, !noScrollBars);
+
+  // Show elements again
+  if (hideElements.length > 0 || removeElements.length > 0) {
+    await executor(hideRemoveElements, {hide: hideElements, remove: removeElements}, false);
+  }
 
   // Remove the custom set css
   await executor(removeCustomCss, CUSTOM_CSS_ID);
