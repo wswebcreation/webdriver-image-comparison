@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 1`] = `""`;
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 2`] = `""`;
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 3`] = `"hidden"`;
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 4`] = `"hidden"`;
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 5`] = `""`;
+
+exports[`hideRemoveElements should be able to hide elements and put them back again 6`] = `""`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 1`] = `""`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 2`] = `""`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 3`] = `"none"`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 4`] = `"none"`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 5`] = `""`;
+
+exports[`hideRemoveElements should be able to remove elements and put them back again 6`] = `""`;
