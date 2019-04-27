@@ -18,6 +18,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: false,
         toolBarShadowPadding: 6,
+        hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
         .mockResolvedValueOnce({statusAddressBar: {height: 56}})
@@ -41,10 +42,11 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: true,
         isIos: false,
         toolBarShadowPadding: 6,
+        hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
-        // THIS NEEDS TO BE FIXED IN THE FUTURE
-        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      // THIS NEEDS TO BE FIXED IN THE FUTURE
+      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(1200)
@@ -58,7 +60,7 @@ describe('screenshots', () => {
       expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
 
-    it('should get the iOS fullpage screenshot data', async() => {
+    it('should get the iOS fullpage screenshot data', async () => {
       const options: FullPageScreenshotDataOptions = {
         addressBarShadowPadding: 6,
         devicePixelRatio: 2,
@@ -69,6 +71,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: true,
         toolBarShadowPadding: 6,
+        hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
         .mockResolvedValueOnce({statusAddressBar: {height: 94}})
@@ -97,10 +100,11 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: false,
         toolBarShadowPadding: 6,
+        hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
-        // THIS NEEDS TO BE FIXED IN THE FUTURE
-        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      // THIS NEEDS TO BE FIXED IN THE FUTURE
+      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)

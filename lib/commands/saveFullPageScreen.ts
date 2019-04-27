@@ -8,7 +8,7 @@ import {InstanceData} from '../methods/instanceData.interfaces';
 import {Folders} from '../base.interface';
 import {SaveFullPageOptions} from './fullPage.interfaces';
 import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
-import {FullPageScreenshotsData} from '../methods/screenshots.interfaces';
+import {FullPageScreenshotDataOptions, FullPageScreenshotsData} from '../methods/screenshots.interfaces';
 
 /**
  * Saves an image of the full page
@@ -36,6 +36,7 @@ export default async function saveFullPageScreen(
     : saveFullPageOptions.wic.fullPageScrollTimeout;
   const hideElements: HTMLElement[] = saveFullPageOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveFullPageOptions.method.removeElements || [];
+  const hideAfterFirstScroll: HTMLElement[] = saveFullPageOptions.method.hideAfterFirstScroll || [];
 
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {
@@ -50,10 +51,11 @@ export default async function saveFullPageScreen(
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
 
   // 3.  Fullpage screenshots are taken per scrolled viewport
-  const fullPageScreenshotOptions = {
+  const fullPageScreenshotOptions: FullPageScreenshotDataOptions = {
     addressBarShadowPadding: enrichedInstanceData.addressBarShadowPadding,
     devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
     fullPageScrollTimeout,
+    hideAfterFirstScroll,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
     isAndroid: enrichedInstanceData.isAndroid,
     isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
@@ -61,7 +63,11 @@ export default async function saveFullPageScreen(
     isIos: enrichedInstanceData.isIos,
     toolBarShadowPadding: enrichedInstanceData.toolBarShadowPadding,
   };
-  const screenshotsData: FullPageScreenshotsData = await getBase64FullPageScreenshotsData(methods.screenShot, methods.executor, fullPageScreenshotOptions);
+  const screenshotsData: FullPageScreenshotsData = await getBase64FullPageScreenshotsData(
+    methods.screenShot,
+    methods.executor,
+    fullPageScreenshotOptions,
+  );
 
   // 4.  Make a fullpage base64 image
   const fullPageBase64Image: string = await makeFullPageBase64Image(screenshotsData);
