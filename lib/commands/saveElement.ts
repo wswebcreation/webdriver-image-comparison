@@ -71,6 +71,7 @@ export default async function saveElement(
   const afterOptions: AfterScreenshotOptions = {
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
+    hideElements,
     hideScrollBars,
     filePath: {
       browserName: enrichedInstanceData.browserName,
@@ -93,6 +94,7 @@ export default async function saveElement(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    removeElements,
   };
 
   // 7.  Return the data

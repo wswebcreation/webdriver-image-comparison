@@ -70,6 +70,7 @@ export default async function saveFullPageScreen(
   const afterOptions = {
     actualFolder: folders.actualFolder,
     base64Image: fullPageBase64Image,
+    hideElements,
     hideScrollBars,
     filePath: {
       autoSaveBaseline,
@@ -93,6 +94,7 @@ export default async function saveFullPageScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    removeElements,
   };
 
   // 6.  Return the data

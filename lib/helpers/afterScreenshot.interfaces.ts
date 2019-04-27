@@ -19,9 +19,9 @@ export interface AfterScreenshotOptions {
   // The file name options object
   fileName: ScreenshotFileNameOptions;
   // Elements that need to be hidden (visibility: hidden) before saving a screenshot
-  hideElements?: HTMLElement[];
+  hideElements: HTMLElement[];
   // Elements that need to be removed (display: none) before saving a screenshot
-  removeElements?: HTMLElement[];
+  removeElements: HTMLElement[];
 }
 
 export interface ScreenshotFilePathOptions {
