@@ -13,7 +13,8 @@
     "test": "jest",
     "test:watch": "npm run test -- --watchAll",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "watch": "npm run compile -- -w"
+    "watch": "npm run compile -- -w",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
