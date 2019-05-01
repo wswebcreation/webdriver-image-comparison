@@ -27,7 +27,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
      */
     disableCSSAnimation: options.disableCSSAnimation || false,
     fullPageScrollTimeout: options.fullPageScrollTimeout || FULL_PAGE_SCROLL_TIMEOUT,
-    hideScrollBars: options.hasOwnProperty('hideScrollBars') ? options.hideScrollBars : true,
+    hideScrollBars: !!options.hideScrollBars,
     /**
      * Compare options
      */
