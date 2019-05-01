@@ -124,13 +124,15 @@ export async function executeImageCompare(
     rectangles => {
       return calculateDprData({
         // Adjust for the ResembleJS API
-        bottom: rectangles.height,
-        right: rectangles.width,
+        bottom: rectangles.y + rectangles.height,
+        right: rectangles.x + rectangles.width,
         left: rectangles.x,
         top: rectangles.y,
       }, devicePixelRatio);
     }
   );
+
+  console.log('ignoredBoxes = ', ignoredBoxes);
   const compareOptions: CompareOptions = {
     ignore,
     ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
@@ -329,13 +331,13 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
   // Loop over all ignored areas and add them to the current canvas
   ignoredBoxes.forEach(ignoredBox => {
     const {right: ignoredBoxWidth, bottom: ignoredBoxHeight, left: x, top: y} = ignoredBox;
-    const ignoreCanvas = createCanvas(ignoredBoxWidth, ignoredBoxHeight);
+    const ignoreCanvas = createCanvas(ignoredBoxWidth - x, ignoredBoxHeight - y);
     const ignoreContext = ignoreCanvas.getContext('2d');
 
     // Add a background color to the ignored box
     ignoreContext.globalAlpha = 0.5;
     ignoreContext.fillStyle = '#39aa56';
-    ignoreContext.fillRect(0, 0, ignoredBoxWidth, ignoredBoxHeight);
+    ignoreContext.fillRect(0, 0, ignoredBoxWidth - x, ignoredBoxHeight - y);
 
     // add to canvasContext
     canvasContext.drawImage(ignoreCanvas, x, y);
