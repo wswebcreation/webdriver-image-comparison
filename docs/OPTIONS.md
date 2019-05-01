@@ -78,9 +78,9 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 ### `savePerInstance`
 - **Type:** `boolean`
@@ -122,9 +122,9 @@ and reset when done
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot 
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `hideElements`
 - **Type:** `array`
@@ -157,9 +157,9 @@ and reset when done
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `hideElements`
 - **Type:** `array`
@@ -192,9 +192,9 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `hideElements`
 - **Type:** `array`
@@ -281,9 +281,9 @@ and reset when done
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `hideElements`
 - **Type:** `array`
@@ -327,9 +327,9 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 #### `hideScrollBars`
 - **Type:** `boolean`
 - **Mandatory:** No
-- **Default:** `false`
+- **Default:** `true`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `hideElements`
 - **Type:** `array`
