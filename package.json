@@ -1,6 +1,6 @@
 {
   "name": "webdriver-image-comparison",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "An image compare module that can be used for different NodeJS Test automation frameworks that support the webdriver protocol",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
