@@ -132,7 +132,6 @@ export async function executeImageCompare(
     }
   );
 
-  console.log('ignoredBoxes = ', ignoredBoxes);
   const compareOptions: CompareOptions = {
     ignore,
     ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
