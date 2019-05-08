@@ -21,7 +21,7 @@ Object {
   "disableCSSAnimation": false,
   "formatImageName": "{tag}-{browserName}-{width}x{height}-dpr-{dpr}",
   "fullPageScrollTimeout": 1500,
-  "hideScrollBars": false,
+  "hideScrollBars": true,
   "savePerInstance": false,
   "toolBarShadowPadding": 6,
 }
