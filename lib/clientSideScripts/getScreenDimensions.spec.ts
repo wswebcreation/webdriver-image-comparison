@@ -13,4 +13,11 @@ describe('getScreenDimensions', () => {
 
     expect(getScreenDimensions()).toMatchSnapshot();
   });
+
+  it('should return zeroed dimensions if the document attributes are null', () => {
+    Object.defineProperty(document, 'body', {value: null});
+    Object.defineProperty(document, 'documentElement', {value: null});
+
+    expect(getScreenDimensions()).toMatchSnapshot();
+  });
 });
