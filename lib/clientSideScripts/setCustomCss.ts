@@ -4,7 +4,11 @@ import {CssOptions} from './customCss.interfaces';
  * Set some default css
  */
 export default function setCustomCss(cssOptions: CssOptions): void {
-	const disableTransformationsTransitionsAnimations = `
+    if (document.head == null) {
+        return;
+    }
+
+    const disableTransformationsTransitionsAnimations = `
 * {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;

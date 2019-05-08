@@ -3,5 +3,7 @@
  */
 export default function removeCustomCss(id: string): void {
   const elem = document.querySelector(`style#${id}`);
-  elem.parentNode.removeChild(elem);
+  if (elem != null) {
+    elem.parentNode.removeChild(elem);
+  }
 }

@@ -46,4 +46,18 @@ describe('setCustomCss', () => {
 
     expect(document.head.textContent).toMatchSnapshot();
   });
+
+  it('should do nothing if document.head is null', () => {
+    const cssOptions:CssOptions = {
+      addressBarPadding:6,
+      disableCSSAnimation:false,
+      id:'id',
+      toolBarPadding:6,
+    };
+    Object.defineProperty(document, 'head', {value: null});    
+
+    setCustomCss(cssOptions);
+
+    expect(document.head).toBe(null);
+  });
 });
