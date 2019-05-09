@@ -18,4 +18,24 @@ describe('removeCustomCss', ()=>{
 
     expect(document.head.textContent).toMatchSnapshot();
   });
+
+
+  it('should do nothing if custom css is not present', () => {
+    const id = 'test';
+
+    expect(document.head.textContent).toMatchSnapshot();
+
+    removeCustomCss(id);
+
+    expect(document.head.textContent).toMatchSnapshot();
+  });
+  
+  it('should do nothing if document.head is null', () => {
+    const id = 'test';
+    Object.defineProperty(document, 'head', {value: null});    
+
+    removeCustomCss(id);
+
+    expect(document.head).toBe(null);
+  });
 });
