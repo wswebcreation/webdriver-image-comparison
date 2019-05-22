@@ -448,12 +448,11 @@ This will retun all compare data, not only the mismatch percentage
 
 Allowable value of misMatchPercentage that prevents saving image with differences
 
-
-	### `largeImageThreshold`
-	- **Type:** `number`
-	- **Default:** `0`
-	- **Mandatory:** no
-	- **Remark:** *Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting*
+### `largeImageThreshold`
+- **Type:** `number`
+- **Default:** `0`
+- **Mandatory:** no
+- **Remark:** *Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting*
 	
-	Comparing large images can lead to performance issues.
-	When providing a number for the amount of pixels here (higher then 0), the comparison algorithm skips pixels when the image width or height is larger than `largeImageThreshold` pixels.
+Comparing large images can lead to performance issues.
+When providing a number for the amount of pixels here (higher then 0), the comparison algorithm skips pixels when the image width or height is larger than `largeImageThreshold` pixels.
