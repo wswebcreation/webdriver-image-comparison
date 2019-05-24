@@ -13,6 +13,7 @@ import {
 } from './screenshots.interfaces';
 import {StatusAddressToolBarHeight} from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
+import hideScrollBars from '../clientSideScripts/hideScrollbars';
 
 /**
  * Take a full page screenshots for desktop / iOS / Android
@@ -102,9 +103,15 @@ export async function getFullPageScreenshotsDataNativeMobile(
   let screenshotSizeWidth: number;
 
   for (let i = 0; i <= amountOfScrollsArray.length; i++) {
+    // Show scrollbars before scrolling, otherwise we might not be able to scroll
+    await executor(hideScrollBars, false);
+
     // Determine and start scrolling
     const scrollY = iosViewportHeight * i;
     await executor(scrollToPosition, scrollY);
+
+    // Hide scrollbars before taking a screenshot, we don't want them, on the screenshot
+    await executor(hideScrollBars, false);
 
     // Simply wait the amount of time specified for lazy-loading
     await waitFor(fullPageScrollTimeout);
@@ -149,6 +156,9 @@ export async function getFullPageScreenshotsDataNativeMobile(
   if (hideAfterFirstScroll.length > 0) {
     await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
   }
+
+  // Show scrollbars again to the original state
+  await executor(hideScrollBars, false);
 
   return {
     ...calculateDprData({
