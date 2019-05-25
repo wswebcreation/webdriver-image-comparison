@@ -17,13 +17,14 @@ export default function getDocumentScrollHeight(): number {
   // If that is the case we need to walk over all the elements and determine the highest element
   // this is a very time consuming thing, so our last hope :(
   let pageHeight = 0;
-  let largestNodeElement: HTMLElement;
+  let largestNodeElement = document.querySelector('body');
 
-  if (bodyScrollHeight === scrollHeight && bodyScrollHeight === viewPortHeight){
+  if (bodyScrollHeight === scrollHeight && bodyScrollHeight === viewPortHeight) {
     findHighestNode(document.documentElement.childNodes);
 
     // There could be some elements above this largest element,
     // add that on top
+    /* istanbul ignore next */
     return pageHeight + largestNodeElement.getBoundingClientRect().top;
   }
 
@@ -38,10 +39,11 @@ export default function getDocumentScrollHeight(): number {
     for (let i = nodesList.length - 1; i >= 0; i--) {
       const currentNode = nodesList[i];
 
+      /* istanbul ignore next */
       if (currentNode.scrollHeight && currentNode.clientHeight) {
         const elHeight = Math.max(currentNode.scrollHeight, currentNode.clientHeight);
         pageHeight = Math.max(elHeight, pageHeight);
-        if(elHeight === pageHeight){
+        if (elHeight === pageHeight) {
           largestNodeElement = currentNode;
         }
       }
