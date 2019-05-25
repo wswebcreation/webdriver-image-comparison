@@ -16,27 +16,39 @@ export default function getDocumentScrollHeight(): number {
   // due to for example a `vh` property on the body element.
   // If that is the case we need to walk over all the elements and determine the highest element
   // this is a very time consuming thing, so our last hope :(
+  let pageHeight = 0;
+  let largestNodeElement: HTMLElement;
+
   if (bodyScrollHeight === scrollHeight && bodyScrollHeight === viewPortHeight){
-    let pageHeight = 0;
-
-    // @ts-ignore
-    function findHighestNode(nodesList: any) {
-      for (var i = nodesList.length - 1; i >= 0; i--) {
-        if (nodesList[i].scrollHeight && nodesList[i].clientHeight) {
-          var elHeight = Math.max(nodesList[i].scrollHeight, nodesList[i].clientHeight);
-          pageHeight = Math.max(elHeight, pageHeight);
-        }
-        if (nodesList[i].childNodes.length) {
-          findHighestNode(nodesList[i].childNodes);
-        }
-      }
-    }
-
     findHighestNode(document.documentElement.childNodes);
 
-    return pageHeight;
+    // There could be some elements above this largest element,
+    // add that on top
+    return pageHeight + largestNodeElement.getBoundingClientRect().top;
   }
 
   // The scrollHeight is good enough
   return scrollHeight;
+
+  /**
+   * Find the largest html element on the page
+   * @param nodesList
+   */
+  function findHighestNode(nodesList: any) {
+    for (let i = nodesList.length - 1; i >= 0; i--) {
+      const currentNode = nodesList[i];
+
+      if (currentNode.scrollHeight && currentNode.clientHeight) {
+        const elHeight = Math.max(currentNode.scrollHeight, currentNode.clientHeight);
+        pageHeight = Math.max(elHeight, pageHeight);
+        if(elHeight === pageHeight){
+          largestNodeElement = currentNode;
+        }
+      }
+
+      if (currentNode.childNodes.length) {
+        findHighestNode(currentNode.childNodes);
+      }
+    }
+  }
 }
