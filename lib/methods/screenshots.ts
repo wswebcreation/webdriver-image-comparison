@@ -157,9 +157,6 @@ export async function getFullPageScreenshotsDataNativeMobile(
     await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
   }
 
-  // Show scrollbars again to the original state
-  await executor(hideScrollBars, false);
-
   return {
     ...calculateDprData({
       fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,

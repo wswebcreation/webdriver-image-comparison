@@ -172,5 +172,4 @@ describe('screenshots', () => {
       expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
   });
-
 });
