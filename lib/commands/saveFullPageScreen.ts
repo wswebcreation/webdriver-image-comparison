@@ -28,9 +28,9 @@ export default async function saveFullPageScreen(
   const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveFullPageOptions.method
     ? saveFullPageOptions.method.disableCSSAnimation
     : saveFullPageOptions.wic.disableCSSAnimation;
-  const hideScrollBars: boolean = 'hideScrollBars' in saveFullPageOptions.method
-    ? saveFullPageOptions.method.hideScrollBars
-    : saveFullPageOptions.wic.hideScrollBars;
+  // default this one to false, this will be handled in
+  // taking the screenshots
+  const hideScrollBars: boolean = false;
   const fullPageScrollTimeout: number = 'fullPageScrollTimeout' in saveFullPageOptions.method
     ? saveFullPageOptions.method.fullPageScrollTimeout
     : saveFullPageOptions.wic.fullPageScrollTimeout;
