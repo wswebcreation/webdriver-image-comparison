@@ -2,6 +2,7 @@ node_modules/
 .idea/
 *.log
 .tmp/
+.DS_Store
 perfecto.config.json
 coverage/
 localBaseline/
