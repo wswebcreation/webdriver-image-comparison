@@ -13,6 +13,23 @@ describe('BaseClass', () => {
     expect(instance.folders.diffFolder).toBe('../my_folder/screenshots/diff');
   });
 
+  it('should be able to create baselineFolder with a function', () => {
+    const options = {
+      baseline: './subfolder//../baseline',
+      screenshot: './../my_folder//screenshots'
+    };
+    const setPath = (folderPath: any) => {
+      return folderPath;
+    };
+    const instance = new BaseClass({
+      baselineFolder: setPath(options.baseline),
+      screenshotPath: setPath(options.screenshot)
+    });
+    expect(instance.folders.actualFolder).toBe('../my_folder/screenshots/actual');
+    expect(instance.folders.baselineFolder).toBe('baseline');
+    expect(instance.folders.diffFolder).toBe('../my_folder/screenshots/diff');
+  });  
+
   it('should be able to create BaseClass with default options', () => {
     const instance = new BaseClass({});
     expect(instance.folders.actualFolder).toBe('.tmp/actual');
