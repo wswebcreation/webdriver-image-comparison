@@ -265,9 +265,6 @@ export async function getFullPageScreenshotsDataDesktop(
     const scrollY = innerHeight * i;
     await executor(scrollToPosition, scrollY);
 
-    // Hide scrollbars before taking a screenshot, we don't want them, on the screenshot
-    await executor(hideScrollBars, true);
-
     // Simply wait the amount of time specified for lazy-loading
     await waitFor(fullPageScrollTimeout);
 
@@ -307,9 +304,6 @@ export async function getFullPageScreenshotsDataDesktop(
       }, devicePixelRatio),
       screenshot,
     });
-
-    // Show scrollbars again
-    await executor(hideScrollBars, false);
   }
 
   // Put back the hidden elements to visible
