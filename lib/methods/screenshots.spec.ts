@@ -36,7 +36,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
         .mockResolvedValueOnce({});
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should get hide elements for the Android nativeWebScreenshot fullpage screenshot', async () => {
@@ -78,7 +82,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
         .mockResolvedValueOnce({});
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should get the Android ChromeDriver fullpage screenshot data', async () => {
@@ -114,8 +122,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
         .mockResolvedValueOnce({});
 
-      // await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should hide elements for the Android ChromeDriver fullpage screenshot', async () => {
@@ -155,8 +166,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
         .mockResolvedValueOnce({});
 
-      // await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should get the iOS fullpage screenshot data', async () => {
@@ -193,7 +207,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
         .mockResolvedValueOnce({});
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should hide elements for the iOS fullpage screenshot', async () => {
@@ -234,7 +252,11 @@ describe('screenshots', () => {
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
         .mockResolvedValueOnce({});
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should get the desktop browser fullpage screenshot data', async () => {
@@ -254,50 +276,34 @@ describe('screenshots', () => {
       // THIS NEEDS TO BE FIXED IN THE FUTURE
       // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 2
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 3
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 4
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 5
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
-        .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({});
+        .mockResolvedValueOnce(3200);
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
 
     it('should hide elements for the desktop browser fullpage screenshot', async () => {
@@ -317,54 +323,38 @@ describe('screenshots', () => {
       // THIS NEEDS TO BE FIXED IN THE FUTURE
       // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 2
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
-        .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 3
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 4
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // RUN 5
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
-        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
-        .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
         .mockResolvedValueOnce({});
 
-      expect(await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options)).toMatchSnapshot();
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+
+      expect(result).toMatchSnapshot();
     });
   });
 });
