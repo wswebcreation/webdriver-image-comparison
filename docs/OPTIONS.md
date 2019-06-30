@@ -18,11 +18,21 @@ The padding that needs to be added to the address bar on iOS and Android to do a
 If no baseline image is found during the comparison the image is automatically copied to the baseline folder when this is set to `true`
 
 ### `baselineFolder`
-- **Type:** `string`
+- **Type:** `any`
 - **Mandatory:** No
 - **Default:** `./wic/baseline/`
 
-The directory that will hold all the baseline images that are used to during the comparison.
+The directory that will hold all the baseline images that are used to during the comparison. If not set, the default value will be used. A function that accepts an option object can also be used to set the baselineFolder value:
+```
+  getFolder = type = options => {
+    const testFolder = path.dirname(options.specs[0]);
+    return path.join(testFolder, 'snapshots', type);
+  };
+
+  {
+    baselineFolder: getFolder(options)
+  }
+```
 
 ### `clearRuntimeFolder`
 - **Type:** `boolean`
@@ -90,11 +100,22 @@ Hide scrollbars in the application. If set to true all scrollbars will be disabl
 Save the images per instance in a separate folder so for example all Chrome screenshots will be saved in a chrome folder like `desktop_chrome`.
 
 ### `screenshotPath`
-- **Type:** `string`
+- **Type:** `any`
 - **Default:** `.tmp/`
 - **Mandatory:** no
 
-The directory that will hold all the actual / difference screenshots
+The directory that will hold all the actual / difference screenshots. If not set, the default value will be used. A function that ac
+cepts an option object can also be used to set the screenshotPath value:
+```
+  getFolder = type = options => {
+    const testFolder = path.dirname(options.specs[0]);
+    return path.join(testFolder, 'snapshots', type);
+  };
+
+  {
+    screenshotPath: getFolder(options)
+  }
+```
 
 ### `toolBarShadowPadding`
 - **Type:** `number`

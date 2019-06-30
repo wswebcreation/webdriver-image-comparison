@@ -93,7 +93,7 @@ export interface ImageCompareFolderOptions {
   // The actual folder
   actualFolder: string;
   // The baseline folder
-  baselineFolder: string;
+  baselineFolder: any;
   // The name of the browser
   browserName: string;
   // The name of the device

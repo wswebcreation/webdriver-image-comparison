@@ -7,7 +7,7 @@ export interface ClassOptions{
   // If no baseline image is found during the comparison the image is automatically copied to the baseline folder when this is set to `true`
   autoSaveBaseline?: boolean;
   // The directory that will hold all the baseline images that are used to during the comparison
-  baselineFolder?: string;
+  baselineFolder?: any;
   // Delete runtime folder (actual & diff) on initialisation
   clearRuntimeFolder?: boolean;
   // Enable extra console logging or always saving the diff images during comparison
@@ -17,7 +17,7 @@ export interface ClassOptions{
   // Save the images per instance in a separate folder.
   savePerInstance?: boolean;
   // The directory that will hold all the actual / difference screenshots
-  screenshotPath?: string;
+  screenshotPath?: any;
   // The padding that needs to be added to the toolbar bar on iOS and Android to do a proper cutout of the the viewport.
   toolBarShadowPadding?: number;
 

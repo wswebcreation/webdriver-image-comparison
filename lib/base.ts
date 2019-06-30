@@ -13,8 +13,20 @@ export default class BaseClass {
     // determine default options
     this.defaultOptions = defaultOptions(options);
 
-    const baselineFolder = normalize(options.baselineFolder || FOLDERS.DEFAULT.BASE);
-    const baseFolder = normalize(options.screenshotPath || FOLDERS.DEFAULT.SCREENSHOTS);
+    let baselineFolder;
+    let baseFolder;
+
+    if (typeof options.baselineFolder === 'function') {
+      baselineFolder = options.baselineFolder(options);
+    } else {
+      baselineFolder = normalize(options.baselineFolder || FOLDERS.DEFAULT.BASE);
+    }
+
+    if (typeof options.screenshotPath === 'function') {
+      baseFolder = options.screenshotPath(options);
+    } else {
+      baseFolder = normalize(options.screenshotPath || FOLDERS.DEFAULT.SCREENSHOTS);
+    }
 
     this.folders = {
       actualFolder: join(baseFolder, FOLDERS.ACTUAL),
