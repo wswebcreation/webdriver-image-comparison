@@ -68,6 +68,7 @@ export default async function saveScreen(
   const afterOptions: AfterScreenshotOptions = {
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
+    disableCSSAnimation,
     hideElements,
     hideScrollBars,
     filePath: {
@@ -91,6 +92,7 @@ export default async function saveScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    platformName: instanceData.platformName,
     removeElements,
   };
 
