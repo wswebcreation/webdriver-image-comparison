@@ -6,11 +6,13 @@ describe('getEnrichedInstanceData', () => {
       addressBarShadowPadding: 6,
       toolBarShadowPadding: 6,
       browserName: 'browserName',
+      browserVersion: 'browserVersion',
       deviceName: 'deviceName',
       logName: 'logName',
       name: 'name',
       nativeWebScreenshot: false,
       platformName: 'platformName',
+      platformVersion: 'platformVersion',
     };
     const MOCKED_EXECUTOR = jest.fn()
     // getEnrichedInstanceData for: getScreenDimensions
@@ -47,11 +49,13 @@ describe('getEnrichedInstanceData', () => {
       addressBarShadowPadding: 6,
       toolBarShadowPadding: 6,
       browserName: 'browserName',
+      browserVersion: 'browserVersion',
       deviceName: 'deviceName',
       logName: 'logName',
       name: 'name',
       nativeWebScreenshot: false,
       platformName: 'Android',
+      platformVersion: '8.0',
     };
     const MOCKED_EXECUTOR = jest.fn()
     // getEnrichedInstanceData for: getScreenDimensions
@@ -88,11 +92,13 @@ describe('getEnrichedInstanceData', () => {
       addressBarShadowPadding: 6,
       toolBarShadowPadding: 6,
       browserName: 'browserName',
+      browserVersion: 'browserVersion',
       deviceName: 'deviceName',
       logName: 'logName',
       name: 'name',
       nativeWebScreenshot: true,
       platformName: 'Android',
+      platformVersion: '8.0',
     };
     const MOCKED_EXECUTOR = jest.fn()
     // getEnrichedInstanceData for: getScreenDimensions
@@ -129,11 +135,13 @@ describe('getEnrichedInstanceData', () => {
       addressBarShadowPadding: 6,
       toolBarShadowPadding: 6,
       browserName: 'browserName',
+      browserVersion: 'browserVersion',
       deviceName: 'deviceName',
       logName: 'logName',
       name: 'name',
       nativeWebScreenshot: false,
       platformName: 'iOS',
+      platformVersion: '12.4',
     };
     const MOCKED_EXECUTOR = jest.fn()
     // getEnrichedInstanceData for: getScreenDimensions

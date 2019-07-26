@@ -38,6 +38,8 @@ export interface ScreenshotFilePathOptions {
 export interface ScreenshotFileNameOptions {
   // The browser name
   browserName: string;
+  // The browser version
+  browserVersion: string;
   // The device name
   deviceName: string;
   // The device pixel ratio
@@ -56,6 +58,10 @@ export interface ScreenshotFileNameOptions {
   outerHeight: number;
   // The outer width of the screen
   outerWidth: number;
+  // The platform name
+  platformName: string;
+  // The platform version
+  platformVersion: string;
   // The height of the screen
   screenHeight: number;
   // The width of the screen

@@ -87,6 +87,7 @@ export default async function saveFullPageScreen(
     },
     fileName: {
       browserName: enrichedInstanceData.browserName,
+      browserVersion: enrichedInstanceData.browserVersion,
       deviceName: enrichedInstanceData.deviceName,
       devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
       formatImageName,
@@ -96,6 +97,8 @@ export default async function saveFullPageScreen(
       name: enrichedInstanceData.name,
       outerHeight: enrichedInstanceData.dimensions.window.outerHeight,
       outerWidth: enrichedInstanceData.dimensions.window.outerWidth,
+      platformName: enrichedInstanceData.platformName,
+      platformVersion: enrichedInstanceData.platformVersion,
       screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,

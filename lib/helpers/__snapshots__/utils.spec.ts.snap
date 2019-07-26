@@ -61,7 +61,7 @@ exports[`utils formatFileName should format a string for mobile app 1`] = `"theT
 
 exports[`utils formatFileName should format a string for mobile browser 1`] = `"theTag-chrome-2-1400x900.png"`;
 
-exports[`utils formatFileName should format a string with all options provided 1`] = `"chrome-2-768-chrome-latest-chrome-name-theTag-1366.png"`;
+exports[`utils formatFileName should format a string with all options provided 1`] = `"browser.chrome-74-platform.osx-12-dpr.2-768-chrome-latest-chrome-name-theTag-1366.png"`;
 
 exports[`utils getAddressBarShadowPadding should return 0 when this is a check for Android with a native screenshot but without adding a shadow padding 1`] = `0`;
 

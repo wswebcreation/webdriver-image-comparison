@@ -3,6 +3,8 @@ import {ScreenDimensions} from '../clientSideScripts/screenDimensions.interfaces
 export interface InstanceData {
   // The browser name of the instance
   browserName: string;
+  // The browser version of the instance
+  browserVersion: string;
   // The device name of the instance
   deviceName: string;
   // The log name of the instance
@@ -11,8 +13,10 @@ export interface InstanceData {
   name: string;
   // If the instance creates native webscreenshots
   nativeWebScreenshot: boolean;
-  // The platformname of the instance
+  // The platform name of the instance
   platformName: string;
+  // The platform version of the instance
+  platformVersion: string;
 }
 
 export interface InstanceOptions {
@@ -22,6 +26,8 @@ export interface InstanceOptions {
   toolBarShadowPadding: number;
   // The browser name of the instance
   browserName: string;
+  // The browser version of the instance
+  browserVersion: string;
   // The device name of the instance
   deviceName: string;
   // The log name of the instance
@@ -30,8 +36,9 @@ export interface InstanceOptions {
   name: string;
   // If the instance creates native webscreenshots
   nativeWebScreenshot: boolean;
-  // The platformname of the instance
   platformName: string;
+  // The platform version of the instance
+  platformVersion: string;
 }
 
 export interface EnrichedInstanceData extends ScreenDimensions, InstanceOptions {

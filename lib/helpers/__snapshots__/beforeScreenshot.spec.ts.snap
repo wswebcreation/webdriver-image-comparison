@@ -4,6 +4,7 @@ exports[`beforeScreenshot should be able to return the enriched instance data wi
 Object {
   "addressBarShadowPadding": 0,
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "isAndroid": false,
   "isAndroidChromeDriverScreenshot": false,
@@ -16,6 +17,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": false,
   "platformName": "platformName",
+  "platformVersion": "platformVersion",
   "toolBarShadowPadding": 0,
 }
 `;
@@ -24,6 +26,7 @@ exports[`beforeScreenshot should be able to return the enriched instance data wi
 Object {
   "addressBarShadowPadding": 0,
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "isAndroid": false,
   "isAndroidChromeDriverScreenshot": false,
@@ -36,6 +39,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": false,
   "platformName": "platformName",
+  "platformVersion": "platformVersion",
   "toolBarShadowPadding": 0,
 }
 `;

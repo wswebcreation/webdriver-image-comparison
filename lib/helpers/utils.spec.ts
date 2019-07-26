@@ -71,6 +71,7 @@ describe('utils', () => {
   describe('formatFileName', () => {
     const formatFileOptions: FormatFileNameOptions = {
       browserName: '',
+      browserVersion: '',
       deviceName: '',
       devicePixelRatio: 2,
       formatImageName: '',
@@ -80,16 +81,21 @@ describe('utils', () => {
       name: '',
       outerHeight: 768,
       outerWidth: 1366,
+      platformName: '',
+      platformVersion: '',
       screenHeight: 900,
       screenWidth: 1400,
       tag: 'theTag',
     };
 
     it('should format a string with all options provided', () => {
-      formatFileOptions.formatImageName = '{browserName}-{dpr}-{height}-{logName}-{name}-{tag}-{width}';
+      formatFileOptions.formatImageName = 'browser.{browserName}-{browserVersion}-platform.{platformName}-{platformVersion}-dpr.{dpr}-{height}-{logName}-{name}-{tag}-{width}';
       formatFileOptions.browserName = 'chrome';
+      formatFileOptions.browserVersion = '74';
       formatFileOptions.logName = 'chrome-latest';
       formatFileOptions.name = 'chrome-name';
+      formatFileOptions.platformName = 'osx';
+      formatFileOptions.platformVersion = '12';
 
       expect(formatFileName(formatFileOptions)).toMatchSnapshot();
     });
