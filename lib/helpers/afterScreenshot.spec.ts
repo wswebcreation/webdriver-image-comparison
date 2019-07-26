@@ -12,6 +12,7 @@ describe('afterScreenshot', () => {
     const options = {
       actualFolder: folder,
       base64Image: 'string',
+      disableCSSAnimation: false,
       hideScrollBars: true,
       filePath: {
         browserName: 'browserName',
@@ -35,6 +36,7 @@ describe('afterScreenshot', () => {
         tag: 'tag',
       },
       hideElements: [<HTMLElement><any>'<div></div>'],
+      platformName: '',
       removeElements: [<HTMLElement><any>'<div></div>'],
     };
 

@@ -12,6 +12,8 @@ export interface AfterScreenshotOptions {
   actualFolder: string;
   // The image
   base64Image: string;
+  // Disable all css animations
+  disableCSSAnimation: boolean;
   // If scrollbars need to be hidden
   hideScrollBars: boolean;
   // The file path options
@@ -20,6 +22,8 @@ export interface AfterScreenshotOptions {
   fileName: ScreenshotFileNameOptions;
   // Elements that need to be hidden (visibility: hidden) before saving a screenshot
   hideElements: HTMLElement[];
+  // The platform name of the instance
+  platformName: string;
   // Elements that need to be removed (display: none) before saving a screenshot
   removeElements: HTMLElement[];
 }
