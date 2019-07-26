@@ -3,11 +3,13 @@ import {BeforeScreenshotOptions} from '../helpers/beforeScreenshot.interface';
 export const BEFORE_SCREENSHOT_OPTIONS: BeforeScreenshotOptions = {
   instanceData: {
     browserName: 'chrome',
+    browserVersion: '75.0.1',
     deviceName: '',
     logName: 'chrome-latest',
     name: 'chrome-name',
     nativeWebScreenshot: true,
     platformName: 'Windows 10',
+    platformVersion: '1234',
   },
   addressBarShadowPadding: 6,
   disableCSSAnimation: true,

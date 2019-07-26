@@ -7,11 +7,13 @@ describe('beforeScreenshot', () => {
     const options = {
       instanceData: {
         browserName: 'browserName',
+        browserVersion: 'browserVersion',
         deviceName: 'deviceName',
         logName: 'logName',
         name: 'name',
         nativeWebScreenshot: false,
         platformName: 'platformName',
+        platformVersion: 'platformVersion',
       },
       addressBarShadowPadding: 6,
       disableCSSAnimation: true,
@@ -30,11 +32,13 @@ describe('beforeScreenshot', () => {
     const options = {
       instanceData: {
         browserName: 'browserName',
+        browserVersion: 'browserVersion',
         deviceName: 'deviceName',
         logName: 'logName',
         name: 'name',
         nativeWebScreenshot: false,
         platformName: 'platformName',
+        platformVersion: 'platformVersion',
       },
       addressBarShadowPadding: 6,
       disableCSSAnimation: true,

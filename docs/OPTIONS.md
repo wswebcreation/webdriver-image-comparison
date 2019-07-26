@@ -68,13 +68,16 @@ The name of the saved images can be customized by passing the parameter `formatI
 The following variables can be passed to format the string and will automatically been read from the instance capabilities. 
 If they can't be determined the defaults will be used.
 
-- `browserName`: The name of the device from the capabilities (default: 'no-provided-browserName-in-caps')
-- `deviceName`: The orientation from capabilities (default: 'no-provided-deviceName-in-caps')
+- `browserName`: The name of the browser in the provided capabilities
+- `browserVersion`: The version of the browser provided in the capabilities
+- `deviceName`: The device name from the capabilities
 - `dpr`: The device pixel ratio
 - `height`: The height of the screen
 - `logName`: The logName from capabilities
 - `mobile`: This will add _app, of browserName after the deviceName to distinguish app screenshots from browser screenshots
 - `name`: The name from capabilities
+- `platformName`: The name of the platform in the provided capabilities
+- `platformVersion`: The version of the platform provided in the capabilities
 - `tag`: The tag that is provided in the methods that is being called
 - `width`: The width of the screen
 

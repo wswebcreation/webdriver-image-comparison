@@ -22,6 +22,7 @@ describe('afterScreenshot', () => {
       },
       fileName: {
         browserName: 'browserName',
+        browserVersion: 'browserVersion',
         deviceName: 'deviceName',
         devicePixelRatio: 2,
         formatImageName: '{tag}-{browserName}-{width}x{height}-dpr-{dpr}',
@@ -31,6 +32,8 @@ describe('afterScreenshot', () => {
         name: 'name',
         outerHeight: 850,
         outerWidth: 1400,
+        platformName: 'platformName',
+        platformVersion: 'platformVersion',
         screenHeight: 900,
         screenWidth: 1440,
         tag: 'tag',

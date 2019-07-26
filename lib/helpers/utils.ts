@@ -29,12 +29,15 @@ export function getAndCreatePath(folder: string, options: GetAndCreatePathOption
 export function formatFileName(options: FormatFileNameOptions): string {
   let defaults: FormatFileDefaults = {
     browserName: options.browserName,
+    browserVersion: options.browserVersion,
     deviceName: options.deviceName,
     dpr: options.devicePixelRatio,
     height: options.isMobile ? options.screenHeight : options.outerHeight,
     logName: options.logName,
     mobile: (options.isMobile && options.isTestInBrowser) ? options.browserName : options.isMobile ? 'app' : '',
     name: options.name,
+    platformName: options.platformName,
+    platformVersion: options.platformVersion,
     tag: options.tag,
     width: options.isMobile ? options.screenWidth : options.outerWidth
   };

@@ -79,6 +79,7 @@ export default async function saveScreen(
     },
     fileName: {
       browserName: enrichedInstanceData.browserName,
+      browserVersion: enrichedInstanceData.browserVersion,
       deviceName: enrichedInstanceData.deviceName,
       devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
       formatImageName,
@@ -88,6 +89,8 @@ export default async function saveScreen(
       name: enrichedInstanceData.name,
       outerHeight: enrichedInstanceData.dimensions.window.outerHeight,
       outerWidth: enrichedInstanceData.dimensions.window.outerWidth,
+      platformName: enrichedInstanceData.platformName,
+      platformVersion: enrichedInstanceData.platformVersion,
       screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,

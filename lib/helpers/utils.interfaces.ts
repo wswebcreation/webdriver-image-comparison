@@ -12,6 +12,8 @@ export interface GetAndCreatePathOptions {
 export interface FormatFileNameOptions {
   // The browser name
   browserName: string;
+  // The browser version
+  browserVersion: string;
   // The device name
   deviceName: string;
   // The device pixel ratio
@@ -30,6 +32,10 @@ export interface FormatFileNameOptions {
   outerHeight: number;
   // The outer width of the screen
   outerWidth: number;
+  // The platform name
+  platformName: string;
+  // The platform version
+  platformVersion: string;
   // The height of the screen
   screenHeight: number;
   // The width of the screen
@@ -41,6 +47,8 @@ export interface FormatFileNameOptions {
 export interface FormatFileDefaults {
   // The browser name
   browserName: string;
+  // The browser version
+  browserVersion: string;
   // The device name
   deviceName: string;
   // The device pixel ratio
@@ -53,6 +61,10 @@ export interface FormatFileDefaults {
   mobile: string;
   // The the name of the instance
   name: string;
+  // The platform name
+  platformName: string;
+  // The platform version
+  platformVersion: string;
   // The tag of the image
   tag: string;
   // The width of the screen

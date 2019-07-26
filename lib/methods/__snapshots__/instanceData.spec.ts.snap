@@ -8,6 +8,7 @@ Object {
     "scrollHeight": 0,
   },
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "html": Object {
     "clientHeight": 0,
@@ -27,6 +28,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": false,
   "platformName": "Android",
+  "platformVersion": "8.0",
   "toolBarShadowPadding": 0,
   "window": Object {
     "devicePixelRatio": 1,
@@ -48,6 +50,7 @@ Object {
     "scrollHeight": 0,
   },
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "html": Object {
     "clientHeight": 0,
@@ -67,6 +70,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": true,
   "platformName": "Android",
+  "platformVersion": "8.0",
   "toolBarShadowPadding": 0,
   "window": Object {
     "devicePixelRatio": 1,
@@ -88,6 +92,7 @@ Object {
     "scrollHeight": 0,
   },
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "html": Object {
     "clientHeight": 0,
@@ -107,6 +112,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": false,
   "platformName": "platformName",
+  "platformVersion": "platformVersion",
   "toolBarShadowPadding": 0,
   "window": Object {
     "devicePixelRatio": 1,
@@ -128,6 +134,7 @@ Object {
     "scrollHeight": 0,
   },
   "browserName": "browserName",
+  "browserVersion": "browserVersion",
   "deviceName": "deviceName",
   "html": Object {
     "clientHeight": 0,
@@ -147,6 +154,7 @@ Object {
   "name": "name",
   "nativeWebScreenshot": false,
   "platformName": "iOS",
+  "platformVersion": "12.4",
   "toolBarShadowPadding": 6,
   "window": Object {
     "devicePixelRatio": 1,
