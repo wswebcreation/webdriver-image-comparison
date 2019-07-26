@@ -70,7 +70,7 @@ If they can't be determined the defaults will be used.
 
 - `browserName`: The name of the browser in the provided capabilities
 - `browserVersion`: The version of the browser provided in the capabilities
-- `deviceName`: The orientation from capabilities
+- `deviceName`: The device name from the capabilities
 - `dpr`: The device pixel ratio
 - `height`: The height of the screen
 - `logName`: The logName from capabilities
