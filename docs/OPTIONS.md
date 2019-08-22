@@ -107,8 +107,8 @@ Save the images per instance in a separate folder so for example all Chrome scre
 - **Default:** `.tmp/`
 - **Mandatory:** no
 
-The directory that will hold all the actual / difference screenshots. If not set, the default value will be used. A function that ac
-cepts an option object can also be used to set the screenshotPath value:
+The directory that will hold all the actual / difference screenshots. If not set, the default value will be used. A function that
+accepts an option object can also be used to set the screenshotPath value:
 ```
   getFolder = type = options => {
     const testFolder = path.dirname(options.specs[0]);
