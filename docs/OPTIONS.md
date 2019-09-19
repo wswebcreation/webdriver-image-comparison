@@ -41,6 +41,9 @@ The directory that will hold all the baseline images that are used to during the
 
 Delete runtime folder (`actual` & `diff`) on initialisation
 
+> **NOTE:**<br>
+> This will only work when the [`screenshotPath`](#screenshotpath) is set through the plugin options, and **WILL NOT WORK** when you set the folders in the methods
+
 ### `debug`
 - **Type:** `boolean`
 - **Mandatory:** No
