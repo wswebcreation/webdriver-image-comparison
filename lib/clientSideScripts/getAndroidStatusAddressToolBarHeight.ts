@@ -10,7 +10,7 @@ export default function getAndroidStatusAddressToolBarHeight(
   // Determine version for the right offsets
   const {height, width} = window.screen;
   const {innerHeight} = window;
-  const match = (navigator.appVersion).match(/Android (\d+).(\d+).?(\d+)?/);
+  const match = (navigator.appVersion).match(/Android (\d+).?(\d+)?.?(\d+)?/);
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = androidOffsets[majorVersion];
   const statusAddressBarHeight = versionOffsets.STATUS_BAR + versionOffsets.ADDRESS_BAR;
