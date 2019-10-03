@@ -468,8 +468,8 @@ If true the return percentage will be like `0.12345678`, default is `0.12`
 This will retun all compare data, not only the mismatch percentage
 
 ### `saveAboveTolerance`
-- **Type:** `boolean`
-- **Default:** `false`
+- **Type:** `number`
+- **Default:** `0`
 - **Mandatory:** no
 - **Remark:** *Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting*
 
