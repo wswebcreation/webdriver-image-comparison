@@ -1,11 +1,6 @@
-import {IOS_DEVICES, NAVIGATOR_APP_VERSIONS} from '../mocks/mocks';
+import {IOS_DEVICES, NAVIGATOR_APP_VERSIONS, CONFIGURABLE} from '../mocks/mocks';
 import getIosStatusAddressToolBarHeight from './getIosStatusAddressToolBarHeight';
 import {OFFSETS} from '../helpers/constants';
-
-const CONFIGURABLE = {
-  writable: true,
-  configurable: true,
-};
 
 describe('getIosStatusAddressToolBarHeight', () => {
   it('should get the correct status, address and toolbar height for an iPhone with iOS 10', () => {
@@ -64,7 +59,7 @@ describe('getIosStatusAddressToolBarHeight', () => {
 /**
  * Set the environment for the test
  */
-function setEnvironment(ios:number, phone: string){
+function setEnvironment(ios: number, phone: string) {
   // @ts-ignore
   Object.defineProperty(navigator, 'appVersion', {value: NAVIGATOR_APP_VERSIONS.IOS[ios], ...CONFIGURABLE});
   // @ts-ignore
