@@ -41,6 +41,9 @@ The directory that will hold all the baseline images that are used to during the
 
 Delete runtime folder (`actual` & `diff`) on initialisation
 
+> **NOTE:**<br>
+> This will only work when the [`screenshotPath`](#screenshotpath) is set through the plugin options, and **WILL NOT WORK** when you set the folders in the methods
+
 ### `debug`
 - **Type:** `boolean`
 - **Mandatory:** No
@@ -107,8 +110,8 @@ Save the images per instance in a separate folder so for example all Chrome scre
 - **Default:** `.tmp/`
 - **Mandatory:** no
 
-The directory that will hold all the actual / difference screenshots. If not set, the default value will be used. A function that ac
-cepts an option object can also be used to set the screenshotPath value:
+The directory that will hold all the actual / difference screenshots. If not set, the default value will be used. A function that
+accepts an option object can also be used to set the screenshotPath value:
 ```
   getFolder = type = options => {
     const testFolder = path.dirname(options.specs[0]);
@@ -465,8 +468,8 @@ If true the return percentage will be like `0.12345678`, default is `0.12`
 This will retun all compare data, not only the mismatch percentage
 
 ### `saveAboveTolerance`
-- **Type:** `boolean`
-- **Default:** `false`
+- **Type:** `number`
+- **Default:** `0`
 - **Mandatory:** no
 - **Remark:** *Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting*
 

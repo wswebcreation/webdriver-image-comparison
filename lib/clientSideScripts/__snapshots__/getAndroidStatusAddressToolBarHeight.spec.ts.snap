@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getAndroidStatusAddressToolBarHeight should the the android status, address and toolbar height 1`] = `
+exports[`getAndroidStatusAddressToolBarHeight should the the android status, address and toolbar height with major and minor version in the navigator 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 80,
+    "width": 412,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 48,
+    "width": 412,
+    "x": 0,
+    "y": 684,
+  },
+}
+`;
+
+exports[`getAndroidStatusAddressToolBarHeight should the the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 80,
+    "width": 412,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 48,
+    "width": 412,
+    "x": 0,
+    "y": 684,
+  },
+}
+`;
+
+exports[`getAndroidStatusAddressToolBarHeight should the the android status, address and toolbar height with only a major version in the navigator 1`] = `
 Object {
   "statusAddressBar": Object {
     "height": 80,

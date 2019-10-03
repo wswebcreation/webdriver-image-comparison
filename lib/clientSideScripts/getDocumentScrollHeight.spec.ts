@@ -1,9 +1,5 @@
 import getDocumentScrollHeight from './getDocumentScrollHeight';
-
-const CONFIGURABLE = {
-  writable: true,
-  configurable: true,
-};
+import {CONFIGURABLE} from "../mocks/mocks";
 
 describe('getDocumentScrollHeight', () => {
   it('should return the bodyScrollHeight', () => {

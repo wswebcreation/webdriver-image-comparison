@@ -1,10 +1,5 @@
-import {IOS_DEVICES} from '../mocks/mocks';
+import {IOS_DEVICES, CONFIGURABLE} from '../mocks/mocks';
 import {getElementPositionTopScreenNativeMobile} from './getElementPositionTopScreenNativeMobile';
-
-const CONFIGURABLE = {
-  writable: true,
-  configurable: true,
-};
 
 describe('getElementPositionTopScreenNativeMobile', () => {
   beforeEach(()=>{
