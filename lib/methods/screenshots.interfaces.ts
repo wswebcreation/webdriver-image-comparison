@@ -29,7 +29,7 @@ export interface FullPageScreenshotDataOptions {
   // The amount of milliseconds to wait for a new scroll
   fullPageScrollTimeout: number;
   // Elements that need to be hidden after the first scroll for a fullpage scroll
-  hideAfterFirstScroll: HTMLElement[];
+  hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
   // The innerheight
   innerHeight: number;
   // If the instance is an Android device
@@ -58,7 +58,7 @@ export interface FullPageScreenshotNativeMobileOptions {
   // The address bar padding for iOS or Android
   toolBarShadowPadding: number;
   // Elements that need to be hidden after the first scroll for a fullpage scroll
-  hideAfterFirstScroll: HTMLElement[];
+  hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
 }
 
 export interface FullPageScreenshotOptions {
@@ -69,5 +69,5 @@ export interface FullPageScreenshotOptions {
   // The innerheight
   innerHeight: number;
   // Elements that need to be hidden after the first scroll for a fullpage scroll
-  hideAfterFirstScroll: HTMLElement[];
+  hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
 }

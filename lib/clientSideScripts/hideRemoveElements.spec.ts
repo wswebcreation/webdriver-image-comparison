@@ -17,7 +17,7 @@ describe('hideRemoveElements', () => {
     expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
 
     hideRemoveElements({
-        hide: [document.querySelector('#id-1'), document.querySelector('#id-3')],
+        hide: [<HTMLElement>document.querySelector('#id-1'), <HTMLElement>document.querySelector('#id-3')],
         remove: [],
       },
       true,
@@ -28,7 +28,7 @@ describe('hideRemoveElements', () => {
     expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
 
     hideRemoveElements({
-        hide: [document.querySelector('#id-1'), document.querySelector('#id-3')],
+        hide: [<HTMLElement>document.querySelector('#id-1'), <HTMLElement>document.querySelector('#id-3')],
         remove: [],
       },
       false,
@@ -37,6 +37,50 @@ describe('hideRemoveElements', () => {
     // Check not hidden
     expect((<HTMLElement>document.querySelector('#id-1')).style.visibility).toMatchSnapshot();
     expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
+  });
+
+  it('should be able to hide elements and put them back again when an array of hidden elements is provided', () => {
+    document.body.innerHTML =
+      '<div>' +
+      '   <span class="hide">Hello</span>' +
+      '   <span class="hide">Hello</span>' +
+      '   <div>' +
+      '     <span id="id-3">Hello</span>' +
+      '     <span class="hide">Hello</span>' +
+      '  </div>' +
+      '</div>';
+
+    // Check not hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[0].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[1].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[2].style.visibility).toMatchSnapshot();
+
+    hideRemoveElements({
+        hide: [[...<HTMLElement[]><unknown>document.querySelectorAll('.hide')]],
+        remove: [],
+      },
+      true,
+    );
+
+    // Check hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[0].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[1].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[2].style.visibility).toMatchSnapshot();
+
+    hideRemoveElements({
+        hide: [[...<HTMLElement[]><unknown>document.querySelectorAll('.hide')]],
+        remove: [],
+      },
+      false,
+    );
+
+    // Check not hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[0].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[1].style.visibility).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.visibility).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.hide'))[2].style.visibility).toMatchSnapshot();
   });
 
   it('should be able to remove elements and put them back again', () => {
@@ -56,7 +100,10 @@ describe('hideRemoveElements', () => {
 
     hideRemoveElements({
         hide: [],
-        remove: [document.querySelector('#id-2'), document.querySelector('#id-4')],
+        remove: [
+          <HTMLElement>document.querySelector('#id-2'),
+          <HTMLElement>document.querySelector('#id-4'),
+        ],
       },
       true,
     );
@@ -66,7 +113,10 @@ describe('hideRemoveElements', () => {
     expect((<HTMLElement>document.querySelector('#id-4')).style.display).toMatchSnapshot();
 
     hideRemoveElements({
-        remove: [document.querySelector('#id-2'), document.querySelector('#id-4')],
+        remove: [
+          <HTMLElement>document.querySelector('#id-2'),
+          <HTMLElement>document.querySelector('#id-4'),
+        ],
         hide: [],
       },
       false,
@@ -75,5 +125,49 @@ describe('hideRemoveElements', () => {
     // Check not removed
     expect((<HTMLElement>document.querySelector('#id-2')).style.display).toMatchSnapshot();
     expect((<HTMLElement>document.querySelector('#id-4')).style.display).toMatchSnapshot();
+  });
+
+  it('should be able to remove elements and put them back again when an array of to be removed elements is provided', () => {
+    document.body.innerHTML =
+      '<div>' +
+      '   <span class="remove">Hello</span>' +
+      '   <span class="remove">Hello</span>' +
+      '   <div>' +
+      '     <span id="id-3">Hello</span>' +
+      '     <span class="remove">Hello</span>' +
+      '  </div>' +
+      '</div>';
+
+    // Check not hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[0].style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[1].style.display).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[2].style.display).toMatchSnapshot();
+
+    hideRemoveElements({
+        remove: [[...<HTMLElement[]><unknown>document.querySelectorAll('.remove')]],
+        hide: [],
+      },
+      true,
+    );
+
+    // Check hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[0].style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[1].style.display).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[2].style.display).toMatchSnapshot();
+
+    hideRemoveElements({
+        remove: [[...<HTMLElement[]><unknown>document.querySelectorAll('.remove')]],
+        hide: [],
+      },
+      false,
+    );
+
+    // Check not hidden
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[0].style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[1].style.display).toMatchSnapshot();
+    expect((<HTMLElement>document.querySelector('#id-3')).style.display).toMatchSnapshot();
+    expect((<HTMLElement[]><unknown>document.querySelectorAll('.remove'))[2].style.display).toMatchSnapshot();
   });
 });
