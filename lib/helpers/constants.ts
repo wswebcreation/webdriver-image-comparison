@@ -113,5 +113,26 @@ export const OFFSETS = {
         },
       },
 		},
+		13: {
+			STATUS_BAR: 20,
+			STATUS_BAR_PRO: 24,
+			STATUS_BAR_X: 44,
+			ADDRESS_BAR: 50,
+			TOOL_BAR: 44,
+      HOME_BAR:{
+        DEFAULT:{
+          height: 5,
+          width:135,
+          x:120,
+          y:799,
+        },
+        LARGE:{
+          height: 5,
+          width:148,
+          x:133,
+          y:883,
+        },
+      },
+		},
 	},
 };
