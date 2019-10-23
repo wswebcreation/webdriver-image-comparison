@@ -284,8 +284,8 @@ export async function getFullPageScreenshotsDataDesktop(
       if (Math.round(screenshotSize.height) === actualInnerHeight) {
         actualInnerHeight = screenshotSize.height;
       }
-      // No else, because some drivers take a full page screenshot, e.g. FireFox,
-      // and SafariDriver for IE11
+      // No else, because some drivers take a full page screenshot, e.g. some versions of FireFox,
+      // and SafariDriver for Safari 11
     }
 
     // Determine scroll height and check if we need to scroll again
