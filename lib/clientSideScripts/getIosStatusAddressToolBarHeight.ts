@@ -10,7 +10,7 @@ export default function getIosStatusAddressToolBarHeight(iosOffsets: IosOffsets)
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = iosOffsets[majorVersion];
 
-  // Determine screen widht/height to determine iPhone X series address bar height
+  // Determine screen width/height to determine iPhone X series address bar height
   const {width, height} = window.screen;
   const isIphoneXSeries = (width === 812 || height === 812) || (width === 896 || height === 896);
 
