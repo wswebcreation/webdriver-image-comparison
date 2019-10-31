@@ -156,12 +156,14 @@ export async function executeImageCompare(
       diffFilePath,
     );
 
-    console.log(yellow(`
+    if (debug) {
+      console.log(yellow(`
 #####################################################################################
  ${isDifference ? isDifferenceMessage : debugMessage}
  ${diffFilePath}
 #####################################################################################
 `));
+    }
   }
 
   // 7. 	Return the comparison data
