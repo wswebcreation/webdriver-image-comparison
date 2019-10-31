@@ -46,6 +46,11 @@ export const OFFSETS = {
 			STATUS_BAR: 24,
 			ADDRESS_BAR: 56,
 			TOOL_BAR: 48,
+		},
+		10: {
+			STATUS_BAR: 24,
+			ADDRESS_BAR: 56,
+			TOOL_BAR: 48,
 		}
 	},
 	// https://ivomynttinen.com/blog/ios-design-guidelines
