@@ -154,7 +154,7 @@ export async function waitFor(milliseconds: number): Promise<void> {
  */
 export function getScreenshotSize(screenshot: string, devicePixelRation: number = 1): ScreenshotSize {
   return {
-    height: new Buffer(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
-    width: new Buffer(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
+    height: Buffer.from(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
+    width: Buffer.from(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
   };
 }
