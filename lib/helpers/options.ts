@@ -26,6 +26,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
      * Module and method options
      */
     disableCSSAnimation: options.disableCSSAnimation || false,
+    colorToBlack: options.colorToBlack || false,
     fullPageScrollTimeout: options.fullPageScrollTimeout || FULL_PAGE_SCROLL_TIMEOUT,
     hideScrollBars: options.hasOwnProperty('hideScrollBars') ? options.hideScrollBars : true,
     /**

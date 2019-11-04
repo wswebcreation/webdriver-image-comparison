@@ -15,6 +15,8 @@ export interface SaveScreenMethodOptions {
   hideElements?: HTMLElement[];
   // Elements that need to be removed (display: none) before saving a screenshot
   removeElements?: HTMLElement[];
+  // Replace all non-white colors with black
+  colorToBlack?: boolean;
 }
 
 interface CheckOptions extends SaveScreenMethodOptions, CheckMethodOptions {

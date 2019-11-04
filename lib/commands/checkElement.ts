@@ -28,9 +28,10 @@ export default async function checkElement(
       ...('hideScrollBars' in checkElementOptions.method ? {hideScrollBars: checkElementOptions.method.hideScrollBars} : {}),
       ...('resizeDimensions' in checkElementOptions.method ? {resizeDimensions: checkElementOptions.method.resizeDimensions} : {}),
       ...{hideElements: checkElementOptions.method.hideElements || []},
-      ...{removeElements: checkElementOptions.method.removeElements || []},
+      ...{removeElements: checkElementOptions.method.removeElements || []}
     }
   };
+  
   const {devicePixelRatio, fileName} = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);
 
   // 2a. Determine the options

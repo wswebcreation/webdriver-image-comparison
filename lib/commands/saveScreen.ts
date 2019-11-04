@@ -32,9 +32,12 @@ export default async function saveScreen(
   const hideScrollBars: boolean = 'hideScrollBars' in saveScreenOptions.method
     ? saveScreenOptions.method.hideScrollBars
     : saveScreenOptions.wic.hideScrollBars;
+  const colorToBlack: boolean = 'colorToBlack' in saveScreenOptions.method
+    ? saveScreenOptions.method.colorToBlack
+    : saveScreenOptions.wic.colorToBlack;
   const hideElements: HTMLElement[] = saveScreenOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveScreenOptions.method.removeElements || [];
-
+  
   // 2.  Prepare the beforeScreenshot
   const beforeOptions: BeforeScreenshotOptions = {
     instanceData,
@@ -97,6 +100,7 @@ export default async function saveScreen(
     },
     platformName: instanceData.platformName,
     removeElements,
+    colorToBlack
   };
 
   // 6.  Return the data

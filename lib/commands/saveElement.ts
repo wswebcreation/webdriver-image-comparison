@@ -35,6 +35,9 @@ export default async function saveElement(
   const hideScrollBars: boolean = 'hideScrollBars' in saveElementOptions.method
     ? saveElementOptions.method.hideScrollBars
     : saveElementOptions.wic.hideScrollBars;
+  const colorToBlack: boolean = 'colorToBlack' in saveElementOptions.method
+    ? saveElementOptions.method.colorToBlack
+    : saveElementOptions.wic.colorToBlack;
   const resizeDimensions: ResizeDimensions | number = saveElementOptions.method.resizeDimensions || DEFAULT_RESIZE_DIMENSIONS;
   const hideElements: HTMLElement[] = saveElementOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveElementOptions.method.removeElements || [];
@@ -100,6 +103,7 @@ export default async function saveElement(
     },
     platformName: instanceData.platformName,
     removeElements,
+    colorToBlack
   };
 
   // 7.  Return the data

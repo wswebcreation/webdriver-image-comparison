@@ -34,6 +34,9 @@ export default async function saveFullPageScreen(
   const fullPageScrollTimeout: number = 'fullPageScrollTimeout' in saveFullPageOptions.method
     ? saveFullPageOptions.method.fullPageScrollTimeout
     : saveFullPageOptions.wic.fullPageScrollTimeout;
+  const colorToBlack: boolean = 'colorToBlack' in saveFullPageOptions.method
+    ? saveFullPageOptions.method.colorToBlack
+    : saveFullPageOptions.wic.colorToBlack;
   const hideElements: HTMLElement[] = saveFullPageOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveFullPageOptions.method.removeElements || [];
   const hideAfterFirstScroll: HTMLElement[] = saveFullPageOptions.method.hideAfterFirstScroll || [];
@@ -106,6 +109,7 @@ export default async function saveFullPageScreen(
     },
     platformName: instanceData.platformName,
     removeElements,
+    colorToBlack
   };
 
   // 6.  Return the data

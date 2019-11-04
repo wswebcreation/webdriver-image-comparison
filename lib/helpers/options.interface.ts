@@ -30,7 +30,9 @@ export interface ClassOptions{
   fullPageScrollTimeout?: number;
   // Hide scrollbars
   hideScrollBars?: boolean;
-
+  // Replace all non-white colors with black
+  colorToBlack?: boolean;
+  
   /**
    * Compare options
    */
@@ -69,6 +71,7 @@ export interface DefaultOptions {
   fullPageScrollTimeout: number;
   hideScrollBars: boolean;
   compareOptions: CompareOptions;
+  colorToBlack: boolean;
 }
 
 interface CompareOptions {

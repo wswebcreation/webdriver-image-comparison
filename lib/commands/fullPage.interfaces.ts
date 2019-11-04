@@ -26,6 +26,8 @@ export interface SaveFullPageMethodOptions {
   removeElements?: HTMLElement[];
   // Elements that need to be hidden after the first scroll for a fullpage scroll
   hideAfterFirstScroll?: HTMLElement[];
+  // Replace all non-white colors with black
+  colorToBlack?: boolean;
 }
 
 interface CheckOptions extends SaveFullPageMethodOptions, CheckMethodOptions {
