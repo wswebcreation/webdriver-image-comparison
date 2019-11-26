@@ -16,6 +16,7 @@ Object {
     "rawMisMatchPercentage": false,
     "returnAllCompareData": false,
     "saveAboveTolerance": 0,
+    "scaleImagesToSameSize": false,
   },
   "debug": false,
   "disableCSSAnimation": false,
@@ -43,6 +44,7 @@ Object {
     "rawMisMatchPercentage": true,
     "returnAllCompareData": true,
     "saveAboveTolerance": 12,
+    "scaleImagesToSameSize": true,
   },
   "debug": true,
   "disableCSSAnimation": true,
@@ -74,6 +76,7 @@ Object {
   "rawMisMatchPercentage": true,
   "returnAllCompareData": true,
   "saveAboveTolerance": 12,
+  "scaleImagesToSameSize": true,
 }
 `;
 
@@ -99,5 +102,6 @@ Object {
   "rawMisMatchPercentage": true,
   "returnAllCompareData": true,
   "saveAboveTolerance": 12,
+  "scaleImagesToSameSize": true,
 }
 `;
