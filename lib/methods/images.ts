@@ -135,6 +135,7 @@ export async function executeImageCompare(
   const compareOptions: CompareOptions = {
     ignore,
     ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
+    scaleToSameSize: imageCompareOptions.scaleImagesToSameSize,
   };
 
   // 5.		Execute the compare and retrieve the data

@@ -42,6 +42,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
       rawMisMatchPercentage: options.rawMisMatchPercentage || false,
       returnAllCompareData: options.returnAllCompareData || false,
       saveAboveTolerance: options.saveAboveTolerance || 0,
+      scaleImagesToSameSize: options.scaleImagesToSameSize || false
     },
   };
 }
@@ -71,5 +72,6 @@ export function methodCompareOptions(options: any): MethodImageCompareCompareOpt
     ...('rawMisMatchPercentage' in options ? {rawMisMatchPercentage: options.rawMisMatchPercentage} : {}),
     ...('returnAllCompareData' in options ? {returnAllCompareData: options.returnAllCompareData} : {}),
     ...('saveAboveTolerance' in options ? {saveAboveTolerance: options.saveAboveTolerance} : {}),
+    ...('scaleImagesToSameSize' in options ? {scaleImagesToSameSize: options.scaleImagesToSameSize} : {}),
   };
 }

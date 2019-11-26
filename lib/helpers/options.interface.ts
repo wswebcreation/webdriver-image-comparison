@@ -55,6 +55,8 @@ export interface ClassOptions{
   returnAllCompareData?: boolean;
   // Allowable value of misMatchPercentage that prevents saving image with differences
   saveAboveTolerance?: number;
+  //Scale images to same size before comparison
+  scaleImagesToSameSize?:boolean;
 }
 
 export interface DefaultOptions {
@@ -82,4 +84,5 @@ interface CompareOptions {
   rawMisMatchPercentage: boolean;
   returnAllCompareData: boolean;
   saveAboveTolerance: number;
+  scaleImagesToSameSize:boolean;
 }

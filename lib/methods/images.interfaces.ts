@@ -85,6 +85,8 @@ export interface MethodImageCompareCompareOptions {
   returnAllCompareData?: boolean;
   // Allowable value of misMatchPercentage that prevents saving image with differences
   saveAboveTolerance?: number;
+  //Scale images to same size before comparison
+  scaleImagesToSameSize?:boolean;
 }
 
 export interface ImageCompareFolderOptions {
@@ -127,6 +129,7 @@ export interface CompareOptions {
   output?: {
     ignoredBoxes?: IgnoreBoxes[]
   };
+  scaleToSameSize? : boolean;
 }
 
 export interface IgnoreBoxes {
