@@ -29,6 +29,7 @@ describe('options', ()=>{
         rawMisMatchPercentage: true,
         returnAllCompareData: true,
         saveAboveTolerance: 12,
+        scaleImagesToSameSize: true
       };
 
       expect(defaultOptions(options)).toMatchSnapshot();
@@ -51,6 +52,7 @@ describe('options', ()=>{
         rawMisMatchPercentage: true,
         returnAllCompareData: true,
         saveAboveTolerance: 12,
+        scaleImagesToSameSize: true,
       };
 
       expect(methodCompareOptions(options)).toMatchSnapshot();
@@ -75,6 +77,7 @@ describe('options', ()=>{
         rawMisMatchPercentage: true,
         returnAllCompareData: true,
         saveAboveTolerance: 12,
+        scaleImagesToSameSize: true
       };
 
       expect(screenMethodCompareOptions(options)).toMatchSnapshot();

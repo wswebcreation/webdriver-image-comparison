@@ -23,4 +23,6 @@ export interface CheckMethodOptions {
   returnAllCompareData?: boolean;
   // Allowable value of misMatchPercentage that prevents saving image with
   saveAboveTolerance?: number;
+  //Scale images to same size before comparison
+  scaleImagesToSameSize?:boolean;
 }

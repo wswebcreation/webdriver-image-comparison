@@ -483,3 +483,11 @@ Allowable value of misMatchPercentage that prevents saving image with difference
 	
 Comparing large images can lead to performance issues.
 When providing a number for the amount of pixels here (higher then 0), the comparison algorithm skips pixels when the image width or height is larger than `largeImageThreshold` pixels.
+
+### `scaleImagesToSameSize`
+- **Type:** `boolean`
+- **Default:** `false`
+- **Mandatory:** no
+- **Remark:** *Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting*
+
+Scales 2 images to same size before execution of comparison. Highly recommended to enable `ignoreAntialiasing` and ignoreAlpha
