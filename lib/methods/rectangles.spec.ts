@@ -164,6 +164,7 @@ describe('rectangles', () => {
   describe('determineStatusAddressToolBarRectangles', () => {
     it('should determine the rectangles for the iOS with a status and toolbar blockout', async () => {
       const options = {
+        isHybridApp: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
@@ -194,6 +195,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for the iOS without a status and toolbar blockout', async () => {
       const options = {
+        isHybridApp: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
@@ -224,6 +226,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for Android with a status and toolbar blockout', async () => {
       const options = {
+        isHybridApp:false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'Android',
@@ -254,6 +257,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles that there are no rectangles for this device', async () => {
       const options = {
+        isHybridApp: false,
         isMobile: true,
         isViewPortScreenshot: false,
         platformName: 'Android',

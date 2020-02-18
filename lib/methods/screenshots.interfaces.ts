@@ -38,6 +38,8 @@ export interface FullPageScreenshotDataOptions {
   isAndroidNativeWebScreenshot: boolean;
   // If this is an Android ChromeDriver screenshot
   isAndroidChromeDriverScreenshot: boolean;
+  // Is it an hybrid app or not
+  isHybridApp: boolean;
   // If the instance is an iOS device
   isIos: boolean;
   // The address bar padding for iOS or Android

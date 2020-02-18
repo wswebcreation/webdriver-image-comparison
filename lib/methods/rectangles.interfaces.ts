@@ -29,6 +29,8 @@ export interface RectanglesOutput {
 }
 
 export interface StatusAddressToolBarRectanglesOptions {
+  // Is it an hybrid app or not
+  isHybridApp: boolean;
   // If the instance is a mobile phone
   isMobile: boolean;
   // If the comparison needs to be done for a viewport screenshot or not

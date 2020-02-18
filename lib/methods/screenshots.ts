@@ -32,6 +32,7 @@ export async function getBase64FullPageScreenshotsData(
     isAndroid,
     isAndroidNativeWebScreenshot,
     isAndroidChromeDriverScreenshot,
+    isHybridApp,
     isIos,
     toolBarShadowPadding,
   } = options;
@@ -50,7 +51,7 @@ export async function getBase64FullPageScreenshotsData(
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
     const statusAddressBarHeight = (
-      <StatusAddressToolBarHeight>(await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
+      <StatusAddressToolBarHeight>(await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp))
     ).statusAddressBar.height;
     const androidNativeMobileOptions = {...nativeMobileOptions, statusAddressBarHeight};
 

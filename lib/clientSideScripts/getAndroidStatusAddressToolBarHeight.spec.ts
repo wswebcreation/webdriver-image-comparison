@@ -13,18 +13,18 @@ describe('getAndroidStatusAddressToolBarHeight', () => {
   it('should the the android status, address and toolbar height with only a major version in the navigator', () => {
     Object.defineProperty(navigator, 'appVersion', {value: NAVIGATOR_APP_VERSIONS.ANDROID['9'], ...CONFIGURABLE});
 
-    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID)).toMatchSnapshot();
+    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID, false)).toMatchSnapshot();
   });
 
   it('should the the android status, address and toolbar height with major and minor version in the navigator', () => {
     Object.defineProperty(navigator, 'appVersion', {value: NAVIGATOR_APP_VERSIONS.ANDROID['8'], ...CONFIGURABLE});
 
-    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID)).toMatchSnapshot();
+    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID, false)).toMatchSnapshot();
   });
 
   it('should the the android status, address and toolbar height with major, minor and patch version in the navigator', () => {
     Object.defineProperty(navigator, 'appVersion', {value: NAVIGATOR_APP_VERSIONS.ANDROID['7'], ...CONFIGURABLE});
 
-    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID)).toMatchSnapshot();
+    expect(getAndroidStatusAddressToolBarHeight(OFFSETS.ANDROID, false)).toMatchSnapshot();
   });
 });

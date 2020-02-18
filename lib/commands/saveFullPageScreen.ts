@@ -22,7 +22,14 @@ export default async function saveFullPageScreen(
 ): Promise<ScreenshotOutput> {
 
   // 1a. Set some variables
-  const {addressBarShadowPadding, autoSaveBaseline, formatImageName, savePerInstance, toolBarShadowPadding} = saveFullPageOptions.wic;
+  const {
+    addressBarShadowPadding,
+    autoSaveBaseline,
+    formatImageName,
+    isHybridApp,
+    savePerInstance,
+    toolBarShadowPadding,
+  } = saveFullPageOptions.wic;
 
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveFullPageOptions.method
@@ -60,6 +67,7 @@ export default async function saveFullPageScreen(
     isAndroid: enrichedInstanceData.isAndroid,
     isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
+    isHybridApp,
     isIos: enrichedInstanceData.isIos,
     toolBarShadowPadding: enrichedInstanceData.toolBarShadowPadding,
   };

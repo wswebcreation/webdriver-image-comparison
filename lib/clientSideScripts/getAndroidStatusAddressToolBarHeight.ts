@@ -5,7 +5,8 @@ import {AndroidOffsets} from '../helpers/constants.interfaces';
  * Get the current height of the Android status and address bar
  */
 export default function getAndroidStatusAddressToolBarHeight(
-  androidOffsets: AndroidOffsets
+  androidOffsets: AndroidOffsets,
+  isHybridApp: boolean,
 ): StatusAddressToolBarHeight {
   // Determine version for the right offsets
   const {height, width} = window.screen;
@@ -13,8 +14,8 @@ export default function getAndroidStatusAddressToolBarHeight(
   const match = (navigator.appVersion).match(/Android (\d+).?(\d+)?.?(\d+)?/);
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = androidOffsets[majorVersion];
-  const statusAddressBarHeight = versionOffsets.STATUS_BAR + versionOffsets.ADDRESS_BAR;
-  const toolBarHeight = height - innerHeight - statusAddressBarHeight;
+  const statusAddressBarHeight = versionOffsets.STATUS_BAR + (isHybridApp ? 0 : versionOffsets.ADDRESS_BAR);
+  const toolBarHeight = versionOffsets.TOOL_BAR;
 
   // Determine status, address and tool bar height
   return {

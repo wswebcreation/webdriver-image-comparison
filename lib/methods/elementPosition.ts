@@ -18,7 +18,9 @@ export async function getElementPositionAndroid(
 ): Promise<ElementPosition> {
   // This is the native webscreenshot
   if (isNativeWebScreenshot) {
-    const {height} = (<StatusAddressToolBarHeight>(await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))).statusAddressBar;
+    const {height} = (<StatusAddressToolBarHeight>(
+      await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, false)
+    )).statusAddressBar;
 
     return executor(getElementPositionTopScreenNativeMobile, height, element);
   }

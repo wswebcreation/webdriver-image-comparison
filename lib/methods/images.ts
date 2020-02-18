@@ -31,8 +31,8 @@ export async function checkBaselineImageExists(
             copySync(actualFilePath, baselineFilePath);
             console.log(yellow(`
 #####################################################################################
- INFO: 
- Autosaved the image to 
+ INFO:
+ Autosaved the image to
  ${baselineFilePath}
 #####################################################################################
 `));
@@ -40,7 +40,7 @@ export async function checkBaselineImageExists(
             /* istanbul ignore next */
             reject(red(`
 #####################################################################################
- Image could not be copied. The following error was thrown: 
+ Image could not be copied. The following error was thrown:
  ${error}
 #####################################################################################
 `));
@@ -72,7 +72,7 @@ export async function executeImageCompare(
 ): Promise<ImageCompareResult | number> {
 
   // 1. Set some variables
-  const {debug, devicePixelRatio, fileName, isAndroidNativeWebScreenshot, platformName} = options;
+  const {debug, devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, platformName} = options;
   const {
     actualFolder,
     autoSaveBaseline,
@@ -108,6 +108,7 @@ export async function executeImageCompare(
   // 4b.	Determine the ignore rectangles for the blockouts
   const blockOut = 'blockOut' in imageCompareOptions ? imageCompareOptions.blockOut : [];
   const statusAddressToolBarOptions = {
+    isHybridApp,
     isMobile,
     isViewPortScreenshot,
     platformName,
