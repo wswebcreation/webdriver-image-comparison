@@ -15,7 +15,11 @@ export default function getAndroidStatusAddressToolBarHeight(
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = androidOffsets[majorVersion];
   const statusAddressBarHeight = versionOffsets.STATUS_BAR + (isHybridApp ? 0 : versionOffsets.ADDRESS_BAR);
-  const toolBarHeight = versionOffsets.TOOL_BAR;
+  let toolBarHeight = height - innerHeight - statusAddressBarHeight;
+
+  if(toolBarHeight < 0){
+    toolBarHeight = versionOffsets.TOOL_BAR;
+  }
 
   // Determine status, address and tool bar height
   return {
