@@ -19,6 +19,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
     clearFolder: options.clearRuntimeFolder || false,
     debug: options.debug || false,
     formatImageName: options.formatImageName || DEFAULT_FORMAT_STRING,
+    isHybridApp: options.isHybridApp || false,
     savePerInstance: options.savePerInstance || false,
     toolBarShadowPadding: options.toolBarShadowPadding || DEFAULT_SHADOW.TOOL_BAR,
 

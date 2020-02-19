@@ -52,6 +52,7 @@ export default async function checkScreen(
       savePerInstance: checkScreenOptions.wic.savePerInstance,
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
+    isHybridApp: checkScreenOptions.wic.isHybridApp,
     platformName: instanceData.platformName,
   };
 

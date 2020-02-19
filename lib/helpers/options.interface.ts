@@ -14,6 +14,8 @@ export interface ClassOptions{
   debug?: boolean;
   // The naming of the saved images can be customized by passing the parameter `formatImageName` with a format string
   formatImageName?: string;
+  // Is it an hybrid app or not
+  isHybridApp?: boolean;
   // Save the images per instance in a separate folder.
   savePerInstance?: boolean;
   // The directory that will hold all the actual / difference screenshots
@@ -65,6 +67,7 @@ export interface DefaultOptions {
   clearFolder: boolean;
   debug: boolean;
   formatImageName: string;
+  isHybridApp: boolean;
   savePerInstance: boolean;
   toolBarShadowPadding: number;
   disableCSSAnimation: boolean;

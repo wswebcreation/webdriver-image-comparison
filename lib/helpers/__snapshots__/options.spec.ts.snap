@@ -23,6 +23,7 @@ Object {
   "formatImageName": "{tag}-{browserName}-{width}x{height}-dpr-{dpr}",
   "fullPageScrollTimeout": 1500,
   "hideScrollBars": true,
+  "isHybridApp": false,
   "savePerInstance": false,
   "toolBarShadowPadding": 6,
 }
@@ -51,6 +52,7 @@ Object {
   "formatImageName": "{foo}-{bar}",
   "fullPageScrollTimeout": 12345,
   "hideScrollBars": true,
+  "isHybridApp": false,
   "savePerInstance": true,
   "toolBarShadowPadding": 1,
 }

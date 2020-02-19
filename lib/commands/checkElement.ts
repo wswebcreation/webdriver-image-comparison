@@ -54,6 +54,7 @@ export default async function checkElement(
       savePerInstance: checkElementOptions.wic.savePerInstance,
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
+    isHybridApp: checkElementOptions.wic.isHybridApp,
     platformName: instanceData.platformName,
   };
 

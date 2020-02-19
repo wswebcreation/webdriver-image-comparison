@@ -4,6 +4,8 @@ export interface AndroidOffsets {
     STATUS_BAR: number;
     // The height of the address bar
     ADDRESS_BAR: number;
+    // The height of the tool bar
+    TOOL_BAR: number;
   };
 }
 
