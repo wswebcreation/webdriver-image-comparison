@@ -1,32 +1,19 @@
-import {CircleOptions, ElementCoordinate, LineOptions, TabbableOptions} from "./tabbableOptions.interfaces";
+import {ElementCoordinate} from './drawTabbableOnCanvas.interfaces';
+import {CircleOptions, LineOptions, TabbableOptions} from '../commands/tabbable.interfaces';
 
-// based on this https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript
-export default function drawTabbableOnCanvas(options: TabbableOptions) {
-  const defaultOptions: TabbableOptions = {
-    circle: {
-      backgroundColor: '#ff0000',
-      borderColor: '#000',
-      borderWidth: 1,
-      fontColor: '#fff',
-      fontFamily: 'Arial',
-      fontSize: 10,
-      size: 10,
-      showNumber: true,
-    },
-    line: {
-      color: '#000',
-      width: 1,
-    },
-  };
-  const drawOptions = {...defaultOptions, ...options};
-
+/**
+ * This method is based on this blog post
+ * https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript
+ * by Viv Richards and optimized for using Canvas
+ */
+export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
   // 1. Scroll to top of page
   window.scrollTo(0, 0);
 
   // 2. Insert canvas
   const width = window.innerWidth;
   const height = getDocumentScrollHeight();
-  const canvasNode = `<canvas id="tabCanvas" width="${width}" height="${height}" style="position:absolute;top:0;left:0;z-index:999999;">`;
+  const canvasNode = `<canvas id="wic-tabbable-canvas" width="${width}" height="${height}" style="position:absolute;top:0;left:0;z-index:999999;">`;
   document.body.insertAdjacentHTML('afterbegin', canvasNode);
 
   // 3. Get all the elements
@@ -39,7 +26,7 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
     return {
       x: currentElement.left + (currentElement.width / 2),
       y: currentElement.top + (currentElement.height / 2),
-    }
+    };
   });
   // 4b. Add the starting coordinates
   elementCoordinates.unshift({x: 0, y: 0});
@@ -57,7 +44,7 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
    * Draw a line
    */
   function drawLine(options: LineOptions, start: ElementCoordinate, end: ElementCoordinate): void {
-    const tabbableCanvasContext = (<HTMLCanvasElement>document.getElementById("tabCanvas")).getContext("2d");
+    const tabbableCanvasContext = (<HTMLCanvasElement>document.getElementById('wic-tabbable-canvas')).getContext('2d');
 
     // Draw the line
     tabbableCanvasContext.beginPath();
@@ -73,7 +60,7 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
    * Draw a circle
    */
   function drawCircleAndNumber(options: CircleOptions, position: ElementCoordinate, i: number): void {
-    const tabbableCanvasContext = (<HTMLCanvasElement>document.getElementById("tabCanvas")).getContext("2d");
+    const tabbableCanvasContext = (<HTMLCanvasElement>document.getElementById('wic-tabbable-canvas')).getContext('2d');
 
     // Draw circle
     tabbableCanvasContext.beginPath();
@@ -97,9 +84,9 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
   }
 
   /**
-   * This is coming from https://github.com/davidtheclark/tabbable
+   * Below code is coming from https://github.com/davidtheclark/tabbable
    * and is modified a bit to work inside the browser.
-   * The original module couldn't be used for injection
+   * The original module couldn't be used for injection and didn't support TypeScript
    */
 
   /**
@@ -141,8 +128,7 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
       }
     }
 
-    // This is so bad :(, fix typings!!!
-    return [...(orderedTabbables.sort(<any>sortOrderedTabbables).map(a => a.node).concat(regularTabbables))];
+    return Array.prototype.slice.call(orderedTabbables.sort(<any>sortOrderedTabbables).map(a => a.node).concat(regularTabbables));
   }
 
   /**
@@ -253,7 +239,7 @@ export default function drawTabbableOnCanvas(options: TabbableOptions) {
     // in separate forms on the same page.
     // This is bad :(, but don't know how to fix this typing
     let radioSet = (<any>node.ownerDocument).querySelectorAll(
-      'input[type="radio"][name="' + node.name + '"]'
+      `input[type="radio"][name="${node.name}"]`
     );
     let checked = getCheckedRadio(radioSet);
 

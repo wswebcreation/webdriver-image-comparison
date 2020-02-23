@@ -137,6 +137,99 @@ accepts an option object can also be used to set the screenshotPath value:
 
 The padding that needs to be added to the toolbar bar on iOS and Android to do a proper cutout of the the viewport.
 
+### `tabbableOptions`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options that can be changed for the lines and dots if you use the `{save|check}Tabbable`-methods. The options are explained below.
+
+#### `tabbableOptions.circle`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options to change the circle.
+
+##### `tabbableOptions.circle.backgroundColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The background color of the circle.
+
+##### `tabbableOptions.circle.borderColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The border color of the circle.
+
+##### `tabbableOptions.circle.borderWidth`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The border width of the circle.
+
+##### `tabbableOptions.circle.fontColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The color of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+##### `tabbableOptions.circle.fontFamily`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The family of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+Make sure to set fonts that are supported by the browsers.
+
+##### `tabbableOptions.circle.fontSize`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The size of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+##### `tabbableOptions.circle.size`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The size of the circle.
+
+##### `tabbableOptions.circle.showNumber`
+- **Type:** `showNumber`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+Show the tab sequence number in the circle.
+
+#### `tabbableOptions.line`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options to change the line.
+
+##### `tabbableOptions.line.color`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The color of the line.
+
+##### `tabbableOptions.line.width`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The width of the line.
+
 ### Plugin compare options 
 The compare options can be set as plugin options, see [Compare options](./OPTIONS.md#compare-options)
 

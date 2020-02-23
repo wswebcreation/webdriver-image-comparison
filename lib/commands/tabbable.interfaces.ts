@@ -1,8 +1,19 @@
+import {DefaultOptions} from '../helpers/options.interface';
+import {CheckFullPageMethodOptions, SaveFullPageMethodOptions} from "./fullPage.interfaces";
+
+export interface SaveTabbableOptions {
+  wic: DefaultOptions;
+  method: SaveFullPageMethodOptions;
+}
+export interface CheckTabbableOptions {
+  wic: DefaultOptions;
+  method: CheckFullPageMethodOptions;
+}
+
 export interface TabbableOptions {
   circle?: CircleOptions;
   line?: LineOptions;
 }
-
 export interface CircleOptions {
   backgroundColor?: string;
   borderColor?: string;
@@ -13,13 +24,7 @@ export interface CircleOptions {
   size?: number;
   showNumber?: boolean;
 }
-
 export interface LineOptions {
   color?: string;
   width?: number;
-}
-
-export interface ElementCoordinate {
-  x: number;
-  y: number;
 }

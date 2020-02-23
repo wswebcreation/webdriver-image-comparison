@@ -8,7 +8,7 @@
     "compile": "tsc --allowJs true --declaration false && tsc",
     "lint": "tslint -p tsconfig.json",
     "clean": "rimraf coverage build tmp",
-    "pretest": "npm run lint -- --fix",
+    "pretest": "npm run lint",
     "test": "jest",
     "release": "np",
     "test:watch": "npm run test -- --watchAll",

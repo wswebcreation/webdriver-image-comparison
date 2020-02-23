@@ -1,5 +1,5 @@
 import hideScrollBars from '../clientSideScripts/hideScrollbars';
-import removeCustomCss from '../clientSideScripts/removeCustomCss';
+import removeElementFromDom from '../clientSideScripts/removeElementFromDom';
 import {CUSTOM_CSS_ID} from './constants';
 import {checkIsMobile, formatFileName, getAndCreatePath} from './utils';
 import {saveBase64Image} from '../methods/images';
@@ -49,7 +49,7 @@ export default async function afterScreenshot(executor: Executor, options: After
   // Remove the custom set css
   /* istanbul ignore else */
   if (disableCSSAnimation || checkIsMobile(platformName)) {
-    await executor(removeCustomCss, CUSTOM_CSS_ID);
+    await executor(removeElementFromDom, CUSTOM_CSS_ID);
   }
 
   // Return the needed data
