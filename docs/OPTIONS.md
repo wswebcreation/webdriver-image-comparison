@@ -137,6 +137,11 @@ accepts an option object can also be used to set the screenshotPath value:
 
 The padding that needs to be added to the toolbar bar on iOS and Android to do a proper cutout of the the viewport.
 
+> **NOTE:**<br>
+> This module also supports drawing the way a user would use his keyboard to *tab* through the website by drawing lines and dots from tabbable element to tabbable element.<br>
+> The works is inspired by [Viv Richards](https://github.com/vivrichards600) his blog post about ["AUTOMATING PAGE TABABILITY (IS THAT A WORD?) WITH VISUAL TESTING"](https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript).<br>
+> The way tabbable elements are selected are based on the module [tabbable](https://github.com/davidtheclark/tabbable). If there are any issues regarding the tabbing please check the [README.md](https://github.com/davidtheclark/tabbable/blob/master/README.md) and especially the [More details](https://github.com/davidtheclark/tabbable/blob/master/README.md#more-details)-section.
+
 ### `tabbableOptions`
 - **Type:** `object`
 - **Mandatory:** No
