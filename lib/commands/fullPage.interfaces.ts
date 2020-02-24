@@ -28,10 +28,10 @@ export interface SaveFullPageMethodOptions {
   hideAfterFirstScroll?: HTMLElement[];
 }
 
-interface CheckOptions extends SaveFullPageMethodOptions, CheckMethodOptions {
+export interface CheckFullPageMethodOptions extends SaveFullPageMethodOptions, CheckMethodOptions {
 }
 
 export interface CheckFullPageOptions {
   wic: DefaultOptions;
-  method: CheckOptions;
+  method: CheckFullPageMethodOptions;
 }

@@ -25,6 +25,22 @@ Object {
   "hideScrollBars": true,
   "isHybridApp": false,
   "savePerInstance": false,
+  "tabbableOptions": Object {
+    "circle": Object {
+      "backgroundColor": "#ff0000",
+      "borderColor": "#000",
+      "borderWidth": 1,
+      "fontColor": "#fff",
+      "fontFamily": "Arial",
+      "fontSize": 10,
+      "showNumber": true,
+      "size": 10,
+    },
+    "line": Object {
+      "color": "#000",
+      "width": 1,
+    },
+  },
   "toolBarShadowPadding": 6,
 }
 `;
@@ -54,6 +70,22 @@ Object {
   "hideScrollBars": true,
   "isHybridApp": false,
   "savePerInstance": true,
+  "tabbableOptions": Object {
+    "circle": Object {
+      "backgroundColor": "backgroundColor",
+      "borderColor": "borderColor",
+      "borderWidth": 123,
+      "fontColor": "fontColor",
+      "fontFamily": "fontFamily",
+      "fontSize": 321,
+      "showNumber": false,
+      "size": 567,
+    },
+    "line": Object {
+      "color": "color",
+      "width": 987,
+    },
+  },
   "toolBarShadowPadding": 1,
 }
 `;

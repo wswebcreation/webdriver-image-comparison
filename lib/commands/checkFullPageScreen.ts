@@ -19,7 +19,7 @@ export default async function checkFullPageScreen(
   checkFullPageOptions: CheckFullPageOptions,
 ): Promise<ImageCompareResult | number> {
 
-  // 1. Take the actual element screenshot and retrieve the needed data
+  // 1. Take the actual full page screenshot and retrieve the needed data
   const saveFullPageOptions: SaveFullPageOptions = {
     wic: checkFullPageOptions.wic,
     method: {

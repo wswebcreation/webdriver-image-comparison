@@ -1,6 +1,6 @@
-import removeCustomCss from './removeCustomCss';
+import removeElementFromDom from './removeElementFromDom';
 
-describe('removeCustomCss', ()=>{
+describe('removeElementFromDom', ()=>{
   it('should be able to remove the custom css', ()=>{
     // Set up our document body
     const id = 'test';
@@ -14,7 +14,7 @@ describe('removeCustomCss', ()=>{
 
     expect(document.head.textContent).toMatchSnapshot();
 
-    removeCustomCss(id);
+    removeElementFromDom(id);
 
     expect(document.head.textContent).toMatchSnapshot();
   });
@@ -25,17 +25,35 @@ describe('removeCustomCss', ()=>{
 
     expect(document.head.textContent).toMatchSnapshot();
 
-    removeCustomCss(id);
+    removeElementFromDom(id);
 
     expect(document.head.textContent).toMatchSnapshot();
   });
-  
+
   it('should do nothing if document.head is null', () => {
     const id = 'test';
-    Object.defineProperty(document, 'head', {value: null});    
+    Object.defineProperty(document, 'head', {value: null});
 
-    removeCustomCss(id);
+    removeElementFromDom(id);
 
     expect(document.head).toBe(null);
+  });
+
+  it('should be able to remove an element from the body', () => {
+    document.body.innerHTML =
+      '<div>' +
+      '   <span id="id-1">Hello</span>' +
+      '   <span id="id-2">Hello</span>' +
+      '   <div>' +
+      '     <span id="id-3">Hello</span>' +
+      '     <span id="id-4">Hello</span>' +
+      '  </div>' +
+      '</div>';
+
+    expect(document.body).toMatchSnapshot();
+
+    removeElementFromDom('id-1');
+
+    expect(document.body).toMatchSnapshot();
   });
 });

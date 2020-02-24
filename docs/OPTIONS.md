@@ -137,6 +137,104 @@ accepts an option object can also be used to set the screenshotPath value:
 
 The padding that needs to be added to the toolbar bar on iOS and Android to do a proper cutout of the the viewport.
 
+> **NOTE:**<br>
+> This module also supports drawing the way a user would use his keyboard to *tab* through the website by drawing lines and dots from tabbable element to tabbable element.<br>
+> The work is inspired by [Viv Richards](https://github.com/vivrichards600) his blog post about ["AUTOMATING PAGE TABABILITY (IS THAT A WORD?) WITH VISUAL TESTING"](https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript).<br>
+> The way tabbable elements are selected are based on the module [tabbable](https://github.com/davidtheclark/tabbable). If there are any issues regarding the tabbing please check the [README.md](https://github.com/davidtheclark/tabbable/blob/master/README.md) and especially the [More details](https://github.com/davidtheclark/tabbable/blob/master/README.md#more-details)-section.
+
+### `tabbableOptions`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options that can be changed for the lines and dots if you use the `{save|check}Tabbable`-methods. The options are explained below.
+
+#### `tabbableOptions.circle`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options to change the circle.
+
+##### `tabbableOptions.circle.backgroundColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The background color of the circle.
+
+##### `tabbableOptions.circle.borderColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The border color of the circle.
+
+##### `tabbableOptions.circle.borderWidth`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The border width of the circle.
+
+##### `tabbableOptions.circle.fontColor`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The color of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+##### `tabbableOptions.circle.fontFamily`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The family of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+Make sure to set fonts that are supported by the browsers.
+
+##### `tabbableOptions.circle.fontSize`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The size of the font of the text in the circle. This will only be shown if [`showNumber`](./OPTIONS.md#tabbableoptionscircleshownumber) is set to `true`.
+
+##### `tabbableOptions.circle.size`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The size of the circle.
+
+##### `tabbableOptions.circle.showNumber`
+- **Type:** `showNumber`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+Show the tab sequence number in the circle.
+
+#### `tabbableOptions.line`
+- **Type:** `object`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The options to change the line.
+
+##### `tabbableOptions.line.color`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The color of the line.
+
+##### `tabbableOptions.line.width`
+- **Type:** `number`
+- **Mandatory:** No
+- **Default:** See [here](../lib/helpers/constants.ts#L140) for all default values
+
+The width of the line.
+
 ### Plugin compare options 
 The compare options can be set as plugin options, see [Compare options](./OPTIONS.md#compare-options)
 
@@ -207,7 +305,7 @@ This methods can hide 1 or multiple elements by adding the property `visibility:
 
 This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements. 
 
-### `saveFullPageScreen`
+### `saveFullPageScreen` or `saveTabbablePage`
 #### `disableCSSAnimation`
 - **Type:** `boolean`
 - **Mandatory:** No
@@ -334,7 +432,7 @@ This methods can *remove* 1 or multiple elements by adding the property `display
 ### `checkScreen` compare options 
 The compare options can be set as `checkScreen` options, see [Compare options](./OPTIONS.md#compare-options)
 
-### `checkFullPageScreen`
+### `checkFullPageScreen` or `checkTabbablePage`
 #### `blockOut`
 - **Type:** `array`
 - **Mandatory:** No

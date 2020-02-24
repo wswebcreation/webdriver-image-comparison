@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`removeCustomCss should be able to remove the custom css 1`] = `"body:{width:100%}"`;
-
-exports[`removeCustomCss should be able to remove the custom css 2`] = `""`;
-
-exports[`removeCustomCss should do nothing if custom css is not present 1`] = `""`;
-
-exports[`removeCustomCss should do nothing if custom css is not present 2`] = `""`;

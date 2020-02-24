@@ -1,3 +1,5 @@
+import {TabbableOptions} from "../commands/tabbable.interfaces";
+
 export interface ClassOptions{
   /**
    * Class options
@@ -59,6 +61,11 @@ export interface ClassOptions{
   saveAboveTolerance?: number;
   //Scale images to same size before comparison
   scaleImagesToSameSize?:boolean;
+
+  /**
+   * Tabbable options
+   */
+  tabbableOptions?: TabbableOptions;
 }
 
 export interface DefaultOptions {
@@ -74,6 +81,7 @@ export interface DefaultOptions {
   fullPageScrollTimeout: number;
   hideScrollBars: boolean;
   compareOptions: CompareOptions;
+  tabbableOptions: TabbableOptions;
 }
 
 interface CompareOptions {

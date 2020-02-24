@@ -1,6 +1,7 @@
 import {
   DEFAULT_FORMAT_STRING,
   DEFAULT_SHADOW,
+  DEFAULT_TABBABLE_OPTIONS,
   FULL_PAGE_SCROLL_TIMEOUT,
 } from './constants';
 import {ClassOptions, DefaultOptions} from './options.interface';
@@ -29,6 +30,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
     disableCSSAnimation: options.disableCSSAnimation || false,
     fullPageScrollTimeout: options.fullPageScrollTimeout || FULL_PAGE_SCROLL_TIMEOUT,
     hideScrollBars: options.hasOwnProperty('hideScrollBars') ? options.hideScrollBars : true,
+
     /**
      * Compare options
      */
@@ -45,6 +47,20 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
       saveAboveTolerance: options.saveAboveTolerance || 0,
       scaleImagesToSameSize: options.scaleImagesToSameSize || false
     },
+
+    /**
+     * Tabbable options
+     */
+    tabbableOptions: {
+      circle: {
+        ...DEFAULT_TABBABLE_OPTIONS.circle,
+        ...(options.tabbableOptions && options.tabbableOptions.circle ? options.tabbableOptions.circle : {}),
+      },
+      line: {
+        ...DEFAULT_TABBABLE_OPTIONS.line,
+        ...(options.tabbableOptions && options.tabbableOptions.line ? options.tabbableOptions.line : {}),
+      }
+    }
   };
 }
 

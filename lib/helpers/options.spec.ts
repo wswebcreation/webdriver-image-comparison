@@ -29,7 +29,23 @@ describe('options', ()=>{
         rawMisMatchPercentage: true,
         returnAllCompareData: true,
         saveAboveTolerance: 12,
-        scaleImagesToSameSize: true
+        scaleImagesToSameSize: true,
+        tabbableOptions:{
+          circle: {
+            backgroundColor: 'backgroundColor',
+            borderColor: 'borderColor',
+            borderWidth: 123,
+            fontColor: 'fontColor',
+            fontFamily: 'fontFamily',
+            fontSize: 321,
+            size: 567,
+            showNumber: false,
+          },
+          line: {
+            color: 'color',
+            width: 987,
+          },
+        },
       };
 
       expect(defaultOptions(options)).toMatchSnapshot();
