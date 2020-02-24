@@ -10,7 +10,7 @@ import removeElementFromDom from "../clientSideScripts/removeElementFromDom";
 /**
  * Saves an image of all tab executions
  */
-export default async function saveTabbable(
+export default async function saveTabbablePage(
   methods: Methods,
   instanceData: InstanceData,
   folders: Folders,

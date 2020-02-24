@@ -10,7 +10,7 @@ import {ImageCompareResult} from "..";
 /**
  * Compare an image with all tab executions
  */
-export default async function checkTabbable(
+export default async function checkTabbablePage(
   methods: Methods,
   instanceData: InstanceData,
   folders: Folders,
