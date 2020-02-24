@@ -5,6 +5,7 @@ describe('getElementPositionTopScreenNativeMobile', () => {
   beforeEach(()=>{
     Object.defineProperty(window.screen, 'width', {value: IOS_DEVICES.IPHONE.width, ...CONFIGURABLE});
     Object.defineProperty(window.screen, 'height', {value: IOS_DEVICES.IPHONE.height, ...CONFIGURABLE});
+    // @ts-ignore
     Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
         width: 120,
