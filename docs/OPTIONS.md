@@ -139,7 +139,7 @@ The padding that needs to be added to the toolbar bar on iOS and Android to do a
 
 > **NOTE:**<br>
 > This module also supports drawing the way a user would use his keyboard to *tab* through the website by drawing lines and dots from tabbable element to tabbable element.<br>
-> The works is inspired by [Viv Richards](https://github.com/vivrichards600) his blog post about ["AUTOMATING PAGE TABABILITY (IS THAT A WORD?) WITH VISUAL TESTING"](https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript).<br>
+> The work is inspired by [Viv Richards](https://github.com/vivrichards600) his blog post about ["AUTOMATING PAGE TABABILITY (IS THAT A WORD?) WITH VISUAL TESTING"](https://vivrichards.co.uk/accessibility/automating-page-tab-flows-using-visual-testing-and-javascript).<br>
 > The way tabbable elements are selected are based on the module [tabbable](https://github.com/davidtheclark/tabbable). If there are any issues regarding the tabbing please check the [README.md](https://github.com/davidtheclark/tabbable/blob/master/README.md) and especially the [More details](https://github.com/davidtheclark/tabbable/blob/master/README.md#more-details)-section.
 
 ### `tabbableOptions`
@@ -305,7 +305,7 @@ This methods can hide 1 or multiple elements by adding the property `visibility:
 
 This methods can *remove* 1 or multiple elements by adding the property `display: none` to them by providing an array of elements. 
 
-### `saveFullPageScreen`
+### `saveFullPageScreen` or `saveTabbablePage`
 #### `disableCSSAnimation`
 - **Type:** `boolean`
 - **Mandatory:** No
@@ -432,7 +432,7 @@ This methods can *remove* 1 or multiple elements by adding the property `display
 ### `checkScreen` compare options 
 The compare options can be set as `checkScreen` options, see [Compare options](./OPTIONS.md#compare-options)
 
-### `checkFullPageScreen`
+### `checkFullPageScreen` or `checkTabbablePage`
 #### `blockOut`
 - **Type:** `array`
 - **Mandatory:** No
