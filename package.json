@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
   "dependencies": {
+    "@types/selenium-webdriver": "^4.0.8",
     "canvas": "^2.6.1",
     "chalk": "^3.0.0",
     "fs-extra": "^8.1.0"
