@@ -38,13 +38,13 @@ export default function hideRemoveElements(
       try {
         if (singleElement) {
           // @ts-ignore
-          return setPropertyToElement(document.querySelector(el.selector), prop, hideRemove);
+          setPropertyToElement(document.querySelector(el.selector), prop, hideRemove);
+        } else {
+          // @ts-ignore
+          document.querySelectorAll(el.selector).forEach(singleEl =>
+            setPropertyToElement(singleEl, prop, hideRemove)
+          );
         }
-
-        // @ts-ignore
-        return document.querySelectorAll(el.selector).forEach(singleEl =>
-          setPropertyToElement(singleEl, prop, hideRemove)
-        );
       } catch (e) {
         // 99.99% sure that we have XPATH here
         // @ts-ignore
