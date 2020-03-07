@@ -24,10 +24,10 @@ export interface SaveElementMethodOptions {
   removeElements?: HTMLElement[];
 }
 
-interface CheckOptions extends SaveElementMethodOptions, CheckMethodOptions {
+export interface CheckElementMethodOptions extends SaveElementMethodOptions, CheckMethodOptions {
 }
 
 export interface CheckElementOptions {
   wic: DefaultOptions;
-  method: CheckOptions;
+  method: CheckElementMethodOptions;
 }

@@ -17,10 +17,10 @@ export interface SaveScreenMethodOptions {
   removeElements?: HTMLElement[];
 }
 
-interface CheckOptions extends SaveScreenMethodOptions, CheckMethodOptions {
+export interface CheckScreenMethodOptions extends SaveScreenMethodOptions, CheckMethodOptions {
 }
 
 export interface CheckScreenOptions {
   wic: DefaultOptions;
-  method: CheckOptions;
+  method: CheckScreenMethodOptions;
 }
