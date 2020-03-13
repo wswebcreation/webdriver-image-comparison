@@ -96,14 +96,14 @@ The timeout in milliseconds to wait after a scroll. This might help identifying 
 - **Mandatory:** No
 - **Default:** `true`
 
-Tell the module if the used app is an Hybrid app, this will not calculate the address bar height because it is not there.
+Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
 
 #### `isHybridApp`
 - **Type:** `boolean`
 - **Mandatory:** No
 - **Default:** `false`
 
-Hide scrollbars in the application. If set to true all scrollbars will be disabled before taking a screenshot. This is set to default `true` to prevent extra issues.
+Tell the module if the used app is an Hybrid app, this will not calculate the address bar height because it is not there.
 
 ### `savePerInstance`
 - **Type:** `boolean`
