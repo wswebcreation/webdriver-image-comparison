@@ -147,7 +147,7 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
    */
   function isNodeMatchingSelectorFocusable(node: HTMLElement): boolean {
     return !(
-      (node.hasAttribute('disabled') && node.getAttribute('disabled'))
+      (node.hasAttribute('disabled') || node.getAttribute('disabled'))
       || isHiddenInput(node)
       || isHidden(node)
     );

@@ -1,3 +1,5 @@
+// @ts-ignore
+import {yellow} from 'chalk';
 import scrollToPosition from '../clientSideScripts/scrollToPosition';
 import getDocumentScrollHeight from '../clientSideScripts/getDocumentScrollHeight';
 import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
@@ -116,7 +118,19 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      try {
+        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      } catch (e) {
+        console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+      }
     }
 
     // Take the screenshot and get the width
@@ -155,7 +169,19 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
-    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    try {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    } catch (e) {
+      console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+    }
   }
 
   return {
@@ -196,7 +222,19 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
 
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      try {
+        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      } catch (e) {
+        console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+      }
     }
 
     // Take the screenshot
@@ -233,7 +271,19 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
 
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
-    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    try {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    } catch (e) {
+      console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+    }
   }
 
   return {
@@ -272,7 +322,19 @@ export async function getFullPageScreenshotsDataDesktop(
 
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      try {
+        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+      } catch (e) {
+        console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+      }
     }
 
     // Take the screenshot
@@ -320,7 +382,19 @@ export async function getFullPageScreenshotsDataDesktop(
 
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
-    await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    try {
+      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+    } catch (e) {
+      console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+    }
   }
 
   return {
