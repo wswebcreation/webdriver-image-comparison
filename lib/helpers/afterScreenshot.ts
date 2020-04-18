@@ -7,6 +7,7 @@ import {join} from 'path';
 import {Executor} from '../methods/methods.interface';
 import {AfterScreenshotOptions, ScreenshotOutput} from './afterScreenshot.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
+import {yellow} from "chalk";
 
 /**
  * Methods that need to be executed after a screenshot has been taken
@@ -43,7 +44,19 @@ export default async function afterScreenshot(executor: Executor, options: After
   // Show elements again
   /* istanbul ignore else */
   if (hideElements.length > 0 || removeElements.length > 0) {
-    await executor(hideRemoveElements, {hide: hideElements, remove: removeElements}, false);
+    try {
+      await executor(hideRemoveElements, {hide: hideElements, remove: removeElements}, false);
+    } catch (e) {
+      console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${e}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+    }
   }
 
   // Remove the custom set css
