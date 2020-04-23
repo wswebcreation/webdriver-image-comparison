@@ -68,6 +68,23 @@ Object {
 }
 `;
 
+exports[`getIosStatusAddressToolBarHeight should get the correct status, address and toolbar height for an iPad with iPadOS 13 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 70,
+    "width": 768,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 0,
+    "width": 768,
+    "x": 0,
+    "y": 1024,
+  },
+}
+`;
+
 exports[`getIosStatusAddressToolBarHeight should get the correct status, address and toolbar height for an iPhone X with iOS 11 1`] = `
 Object {
   "statusAddressBar": Object {
