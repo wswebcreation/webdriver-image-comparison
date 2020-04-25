@@ -6,7 +6,7 @@ import {IosOffsets} from '../helpers/constants.interfaces';
  */
 export default function getIosStatusAddressToolBarHeight(iosOffsets: IosOffsets): StatusAddressToolBarHeight {
   // Determine version for the right offsets
-  const match = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+  const match = (navigator.appVersion).match(/(?:OS |Version\/)(\d+)(?:_|\.)(\d+)(?:_|\.)?(\d+)?/);
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = iosOffsets[majorVersion];
 
