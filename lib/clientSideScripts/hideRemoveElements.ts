@@ -11,6 +11,7 @@ export default function hideRemoveElements(
     },
   hideRemove: boolean): any {
 
+  const visitedSelectors: Record<string, boolean> = {};
   hideRemoveElements.hide.forEach(element => {
     if (Array.isArray(element)) {
       return element.forEach((singleElement: HTMLElement | WebElement) => hideRemoveEl(singleElement, 'visibility', hideRemove));
@@ -36,12 +37,14 @@ export default function hideRemoveElements(
       // css and xpath, transform them into HTML
       // This is an anti pattern, but I don't know how to do this better with XPATH selection
       try {
-        if (singleElement) {
-          // @ts-ignore
-          setPropertyToElement(document.querySelector(el.selector), prop, hideRemove);
-        } else {
-          // @ts-ignore
-          document.querySelectorAll(el.selector).forEach(singleEl =>
+        // @ts-ignore
+        const selector = el.selector;
+
+        if (visitedSelectors[selector] == null) {
+          visitedSelectors[selector] = true;
+          const elems = document.querySelectorAll(selector);
+
+          elems.forEach(singleEl =>
             setPropertyToElement(singleEl, prop, hideRemove)
           );
         }
