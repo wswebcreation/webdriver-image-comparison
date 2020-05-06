@@ -15,11 +15,6 @@ export default function setCustomCss(cssOptions: CssOptions): void {
     -ms-transition-property: none !important;
     -webkit-transition-property: none !important;
     transition-property: none !important;
-    -o-transform: none !important;
-    -moz-transform: none !important;
-    -ms-transform: none !important;
-    -webkit-transform: none !important;
-    transform: none !important;
     -webkit-animation: none !important;
     -moz-animation: none !important;
     -o-animation: none !important;
