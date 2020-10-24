@@ -25,33 +25,48 @@ export const DEFAULT_RESIZE_DIMENSIONS = {
   left: 0
 };
 export const FULL_PAGE_SCROLL_TIMEOUT = 1500;
+export const LOG_METHODS = ['error', 'warn', 'info', 'debug', 'trace', 'silent'];
+export const LOG_LEVELS = {
+  ERROR: 'error',
+  WARN: 'warn',
+  INFO: 'info',
+  DEBUG: 'debug',
+  TRACE: 'trace',
+  SILENT: 'silent',
+};
+const androidDefaultOffsets = {
+  STATUS_BAR: 24,
+  ADDRESS_BAR: 56,
+  TOOL_BAR: 48,
+};
+const iosDefaultOffsets = {
+  STATUS_BAR: 20,
+  STATUS_BAR_PRO: 24,
+  STATUS_BAR_X: 44,
+  ADDRESS_BAR: 50,
+  HOME_BAR: {
+    DEFAULT: {
+      height: 5,
+      width: 135,
+      x: 120,
+      y: 799,
+    },
+    LARGE: {
+      height: 5,
+      width: 148,
+      x: 133,
+      y: 883,
+    },
+  },
+};
 export const OFFSETS = {
   ANDROID: {
-    6: {
-      STATUS_BAR: 24,
-      ADDRESS_BAR: 56,
-      TOOL_BAR: 48,
-    },
-    7: {
-      STATUS_BAR: 24,
-      ADDRESS_BAR: 56,
-      TOOL_BAR: 48,
-    },
-    8: {
-      STATUS_BAR: 24,
-      ADDRESS_BAR: 56,
-      TOOL_BAR: 48,
-    },
-    9: {
-      STATUS_BAR: 24,
-      ADDRESS_BAR: 56,
-      TOOL_BAR: 48,
-    },
-    10: {
-      STATUS_BAR: 24,
-      ADDRESS_BAR: 56,
-      TOOL_BAR: 48,
-    }
+    6: {...androidDefaultOffsets},
+    7: {...androidDefaultOffsets},
+    8: {...androidDefaultOffsets},
+    9: {...androidDefaultOffsets},
+    10: {...androidDefaultOffsets},
+    11: {...androidDefaultOffsets},
   },
   // https://ivomynttinen.com/blog/ios-design-guidelines
   IOS: {
@@ -75,86 +90,10 @@ export const OFFSETS = {
         },
       },
     },
-    11: {
-      STATUS_BAR: 20,
-      STATUS_BAR_PRO: 24,
-      STATUS_BAR_X: 44,
-      ADDRESS_BAR: 50,
-      HOME_BAR: {
-        DEFAULT: {
-          height: 5,
-          width: 135,
-          x: 120,
-          y: 799,
-        },
-        LARGE: {
-          height: 5,
-          width: 148,
-          x: 133,
-          y: 883,
-        },
-      },
-    },
-    12: {
-      STATUS_BAR: 20,
-      STATUS_BAR_PRO: 24,
-      STATUS_BAR_X: 44,
-      ADDRESS_BAR: 50,
-      HOME_BAR: {
-        DEFAULT: {
-          height: 5,
-          width: 135,
-          x: 120,
-          y: 799,
-        },
-        LARGE: {
-          height: 5,
-          width: 148,
-          x: 133,
-          y: 883,
-        },
-      },
-    },
-    13: {
-      STATUS_BAR: 20,
-      STATUS_BAR_PRO: 24,
-      STATUS_BAR_X: 44,
-      ADDRESS_BAR: 50,
-      HOME_BAR: {
-        DEFAULT: {
-          height: 5,
-          width: 135,
-          x: 120,
-          y: 799,
-        },
-        LARGE: {
-          height: 5,
-          width: 148,
-          x: 133,
-          y: 883,
-        },
-      },
-    },
-    14: {
-      STATUS_BAR: 20,
-      STATUS_BAR_PRO: 24,
-      STATUS_BAR_X: 44,
-      ADDRESS_BAR: 50,
-      HOME_BAR: {
-        DEFAULT: {
-          height: 5,
-          width: 135,
-          x: 120,
-          y: 799,
-        },
-        LARGE: {
-          height: 5,
-          width: 148,
-          x: 133,
-          y: 883,
-        },
-      },
-    },
+    11: {...iosDefaultOffsets},
+    12: {...iosDefaultOffsets},
+    13: {...iosDefaultOffsets},
+    14: {...iosDefaultOffsets},
   },
 };
 export const DEFAULT_TABBABLE_OPTIONS = {
