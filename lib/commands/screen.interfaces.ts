@@ -1,4 +1,4 @@
-import {DefaultOptions} from '../helpers/options.interface';
+import {DefaultOptions, LogLevel} from '../helpers/options.interface';
 import {CheckMethodOptions} from './check.interfaces';
 
 export interface SaveScreenOptions {

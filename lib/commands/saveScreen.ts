@@ -23,7 +23,7 @@ export default async function saveScreen(
 ): Promise<ScreenshotOutput> {
 
   // 1a. Set some variables
-  const {addressBarShadowPadding, formatImageName, savePerInstance, toolBarShadowPadding} = saveScreenOptions.wic;
+  const {addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding} = saveScreenOptions.wic;
 
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveScreenOptions.method
@@ -41,6 +41,7 @@ export default async function saveScreen(
     addressBarShadowPadding,
     disableCSSAnimation,
     hideElements,
+    logLevel,
     noScrollBars: hideScrollBars,
     removeElements,
     toolBarShadowPadding,
@@ -62,7 +63,7 @@ export default async function saveScreen(
   const rectangles: RectanglesOutput = determineScreenRectangles(screenshot, screenRectangleOptions);
 
   // 4.  Make a cropped base64 image
-  const croppedBase64Image: string = await makeCroppedBase64Image(screenshot, rectangles);
+  const croppedBase64Image: string = await makeCroppedBase64Image(screenshot, rectangles, logLevel);
 
   // 5.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {
@@ -95,6 +96,7 @@ export default async function saveScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    logLevel,
     platformName: instanceData.platformName,
     removeElements,
   };

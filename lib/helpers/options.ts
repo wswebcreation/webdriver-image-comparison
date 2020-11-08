@@ -1,10 +1,5 @@
-import {
-  DEFAULT_FORMAT_STRING,
-  DEFAULT_SHADOW,
-  DEFAULT_TABBABLE_OPTIONS,
-  FULL_PAGE_SCROLL_TIMEOUT,
-} from './constants';
-import {ClassOptions, DefaultOptions} from './options.interface';
+import {DEFAULT_FORMAT_STRING, DEFAULT_SHADOW, DEFAULT_TABBABLE_OPTIONS, FULL_PAGE_SCROLL_TIMEOUT,} from './constants';
+import {ClassOptions, DefaultOptions, LogLevel} from './options.interface';
 import {MethodImageCompareCompareOptions, ScreenMethodImageCompareCompareOptions} from '../methods/images.interfaces';
 
 /**
@@ -18,9 +13,9 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
     addressBarShadowPadding: options.addressBarShadowPadding || DEFAULT_SHADOW.ADDRESS_BAR,
     autoSaveBaseline: options.autoSaveBaseline || false,
     clearFolder: options.clearRuntimeFolder || false,
-    debug: options.debug || false,
     formatImageName: options.formatImageName || DEFAULT_FORMAT_STRING,
     isHybridApp: options.isHybridApp || false,
+    logLevel: options.logLevel || LogLevel.info,
     savePerInstance: options.savePerInstance || false,
     toolBarShadowPadding: options.toolBarShadowPadding || DEFAULT_SHADOW.TOOL_BAR,
 

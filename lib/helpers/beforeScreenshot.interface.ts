@@ -1,4 +1,5 @@
 import {EnrichedInstanceData, InstanceData} from '../methods/instanceData.interfaces';
+import {LogLevel} from "./options.interface";
 
 export interface BeforeScreenshotOptions {
   // The instance data
@@ -7,6 +8,8 @@ export interface BeforeScreenshotOptions {
   addressBarShadowPadding: number;
   // Disable all css animations
   disableCSSAnimation: boolean;
+  // Level to show logs
+  logLevel: LogLevel;
   // Hide all scrollbars
   noScrollBars: boolean;
   // The padding that needs to be added to the tool bar on iOS and Android

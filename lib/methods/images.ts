@@ -1,4 +1,3 @@
-// @ts-ignore
 import {red, yellow} from 'chalk';
 import {access, copySync, outputFile, readFileSync} from 'fs-extra';
 import {join} from 'path';
@@ -7,10 +6,17 @@ import {calculateDprData, getAndCreatePath, getScreenshotSize} from '../helpers/
 import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
 import {determineStatusAddressToolBarRectangles} from './rectangles';
 import {RectanglesOutput} from './rectangles.interfaces';
-import {CompareOptions, IgnoreBoxes, ImageCompareOptions, ImageCompareResult, ResizeDimensions} from './images.interfaces';
+import {
+  CompareOptions,
+  IgnoreBoxes,
+  ImageCompareOptions,
+  ImageCompareResult,
+  ResizeDimensions
+} from './images.interfaces';
 import {FullPageScreenshotsData} from './screenshots.interfaces';
 import {Executor} from './methods.interface';
 import {CompareData} from '../resemble/compare.interfaces';
+import {LogLevel} from "../helpers/options.interface";
 
 const {createCanvas, loadImage} = require('canvas');
 
@@ -21,21 +27,23 @@ export async function checkBaselineImageExists(
   actualFilePath: string,
   baselineFilePath: string,
   autoSaveBaseline: boolean,
+  logLevel: LogLevel,
 ): Promise<void> {
-
   return new Promise((resolve, reject) => {
     access(baselineFilePath, error => {
       if (error) {
         if (autoSaveBaseline) {
           try {
             copySync(actualFilePath, baselineFilePath);
-            console.log(yellow(`
+            if (logLevel === LogLevel.info) {
+              console.log(yellow(`
 #####################################################################################
  INFO:
  Autosaved the image to
  ${baselineFilePath}
 #####################################################################################
 `));
+            }
           } catch (error) {
             /* istanbul ignore next */
             reject(red(`
@@ -63,6 +71,103 @@ export async function checkBaselineImageExists(
 }
 
 /**
+ * Make a cropped image with Canvas
+ */
+export async function makeCroppedBase64Image(
+  base64Image: string,
+  rectangles: RectanglesOutput,
+  logLevel: LogLevel,
+  resizeDimensions: number | ResizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
+): Promise<string> {
+  /**
+   * This is in for backwards compatibility, it will be removed in the future
+   */
+  let resizeValues;
+  if (typeof resizeDimensions === 'number') {
+    resizeValues = {
+      top: resizeDimensions,
+      right: resizeDimensions,
+      bottom: resizeDimensions,
+      left: resizeDimensions,
+    };
+    if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+      console.log(yellow(`
+#####################################################################################
+ WARNING:
+ THE 'resizeDimensions' NEEDS TO BE AN OBJECT LIKE
+ {
+    top: 10,
+    right: 20,
+    bottom: 15,
+    left: 25,
+ }
+ NOW IT WILL BE DEFAULTED TO
+  {
+    top: ${resizeDimensions},
+    right: ${resizeDimensions},
+    bottom: ${resizeDimensions},
+    left: ${resizeDimensions},
+ }
+ THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
+#####################################################################################
+`));
+    }
+  } else {
+    resizeValues = resizeDimensions;
+  }
+
+  const {top, right, bottom, left} = {...DEFAULT_RESIZE_DIMENSIONS, ...resizeValues};
+  const {height, width, x, y} = rectangles;
+  const canvasWidth = width + left + right;
+  const canvasHeight = height + top + bottom;
+  const canvas = createCanvas(canvasWidth, canvasHeight);
+  const image = await loadImage(`data:image/png;base64,${base64Image}`);
+  const ctx = canvas.getContext('2d');
+
+  let sourceXStart = x - left;
+  let sourceYStart = y - top;
+
+  if (sourceXStart < 0) {
+    if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+      console.log(yellow(`
+#####################################################################################
+ THE RESIZE DIMENSION LEFT '${left}' MADE THE CROPPING GO OUT OF
+ THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceXStart}'.
+ THIS HAS BEEN DEFAULTED TO '0'
+#####################################################################################
+`));
+    }
+    sourceXStart = 0;
+  }
+
+  if (sourceYStart < 0) {
+    if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+      console.log(yellow(`
+#####################################################################################
+ THE RESIZE DIMENSION LEFT '${top}' MADE THE CROPPING GO OUT OF
+ THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceYStart}'.
+ THIS HAS BEEN DEFAULTED TO '0'
+#####################################################################################
+`));
+    }
+    sourceYStart = 0;
+  }
+
+  ctx.drawImage(image,
+    // Start at x/y pixels from the left and the top of the image (crop)
+    sourceXStart, sourceYStart,
+    // 'Get' a (w * h) area from the source image (crop)
+    canvasWidth, canvasHeight,
+    // Place the result at 0, 0 in the canvas,
+    0, 0,
+    // With as width / height: 100 * 100 (scale)
+    canvasWidth, canvasHeight
+  );
+
+  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+}
+
+/**
  * Execute the image compare
  */
 export async function executeImageCompare(
@@ -72,7 +177,7 @@ export async function executeImageCompare(
 ): Promise<ImageCompareResult | number> {
 
   // 1. Set some variables
-  const {debug, devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, platformName} = options;
+  const {devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, logLevel, platformName} = options;
   const {
     actualFolder,
     autoSaveBaseline,
@@ -94,7 +199,7 @@ export async function executeImageCompare(
   const baselineFilePath = join(baselineFolderPath, fileName);
 
   // 3. 	Check if there is a baseline image, and determine if it needs to be auto saved or not
-  await checkBaselineImageExists(actualFilePath, baselineFilePath, autoSaveBaseline);
+  await checkBaselineImageExists(actualFilePath, baselineFilePath, autoSaveBaseline, logLevel);
 
   // 4. 	Prepare the compare
   // 4a.	Determine the ignore options
@@ -146,7 +251,7 @@ export async function executeImageCompare(
     : Number(data.rawMisMatchPercentage.toFixed(2));
 
   // 6.		Save the diff when there is a diff or when debug mode is on
-  if (misMatchPercentage > imageCompareOptions.saveAboveTolerance || debug) {
+  if (misMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
     const isDifference = misMatchPercentage > imageCompareOptions.saveAboveTolerance;
     const isDifferenceMessage = 'WARNING:\n There was a difference. Saved the difference to';
     const debugMessage = 'INFO:\n Debug mode is enabled. Saved the debug file to:';
@@ -158,7 +263,7 @@ export async function executeImageCompare(
       diffFilePath,
     );
 
-    if (debug) {
+    if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(yellow(`
 #####################################################################################
  ${isDifference ? isDifferenceMessage : debugMessage}
@@ -178,97 +283,6 @@ export async function executeImageCompare(
     },
     misMatchPercentage,
   } : misMatchPercentage;
-}
-
-/**
- * Make a cropped image with Canvas
- */
-export async function makeCroppedBase64Image(
-  base64Image: string,
-  rectangles: RectanglesOutput,
-  resizeDimensions: number | ResizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
-): Promise<string> {
-  /**
-   * This is in for backwards compatibility, it will be removed in the future
-   */
-  let resizeValues;
-  if (typeof resizeDimensions === 'number') {
-    resizeValues = {
-      top: resizeDimensions,
-      right: resizeDimensions,
-      bottom: resizeDimensions,
-      left: resizeDimensions,
-    };
-
-    console.log(yellow(`
-#####################################################################################
- WARNING:
- THE 'resizeDimensions' NEEDS TO BE AN OBJECT LIKE
- {
-    top: 10,
-    right: 20,
-    bottom: 15,
-    left: 25,
- }
- NOW IT WILL BE DEFAULTED TO
-  {
-    top: ${resizeDimensions},
-    right: ${resizeDimensions},
-    bottom: ${resizeDimensions},
-    left: ${resizeDimensions},
- }
- THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
-#####################################################################################
-`));
-  } else {
-    resizeValues = resizeDimensions;
-  }
-
-  const {top, right, bottom, left} = {...DEFAULT_RESIZE_DIMENSIONS, ...resizeValues};
-  const {height, width, x, y} = rectangles;
-  const canvasWidth = width + left + right;
-  const canvasHeight = height + top + bottom;
-  const canvas = createCanvas(canvasWidth, canvasHeight);
-  const image = await loadImage(`data:image/png;base64,${base64Image}`);
-  const ctx = canvas.getContext('2d');
-
-  let sourceXStart = x - left;
-  let sourceYStart = y - top;
-
-  if (sourceXStart < 0) {
-    console.log(yellow(`
-#####################################################################################
- THE RESIZE DIMENSION LEFT '${left}' MADE THE CROPPING GO OUT OF
- THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceXStart}'.
- THIS HAS BEEN DEFAULTED TO '0'
-#####################################################################################
-`));
-    sourceXStart = 0;
-  }
-
-  if (sourceYStart < 0) {
-    console.log(yellow(`
-#####################################################################################
- THE RESIZE DIMENSION LEFT '${top}' MADE THE CROPPING GO OUT OF
- THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceYStart}'.
- THIS HAS BEEN DEFAULTED TO '0'
-#####################################################################################
-`));
-    sourceYStart = 0;
-  }
-
-  ctx.drawImage(image,
-    // Start at x/y pixels from the left and the top of the image (crop)
-    sourceXStart, sourceYStart,
-    // 'Get' a (w * h) area from the source image (crop)
-    canvasWidth, canvasHeight,
-    // Place the result at 0, 0 in the canvas,
-    0, 0,
-    // With as width / height: 100 * 100 (scale)
-    canvasWidth, canvasHeight
-  );
-
-  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
 }
 
 /**

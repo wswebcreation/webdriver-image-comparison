@@ -1,6 +1,7 @@
 import afterScreenshot from './afterScreenshot';
 import {join} from 'path';
 import {removeSync} from 'fs-extra';
+import {LogLevel} from "./options.interface";
 
 describe('afterScreenshot', () => {
   const folder = join(process.cwd(), '/.tmp/afterScreenshot');
@@ -38,6 +39,7 @@ describe('afterScreenshot', () => {
         screenWidth: 1440,
         tag: 'tag',
       },
+      logLevel: LogLevel.debug,
       hideElements: [<HTMLElement><any>'<div></div>'],
       platformName: '',
       removeElements: [<HTMLElement><any>'<div></div>'],

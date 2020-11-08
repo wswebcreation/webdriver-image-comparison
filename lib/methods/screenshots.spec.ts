@@ -1,9 +1,7 @@
 import {getBase64FullPageScreenshotsData} from './screenshots';
 import {FullPageScreenshotDataOptions} from './screenshots.interfaces';
 import {IMAGE_STRING} from '../mocks/mocks';
-import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
-import {OFFSETS} from '../helpers/constants';
-import hideScrollBars from '../clientSideScripts/hideScrollbars';
+import {LogLevel} from "../helpers/options.interface";
 
 describe('screenshots', () => {
   describe('getBase64FullPageScreenshotsData', () => {
@@ -21,6 +19,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
@@ -55,6 +54,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
@@ -102,6 +102,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: true,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
@@ -143,6 +144,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: true,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
@@ -188,6 +190,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: true,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
@@ -230,6 +233,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: true,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
@@ -276,6 +280,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
@@ -324,6 +329,7 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };

@@ -1,4 +1,5 @@
 import {RectanglesOutput} from './rectangles.interfaces';
+import {LogLevel} from "../helpers/options.interface";
 
 export interface ResizeDimensions {
   // The bottom margin
@@ -12,8 +13,6 @@ export interface ResizeDimensions {
 }
 
 export interface ImageCompareOptions {
-  // Debug the comparison with extra logging
-  debug: boolean;
   // The device pixel ratio of the device
   devicePixelRatio: number;
   // The compare options
@@ -27,6 +26,8 @@ export interface ImageCompareOptions {
   folderOptions: ImageCompareFolderOptions;
   // Is it an hybrid app or not
   isHybridApp: boolean;
+  // Level to show logs
+  logLevel: LogLevel;
   // The name of the platform
   platformName: string;
   // If this is a native web screenshot

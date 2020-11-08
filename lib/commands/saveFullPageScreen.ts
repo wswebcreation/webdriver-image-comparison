@@ -27,6 +27,7 @@ export default async function saveFullPageScreen(
     autoSaveBaseline,
     formatImageName,
     isHybridApp,
+    logLevel,
     savePerInstance,
     toolBarShadowPadding,
   } = saveFullPageOptions.wic;
@@ -51,6 +52,7 @@ export default async function saveFullPageScreen(
     addressBarShadowPadding,
     disableCSSAnimation,
     hideElements,
+    logLevel,
     noScrollBars: hideScrollBars,
     removeElements,
     toolBarShadowPadding,
@@ -69,6 +71,7 @@ export default async function saveFullPageScreen(
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isHybridApp,
     isIos: enrichedInstanceData.isIos,
+    logLevel: logLevel,
     toolBarShadowPadding: enrichedInstanceData.toolBarShadowPadding,
   };
   const screenshotsData: FullPageScreenshotsData = await getBase64FullPageScreenshotsData(
@@ -112,6 +115,7 @@ export default async function saveFullPageScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    logLevel,
     platformName: instanceData.platformName,
     removeElements,
   };

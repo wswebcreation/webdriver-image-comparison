@@ -18,12 +18,12 @@ Object {
     "saveAboveTolerance": 0,
     "scaleImagesToSameSize": false,
   },
-  "debug": false,
   "disableCSSAnimation": false,
   "formatImageName": "{tag}-{browserName}-{width}x{height}-dpr-{dpr}",
   "fullPageScrollTimeout": 1500,
   "hideScrollBars": true,
   "isHybridApp": false,
+  "logLevel": "info",
   "savePerInstance": false,
   "tabbableOptions": Object {
     "circle": Object {
@@ -63,12 +63,12 @@ Object {
     "saveAboveTolerance": 12,
     "scaleImagesToSameSize": true,
   },
-  "debug": true,
   "disableCSSAnimation": true,
   "formatImageName": "{foo}-{bar}",
   "fullPageScrollTimeout": 12345,
   "hideScrollBars": true,
   "isHybridApp": false,
+  "logLevel": "info",
   "savePerInstance": true,
   "tabbableOptions": Object {
     "circle": Object {
