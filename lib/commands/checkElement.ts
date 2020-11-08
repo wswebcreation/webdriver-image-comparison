@@ -36,7 +36,6 @@ export default async function checkElement(
   // 2a. Determine the options
   const compareOptions = methodCompareOptions(checkElementOptions.method);
   const executeCompareOptions = {
-    debug: checkElementOptions.wic.debug,
     devicePixelRatio,
     compareOptions: {
       wic: checkElementOptions.wic.compareOptions,
@@ -55,6 +54,7 @@ export default async function checkElement(
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkElementOptions.wic.isHybridApp,
+    logLevel: checkElementOptions.wic.logLevel,
     platformName: instanceData.platformName,
   };
 

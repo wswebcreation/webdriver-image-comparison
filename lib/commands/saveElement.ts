@@ -26,7 +26,7 @@ export default async function saveElement(
 ): Promise<ScreenshotOutput> {
 
   // 1a. Set some variables
-  const {addressBarShadowPadding, formatImageName, savePerInstance, toolBarShadowPadding} = saveElementOptions.wic;
+  const {addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding} = saveElementOptions.wic;
 
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveElementOptions.method
@@ -45,6 +45,7 @@ export default async function saveElement(
     addressBarShadowPadding,
     disableCSSAnimation,
     hideElements,
+    logLevel,
     noScrollBars: hideScrollBars,
     removeElements,
     toolBarShadowPadding,
@@ -52,7 +53,7 @@ export default async function saveElement(
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
 
   // 3.  Take the screenshot
-  const screenshot: string = await takeBase64Screenshot(methods.screenShot);
+  const base64Image: string = await takeBase64Screenshot(methods.screenShot);
 
   // 4.  Determine the rectangles
   const elementRectangleOptions: ElementRectanglesOptions = {
@@ -62,10 +63,15 @@ export default async function saveElement(
     isAndroid: enrichedInstanceData.isAndroid,
     isIos: enrichedInstanceData.isIos,
   };
-  const rectangles: RectanglesOutput = await determineElementRectangles(methods.executor, screenshot, elementRectangleOptions, element);
+  const rectangles: RectanglesOutput = await determineElementRectangles({
+    executor: methods.executor,
+    base64Image,
+    options: elementRectangleOptions,
+    element
+  });
 
   // 5.  Make a cropped base64 image with resizeDimensions
-  const croppedBase64Image = await makeCroppedBase64Image(screenshot, rectangles, resizeDimensions);
+  const croppedBase64Image = await makeCroppedBase64Image({base64Image, rectangles, logLevel, resizeDimensions});
 
   // 6.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {
@@ -98,6 +104,7 @@ export default async function saveElement(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    logLevel,
     platformName: instanceData.platformName,
     removeElements,
   };

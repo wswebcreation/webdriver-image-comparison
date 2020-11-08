@@ -44,7 +44,6 @@ export default async function checkFullPageScreen(
   // 2a. Determine the options
   const compareOptions = methodCompareOptions(checkFullPageOptions.method);
   const executeCompareOptions = {
-    debug: checkFullPageOptions.wic.debug,
     devicePixelRatio,
     compareOptions: {
       wic: checkFullPageOptions.wic.compareOptions,
@@ -63,6 +62,7 @@ export default async function checkFullPageScreen(
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkFullPageOptions.wic.isHybridApp,
+    logLevel: checkFullPageOptions.wic.logLevel,
     platformName: instanceData.platformName,
   };
 

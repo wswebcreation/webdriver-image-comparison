@@ -1,3 +1,5 @@
+import {LogLevel} from "./options.interface";
+
 export interface ScreenshotOutput {
   // The device pixel ratio of the instance
   devicePixelRatio: number;
@@ -22,6 +24,8 @@ export interface AfterScreenshotOptions {
   fileName: ScreenshotFileNameOptions;
   // Elements that need to be hidden (visibility: hidden) before saving a screenshot
   hideElements: (HTMLElement | HTMLElement[])[];
+  // Level to show logs
+  logLevel: LogLevel;
   // The platform name of the instance
   platformName: string;
   // Elements that need to be removed (display: none) before saving a screenshot

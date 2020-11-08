@@ -44,13 +44,6 @@ Delete runtime folder (`actual` & `diff`) on initialisation
 > **NOTE:**<br>
 > This will only work when the [`screenshotPath`](#screenshotpath) is set through the plugin options, and **WILL NOT WORK** when you set the folders in the methods
 
-### `debug`
-- **Type:** `boolean`
-- **Mandatory:** No
-- **Default:** `false`
-
-Enable extra console logging or always saving the diff images during comparison.
-
 ### `disableCSSAnimation`
 - **Type:** `boolean`
 - **Mandatory:** No
@@ -104,6 +97,15 @@ Hide scrollbars in the application. If set to true all scrollbars will be disabl
 - **Default:** `false`
 
 Tell the module if the used app is an Hybrid app, this will not calculate the address bar height because it is not there.
+
+### `logLevel`
+- **Type:** `string`
+- **Mandatory:** No
+- **Default:** `info`
+
+Adds extra logs, options are `debug | info | warn | silent`
+
+Errors are always logged to the console.
 
 ### `savePerInstance`
 - **Type:** `boolean`

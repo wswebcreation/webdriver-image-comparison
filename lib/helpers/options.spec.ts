@@ -12,7 +12,6 @@ describe('options', ()=>{
       const options:ClassOptions = {
         addressBarShadowPadding: 1,
         autoSaveBaseline: true,
-        debug: true,
         formatImageName: '{foo}-{bar}',
         savePerInstance: true,
         toolBarShadowPadding: 1,

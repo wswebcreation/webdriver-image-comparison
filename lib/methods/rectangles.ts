@@ -2,7 +2,7 @@ import {calculateDprData, checkAndroidNativeWebScreenshot, checkIsIos, getScreen
 import {getElementPositionAndroid, getElementPositionDesktop, getElementPositionIos} from './elementPosition';
 import {OFFSETS} from '../helpers/constants';
 import {
-  ElementRectanglesOptions,
+  ElementRectangles,
   RectanglesOutput,
   ScreenRectanglesOptions,
   StatusAddressToolBarRectangles,
@@ -15,15 +15,15 @@ import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroi
 /**
  * Determine the element rectangles on the page / screenshot
  */
-export async function determineElementRectangles(
-  executor: Executor,
-  screenshot: string,
-  options: ElementRectanglesOptions,
-  element: any,
-): Promise<RectanglesOutput> {
+export async function determineElementRectangles({
+                                                   executor,
+                                                   base64Image,
+                                                   options,
+                                                   element,
+                                                 }: ElementRectangles): Promise<RectanglesOutput> {
   // Determine screenshot data
   const {devicePixelRatio, innerHeight, isAndroid, isAndroidNativeWebScreenshot, isIos} = options;
-  const {height} = getScreenshotSize(screenshot, devicePixelRatio);
+  const {height} = getScreenshotSize(base64Image, devicePixelRatio);
   let elementPosition;
 
   // Determine the element position on the screenshot
@@ -47,7 +47,7 @@ export async function determineElementRectangles(
 /**
  * Determine the rectangles of the screen for the screenshot
  */
-export function determineScreenRectangles(screenshot: string, options: ScreenRectanglesOptions): RectanglesOutput {
+export function determineScreenRectangles(base64Image: string, options: ScreenRectanglesOptions): RectanglesOutput {
   // Determine screenshot data
   const {
     devicePixelRatio,
@@ -57,7 +57,7 @@ export function determineScreenRectangles(screenshot: string, options: ScreenRec
     isAndroidChromeDriverScreenshot,
     isAndroidNativeWebScreenshot,
   } = options;
-  const {height, width} = getScreenshotSize(screenshot, devicePixelRatio);
+  const {height, width} = getScreenshotSize(base64Image, devicePixelRatio);
 
   // Determine the width
   const screenshotWidth = isAndroidChromeDriverScreenshot ? width : innerWidth;

@@ -7,6 +7,7 @@ import {BeforeScreenshotOptions, BeforeScreenshotResult} from './beforeScreensho
 import {Executor} from '../methods/methods.interface';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 import {yellow} from "chalk";
+import {LogLevel} from "./options.interface";
 
 /**
  * Methods that need to be executed before a screenshot will be taken
@@ -22,6 +23,7 @@ export default async function beforeScreenshot(
     addressBarShadowPadding,
     disableCSSAnimation,
     hideElements,
+    logLevel,
     noScrollBars,
     removeElements,
     toolBarShadowPadding,
@@ -45,7 +47,8 @@ export default async function beforeScreenshot(
     try {
       await executor(hideRemoveElements, {hide: hideElements, remove: removeElements}, true);
     } catch (e) {
-      console.log(yellow(`
+      if(logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+        console.log(yellow(`
 #####################################################################################
  WARNING:
  (One of) the elements that needed to be hidden or removed could not be found on the
@@ -54,6 +57,7 @@ export default async function beforeScreenshot(
  We made sure the test didn't break.
 #####################################################################################
 `));
+      }
     }
   }
 

@@ -16,6 +16,8 @@ import {
 import {StatusAddressToolBarHeight} from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 import hideScrollBars from '../clientSideScripts/hideScrollbars';
+import {LogLevel} from "../helpers/options.interface";
+import {error} from "selenium-webdriver";
 
 /**
  * Take a full page screenshots for desktop / iOS / Android
@@ -36,6 +38,7 @@ export async function getBase64FullPageScreenshotsData(
     isAndroidChromeDriverScreenshot,
     isHybridApp,
     isIos,
+    logLevel,
     toolBarShadowPadding,
   } = options;
   const desktopOptions = {
@@ -43,6 +46,7 @@ export async function getBase64FullPageScreenshotsData(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    logLevel,
   };
   const nativeMobileOptions = {
     ...desktopOptions,
@@ -59,7 +63,7 @@ export async function getBase64FullPageScreenshotsData(
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, androidNativeMobileOptions);
   } else if (isAndroid && isAndroidChromeDriverScreenshot) {
-    const chromeDriverOptions = {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight};
+    const chromeDriverOptions = {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel};
 
     // Create a fullpage screenshot for Android when the ChromeDriver provides the screenshots
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
@@ -95,6 +99,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    logLevel,
     statusAddressBarHeight,
     toolBarShadowPadding,
   } = options;
@@ -121,15 +126,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
       try {
         await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
       } catch (e) {
-        console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+        logHiddenRemovedError(e, logLevel);
       }
     }
 
@@ -172,15 +169,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
     try {
       await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
     } catch (e) {
-      console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+      logHiddenRemovedError(e, logLevel);
     }
   }
 
@@ -202,7 +191,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight} = options;
+  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel} = options;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
@@ -225,15 +214,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
       try {
         await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
       } catch (e) {
-        console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+        logHiddenRemovedError(e, logLevel);
       }
     }
 
@@ -274,15 +255,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
     try {
       await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
     } catch (e) {
-      console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+      logHiddenRemovedError(e, logLevel);
     }
   }
 
@@ -304,7 +277,7 @@ export async function getFullPageScreenshotsDataDesktop(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight} = options;
+  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel} = options;
   let actualInnerHeight = innerHeight;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
@@ -325,15 +298,7 @@ export async function getFullPageScreenshotsDataDesktop(
       try {
         await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
       } catch (e) {
-        console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+        logHiddenRemovedError(e, logLevel);
       }
     }
 
@@ -385,15 +350,7 @@ export async function getFullPageScreenshotsDataDesktop(
     try {
       await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
     } catch (e) {
-      console.log(yellow(`
-#####################################################################################
- WARNING:
- (One of) the elements that needed to be hidden or removed could not be found on the
- page and caused this error
- Error: ${e}
- We made sure the test didn't break.
-#####################################################################################
-`));
+      logHiddenRemovedError(e, logLevel);
     }
   }
 
@@ -411,4 +368,23 @@ export async function getFullPageScreenshotsDataDesktop(
  */
 export async function takeBase64Screenshot(takeScreenshot: TakeScreenShot): Promise<string> {
   return takeScreenshot();
+}
+
+/**
+ * Log an error for not being able to hide remove elements
+ *
+ * @TODO: remove the any
+ */
+function logHiddenRemovedError(error:any, logLevel:LogLevel){
+  if(logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+    console.log(yellow(`
+#####################################################################################
+ WARNING:
+ (One of) the elements that needed to be hidden or removed could not be found on the
+ page and caused this error
+ Error: ${error}
+ We made sure the test didn't break.
+#####################################################################################
+`));
+  }
 }

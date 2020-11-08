@@ -12,12 +12,12 @@ export interface ClassOptions{
   baselineFolder?: any;
   // Delete runtime folder (actual & diff) on initialisation
   clearRuntimeFolder?: boolean;
-  // Enable extra console logging or always saving the diff images during comparison
-  debug?: boolean;
   // The naming of the saved images can be customized by passing the parameter `formatImageName` with a format string
   formatImageName?: string;
   // Is it an hybrid app or not
   isHybridApp?: boolean;
+  // Level to show logs
+  logLevel?: LogLevel;
   // Save the images per instance in a separate folder.
   savePerInstance?: boolean;
   // The directory that will hold all the actual / difference screenshots
@@ -72,7 +72,6 @@ export interface DefaultOptions {
   addressBarShadowPadding: number;
   autoSaveBaseline: boolean;
   clearFolder: boolean;
-  debug: boolean;
   formatImageName: string;
   isHybridApp: boolean;
   savePerInstance: boolean;
@@ -80,6 +79,7 @@ export interface DefaultOptions {
   disableCSSAnimation: boolean;
   fullPageScrollTimeout: number;
   hideScrollBars: boolean;
+  logLevel: LogLevel;
   compareOptions: CompareOptions;
   tabbableOptions: TabbableOptions;
 }
@@ -96,4 +96,11 @@ interface CompareOptions {
   returnAllCompareData: boolean;
   saveAboveTolerance: number;
   scaleImagesToSameSize:boolean;
+}
+
+export enum LogLevel {
+  debug = 'debug' ,
+  info = 'info',
+  warn = 'warn',
+  silent = 'silent'
 }

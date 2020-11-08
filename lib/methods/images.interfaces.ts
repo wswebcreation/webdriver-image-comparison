@@ -1,4 +1,6 @@
 import {RectanglesOutput} from './rectangles.interfaces';
+import {LogLevel} from "../helpers/options.interface";
+import {DEFAULT_RESIZE_DIMENSIONS} from "../helpers/constants";
 
 export interface ResizeDimensions {
   // The bottom margin
@@ -12,8 +14,6 @@ export interface ResizeDimensions {
 }
 
 export interface ImageCompareOptions {
-  // Debug the comparison with extra logging
-  debug: boolean;
   // The device pixel ratio of the device
   devicePixelRatio: number;
   // The compare options
@@ -27,6 +27,8 @@ export interface ImageCompareOptions {
   folderOptions: ImageCompareFolderOptions;
   // Is it an hybrid app or not
   isHybridApp: boolean;
+  // Level to show logs
+  logLevel: LogLevel;
   // The name of the platform
   platformName: string;
   // If this is a native web screenshot
@@ -88,7 +90,7 @@ export interface MethodImageCompareCompareOptions {
   // Allowable value of misMatchPercentage that prevents saving image with differences
   saveAboveTolerance?: number;
   //Scale images to same size before comparison
-  scaleImagesToSameSize?:boolean;
+  scaleImagesToSameSize?: boolean;
 }
 
 export interface ImageCompareFolderOptions {
@@ -131,7 +133,7 @@ export interface CompareOptions {
   output?: {
     ignoredBoxes?: IgnoreBoxes[]
   };
-  scaleToSameSize? : boolean;
+  scaleToSameSize?: boolean;
 }
 
 export interface IgnoreBoxes {
@@ -139,4 +141,11 @@ export interface IgnoreBoxes {
   right: number;
   left: number;
   top: number;
+}
+
+export interface CroppedBase64Image {
+  base64Image: string;
+  rectangles: RectanglesOutput;
+  logLevel: LogLevel;
+  resizeDimensions?: number | ResizeDimensions;
 }

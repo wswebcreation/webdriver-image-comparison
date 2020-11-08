@@ -34,7 +34,6 @@ export default async function checkScreen(
   // 2a. Determine the compare options
   const methodCompareOptions = screenMethodCompareOptions(checkScreenOptions.method);
   const executeCompareOptions: ImageCompareOptions = {
-    debug: checkScreenOptions.wic.debug,
     devicePixelRatio,
     compareOptions: {
       wic: checkScreenOptions.wic.compareOptions,
@@ -51,6 +50,7 @@ export default async function checkScreen(
       isMobile: checkIsMobile(instanceData.platformName),
       savePerInstance: checkScreenOptions.wic.savePerInstance,
     },
+    logLevel: checkScreenOptions.wic.logLevel,
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkScreenOptions.wic.isHybridApp,
     platformName: instanceData.platformName,

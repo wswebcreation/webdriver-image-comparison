@@ -1,3 +1,5 @@
+import {Executor} from "./methods.interface";
+
 export interface RectanglesOptions {
   // The device pixel ration of the screen / device
   devicePixelRatio: number;
@@ -47,4 +49,11 @@ export interface StatusAddressToolBarRectanglesOptions {
 
 export interface StatusAddressToolBarRectangles extends Array<RectanglesOutput>{
 
+}
+
+export interface ElementRectangles{
+  executor: Executor;
+  base64Image: string;
+  options: ElementRectanglesOptions;
+  element: any;
 }

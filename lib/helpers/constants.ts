@@ -25,15 +25,6 @@ export const DEFAULT_RESIZE_DIMENSIONS = {
   left: 0
 };
 export const FULL_PAGE_SCROLL_TIMEOUT = 1500;
-export const LOG_METHODS = ['error', 'warn', 'info', 'debug', 'trace', 'silent'];
-export const LOG_LEVELS = {
-  ERROR: 'error',
-  WARN: 'warn',
-  INFO: 'info',
-  DEBUG: 'debug',
-  TRACE: 'trace',
-  SILENT: 'silent',
-};
 const androidDefaultOffsets = {
   STATUS_BAR: 24,
   ADDRESS_BAR: 56,
