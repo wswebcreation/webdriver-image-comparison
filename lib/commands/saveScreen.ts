@@ -49,7 +49,7 @@ export default async function saveScreen(
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions);
 
   // 3.  Take the screenshot
-  const screenshot:string = await takeBase64Screenshot(methods.screenShot);
+  const base64Image:string = await takeBase64Screenshot(methods.screenShot);
 
   // Determine the rectangles
   const screenRectangleOptions: ScreenRectanglesOptions = {
@@ -60,10 +60,10 @@ export default async function saveScreen(
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isIos: enrichedInstanceData.isIos,
   };
-  const rectangles: RectanglesOutput = determineScreenRectangles(screenshot, screenRectangleOptions);
+  const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
 
   // 4.  Make a cropped base64 image
-  const croppedBase64Image: string = await makeCroppedBase64Image(screenshot, rectangles, logLevel);
+  const croppedBase64Image: string = await makeCroppedBase64Image({base64Image, rectangles, logLevel});
 
   // 5.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {

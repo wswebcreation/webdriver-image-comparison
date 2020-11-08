@@ -7,7 +7,7 @@ import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
 import {determineStatusAddressToolBarRectangles} from './rectangles';
 import {RectanglesOutput} from './rectangles.interfaces';
 import {
-  CompareOptions,
+  CompareOptions, CroppedBase64Image,
   IgnoreBoxes,
   ImageCompareOptions,
   ImageCompareResult,
@@ -73,12 +73,12 @@ export async function checkBaselineImageExists(
 /**
  * Make a cropped image with Canvas
  */
-export async function makeCroppedBase64Image(
-  base64Image: string,
-  rectangles: RectanglesOutput,
-  logLevel: LogLevel,
-  resizeDimensions: number | ResizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
-): Promise<string> {
+export async function makeCroppedBase64Image({
+                                               base64Image,
+                                               rectangles,
+                                               logLevel,
+                                               resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
+                                             }: CroppedBase64Image): Promise<string> {
   /**
    * This is in for backwards compatibility, it will be removed in the future
    */

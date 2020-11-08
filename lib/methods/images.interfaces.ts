@@ -1,5 +1,6 @@
 import {RectanglesOutput} from './rectangles.interfaces';
 import {LogLevel} from "../helpers/options.interface";
+import {DEFAULT_RESIZE_DIMENSIONS} from "../helpers/constants";
 
 export interface ResizeDimensions {
   // The bottom margin
@@ -89,7 +90,7 @@ export interface MethodImageCompareCompareOptions {
   // Allowable value of misMatchPercentage that prevents saving image with differences
   saveAboveTolerance?: number;
   //Scale images to same size before comparison
-  scaleImagesToSameSize?:boolean;
+  scaleImagesToSameSize?: boolean;
 }
 
 export interface ImageCompareFolderOptions {
@@ -132,7 +133,7 @@ export interface CompareOptions {
   output?: {
     ignoredBoxes?: IgnoreBoxes[]
   };
-  scaleToSameSize? : boolean;
+  scaleToSameSize?: boolean;
 }
 
 export interface IgnoreBoxes {
@@ -140,4 +141,11 @@ export interface IgnoreBoxes {
   right: number;
   left: number;
   top: number;
+}
+
+export interface CroppedBase64Image {
+  base64Image: string;
+  rectangles: RectanglesOutput;
+  logLevel: LogLevel;
+  resizeDimensions?: number | ResizeDimensions;
 }
