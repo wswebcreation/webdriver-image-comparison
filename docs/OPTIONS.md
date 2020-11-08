@@ -103,7 +103,9 @@ Tell the module if the used app is an Hybrid app, this will not calculate the ad
 - **Mandatory:** No
 - **Default:** `info`
 
-Adds extra logs, options are `debug | info | warn | error | silent`
+Adds extra logs, options are `debug | info | warn | silent`
+
+Errors are always logged to the console.
 
 ### `savePerInstance`
 - **Type:** `boolean`
