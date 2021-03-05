@@ -7,9 +7,9 @@ export default function setCustomCss(cssOptions: CssOptions): void {
     if (document.head == null) {
         return;
     }
-
+    // disabling CSS animations for everything including pseudo elements
     const disableTransformationsTransitionsAnimations = `
-* {
+*, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -ms-transition-property: none !important;
