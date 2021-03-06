@@ -4,7 +4,7 @@ exports[`setCustomCss should be able to set the custom css with the animations d
 
 exports[`setCustomCss should be able to set the custom css with the animations disabled 2`] = `
 "body{padding-top:6px !important}body{padding-bottom:6px !important}
-* {
+*, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -ms-transition-property: none !important;
@@ -24,7 +24,7 @@ exports[`setCustomCss should be able to set the custom css with the default opti
 
 exports[`setCustomCss should be able to set the custom css with the with padding set to 0 1`] = `
 "body{padding-top:6px !important}body{padding-bottom:6px !important}
-* {
+*, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -ms-transition-property: none !important;
@@ -40,7 +40,7 @@ exports[`setCustomCss should be able to set the custom css with the with padding
 
 exports[`setCustomCss should be able to set the custom css with the with padding set to 0 2`] = `
 "body{padding-top:6px !important}body{padding-bottom:6px !important}
-* {
+*, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -ms-transition-property: none !important;
@@ -52,7 +52,7 @@ exports[`setCustomCss should be able to set the custom css with the with padding
     -ms-animation: none !important;
     animation: none !important;
 }body{padding-top:6px !important}body{padding-bottom:6px !important}
-* {
+*, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
     -ms-transition-property: none !important;
