@@ -29,7 +29,11 @@ jobs:
 
     - name: Run Unit Tests and generate coverage report
       working-directory: ./
-      run: |
-        npm run test
-        npm run coveralls
+      run: npm run test
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.COVERALLS_TOKEN }}
+      
 
