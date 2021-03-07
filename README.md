@@ -1,7 +1,7 @@
 # webdriver-image-comparison
 
-![wdio-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison.yml/actions/workflows/wdio-image-comparison.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/wswebcreation/webdriver-image-comparison/badge.svg?branch=master)](https://coveralls.io/github/wswebcreation/webdriver-image-comparison?branch=master)
+![webdriver-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison.yml/actions/workflows/webdriver-image-comparison.yml/badge.svg)
+[![codecov](https://codecov.io/gh/wswebcreation/webdriver-image-comparison/branch/master/graph/badge.svg?token=Q4UsgDSRd3)](https://codecov.io/gh/wswebcreation/webdriver-image-comparison)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 > **NOTE: This module is still being developed**
