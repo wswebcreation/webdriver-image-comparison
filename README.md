@@ -1,5 +1,6 @@
 # webdriver-image-comparison
 
+![wdio-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison.yml/actions/workflows/wdio-image-comparison.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/wswebcreation/webdriver-image-comparison/badge.svg?branch=master)](https://coveralls.io/github/wswebcreation/webdriver-image-comparison?branch=master)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 

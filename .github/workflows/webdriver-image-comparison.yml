@@ -1,0 +1,35 @@
+name: Test wdio-image-comparison-service
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    # Testing steps
+    - name: Install dependencies
+      working-directory: ./
+      run: npm install
+
+    - name: Run Unit Tests and generate coverage report
+      working-directory: ./
+      run:
+      - npm run test
+      - npm run coveralls
+
