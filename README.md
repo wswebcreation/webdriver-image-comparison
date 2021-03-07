@@ -1,6 +1,6 @@
 # webdriver-image-comparison
 
-![webdriver-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison.yml/actions/workflows/webdriver-image-comparison.yml/badge.svg)
+![webdriver-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison/actions/workflows/webdriver-image-comparison.yml/badge.svg)
 [![codecov](https://codecov.io/gh/wswebcreation/webdriver-image-comparison/branch/master/graph/badge.svg?token=Q4UsgDSRd3)](https://codecov.io/gh/wswebcreation/webdriver-image-comparison)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
