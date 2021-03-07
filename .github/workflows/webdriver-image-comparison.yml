@@ -1,4 +1,4 @@
-name: Test wdio-image-comparison-service
+name: webdriver-image-comparison
 
 on:
   pull_request:
