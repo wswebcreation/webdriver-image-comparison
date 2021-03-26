@@ -20,6 +20,7 @@ export default function setCustomCss(cssOptions: CssOptions): void {
     -o-animation: none !important;
     -ms-animation: none !important;
     animation: none !important;
+    caret-color: transparent !important;
 }`;
 	const { addressBarPadding, disableCSSAnimation, id, toolBarPadding } = cssOptions;
 	const bodyTopPadding = addressBarPadding === 0 ? '' : `body{padding-top:${ addressBarPadding }px !important}`;
