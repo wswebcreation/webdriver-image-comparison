@@ -15,6 +15,7 @@ exports[`setCustomCss should be able to set the custom css with the animations d
     -o-animation: none !important;
     -ms-animation: none !important;
     animation: none !important;
+    caret-color: transparent !important;
 }body{padding-top:6px !important}body{padding-bottom:6px !important}"
 `;
 
@@ -35,6 +36,7 @@ exports[`setCustomCss should be able to set the custom css with the with padding
     -o-animation: none !important;
     -ms-animation: none !important;
     animation: none !important;
+    caret-color: transparent !important;
 }body{padding-top:6px !important}body{padding-bottom:6px !important}"
 `;
 
@@ -51,6 +53,7 @@ exports[`setCustomCss should be able to set the custom css with the with padding
     -o-animation: none !important;
     -ms-animation: none !important;
     animation: none !important;
+    caret-color: transparent !important;
 }body{padding-top:6px !important}body{padding-bottom:6px !important}
 *, *::before, *::after {
     -o-transition-property: none !important;
@@ -63,5 +66,6 @@ exports[`setCustomCss should be able to set the custom css with the with padding
     -o-animation: none !important;
     -ms-animation: none !important;
     animation: none !important;
+    caret-color: transparent !important;
 }"
 `;

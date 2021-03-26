@@ -49,7 +49,7 @@ Delete runtime folder (`actual` & `diff`) on initialisation
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 ### `formatImageName`
@@ -250,7 +250,7 @@ Methods options are the options that can be set per method. If the option has th
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `hideScrollBars`
@@ -285,7 +285,7 @@ An object that need to hold a `top`, `right`, `bottom` and a `left` amount of pi
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `hideScrollBars`
@@ -313,7 +313,7 @@ This methods can *remove* 1 or multiple elements by adding the property `display
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `fullPageScrollTimeout`
@@ -363,7 +363,7 @@ The values will automatically be transformed to the correct DPR-values.
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `hideScrollBars`
@@ -409,7 +409,7 @@ The values will automatically be transformed to the correct DPR-values.
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `hideScrollBars`
@@ -448,7 +448,7 @@ The values will automatically be transformed to the correct DPR-values.
 - **Mandatory:** No
 - **Default:** `false`
 
-En/Disable all css animations in the application. If set to true all animations will be disabled before taking a screenshot
+En/Disable all css animations and the input caret in the application. If set to true all animations will be disabled before taking a screenshot
 and reset when done
 
 #### `fullPageScrollTimeout`

@@ -28,7 +28,7 @@ export interface ClassOptions{
   /**
    * Class and method options
    */
-  // En/Disable all css animations in the application.
+  // En/Disable all css animations and the input caret in the application.
   disableCSSAnimation?: boolean;
   // The timeout in milliseconds to wait after a scroll. This might help identifying pages with lazy loading.
   fullPageScrollTimeout?: number;
