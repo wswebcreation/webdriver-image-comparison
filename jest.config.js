@@ -30,4 +30,5 @@ module.exports = {
     'json',
     'node'
   ],
+  testEnvironment: 'jsdom',
 };
