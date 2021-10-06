@@ -66,6 +66,7 @@ export default async function saveFullPageScreen(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
+    clientHeight: enrichedInstanceData.dimensions.html.clientHeight,
     isAndroid: enrichedInstanceData.isAndroid,
     isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,

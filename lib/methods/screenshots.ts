@@ -33,6 +33,7 @@ export async function getBase64FullPageScreenshotsData(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    clientHeight,
     isAndroid,
     isAndroidNativeWebScreenshot,
     isAndroidChromeDriverScreenshot,
@@ -46,6 +47,7 @@ export async function getBase64FullPageScreenshotsData(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    clientHeight,
     logLevel,
   };
   const nativeMobileOptions = {
@@ -99,12 +101,13 @@ export async function getFullPageScreenshotsDataNativeMobile(
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    clientHeight,
     logLevel,
     statusAddressBarHeight,
     toolBarShadowPadding,
   } = options;
   const iosViewportHeight = innerHeight - addressBarShadowPadding - toolBarShadowPadding;
-
+  const htmClientHeight = clientHeight - addressBarShadowPadding - toolBarShadowPadding;
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
   let scrollHeight: number;
@@ -113,6 +116,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
   for (let i = 0; i <= amountOfScrollsArray.length; i++) {
     // Determine and start scrolling
     const scrollY = iosViewportHeight * i;
+    const scrollClientHeight = htmClientHeight * i;
     await executor(scrollToPosition, scrollY);
 
     // Hide scrollbars before taking a screenshot, we don't want them, on the screenshot
@@ -146,13 +150,13 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // The starting position for cropping could be different for the last image
     // The cropping always needs to start at status and address bar height and the address bar shadow padding
-    const imageYPosition = (amountOfScrollsArray.length === i ? innerHeight - imageHeight : 0) + statusAddressBarHeight + addressBarShadowPadding;
+    const imageYPosition = (amountOfScrollsArray.length === i ? clientHeight - imageHeight : 0) + statusAddressBarHeight + addressBarShadowPadding;
 
     // Store all the screenshot data in the screenshot object
     viewportScreenshots.push({
       ...calculateDprData({
         canvasWidth: screenshotSizeWidth,
-        canvasYPosition: scrollY,
+        canvasYPosition: scrollClientHeight,
         imageHeight: imageHeight,
         imageWidth: screenshotSizeWidth,
         imageYPosition: imageYPosition,
@@ -175,7 +179,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
   return {
     ...calculateDprData({
-      fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,
+      fullPageHeight: (scrollHeight * htmClientHeight / iosViewportHeight )- addressBarShadowPadding - toolBarShadowPadding,
       fullPageWidth: screenshotSizeWidth,
     }, devicePixelRatio),
     data: viewportScreenshots,

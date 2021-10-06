@@ -14,6 +14,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 800,
+        clientHeight: 800,
         isAndroid: true,
         isAndroidNativeWebScreenshot: true,
         isAndroidChromeDriverScreenshot: false,
@@ -49,6 +50,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 600,
+        clientHeight: 800,
         isAndroid: true,
         isAndroidNativeWebScreenshot: true,
         isAndroidChromeDriverScreenshot: false,
@@ -59,7 +61,7 @@ describe('screenshots', () => {
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
       const MOCKED_EXECUTOR = jest.fn()
-      // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
+        // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
         .mockResolvedValueOnce({statusAddressBar: {height: 56}})
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
@@ -97,6 +99,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 800,
+        clientHeight: 800,
         isAndroid: true,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: true,
@@ -107,8 +110,8 @@ describe('screenshots', () => {
         hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
         .mockResolvedValueOnce({})
@@ -139,6 +142,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 800,
+        clientHeight: 800,
         isAndroid: true,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: true,
@@ -149,8 +153,8 @@ describe('screenshots', () => {
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
       const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
         .mockResolvedValueOnce({})
@@ -185,6 +189,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 800,
+        clientHeight: 800,
         isAndroid: false,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: false,
@@ -228,6 +233,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 800,
+        clientHeight: 800,
         isAndroid: false,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: false,
@@ -275,6 +281,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 768,
+        clientHeight: 800,
         isAndroid: false,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: false,
@@ -285,8 +292,8 @@ describe('screenshots', () => {
         hideAfterFirstScroll: [],
       };
       const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
@@ -324,6 +331,7 @@ describe('screenshots', () => {
         devicePixelRatio: 2,
         fullPageScrollTimeout: 1,
         innerHeight: 768,
+        clientHeight: 800,
         isAndroid: false,
         isAndroidNativeWebScreenshot: false,
         isAndroidChromeDriverScreenshot: false,
@@ -334,8 +342,8 @@ describe('screenshots', () => {
         hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
       };
       const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)

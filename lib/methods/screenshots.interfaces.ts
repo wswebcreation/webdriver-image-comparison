@@ -34,6 +34,8 @@ export interface FullPageScreenshotDataOptions {
   hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
   // The innerheight
   innerHeight: number;
+  // The Html clientHeight
+  clientHeight: number;
   // If the instance is an Android device
   isAndroid: boolean;
   // If this is an Android native screenshot
@@ -59,6 +61,8 @@ export interface FullPageScreenshotNativeMobileOptions {
   fullPageScrollTimeout: number;
   // The innerheight
   innerHeight: number;
+  // The Html clientHeight
+  clientHeight: number;
   // Level to show logs
   logLevel: LogLevel;
   // The height of the status and the address bar
