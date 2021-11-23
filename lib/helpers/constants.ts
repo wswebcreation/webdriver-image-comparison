@@ -30,6 +30,16 @@ const androidDefaultOffsets = {
   ADDRESS_BAR: 56,
   TOOL_BAR: 48,
 };
+// Good to know data
+//   const iPhoneHasNotch =
+//     // iPhone X|XS|11Pro|12Mini|13Mini
+//     (width === 812 || height === 812)
+//     // iPone XSMax|XR|11|11ProMax
+//     || (width === 896 || height === 896)
+//     // iPhone 12|12Pro|13|13Pro
+//     || (width === 844 || height === 844)
+//     // iPhone 12ProMax|13ProMax
+//     || (width === 926 || height === 926);
 const iosDefaultOffsets = {
   STATUS_BAR: 20,
   STATUS_BAR_PRO: 24,
@@ -58,6 +68,7 @@ export const OFFSETS = {
     9: {...androidDefaultOffsets},
     10: {...androidDefaultOffsets},
     11: {...androidDefaultOffsets},
+    12: {...androidDefaultOffsets},
   },
   // https://ivomynttinen.com/blog/ios-design-guidelines
   IOS: {
@@ -85,6 +96,11 @@ export const OFFSETS = {
     12: {...iosDefaultOffsets},
     13: {...iosDefaultOffsets},
     14: {...iosDefaultOffsets},
+    15: {
+      ...iosDefaultOffsets,
+      ADDRESS_BAR: 0,
+      STATUS_BAR_X: 47,
+    },
   },
 };
 export const DEFAULT_TABBABLE_OPTIONS = {

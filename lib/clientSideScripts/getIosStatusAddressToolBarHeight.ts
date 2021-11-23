@@ -12,7 +12,15 @@ export default function getIosStatusAddressToolBarHeight(iosOffsets: IosOffsets)
 
   // Determine screen width/height to determine iPhone X series address bar height
   const {width, height} = window.screen;
-  const isIphoneXSeries = (width === 812 || height === 812) || (width === 896 || height === 896);
+  const iPhoneHasNotch =
+    // iPhone X|XS|11Pro|12Mini|13Mini
+    (width === 812 || height === 812)
+    // iPone XSMax|XR|11|11ProMax
+    || (width === 896 || height === 896)
+    // iPhone 12|12Pro|13|13Pro
+    || (width === 844 || height === 844)
+    // iPhone 12ProMax|13ProMax
+    || (width === 926 || height === 926);
 
   // Determine if iPad Pro with no touchID for higher status bar
   const {innerWidth, innerHeight} = window;
@@ -23,7 +31,7 @@ export default function getIosStatusAddressToolBarHeight(iosOffsets: IosOffsets)
 
   // Determine address bar height
   let statusBarHeight;
-  if (isIphoneXSeries) {
+  if (iPhoneHasNotch) {
     statusBarHeight = versionOffsets.STATUS_BAR_X;
   } else if (isIpadNoTouch) {
     statusBarHeight = versionOffsets.STATUS_BAR_PRO;
@@ -46,7 +54,7 @@ export default function getIosStatusAddressToolBarHeight(iosOffsets: IosOffsets)
     toolBar.y = 0;
   }
   // Add the handlebar on iPhone X series as a blockout, it can colour with the background
-  if (toolBar.height === 0 && isIphoneXSeries) {
+  if (toolBar.height === 0 && iPhoneHasNotch) {
     // Needs to be verbose to support the correct injection
     toolBar.height = versionOffsets.HOME_BAR.DEFAULT.height;
     toolBar.width = versionOffsets.HOME_BAR.DEFAULT.width;
