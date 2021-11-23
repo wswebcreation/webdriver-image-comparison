@@ -35,6 +35,9 @@ export default class BaseClass {
     };
 
     if (options.clearRuntimeFolder) {
+      console.log('\n\n\n##############################');
+      console.log('!!CLEARING!!');
+      console.log('##############################\n\n\n');
       removeSync(this.folders.actualFolder);
       removeSync(this.folders.diffFolder);
     }
