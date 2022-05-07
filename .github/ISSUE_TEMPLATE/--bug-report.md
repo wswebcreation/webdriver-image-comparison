@@ -10,7 +10,7 @@ about: Create a report to help us improve.
  - Browser name and version: [e.g. Chrome 68]
  - Platform name and version: [e.g. Windows 10]
  - Framework name and version: [e.g. Protractor 5.1.0]
- - Plugin name and version: [e.g. protractor-image-comparison 3.0.0]
+ - Plugin name and version: [e.g. webdriver-image-comparison 3.0.0]
  - webdriver-image-comparison version: [e.g. 1.0.0]
 
 **Config of the automation framework + plugin**
