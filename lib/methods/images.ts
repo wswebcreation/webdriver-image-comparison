@@ -123,7 +123,7 @@ export async function makeCroppedBase64Image({
     bottom: ${resizeDimensions},
     left: ${resizeDimensions},
  }
- THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
+ THIS IS DEPRECATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
 #####################################################################################
 `),
       );
@@ -274,13 +274,12 @@ export async function executeImageCompare(
 
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
-  const misMatchPercentage = imageCompareOptions.rawMisMatchPercentage
-    ? data.rawMisMatchPercentage
-    : Number(data.rawMisMatchPercentage.toFixed(2));
+  const rawMisMatchPercentage = data.rawMisMatchPercentage;
+  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage ? rawMisMatchPercentage : data.misMatchPercentage;
 
   // 6.		Save the diff when there is a diff or when debug mode is on
-  if (misMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
-    const isDifference = misMatchPercentage > imageCompareOptions.saveAboveTolerance;
+  if (rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
+    const isDifference = rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance;
     const isDifferenceMessage = 'WARNING:\n There was a difference. Saved the difference to';
     const debugMessage = 'INFO:\n Debug mode is enabled. Saved the debug file to:';
     const diffFolderPath = getAndCreatePath(diffFolder, createFolderOptions);
@@ -309,9 +308,9 @@ export async function executeImageCompare(
           baseline: baselineFilePath,
           ...(diffFilePath ? { diff: diffFilePath } : {}),
         },
-        misMatchPercentage,
+        misMatchPercentage: reportMisMatchPercentage,
       }
-    : misMatchPercentage;
+    : reportMisMatchPercentage;
 }
 
 /**
