@@ -10,4 +10,5 @@ local.config.json
 localBaseline/
 docs/
 lib/
-build/mocks
+build/
+.eslintcache

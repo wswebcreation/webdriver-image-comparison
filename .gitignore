@@ -8,3 +8,4 @@ coverage/
 localBaseline/
 
 build/
+.eslintcache
