@@ -10,7 +10,7 @@ export const FOLDERS = {
   DEFAULT: {
     BASE: './wic/baseline/',
     SCREENSHOTS: '.tmp/',
-  }
+  },
 };
 export const DEFAULT_SHADOW = {
   ADDRESS_BAR: 6,
@@ -22,7 +22,7 @@ export const DEFAULT_RESIZE_DIMENSIONS = {
   top: 0,
   right: 0,
   bottom: 0,
-  left: 0
+  left: 0,
 };
 export const FULL_PAGE_SCROLL_TIMEOUT = 1500;
 const androidDefaultOffsets = {
@@ -62,13 +62,13 @@ const iosDefaultOffsets = {
 };
 export const OFFSETS = {
   ANDROID: {
-    6: {...androidDefaultOffsets},
-    7: {...androidDefaultOffsets},
-    8: {...androidDefaultOffsets},
-    9: {...androidDefaultOffsets},
-    10: {...androidDefaultOffsets},
-    11: {...androidDefaultOffsets},
-    12: {...androidDefaultOffsets},
+    6: { ...androidDefaultOffsets },
+    7: { ...androidDefaultOffsets },
+    8: { ...androidDefaultOffsets },
+    9: { ...androidDefaultOffsets },
+    10: { ...androidDefaultOffsets },
+    11: { ...androidDefaultOffsets },
+    12: { ...androidDefaultOffsets },
   },
   // https://ivomynttinen.com/blog/ios-design-guidelines
   IOS: {
@@ -92,10 +92,10 @@ export const OFFSETS = {
         },
       },
     },
-    11: {...iosDefaultOffsets},
-    12: {...iosDefaultOffsets},
-    13: {...iosDefaultOffsets},
-    14: {...iosDefaultOffsets},
+    11: { ...iosDefaultOffsets },
+    12: { ...iosDefaultOffsets },
+    13: { ...iosDefaultOffsets },
+    14: { ...iosDefaultOffsets },
     15: {
       ...iosDefaultOffsets,
       ADDRESS_BAR: 0,

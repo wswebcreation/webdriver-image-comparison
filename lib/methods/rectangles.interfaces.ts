@@ -1,4 +1,4 @@
-import {Executor} from "./methods.interface";
+import { Executor } from './methods.interface';
 
 export interface RectanglesOptions {
   // The device pixel ration of the screen / device
@@ -11,7 +11,7 @@ export interface RectanglesOptions {
   isIos: boolean;
 }
 
-export interface ElementRectanglesOptions extends RectanglesOptions{
+export interface ElementRectanglesOptions extends RectanglesOptions {
   // If this is an Android device
   isAndroid: boolean;
 }
@@ -47,11 +47,9 @@ export interface StatusAddressToolBarRectanglesOptions {
   blockOutToolBar: boolean;
 }
 
-export interface StatusAddressToolBarRectangles extends Array<RectanglesOutput>{
+export type StatusAddressToolBarRectangles = Array<RectanglesOutput>;
 
-}
-
-export interface ElementRectangles{
+export interface ElementRectangles {
   executor: Executor;
   base64Image: string;
   options: ElementRectanglesOptions;

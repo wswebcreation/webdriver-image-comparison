@@ -1,5 +1,5 @@
-import {EnrichedInstanceData, InstanceData} from '../methods/instanceData.interfaces';
-import {LogLevel} from "./options.interface";
+import { EnrichedInstanceData, InstanceData } from '../methods/instanceData.interfaces';
+import { LogLevel } from './options.interface';
 
 export interface BeforeScreenshotOptions {
   // The instance data
@@ -20,4 +20,4 @@ export interface BeforeScreenshotOptions {
   removeElements: HTMLElement[];
 }
 
-export interface BeforeScreenshotResult extends EnrichedInstanceData {}
+export type BeforeScreenshotResult = EnrichedInstanceData;

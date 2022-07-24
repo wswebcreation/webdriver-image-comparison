@@ -1,17 +1,17 @@
-import {takeBase64Screenshot} from '../methods/screenshots';
-import {makeCroppedBase64Image} from '../methods/images';
+import { takeBase64Screenshot } from '../methods/screenshots';
+import { makeCroppedBase64Image } from '../methods/images';
 import beforeScreenshot from '../helpers/beforeScreenshot';
 import afterScreenshot from '../helpers/afterScreenshot';
-import {determineElementRectangles} from '../methods/rectangles';
-import {AfterScreenshotOptions, ScreenshotOutput} from '../helpers/afterScreenshot.interfaces';
-import {Methods} from '../methods/methods.interface';
-import {InstanceData} from '../methods/instanceData.interfaces';
-import {Folders} from '../base.interface';
-import {SaveElementOptions} from './element.interfaces';
-import {ElementRectanglesOptions, RectanglesOutput} from '../methods/rectangles.interfaces';
-import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
-import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
-import {ResizeDimensions} from '../methods/images.interfaces';
+import { determineElementRectangles } from '../methods/rectangles';
+import { AfterScreenshotOptions, ScreenshotOutput } from '../helpers/afterScreenshot.interfaces';
+import { Methods } from '../methods/methods.interface';
+import { InstanceData } from '../methods/instanceData.interfaces';
+import { Folders } from '../base.interface';
+import { SaveElementOptions } from './element.interfaces';
+import { ElementRectanglesOptions, RectanglesOutput } from '../methods/rectangles.interfaces';
+import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/beforeScreenshot.interface';
+import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
+import { ResizeDimensions } from '../methods/images.interfaces';
 
 /**
  * Saves an image of an element
@@ -24,17 +24,18 @@ export default async function saveElement(
   tag: string,
   saveElementOptions: SaveElementOptions,
 ): Promise<ScreenshotOutput> {
-
   // 1a. Set some variables
-  const {addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding} = saveElementOptions.wic;
+  const { addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } = saveElementOptions.wic;
 
   // 1b. Set the method options to the right values
-  const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveElementOptions.method
-    ? saveElementOptions.method.disableCSSAnimation
-    : saveElementOptions.wic.disableCSSAnimation;
-  const hideScrollBars: boolean = 'hideScrollBars' in saveElementOptions.method
-    ? saveElementOptions.method.hideScrollBars
-    : saveElementOptions.wic.hideScrollBars;
+  const disableCSSAnimation: boolean =
+    'disableCSSAnimation' in saveElementOptions.method
+      ? saveElementOptions.method.disableCSSAnimation
+      : saveElementOptions.wic.disableCSSAnimation;
+  const hideScrollBars: boolean =
+    'hideScrollBars' in saveElementOptions.method
+      ? saveElementOptions.method.hideScrollBars
+      : saveElementOptions.wic.hideScrollBars;
   const resizeDimensions: ResizeDimensions | number = saveElementOptions.method.resizeDimensions || DEFAULT_RESIZE_DIMENSIONS;
   const hideElements: HTMLElement[] = saveElementOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveElementOptions.method.removeElements || [];
@@ -67,11 +68,11 @@ export default async function saveElement(
     executor: methods.executor,
     base64Image,
     options: elementRectangleOptions,
-    element
+    element,
   });
 
   // 5.  Make a cropped base64 image with resizeDimensions
-  const croppedBase64Image = await makeCroppedBase64Image({base64Image, rectangles, logLevel, resizeDimensions});
+  const croppedBase64Image = await makeCroppedBase64Image({ base64Image, rectangles, logLevel, resizeDimensions });
 
   // 6.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {

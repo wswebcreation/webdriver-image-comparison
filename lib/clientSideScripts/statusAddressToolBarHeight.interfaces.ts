@@ -1,4 +1,4 @@
-import {RectanglesOutput} from '../methods/rectangles.interfaces';
+import { RectanglesOutput } from '../methods/rectangles.interfaces';
 
 export interface StatusAddressToolBarHeight {
   statusAddressBar: RectanglesOutput;

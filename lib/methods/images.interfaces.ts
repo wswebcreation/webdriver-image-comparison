@@ -1,6 +1,5 @@
-import {RectanglesOutput} from './rectangles.interfaces';
-import {LogLevel} from "../helpers/options.interface";
-import {DEFAULT_RESIZE_DIMENSIONS} from "../helpers/constants";
+import { RectanglesOutput } from './rectangles.interfaces';
+import { LogLevel } from '../helpers/options.interface';
 
 export interface ResizeDimensions {
   // The bottom margin
@@ -63,7 +62,9 @@ export interface DefaultImageCompareCompareOptions extends MethodImageCompareCom
   blockOut?: RectanglesOutput[];
 }
 
-export interface ScreenMethodImageCompareCompareOptions extends DefaultImageCompareCompareOptions, MethodImageCompareCompareOptions {
+export interface ScreenMethodImageCompareCompareOptions
+  extends DefaultImageCompareCompareOptions,
+    MethodImageCompareCompareOptions {
   // Block out the status bar yes or no
   blockOutStatusBar?: boolean;
   // Block out the tool bar yes or no
@@ -131,7 +132,7 @@ export interface ImageCompareResult {
 export interface CompareOptions {
   ignore: string[];
   output?: {
-    ignoredBoxes?: IgnoreBoxes[]
+    ignoredBoxes?: IgnoreBoxes[];
   };
   scaleToSameSize?: boolean;
 }

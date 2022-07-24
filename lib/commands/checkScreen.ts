@@ -1,12 +1,12 @@
 import saveScreen from './saveScreen';
-import {executeImageCompare} from '../methods/images';
-import {checkIsMobile} from '../helpers/utils';
-import {ImageCompareOptions, ImageCompareResult} from '../methods/images.interfaces';
-import {Methods} from '../methods/methods.interface';
-import {InstanceData} from '../methods/instanceData.interfaces';
-import {Folders} from '../base.interface';
-import {CheckScreenOptions, SaveScreenOptions} from './screen.interfaces';
-import {screenMethodCompareOptions} from '../helpers/options';
+import { executeImageCompare } from '../methods/images';
+import { checkIsMobile } from '../helpers/utils';
+import { ImageCompareOptions, ImageCompareResult } from '../methods/images.interfaces';
+import { Methods } from '../methods/methods.interface';
+import { InstanceData } from '../methods/instanceData.interfaces';
+import { Folders } from '../base.interface';
+import { CheckScreenOptions, SaveScreenOptions } from './screen.interfaces';
+import { screenMethodCompareOptions } from '../helpers/options';
 
 /**
  * Compare an image of the viewport of the screen
@@ -18,18 +18,19 @@ export default async function checkScreen(
   tag: string,
   checkScreenOptions: CheckScreenOptions,
 ): Promise<ImageCompareResult | number> {
-
   // 1.  Take the actual screenshot and retrieve the needed data
   const saveScreenOptions: SaveScreenOptions = {
     wic: checkScreenOptions.wic,
     method: {
-      ...('disableCSSAnimation' in checkScreenOptions.method ? {disableCSSAnimation: checkScreenOptions.method.disableCSSAnimation} : {}),
-      ...('hideScrollBars' in checkScreenOptions.method ? {hideScrollBars: checkScreenOptions.method.hideScrollBars} : {}),
-      ...{hideElements: checkScreenOptions.method.hideElements || []},
-      ...{removeElements: checkScreenOptions.method.removeElements || []},
-    }
+      ...('disableCSSAnimation' in checkScreenOptions.method
+        ? { disableCSSAnimation: checkScreenOptions.method.disableCSSAnimation }
+        : {}),
+      ...('hideScrollBars' in checkScreenOptions.method ? { hideScrollBars: checkScreenOptions.method.hideScrollBars } : {}),
+      ...{ hideElements: checkScreenOptions.method.hideElements || [] },
+      ...{ removeElements: checkScreenOptions.method.removeElements || [] },
+    },
   };
-  const {devicePixelRatio, fileName} = await saveScreen(methods, instanceData, folders, tag, saveScreenOptions);
+  const { devicePixelRatio, fileName } = await saveScreen(methods, instanceData, folders, tag, saveScreenOptions);
 
   // 2a. Determine the compare options
   const methodCompareOptions = screenMethodCompareOptions(checkScreenOptions.method);

@@ -1,4 +1,4 @@
-import {ElementPosition} from './elementPosition.interfaces';
+import { ElementPosition } from './elementPosition.interfaces';
 
 /**
  * Get the element position to the top of the screen of the device, not the top of the webview
@@ -9,8 +9,8 @@ export function getElementPositionTopScreenNativeMobile(
   element: HTMLElement,
 ): ElementPosition {
   // Get some heights and widths
-  const {width, height} = window.screen;
-  const {innerHeight} = window;
+  const { width, height } = window.screen;
+  const { innerHeight } = window;
 
   // Determine element position
   const elementPosition = element.getBoundingClientRect();
@@ -27,6 +27,6 @@ export function getElementPositionTopScreenNativeMobile(
     height: elementPosition.height,
     width: elementPosition.width,
     x: elementPosition.left,
-    y: y
+    y: y,
   };
 }

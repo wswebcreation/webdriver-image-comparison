@@ -1,24 +1,16 @@
-import {red, yellow} from 'chalk';
-import {access, copySync, outputFile, readFileSync} from 'fs-extra';
-import {join} from 'path';
+import { red, yellow } from 'chalk';
+import { access, copySync, outputFile, readFileSync } from 'fs-extra';
+import { join } from 'path';
+import { createCanvas, loadImage } from 'canvas';
 import compareImages from '../resemble/compareImages';
-import {calculateDprData, getAndCreatePath, getScreenshotSize} from '../helpers/utils';
-import {DEFAULT_RESIZE_DIMENSIONS} from '../helpers/constants';
-import {determineStatusAddressToolBarRectangles} from './rectangles';
-import {RectanglesOutput} from './rectangles.interfaces';
-import {
-  CompareOptions, CroppedBase64Image,
-  IgnoreBoxes,
-  ImageCompareOptions,
-  ImageCompareResult,
-  ResizeDimensions
-} from './images.interfaces';
-import {FullPageScreenshotsData} from './screenshots.interfaces';
-import {Executor} from './methods.interface';
-import {CompareData} from '../resemble/compare.interfaces';
-import {LogLevel} from "../helpers/options.interface";
-
-const {createCanvas, loadImage} = require('canvas');
+import { calculateDprData, getAndCreatePath, getScreenshotSize } from '../helpers/utils';
+import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
+import { determineStatusAddressToolBarRectangles } from './rectangles';
+import { CompareOptions, CroppedBase64Image, IgnoreBoxes, ImageCompareOptions, ImageCompareResult } from './images.interfaces';
+import { FullPageScreenshotsData } from './screenshots.interfaces';
+import { Executor } from './methods.interface';
+import { CompareData } from '../resemble/compare.interfaces';
+import { LogLevel } from '../helpers/options.interface';
 
 /**
  * Check if the image exists and create a new baseline image if needed
@@ -30,31 +22,36 @@ export async function checkBaselineImageExists(
   logLevel: LogLevel,
 ): Promise<void> {
   return new Promise((resolve, reject) => {
-    access(baselineFilePath, error => {
+    access(baselineFilePath, (error) => {
       if (error) {
         if (autoSaveBaseline) {
           try {
             copySync(actualFilePath, baselineFilePath);
             if (logLevel === LogLevel.info) {
-              console.log(yellow(`
+              console.log(
+                yellow(`
 #####################################################################################
  INFO:
  Autosaved the image to
  ${baselineFilePath}
 #####################################################################################
-`));
+`),
+              );
             }
           } catch (error) {
             /* istanbul ignore next */
-            reject(red(`
+            reject(
+              red(`
 #####################################################################################
  Image could not be copied. The following error was thrown:
  ${error}
 #####################################################################################
-`));
+`),
+            );
           }
         } else {
-          reject(red(`
+          reject(
+            red(`
 #####################################################################################
  Baseline image not found, save the actual image manually to the baseline.
  The image can be found here:
@@ -62,7 +59,8 @@ export async function checkBaselineImageExists(
  If you want the module to auto save a non existing image to the baseline you
  can provide 'autoSaveBaseline: true' to the options.
 #####################################################################################
-`));
+`),
+          );
         }
       }
       resolve();
@@ -74,11 +72,11 @@ export async function checkBaselineImageExists(
  * Make a cropped image with Canvas
  */
 export async function makeCroppedBase64Image({
-                                               base64Image,
-                                               rectangles,
-                                               logLevel,
-                                               resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
-                                             }: CroppedBase64Image): Promise<string> {
+  base64Image,
+  rectangles,
+  logLevel,
+  resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
+}: CroppedBase64Image): Promise<string> {
   /**
    * This is in for backwards compatibility, it will be removed in the future
    */
@@ -91,7 +89,8 @@ export async function makeCroppedBase64Image({
       left: resizeDimensions,
     };
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
-      console.log(yellow(`
+      console.log(
+        yellow(`
 #####################################################################################
  WARNING:
  THE 'resizeDimensions' NEEDS TO BE AN OBJECT LIKE
@@ -110,14 +109,15 @@ export async function makeCroppedBase64Image({
  }
  THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
 #####################################################################################
-`));
+`),
+      );
     }
   } else {
     resizeValues = resizeDimensions;
   }
 
-  const {top, right, bottom, left} = {...DEFAULT_RESIZE_DIMENSIONS, ...resizeValues};
-  const {height, width, x, y} = rectangles;
+  const { top, right, bottom, left } = { ...DEFAULT_RESIZE_DIMENSIONS, ...resizeValues };
+  const { height, width, x, y } = rectangles;
   const canvasWidth = width + left + right;
   const canvasHeight = height + top + bottom;
   const canvas = createCanvas(canvasWidth, canvasHeight);
@@ -129,39 +129,48 @@ export async function makeCroppedBase64Image({
 
   if (sourceXStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
-      console.log(yellow(`
+      console.log(
+        yellow(`
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${left}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceXStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`));
+`),
+      );
     }
     sourceXStart = 0;
   }
 
   if (sourceYStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
-      console.log(yellow(`
+      console.log(
+        yellow(`
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${top}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceYStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`));
+`),
+      );
     }
     sourceYStart = 0;
   }
 
-  ctx.drawImage(image,
+  ctx.drawImage(
+    image,
     // Start at x/y pixels from the left and the top of the image (crop)
-    sourceXStart, sourceYStart,
+    sourceXStart,
+    sourceYStart,
     // 'Get' a (w * h) area from the source image (crop)
-    canvasWidth, canvasHeight,
+    canvasWidth,
+    canvasHeight,
     // Place the result at 0, 0 in the canvas,
-    0, 0,
+    0,
+    0,
     // With as width / height: 100 * 100 (scale)
-    canvasWidth, canvasHeight
+    canvasWidth,
+    canvasHeight,
   );
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
@@ -173,26 +182,17 @@ export async function makeCroppedBase64Image({
 export async function executeImageCompare(
   executor: Executor,
   options: ImageCompareOptions,
-  isViewPortScreenshot: boolean = false,
+  isViewPortScreenshot = false,
 ): Promise<ImageCompareResult | number> {
-
   // 1. Set some variables
-  const {devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, logLevel, platformName} = options;
-  const {
-    actualFolder,
-    autoSaveBaseline,
-    baselineFolder,
-    browserName,
-    deviceName,
-    diffFolder,
-    isMobile,
-    savePerInstance,
-  } = options.folderOptions;
+  const { devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, logLevel, platformName } = options;
+  const { actualFolder, autoSaveBaseline, baselineFolder, browserName, deviceName, diffFolder, isMobile, savePerInstance } =
+    options.folderOptions;
   let diffFilePath;
-  const imageCompareOptions = {...options.compareOptions.wic, ...options.compareOptions.method};
+  const imageCompareOptions = { ...options.compareOptions.wic, ...options.compareOptions.method };
 
   // 2. 	Create all needed folders
-  const createFolderOptions = {browserName, deviceName, isMobile, savePerInstance};
+  const createFolderOptions = { browserName, deviceName, isMobile, savePerInstance };
   const actualFolderPath = getAndCreatePath(actualFolder, createFolderOptions);
   const baselineFolderPath = getAndCreatePath(baselineFolder, createFolderOptions);
   const actualFilePath = join(actualFolderPath, fileName);
@@ -204,11 +204,13 @@ export async function executeImageCompare(
   // 4. 	Prepare the compare
   // 4a.	Determine the ignore options
   const resembleIgnoreDefaults = ['alpha', 'antialiasing', 'colors', 'less', 'nothing'];
-  const ignore = resembleIgnoreDefaults.filter(option =>
-    Object.keys(imageCompareOptions).find(key =>
-      // @ts-ignore
-      key.toLowerCase().includes(option) && imageCompareOptions[key]
-    ));
+  const ignore = resembleIgnoreDefaults.filter((option) =>
+    Object.keys(imageCompareOptions).find(
+      (key) =>
+        // @ts-ignore
+        key.toLowerCase().includes(option) && imageCompareOptions[key],
+    ),
+  );
 
   // 4b.	Determine the ignore rectangles for the blockouts
   const blockOut = 'blockOut' in imageCompareOptions ? imageCompareOptions.blockOut : [];
@@ -222,25 +224,30 @@ export async function executeImageCompare(
     blockOutToolBar: imageCompareOptions.blockOutToolBar,
   };
 
-  const ignoredBoxes = blockOut.concat(
-    // 4c.	Add the mobile rectangles that need to be ignored
-    await determineStatusAddressToolBarRectangles(executor, statusAddressToolBarOptions)
-  ).map(
-    // 4d.	Make sure all the rectangles are equal to the dpr for the screenshot
-    rectangles => {
-      return calculateDprData({
-        // Adjust for the ResembleJS API
-        bottom: rectangles.y + rectangles.height,
-        right: rectangles.x + rectangles.width,
-        left: rectangles.x,
-        top: rectangles.y,
-      }, devicePixelRatio);
-    }
-  );
+  const ignoredBoxes = blockOut
+    .concat(
+      // 4c.	Add the mobile rectangles that need to be ignored
+      await determineStatusAddressToolBarRectangles(executor, statusAddressToolBarOptions),
+    )
+    .map(
+      // 4d.	Make sure all the rectangles are equal to the dpr for the screenshot
+      (rectangles) => {
+        return calculateDprData(
+          {
+            // Adjust for the ResembleJS API
+            bottom: rectangles.y + rectangles.height,
+            right: rectangles.x + rectangles.width,
+            left: rectangles.x,
+            top: rectangles.y,
+          },
+          devicePixelRatio,
+        );
+      },
+    );
 
   const compareOptions: CompareOptions = {
     ignore,
-    ...(ignoredBoxes.length > 0 ? {output: {ignoredBoxes}} : {}),
+    ...(ignoredBoxes.length > 0 ? { output: { ignoredBoxes } } : {}),
     scaleToSameSize: imageCompareOptions.scaleImagesToSameSize,
   };
 
@@ -258,31 +265,32 @@ export async function executeImageCompare(
     const diffFolderPath = getAndCreatePath(diffFolder, createFolderOptions);
     diffFilePath = join(diffFolderPath, fileName);
 
-    await saveBase64Image(
-      await addBlockOuts(Buffer.from(data.getBuffer()).toString('base64'), ignoredBoxes),
-      diffFilePath,
-    );
+    await saveBase64Image(await addBlockOuts(Buffer.from(data.getBuffer()).toString('base64'), ignoredBoxes), diffFilePath);
 
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
-      console.log(yellow(`
+      console.log(
+        yellow(`
 #####################################################################################
  ${isDifference ? isDifferenceMessage : debugMessage}
  ${diffFilePath}
 #####################################################################################
-`));
+`),
+      );
     }
   }
 
   // 7. 	Return the comparison data
-  return imageCompareOptions.returnAllCompareData ? {
-    fileName,
-    folders: {
-      actual: actualFilePath,
-      baseline: baselineFilePath,
-      ...(diffFilePath ? {diff: diffFilePath} : {}),
-    },
-    misMatchPercentage,
-  } : misMatchPercentage;
+  return imageCompareOptions.returnAllCompareData
+    ? {
+        fileName,
+        folders: {
+          actual: actualFilePath,
+          baseline: baselineFilePath,
+          ...(diffFilePath ? { diff: diffFilePath } : {}),
+        },
+        misMatchPercentage,
+      }
+    : misMatchPercentage;
 }
 
 /**
@@ -290,25 +298,30 @@ export async function executeImageCompare(
  */
 export async function makeFullPageBase64Image(screenshotsData: FullPageScreenshotsData): Promise<string> {
   const amountOfScreenshots = screenshotsData.data.length;
-  const {fullPageHeight: canvasHeight, fullPageWidth: canvasWidth} = screenshotsData;
+  const { fullPageHeight: canvasHeight, fullPageWidth: canvasWidth } = screenshotsData;
   const canvas = createCanvas(canvasWidth, canvasHeight);
   const ctx = canvas.getContext('2d');
 
   // Load all the images
   for (let i = 0; i < amountOfScreenshots; i++) {
-    const {canvasYPosition, imageHeight, imageWidth, imageYPosition} = screenshotsData.data[i];
+    const { canvasYPosition, imageHeight, imageWidth, imageYPosition } = screenshotsData.data[i];
     const image = await loadImage(`data:image/png;base64,${screenshotsData.data[i].screenshot}`);
 
-    ctx.drawImage(image,
+    ctx.drawImage(
+      image,
       // Start at x/y pixels from the left and the top of the image (crop)
-      0, imageYPosition,
+      0,
+      imageYPosition,
       // 0, 0,
       // 'Get' a (w * h) area from the source image (crop)
-      imageWidth, imageHeight,
+      imageWidth,
+      imageHeight,
       // Place the result at 0, 0 in the canvas,
-      0, canvasYPosition,
+      0,
+      canvasYPosition,
       // With as width / height: 100 * 100 (scale)
-      imageWidth, imageHeight,
+      imageWidth,
+      imageHeight,
     );
   }
 
@@ -327,7 +340,7 @@ export async function saveBase64Image(base64Image: string, filePath: string): Pr
  */
 export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes[]): Promise<string> {
   // Create canvas and load image
-  const {height, width} = getScreenshotSize(screenshot);
+  const { height, width } = getScreenshotSize(screenshot);
   const canvas = createCanvas(width, height);
   const image = await loadImage(`data:image/png;base64,${screenshot}`);
   const canvasContext = canvas.getContext('2d');
@@ -336,18 +349,22 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
   canvasContext.drawImage(
     image,
     // Start at x/y pixels from the left and the top of the image (crop)
-    0, 0,
+    0,
+    0,
     // 'Get' a (w * h) area from the source image (crop)
-    width, height,
+    width,
+    height,
     // Place the result at 0, 0 in the canvas,
-    0, 0,
+    0,
+    0,
     // With as width / height: 100 * 100 (scale)
-    width, height,
+    width,
+    height,
   );
 
   // Loop over all ignored areas and add them to the current canvas
-  ignoredBoxes.forEach(ignoredBox => {
-    const {right: ignoredBoxWidth, bottom: ignoredBoxHeight, left: x, top: y} = ignoredBox;
+  ignoredBoxes.forEach((ignoredBox) => {
+    const { right: ignoredBoxWidth, bottom: ignoredBoxHeight, left: x, top: y } = ignoredBox;
     const ignoreCanvas = createCanvas(ignoredBoxWidth - x, ignoredBoxHeight - y);
     const ignoreContext = ignoreCanvas.getContext('2d');
 

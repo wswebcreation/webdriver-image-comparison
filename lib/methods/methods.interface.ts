@@ -6,6 +6,7 @@ export interface Methods {
   screenShot: any;
 }
 
-export type TakeScreenShot = () => Promise<string>;
+export type TakeScreenShot = () => Promise<string>;
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type Executor = <T>(script: string | Function, ...var_args: any[]) => Promise<T>;

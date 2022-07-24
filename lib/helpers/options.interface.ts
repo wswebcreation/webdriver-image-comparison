@@ -1,6 +1,6 @@
-import {TabbableOptions} from "../commands/tabbable.interfaces";
+import { TabbableOptions } from '../commands/tabbable.interfaces';
 
-export interface ClassOptions{
+export interface ClassOptions {
   /**
    * Class options
    */
@@ -60,7 +60,7 @@ export interface ClassOptions{
   // Allowable value of misMatchPercentage that prevents saving image with differences
   saveAboveTolerance?: number;
   //Scale images to same size before comparison
-  scaleImagesToSameSize?:boolean;
+  scaleImagesToSameSize?: boolean;
 
   /**
    * Tabbable options
@@ -95,12 +95,12 @@ interface CompareOptions {
   rawMisMatchPercentage: boolean;
   returnAllCompareData: boolean;
   saveAboveTolerance: number;
-  scaleImagesToSameSize:boolean;
+  scaleImagesToSameSize: boolean;
 }
 
 export enum LogLevel {
-  debug = 'debug' ,
+  debug = 'debug',
   info = 'info',
   warn = 'warn',
-  silent = 'silent'
+  silent = 'silent',
 }

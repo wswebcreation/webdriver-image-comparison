@@ -1,9 +1,5 @@
-import {
-  determineElementRectangles,
-  determineScreenRectangles,
-  determineStatusAddressToolBarRectangles
-} from './rectangles';
-import {IMAGE_STRING} from '../mocks/mocks';
+import { determineElementRectangles, determineScreenRectangles, determineStatusAddressToolBarRectangles } from './rectangles';
+import { IMAGE_STRING } from '../mocks/mocks';
 
 describe('rectangles', () => {
   describe('determineElementRectangles', () => {
@@ -15,38 +11,39 @@ describe('rectangles', () => {
         innerHeight: 678,
         isIos: true,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // getElementPositionIos for: getIosStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 94,
-              width: 375,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 5,
-              width: 135,
-              x: 120,
-              y: 799,
-            },
-          })
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 94,
+            width: 375,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 5,
+            width: 135,
+            x: 120,
+            y: 799,
+          },
+        })
         // getElementPositionIos for: getElementPositionTopScreenNativeMobile
-        .mockResolvedValueOnce(
-          {
-            height: 120,
-            width: 120,
-            x: 100,
-            y: 10,
-          });
+        .mockResolvedValueOnce({
+          height: 120,
+          width: 120,
+          x: 100,
+          y: 10,
+        });
 
-      expect(await determineElementRectangles({
-        executor: MOCKED_EXECUTOR,
-        base64Image: IMAGE_STRING,
-        options,
-        element: 'element',
-      })).toMatchSnapshot();
+      expect(
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: 'element',
+        }),
+      ).toMatchSnapshot();
     });
 
     it('should determine them for Android Native webscreenshot', async () => {
@@ -57,38 +54,39 @@ describe('rectangles', () => {
         innerHeight: 678,
         isIos: false,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // getElementPositionAndroid for: getAndroidStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 20,
-              width: 375,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 5,
-              width: 135,
-              x: 120,
-              y: 799,
-            },
-          })
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 20,
+            width: 375,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 5,
+            width: 135,
+            x: 120,
+            y: 799,
+          },
+        })
         // getElementPositionIos for: getElementPositionTopScreenNativeMobile
-        .mockResolvedValueOnce(
-          {
-            height: 120,
-            width: 120,
-            x: 100,
-            y: 10,
-          });
+        .mockResolvedValueOnce({
+          height: 120,
+          width: 120,
+          x: 100,
+          y: 10,
+        });
 
-      expect(await determineElementRectangles({
-        executor: MOCKED_EXECUTOR,
-        base64Image: IMAGE_STRING,
-        options,
-        element: 'element',
-      })).toMatchSnapshot();
+      expect(
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: 'element',
+        }),
+      ).toMatchSnapshot();
     });
 
     it('should determine them for Android ChromeDriver', async () => {
@@ -99,22 +97,24 @@ describe('rectangles', () => {
         innerHeight: 678,
         isIos: false,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // getElementPositionAndroid for: getElementPositionTopWindow
-        .mockResolvedValueOnce(
-          {
-            height: 20,
-            width: 375,
-            x: 0,
-            y: 0,
-          });
+        .mockResolvedValueOnce({
+          height: 20,
+          width: 375,
+          x: 0,
+          y: 0,
+        });
 
-      expect(await determineElementRectangles({
-        executor: MOCKED_EXECUTOR,
-        base64Image: IMAGE_STRING,
-        options,
-        element: 'element',
-      })).toMatchSnapshot();
+      expect(
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: 'element',
+        }),
+      ).toMatchSnapshot();
     });
 
     it('should determine them for a desktop browser', async () => {
@@ -125,22 +125,24 @@ describe('rectangles', () => {
         innerHeight: 500,
         isIos: false,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // getElementPositionDesktop for: getElementPositionTopWindow
-        .mockResolvedValueOnce(
-          {
-            height: 20,
-            width: 375,
-            x: 12,
-            y: 34,
-          });
+        .mockResolvedValueOnce({
+          height: 20,
+          width: 375,
+          x: 12,
+          y: 34,
+        });
 
-      expect(await determineElementRectangles({
-        executor: MOCKED_EXECUTOR,
-        base64Image: IMAGE_STRING,
-        options,
-        element: 'element',
-      })).toMatchSnapshot();
+      expect(
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: 'element',
+        }),
+      ).toMatchSnapshot();
     });
   });
 
@@ -196,23 +198,23 @@ describe('rectangles', () => {
         blockOutStatusBar: true,
         blockOutToolBar: true,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 94,
-              width: 375,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 5,
-              width: 135,
-              x: 120,
-              y: 799,
-            },
-          });
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 94,
+            width: 375,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 5,
+            width: 135,
+            x: 120,
+            y: 799,
+          },
+        });
 
       expect(await determineStatusAddressToolBarRectangles(MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
@@ -227,23 +229,23 @@ describe('rectangles', () => {
         blockOutStatusBar: false,
         blockOutToolBar: false,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 94,
-              width: 375,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 5,
-              width: 135,
-              x: 0,
-              y: 799,
-            },
-          });
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 94,
+            width: 375,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 5,
+            width: 135,
+            x: 0,
+            y: 799,
+          },
+        });
 
       expect(await determineStatusAddressToolBarRectangles(MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
@@ -258,23 +260,23 @@ describe('rectangles', () => {
         blockOutStatusBar: true,
         blockOutToolBar: true,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 40,
-              width: 320,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 100,
-              width: 320,
-              x: 0,
-              y: 600,
-            },
-          });
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 40,
+            width: 320,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 100,
+            width: 320,
+            x: 0,
+            y: 600,
+          },
+        });
 
       expect(await determineStatusAddressToolBarRectangles(MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });
@@ -289,23 +291,23 @@ describe('rectangles', () => {
         blockOutStatusBar: false,
         blockOutToolBar: false,
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarHeight
-        .mockResolvedValueOnce(
-          {
-            statusAddressBar: {
-              height: 40,
-              width: 320,
-              x: 0,
-              y: 0,
-            },
-            toolBar: {
-              height: 100,
-              width: 320,
-              x: 0,
-              y: 600,
-            },
-          });
+        .mockResolvedValueOnce({
+          statusAddressBar: {
+            height: 40,
+            width: 320,
+            x: 0,
+            y: 0,
+          },
+          toolBar: {
+            height: 100,
+            width: 320,
+            x: 0,
+            y: 600,
+          },
+        });
 
       expect(await determineStatusAddressToolBarRectangles(MOCKED_EXECUTOR, options)).toMatchSnapshot();
     });

@@ -1,12 +1,11 @@
-import {getBase64FullPageScreenshotsData} from './screenshots';
-import {FullPageScreenshotDataOptions} from './screenshots.interfaces';
-import {IMAGE_STRING} from '../mocks/mocks';
-import {LogLevel} from "../helpers/options.interface";
+import { getBase64FullPageScreenshotsData } from './screenshots';
+import { FullPageScreenshotDataOptions } from './screenshots.interfaces';
+import { IMAGE_STRING } from '../mocks/mocks';
+import { LogLevel } from '../helpers/options.interface';
 
 describe('screenshots', () => {
   describe('getBase64FullPageScreenshotsData', () => {
-    const MOCKED_TAKESCREENSHOT = jest.fn()
-      .mockResolvedValue(IMAGE_STRING);
+    const MOCKED_TAKESCREENSHOT = jest.fn().mockResolvedValue(IMAGE_STRING);
 
     it('should get the Android nativeWebScreenshot fullpage screenshot data', async () => {
       const options: FullPageScreenshotDataOptions = {
@@ -23,9 +22,10 @@ describe('screenshots', () => {
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
-      const MOCKED_EXECUTOR = jest.fn()
+      const MOCKED_EXECUTOR = jest
+        .fn()
         // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
-        .mockResolvedValueOnce({statusAddressBar: {height: 56}})
+        .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -38,7 +38,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -56,11 +56,12 @@ describe('screenshots', () => {
         isIos: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
-        hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
+        hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-      // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
-        .mockResolvedValueOnce({statusAddressBar: {height: 56}})
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
+        .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -86,7 +87,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -106,9 +107,10 @@ describe('screenshots', () => {
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
         .mockResolvedValueOnce({})
@@ -128,7 +130,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -146,11 +148,12 @@ describe('screenshots', () => {
         isIos: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
-        hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
+        hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
         .mockResolvedValueOnce({})
@@ -174,7 +177,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -194,8 +197,9 @@ describe('screenshots', () => {
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-        .mockResolvedValueOnce({statusAddressBar: {height: 94}})
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        .mockResolvedValueOnce({ statusAddressBar: { height: 94 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -217,7 +221,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -235,10 +239,11 @@ describe('screenshots', () => {
         isIos: true,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
-        hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
+        hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-        .mockResolvedValueOnce({statusAddressBar: {height: 94}})
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        .mockResolvedValueOnce({ statusAddressBar: { height: 94 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -264,7 +269,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -284,9 +289,10 @@ describe('screenshots', () => {
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
@@ -313,7 +319,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });
@@ -331,11 +337,12 @@ describe('screenshots', () => {
         isIos: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
-        hideAfterFirstScroll: [<HTMLElement><unknown>'<div/>'],
+        hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
       };
-      const MOCKED_EXECUTOR = jest.fn()
-      // THIS NEEDS TO BE FIXED IN THE FUTURE
-      // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
         // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
         .mockResolvedValueOnce(3200)
@@ -366,7 +373,7 @@ describe('screenshots', () => {
 
       // Replace the screenshot with a `mocked-screenshot-string`;
       const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
-      result.data.forEach(dataObject => dataObject.screenshot = 'mocked-screenshot-string');
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
 
       expect(result).toMatchSnapshot();
     });

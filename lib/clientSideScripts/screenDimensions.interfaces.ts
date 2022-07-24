@@ -10,7 +10,7 @@ export interface ScreenDimensions {
       // It does not include the height of pseudo-elements such as ::before or ::after. For the document body object, the measurement
       // includes total linear content height instead of the element's CSS height. Floated elements extending below other
       // linear content are ignored
-      offsetHeight?: number
+      offsetHeight?: number;
     };
     html: {
       // Inner width of an element in pixels. It includes padding but excludes borders, margins, and vertical scrollbars (if present)
@@ -29,7 +29,7 @@ export interface ScreenDimensions {
       // It does not include the height of pseudo-elements such as ::before or ::after. For the document body object, the measurement
       // includes total linear content height instead of the element's CSS height. Floated elements extending below other linear
       // content are ignored
-      offsetHeight?: number
+      offsetHeight?: number;
     };
     window: {
       // Width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
@@ -47,7 +47,7 @@ export interface ScreenDimensions {
       // The width of the screen
       screenWidth?: number;
       // The height of the screen
-      screenHeight?: number
-    }
+      screenHeight?: number;
+    };
   };
 }

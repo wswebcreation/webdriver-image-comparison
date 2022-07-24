@@ -10,8 +10,8 @@ import {
   getToolBarShadowPadding,
 } from '../helpers/utils';
 import getScreenDimensions from '../clientSideScripts/getScreenDimensions';
-import {Executor} from './methods.interface';
-import {EnrichedInstanceData, InstanceOptions} from './instanceData.interfaces';
+import { Executor } from './methods.interface';
+import { EnrichedInstanceData, InstanceOptions } from './instanceData.interfaces';
 
 /**
  * Enrich the instance data with more data
@@ -22,8 +22,8 @@ export default async function getEnrichedInstanceData(
   addShadowPadding: boolean,
 ): Promise<EnrichedInstanceData> {
   // Get the current browser data
-  const browserData:any = await executor(getScreenDimensions);
-  const {addressBarShadowPadding, toolBarShadowPadding, browserName, nativeWebScreenshot, platformName} = instanceOptions;
+  const browserData: any = await executor(getScreenDimensions);
+  const { addressBarShadowPadding, toolBarShadowPadding, browserName, nativeWebScreenshot, platformName } = instanceOptions;
 
   // Determine some constants
   const isAndroid = checkIsAndroid(platformName);
@@ -40,12 +40,12 @@ export default async function getEnrichedInstanceData(
     addressBarShadowPadding,
     addShadowPadding,
   });
-  const toolBarPadding = getToolBarShadowPadding({platformName, browserName, toolBarShadowPadding, addShadowPadding});
+  const toolBarPadding = getToolBarShadowPadding({ platformName, browserName, toolBarShadowPadding, addShadowPadding });
 
   // Return the new instance data object
   return {
-    ...(browserData),
-    ...(instanceOptions),
+    ...browserData,
+    ...instanceOptions,
     addressBarShadowPadding: addressBarPadding,
     isAndroid,
     isAndroidChromeDriverScreenshot,

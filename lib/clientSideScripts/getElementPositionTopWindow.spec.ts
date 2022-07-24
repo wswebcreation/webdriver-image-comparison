@@ -13,10 +13,7 @@ describe('getElementPositionTopWindow', () => {
         right: 12,
       };
     });
-    document.body.innerHTML =
-      '<div>' +
-      '  <span id="username">Hello</span>' +
-      '</div>';
+    document.body.innerHTML = '<div>' + '  <span id="username">Hello</span>' + '</div>';
 
     expect(getElementPositionTopWindow(document.querySelector('#username'))).toMatchSnapshot();
   });

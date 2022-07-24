@@ -43,6 +43,6 @@ export interface IosOffsets {
         // The y position of the home bar
         y: number;
       };
-    }
+    };
   };
 }

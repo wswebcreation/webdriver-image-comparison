@@ -1,19 +1,20 @@
-import {join} from 'path';
-import {DESKTOP, PLATFORMS} from './constants';
-import {ensureDirSync} from 'fs-extra';
+import { join } from 'path';
+import { DESKTOP, PLATFORMS } from './constants';
+import { ensureDirSync } from 'fs-extra';
 import {
   FormatFileDefaults,
   FormatFileNameOptions,
   GetAddressBarShadowPaddingOptions,
   GetAndCreatePathOptions,
-  GetToolBarShadowPaddingOptions, ScreenshotSize
+  GetToolBarShadowPaddingOptions,
+  ScreenshotSize,
 } from './utils.interfaces';
 
 /**
  * Get and create a folder
  */
 export function getAndCreatePath(folder: string, options: GetAndCreatePathOptions): string {
-  const {browserName, deviceName, isMobile, savePerInstance} = options;
+  const { browserName, deviceName, isMobile, savePerInstance } = options;
   const instanceName = (isMobile ? deviceName : `${DESKTOP}_${browserName}`).replace(/ /g, '_');
   const subFolder = savePerInstance ? instanceName : '';
   const folderName = join(folder, subFolder);
@@ -27,19 +28,19 @@ export function getAndCreatePath(folder: string, options: GetAndCreatePathOption
  * Format the filename
  */
 export function formatFileName(options: FormatFileNameOptions): string {
-  let defaults: FormatFileDefaults = {
+  const defaults: FormatFileDefaults = {
     browserName: options.browserName,
     browserVersion: options.browserVersion,
     deviceName: options.deviceName,
     dpr: options.devicePixelRatio,
     height: options.isMobile ? options.screenHeight : options.outerHeight,
     logName: options.logName,
-    mobile: (options.isMobile && options.isTestInBrowser) ? options.browserName : options.isMobile ? 'app' : '',
+    mobile: options.isMobile && options.isTestInBrowser ? options.browserName : options.isMobile ? 'app' : '',
     name: options.name,
     platformName: options.platformName,
     platformVersion: options.platformVersion,
     tag: options.tag,
-    width: options.isMobile ? options.screenWidth : options.outerWidth
+    width: options.isMobile ? options.screenWidth : options.outerWidth,
   };
 
   let fileName = options.formatImageName;
@@ -106,28 +107,26 @@ export function checkAndroidChromeDriverScreenshot(platformName: string, nativeW
  * Get the address bar shadow padding. This is only needed for Android native webscreenshot and iOS
  */
 export function getAddressBarShadowPadding(options: GetAddressBarShadowPaddingOptions): number {
-  const {
-    platformName,
-    browserName,
-    nativeWebScreenshot,
-    addressBarShadowPadding,
-    addShadowPadding,
-  } = options;
+  const { platformName, browserName, nativeWebScreenshot, addressBarShadowPadding, addShadowPadding } = options;
   const isTestInMobileBrowser = checkTestInMobileBrowser(platformName, browserName);
   const isAndroidNativeWebScreenshot = checkAndroidNativeWebScreenshot(platformName, nativeWebScreenshot);
   const isAndroid = checkIsAndroid(platformName);
   const isIos = checkIsIos(platformName);
 
-  return isTestInMobileBrowser && ((isAndroidNativeWebScreenshot && isAndroid) || isIos) && addShadowPadding ? addressBarShadowPadding : 0;
+  return isTestInMobileBrowser && ((isAndroidNativeWebScreenshot && isAndroid) || isIos) && addShadowPadding
+    ? addressBarShadowPadding
+    : 0;
 }
 
 /**
  * Get the tool bar shadow padding. This is only needed for iOS
  */
 export function getToolBarShadowPadding(options: GetToolBarShadowPaddingOptions): number {
-  const {platformName, browserName, toolBarShadowPadding, addShadowPadding} = options;
+  const { platformName, browserName, toolBarShadowPadding, addShadowPadding } = options;
 
-  return checkTestInMobileBrowser(platformName, browserName) && checkIsIos(platformName) && addShadowPadding ? toolBarShadowPadding : 0;
+  return checkTestInMobileBrowser(platformName, browserName) && checkIsIos(platformName) && addShadowPadding
+    ? toolBarShadowPadding
+    : 0;
 }
 
 /**
@@ -136,7 +135,7 @@ export function getToolBarShadowPadding(options: GetToolBarShadowPaddingOptions)
 export function calculateDprData<T>(data: T, devicePixelRatio: number): T {
   // @ts-ignore
   // @TODO: need to figure this one out
-  Object.keys(data).map((key) => data[key] = typeof data[key] === 'number' ? data[key] * devicePixelRatio : data[key]);
+  Object.keys(data).map((key) => (data[key] = typeof data[key] === 'number' ? data[key] * devicePixelRatio : data[key]));
 
   return data;
 }
@@ -146,13 +145,13 @@ export function calculateDprData<T>(data: T, devicePixelRatio: number): T {
  */
 export async function waitFor(milliseconds: number): Promise<void> {
   /* istanbul ignore next */
-  return new Promise(resolve => setTimeout(() => resolve(), milliseconds));
+  return new Promise((resolve) => setTimeout(() => resolve(), milliseconds));
 }
 
 /**
  * Get the size of a screenshot in pixels without the device pixel ratio
  */
-export function getScreenshotSize(screenshot: string, devicePixelRation: number = 1): ScreenshotSize {
+export function getScreenshotSize(screenshot: string, devicePixelRation = 1): ScreenshotSize {
   return {
     height: Buffer.from(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
     width: Buffer.from(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,

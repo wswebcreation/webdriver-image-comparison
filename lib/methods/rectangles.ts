@@ -1,14 +1,14 @@
-import {calculateDprData, checkAndroidNativeWebScreenshot, checkIsIos, getScreenshotSize} from '../helpers/utils';
-import {getElementPositionAndroid, getElementPositionDesktop, getElementPositionIos} from './elementPosition';
-import {OFFSETS} from '../helpers/constants';
+import { calculateDprData, checkAndroidNativeWebScreenshot, checkIsIos, getScreenshotSize } from '../helpers/utils';
+import { getElementPositionAndroid, getElementPositionDesktop, getElementPositionIos } from './elementPosition';
+import { OFFSETS } from '../helpers/constants';
 import {
   ElementRectangles,
   RectanglesOutput,
   ScreenRectanglesOptions,
   StatusAddressToolBarRectangles,
-  StatusAddressToolBarRectanglesOptions
+  StatusAddressToolBarRectanglesOptions,
 } from './rectangles.interfaces';
-import {Executor} from './methods.interface';
+import { Executor } from './methods.interface';
 import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
 import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
 
@@ -16,14 +16,14 @@ import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroi
  * Determine the element rectangles on the page / screenshot
  */
 export async function determineElementRectangles({
-                                                   executor,
-                                                   base64Image,
-                                                   options,
-                                                   element,
-                                                 }: ElementRectangles): Promise<RectanglesOutput> {
+  executor,
+  base64Image,
+  options,
+  element,
+}: ElementRectangles): Promise<RectanglesOutput> {
   // Determine screenshot data
-  const {devicePixelRatio, innerHeight, isAndroid, isAndroidNativeWebScreenshot, isIos} = options;
-  const {height} = getScreenshotSize(base64Image, devicePixelRatio);
+  const { devicePixelRatio, innerHeight, isAndroid, isAndroidNativeWebScreenshot, isIos } = options;
+  const { height } = getScreenshotSize(base64Image, devicePixelRatio);
   let elementPosition;
 
   // Determine the element position on the screenshot
@@ -36,12 +36,15 @@ export async function determineElementRectangles({
   }
 
   // Determine the rectangles based on the device pixel ratio
-  return calculateDprData({
-    height: elementPosition.height,
-    width: elementPosition.width,
-    x: elementPosition.x,
-    y: elementPosition.y,
-  }, devicePixelRatio);
+  return calculateDprData(
+    {
+      height: elementPosition.height,
+      width: elementPosition.width,
+      x: elementPosition.x,
+      y: elementPosition.y,
+    },
+    devicePixelRatio,
+  );
 }
 
 /**
@@ -49,26 +52,23 @@ export async function determineElementRectangles({
  */
 export function determineScreenRectangles(base64Image: string, options: ScreenRectanglesOptions): RectanglesOutput {
   // Determine screenshot data
-  const {
-    devicePixelRatio,
-    innerHeight,
-    innerWidth,
-    isIos,
-    isAndroidChromeDriverScreenshot,
-    isAndroidNativeWebScreenshot,
-  } = options;
-  const {height, width} = getScreenshotSize(base64Image, devicePixelRatio);
+  const { devicePixelRatio, innerHeight, innerWidth, isIos, isAndroidChromeDriverScreenshot, isAndroidNativeWebScreenshot } =
+    options;
+  const { height, width } = getScreenshotSize(base64Image, devicePixelRatio);
 
   // Determine the width
   const screenshotWidth = isAndroidChromeDriverScreenshot ? width : innerWidth;
 
   // Determine the rectangles
-  return calculateDprData({
-    height: isIos || isAndroidNativeWebScreenshot ? height : innerHeight,
-    width: screenshotWidth,
-    x: 0,
-    y: 0
-  }, devicePixelRatio);
+  return calculateDprData(
+    {
+      height: isIos || isAndroidNativeWebScreenshot ? height : innerHeight,
+      width: screenshotWidth,
+      x: 0,
+      y: 0,
+    },
+    devicePixelRatio,
+  );
 }
 
 /**
@@ -89,12 +89,14 @@ export async function determineStatusAddressToolBarRectangles(
   } = options;
   const rectangles = [];
 
-  if (isViewPortScreenshot && isMobile &&
+  if (
+    isViewPortScreenshot &&
+    isMobile &&
     (checkAndroidNativeWebScreenshot(platformName, isAndroidNativeWebScreenshot) || checkIsIos(platformName))
   ) {
-    const {statusAddressBar, toolBar} = await (checkIsIos(platformName) ?
-      executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS) :
-      executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp));
+    const { statusAddressBar, toolBar } = await (checkIsIos(platformName)
+      ? executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS)
+      : executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp));
 
     if (blockOutStatusBar) {
       rectangles.push(statusAddressBar);

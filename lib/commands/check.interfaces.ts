@@ -1,4 +1,4 @@
-import {RectanglesOutput} from '../methods/rectangles.interfaces';
+import { RectanglesOutput } from '../methods/rectangles.interfaces';
 
 export interface CheckMethodOptions {
   // Block out array with x, y, width and height values
@@ -24,5 +24,5 @@ export interface CheckMethodOptions {
   // Allowable value of misMatchPercentage that prevents saving image with
   saveAboveTolerance?: number;
   //Scale images to same size before comparison
-  scaleImagesToSameSize?:boolean;
+  scaleImagesToSameSize?: boolean;
 }
