@@ -116,7 +116,10 @@ export async function makeCroppedBase64Image({
     resizeValues = resizeDimensions;
   }
 
-  const { top, right, bottom, left } = { ...DEFAULT_RESIZE_DIMENSIONS, ...resizeValues };
+  const { top, right, bottom, left }: { top: number; right: number; bottom: number; left: number } = {
+    ...DEFAULT_RESIZE_DIMENSIONS,
+    ...resizeValues,
+  };
   const { height, width, x, y } = rectangles;
   const canvasWidth = width + left + right;
   const canvasHeight = height + top + bottom;

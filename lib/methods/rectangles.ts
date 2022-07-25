@@ -35,6 +35,16 @@ export async function determineElementRectangles({
     elementPosition = await getElementPositionDesktop(executor, innerHeight, height, element);
   }
 
+  // Validate if the element is visible
+  if (elementPosition.height === 0 || elementPosition.width === 0) {
+    let selectorMessage = ' ';
+    if (element.selector) {
+      selectorMessage = `, with selector "$(${element.selector})",`;
+    }
+    const message = `The element${selectorMessage}is not visible. The dimensions are ${elementPosition.width}x${elementPosition.height}`;
+    throw new Error(message);
+  }
+
   // Determine the rectangles based on the device pixel ratio
   return calculateDprData(
     {
