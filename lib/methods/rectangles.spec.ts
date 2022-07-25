@@ -144,6 +144,93 @@ describe('rectangles', () => {
         }),
       ).toMatchSnapshot();
     });
+
+    it('should throw an error when the element height is 0', async () => {
+      const options = {
+        isAndroid: false,
+        devicePixelRatio: 2,
+        isAndroidNativeWebScreenshot: false,
+        innerHeight: 500,
+        isIos: false,
+      };
+      const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
+        height: 0,
+        width: 375,
+        x: 12,
+        y: 34,
+      });
+
+      try {
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: { selector: '#elementID' },
+        });
+        // Fail test if above expression doesn't throw anything.
+        expect(true).toBe(false);
+      } catch (e) {
+        expect(e.message).toBe('The element, with selector "$(#elementID)",is not visible. The dimensions are 375x0');
+      }
+    });
+
+    it('should throw an error when the element width is 0', async () => {
+      const options = {
+        isAndroid: false,
+        devicePixelRatio: 2,
+        isAndroidNativeWebScreenshot: false,
+        innerHeight: 500,
+        isIos: false,
+      };
+      const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
+        height: 375,
+        width: 0,
+        x: 12,
+        y: 34,
+      });
+
+      try {
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: { selector: '#elementID' },
+        });
+        // Fail test if above expression doesn't throw anything.
+        expect(true).toBe(false);
+      } catch (e) {
+        expect(e.message).toBe('The element, with selector "$(#elementID)",is not visible. The dimensions are 0x375');
+      }
+    });
+
+    it('should throw an error when the element width is 0 and no element selector is provided', async () => {
+      const options = {
+        isAndroid: false,
+        devicePixelRatio: 2,
+        isAndroidNativeWebScreenshot: false,
+        innerHeight: 500,
+        isIos: false,
+      };
+      const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
+        height: 375,
+        width: 0,
+        x: 12,
+        y: 34,
+      });
+
+      try {
+        await determineElementRectangles({
+          executor: MOCKED_EXECUTOR,
+          base64Image: IMAGE_STRING,
+          options,
+          element: {},
+        });
+        // Fail test if above expression doesn't throw anything.
+        expect(true).toBe(false);
+      } catch (e) {
+        expect(e.message).toBe('The element is not visible. The dimensions are 0x375');
+      }
+    });
   });
 
   describe('determineScreenRectangles', () => {
