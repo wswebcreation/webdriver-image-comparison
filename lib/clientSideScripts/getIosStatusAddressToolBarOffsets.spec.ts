@@ -38,18 +38,6 @@ describe('getIosStatusAddressToolBarOffsets', () => {
 
     expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
   });
-
-  // it('should get the correct status, address and toolbar height for an iPad with iPadOS 13', () => {
-  //   setEnvironment('IPADOS', 13, 'IPAD', false);
-
-  //   expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
-  // });
-
-  // it('should get the correct status, address and toolbar height for an iPad Pro with to touch id and with iOS 12', () => {
-  //   setEnvironment('IOS', 12, 'IPAD_NO_TOUCH', false);
-
-  //   expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
-  // });
 });
 
 /**

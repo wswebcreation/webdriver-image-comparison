@@ -206,7 +206,7 @@ export const IOS_OFFSETS: IosOffsets = {
       LANDSCAPE: {
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
-        HOME_BAR: { x: 408, y: 739, height: 9, width: 318 },
+        HOME_BAR: { x: 408, y: 729, height: 9, width: 318 },
       },
       PORTRAIT: {
         STATUS_BAR: 24,

@@ -21,7 +21,7 @@ exports[`getIosStatusAddressToolBarOffsets should get the correct status, addres
 Object {
   "statusAddressBar": Object {
     "height": 50,
-    "width": 375,
+    "width": 667,
     "x": 0,
     "y": 0,
   },
@@ -38,7 +38,7 @@ exports[`getIosStatusAddressToolBarOffsets should get the correct status, addres
 Object {
   "statusAddressBar": Object {
     "height": 50,
-    "width": 375,
+    "width": 812,
     "x": 0,
     "y": 0,
   },
@@ -71,16 +71,16 @@ Object {
 exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for an iPad 1`] = `
 Object {
   "statusAddressBar": Object {
-    "height": 24,
+    "height": 74,
     "width": 1024,
     "x": 0,
     "y": 0,
   },
   "toolBar": Object {
-    "height": 50,
+    "height": 0,
     "width": 1024,
     "x": 0,
-    "y": 1316,
+    "y": 1366,
   },
 }
 `;
