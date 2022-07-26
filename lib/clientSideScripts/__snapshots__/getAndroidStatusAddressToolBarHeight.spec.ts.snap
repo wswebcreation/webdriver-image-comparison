@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getAndroidStatusAddressToolBarHeight should get the android status, address and toolbar height with major and minor version in the navigator 1`] = `
+exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major and minor version in the navigator 1`] = `
 Object {
   "statusAddressBar": Object {
     "height": 80,
@@ -17,7 +17,7 @@ Object {
 }
 `;
 
-exports[`getAndroidStatusAddressToolBarHeight should get the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
+exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
 Object {
   "statusAddressBar": Object {
     "height": 80,
@@ -34,7 +34,7 @@ Object {
 }
 `;
 
-exports[`getAndroidStatusAddressToolBarHeight should get the android status, address and toolbar height with only a major version in the navigator 1`] = `
+exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with only a major version in the navigator 1`] = `
 Object {
   "statusAddressBar": Object {
     "height": 80,
@@ -51,7 +51,7 @@ Object {
 }
 `;
 
-exports[`getAndroidStatusAddressToolBarHeight should set the default toolbar height when the toolbar height will become negative 1`] = `
+exports[`getAndroidStatusAddressToolBarOffsets should set the default toolbar height when the toolbar height will become negative 1`] = `
 Object {
   "statusAddressBar": Object {
     "height": 24,

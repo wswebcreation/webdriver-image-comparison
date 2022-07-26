@@ -1,6 +1,6 @@
 import { RectanglesOutput } from '../methods/rectangles.interfaces';
 
-export interface StatusAddressToolBarHeight {
+export interface StatusAddressToolBarOffsets {
   statusAddressBar: RectanglesOutput;
   toolBar: RectanglesOutput;
 }

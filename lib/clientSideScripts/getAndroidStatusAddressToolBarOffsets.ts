@@ -1,13 +1,13 @@
-import { StatusAddressToolBarHeight } from './statusAddressToolBarHeight.interfaces';
+import { StatusAddressToolBarOffsets } from './statusAddressToolBarOffsets.interfaces';
 import { AndroidOffsets } from '../helpers/constants.interfaces';
 
 /**
  * Get the current height of the Android status and address bar
  */
-export default function getAndroidStatusAddressToolBarHeight(
+export default function getAndroidStatusAddressToolBarOffsets(
   androidOffsets: AndroidOffsets,
   isHybridApp: boolean,
-): StatusAddressToolBarHeight {
+): StatusAddressToolBarOffsets {
   // Determine version for the right offsets
   const { height, width } = window.screen;
   const { innerHeight } = window;

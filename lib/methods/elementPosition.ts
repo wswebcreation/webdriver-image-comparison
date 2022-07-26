@@ -1,12 +1,12 @@
 import getElementPositionTopWindow from '../clientSideScripts/getElementPositionTopWindow';
 import getElementPositionTopDom from '../clientSideScripts/getElementPositionTopDom';
 import { getElementPositionTopScreenNativeMobile } from '../clientSideScripts/getElementPositionTopScreenNativeMobile';
-import { OFFSETS } from '../helpers/constants';
+import { ANDROID_OFFSETS, IOS_OFFSETS } from '../helpers/constants';
 import { Executor } from './methods.interface';
 import { ElementPosition } from '../clientSideScripts/elementPosition.interfaces';
-import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
-import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
-import { StatusAddressToolBarHeight } from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
+import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
+import getIosStatusAddressToolBarOffsets from '../clientSideScripts/getIosStatusAddressToolBarOffsets';
+import { StatusAddressToolBarOffsets } from '../clientSideScripts/statusAddressToolBarOffsets.interfaces';
 
 /**
  * Get the element position on a Android device
@@ -18,8 +18,9 @@ export async function getElementPositionAndroid(
 ): Promise<ElementPosition> {
   // This is the native webscreenshot
   if (isNativeWebScreenshot) {
-    const { height } = (<StatusAddressToolBarHeight>await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, false))
-      .statusAddressBar;
+    const { height } = (<StatusAddressToolBarOffsets>(
+      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, false)
+    )).statusAddressBar;
 
     return executor(getElementPositionTopScreenNativeMobile, height, element);
   }
@@ -61,7 +62,8 @@ export async function getElementPositionDesktop(
  */
 export async function getElementPositionIos(executor: Executor, element: HTMLElement): Promise<ElementPosition> {
   // Determine status and address bar height
-  const { height } = (<StatusAddressToolBarHeight>await executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS)).statusAddressBar;
+  const { height } = (<StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS))
+    .statusAddressBar;
 
   return executor(getElementPositionTopScreenNativeMobile, height, element);
 }

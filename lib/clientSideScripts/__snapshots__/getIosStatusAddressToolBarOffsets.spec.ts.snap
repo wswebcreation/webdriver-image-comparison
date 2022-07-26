@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for a default iPhone with iOS 14 in Portrait mode 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 70,
+    "width": 375,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 44,
+    "width": 375,
+    "x": 0,
+    "y": 623,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for a default iPhone with iOS 14 in landscape mode 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 50,
+    "width": 375,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for a default iPhone with iOS 15 in landscape mode 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 50,
+    "width": 375,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 9,
+    "width": 212,
+    "x": 300,
+    "y": 359,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for a default iPhone with iOS 15 in portrait mode 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 94,
+    "width": 375,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 83,
+    "width": 375,
+    "x": 0,
+    "y": 729,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for an iPad 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 24,
+    "width": 1024,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 50,
+    "width": 1024,
+    "x": 0,
+    "y": 1316,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for an iPhone with extreme not known dimensions 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 70,
+    "width": 1024,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 107,
+    "width": 1024,
+    "x": 0,
+    "y": 789,
+  },
+}
+`;

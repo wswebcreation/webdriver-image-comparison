@@ -1,6 +1,6 @@
 import { calculateDprData, checkAndroidNativeWebScreenshot, checkIsIos, getScreenshotSize } from '../helpers/utils';
 import { getElementPositionAndroid, getElementPositionDesktop, getElementPositionIos } from './elementPosition';
-import { OFFSETS } from '../helpers/constants';
+import { IOS_OFFSETS, ANDROID_OFFSETS } from '../helpers/constants';
 import {
   ElementRectangles,
   RectanglesOutput,
@@ -9,8 +9,8 @@ import {
   StatusAddressToolBarRectanglesOptions,
 } from './rectangles.interfaces';
 import { Executor } from './methods.interface';
-import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
-import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
+import getIosStatusAddressToolBarOffsets from '../clientSideScripts/getIosStatusAddressToolBarOffsets';
+import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
 
 /**
  * Determine the element rectangles on the page / screenshot
@@ -67,7 +67,7 @@ export function determineScreenRectangles(base64Image: string, options: ScreenRe
   const { height, width } = getScreenshotSize(base64Image, devicePixelRatio);
 
   // Determine the width
-  const screenshotWidth = isAndroidChromeDriverScreenshot ? width : innerWidth;
+  const screenshotWidth = isIos || isAndroidChromeDriverScreenshot ? width : innerWidth;
 
   // Determine the rectangles
   return calculateDprData(
@@ -105,8 +105,8 @@ export async function determineStatusAddressToolBarRectangles(
     (checkAndroidNativeWebScreenshot(platformName, isAndroidNativeWebScreenshot) || checkIsIos(platformName))
   ) {
     const { statusAddressBar, toolBar } = await (checkIsIos(platformName)
-      ? executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS)
-      : executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp));
+      ? executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS)
+      : executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp));
 
     if (blockOutStatusBar) {
       rectangles.push(statusAddressBar);

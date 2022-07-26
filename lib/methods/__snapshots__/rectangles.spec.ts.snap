@@ -57,7 +57,7 @@ Object {
 exports[`rectangles determineScreenRectangles should determine them for iOS 1`] = `
 Object {
   "height": 1536,
-  "width": 750,
+  "width": 2732,
   "x": 0,
   "y": 0,
 }

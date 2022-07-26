@@ -13,7 +13,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // getElementPositionIos for: getIosStatusAddressToolBarHeight
+        // getElementPositionIos for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 94,
@@ -56,7 +56,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // getElementPositionAndroid for: getAndroidStatusAddressToolBarHeight
+        // getElementPositionAndroid for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 20,
@@ -287,7 +287,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarHeight
+        // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 94,
@@ -318,7 +318,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarHeight
+        // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 94,
@@ -349,7 +349,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarHeight
+        // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 40,
@@ -380,7 +380,7 @@ describe('rectangles', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarHeight
+        // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
           statusAddressBar: {
             height: 40,

@@ -38,10 +38,12 @@ export const NAVIGATOR_APP_VERSIONS = {
     12: '5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1',
     13: '5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Mobile/15E148 Safari/604.1',
     14: '5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1',
+    15: '5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
   },
   IPADOS: {
     13: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15',
     14: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15',
+    15: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15',
   },
 };
 export const ANDROID_DEVICES = {
@@ -65,19 +67,13 @@ export const IOS_DEVICES = {
     innerHeight: 635,
     innerWidth: 375,
   },
-  IPHONE_XS_MAX: {
+  IPHONE_HEIGHT: {
     height: 896,
-    width: 414,
+    width: 1024,
     innerHeight: 719,
     innerWidth: 414,
   },
   IPAD: {
-    height: 1024,
-    width: 768,
-    innerHeight: 954,
-    innerWidth: 768,
-  },
-  IPAD_NO_TOUCH: {
     height: 1366,
     width: 1024,
     innerHeight: 1292,

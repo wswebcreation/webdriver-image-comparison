@@ -2,9 +2,9 @@
 import { yellow } from 'chalk';
 import scrollToPosition from '../clientSideScripts/scrollToPosition';
 import getDocumentScrollHeight from '../clientSideScripts/getDocumentScrollHeight';
-import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
-import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
-import { OFFSETS } from '../helpers/constants';
+import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
+import getIosStatusAddressToolBarOffsets from '../clientSideScripts/getIosStatusAddressToolBarOffsets';
+import { ANDROID_OFFSETS, IOS_OFFSETS } from '../helpers/constants';
 import { calculateDprData, getScreenshotSize, waitFor } from '../helpers/utils';
 import { Executor, TakeScreenShot } from './methods.interface';
 import {
@@ -13,7 +13,7 @@ import {
   FullPageScreenshotDataOptions,
   FullPageScreenshotsData,
 } from './screenshots.interfaces';
-import { StatusAddressToolBarHeight } from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
+import { StatusAddressToolBarOffsets } from '../clientSideScripts/statusAddressToolBarOffsets.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 import hideScrollBars from '../clientSideScripts/hideScrollbars';
 import { LogLevel } from '../helpers/options.interface';
@@ -55,8 +55,8 @@ export async function getBase64FullPageScreenshotsData(
 
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
-    const statusAddressBarHeight = (<StatusAddressToolBarHeight>(
-      await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp)
+    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>(
+      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp)
     )).statusAddressBar.height;
     const androidNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
 
@@ -68,7 +68,7 @@ export async function getBase64FullPageScreenshotsData(
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
   } else if (isIos) {
     // Create a fullpage screenshot for iOS. iOS screenshots will hold the status, address and toolbar so they need to be removed
-    const statusAddressBarHeight = (<StatusAddressToolBarHeight>await executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS))
+    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS))
       .statusAddressBar.height;
     const iosNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
 

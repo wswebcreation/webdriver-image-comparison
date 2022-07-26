@@ -24,7 +24,7 @@ describe('screenshots', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
+        // For await executor(getAndroidStatusAddressToolBarOffsets, OFFSETS.ANDROID))
         .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
@@ -60,7 +60,7 @@ describe('screenshots', () => {
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        // For await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID))
+        // For await executor(getAndroidStatusAddressToolBarOffsets, OFFSETS.ANDROID))
         .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
