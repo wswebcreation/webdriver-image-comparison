@@ -10,5 +10,4 @@ local.config.json
 localBaseline/
 docs/
 lib/
-build/
 .eslintcache

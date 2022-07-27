@@ -11,12 +11,14 @@
     "pretest": "npm run lint",
     "test": "jest",
     "release": "release-it --github.release",
-    "release.ci": "npm run compile && npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
+    "release.ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
     "release.patch": "npm run release -- patch",
     "release.minor": "npm run release -- minor",
     "release.major": "npm run release -- major",
     "test:watch": "npm run test -- --watchAll",
-    "watch": "npm run clean && npm run compile -- -w",
+    "watch": "npm run compile -- -w",
+    "precompile": "npm run clean",
+    "prerelease": "npm run compile",
     "prepare": "husky install"
   },
   "repository": {
