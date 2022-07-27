@@ -3,17 +3,26 @@
  */
 /* istanbul ignore next */
 export default function scrollToPosition(yPosition: number): void {
-  let element;
   const htmlNode = document.querySelector('html');
   const bodyNode = document.querySelector('body');
 
   if (htmlNode.scrollHeight > htmlNode.clientHeight) {
-    element = htmlNode;
-  } else if (bodyNode.scrollHeight > bodyNode.clientHeight) {
-    element = bodyNode;
-  } else {
-    element = document.scrollingElement || document.documentElement;
+    htmlNode.scrollTop = yPosition;
+    // Did we scroll to the right position?
+    if (htmlNode.scrollTop === yPosition) {
+      return;
+    }
   }
 
-  element.scrollTop = yPosition;
+  // If not then try the body
+  if (bodyNode.scrollHeight > bodyNode.clientHeight) {
+    bodyNode.scrollTop = yPosition;
+    // Did we scroll to the right position?
+    if (bodyNode.scrollTop === yPosition) {
+      return;
+    }
+  }
+
+  // If not then try the document
+  (document.scrollingElement || document.documentElement).scrollTop = yPosition;
 }
