@@ -35,14 +35,15 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   //    home bar data
   const { innerHeight } = window;
   const toolBarHeight = height - innerHeight - statusAddressBarHeight;
-  const toolBarOffsets = isLandscape
-    ? currentOffsets.HOME_BAR
-    : {
-        height: toolBarHeight,
-        width: deviceWidth,
-        x: 0,
-        y: height - toolBarHeight,
-      };
+  const toolBarOffsets =
+    isLandscape || toolBarHeight <= 0
+      ? currentOffsets.HOME_BAR
+      : {
+          height: toolBarHeight,
+          width: deviceWidth,
+          x: 0,
+          y: height - toolBarHeight,
+        };
 
   // 5. Return the offsets
   return {

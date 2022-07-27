@@ -38,6 +38,12 @@ describe('getIosStatusAddressToolBarOffsets', () => {
 
     expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
   });
+
+  it('should get the correct status, address and toolbar height for an iPad with big sizes', () => {
+    setEnvironment('IOS', 15, 'IPAD_BIG_SIZE', false);
+
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+  });
 });
 
 /**

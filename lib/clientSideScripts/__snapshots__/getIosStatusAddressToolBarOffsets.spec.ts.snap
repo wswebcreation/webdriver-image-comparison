@@ -54,16 +54,16 @@ Object {
 exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for a default iPhone with iOS 15 in portrait mode 1`] = `
 Object {
   "statusAddressBar": Object {
-    "height": 94,
+    "height": 44,
     "width": 375,
     "x": 0,
     "y": 0,
   },
   "toolBar": Object {
-    "height": 83,
+    "height": 133,
     "width": 375,
     "x": 0,
-    "y": 729,
+    "y": 679,
   },
 }
 `;
@@ -77,10 +77,27 @@ Object {
     "y": 0,
   },
   "toolBar": Object {
-    "height": 0,
-    "width": 1024,
+    "height": 9,
+    "width": 320,
+    "x": 352,
+    "y": 1351,
+  },
+}
+`;
+
+exports[`getIosStatusAddressToolBarOffsets should get the correct status, address and toolbar height for an iPad with big sizes 1`] = `
+Object {
+  "statusAddressBar": Object {
+    "height": 70,
+    "width": 9876,
     "x": 0,
-    "y": 1366,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 38,
+    "width": 9876,
+    "x": 0,
+    "y": 5394,
   },
 }
 `;
