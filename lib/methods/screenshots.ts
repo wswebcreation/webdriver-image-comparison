@@ -1,23 +1,22 @@
 // @ts-ignore
-import {yellow} from 'chalk';
+import { yellow } from 'chalk';
 import scrollToPosition from '../clientSideScripts/scrollToPosition';
 import getDocumentScrollHeight from '../clientSideScripts/getDocumentScrollHeight';
-import getAndroidStatusAddressToolBarHeight from '../clientSideScripts/getAndroidStatusAddressToolBarHeight';
-import getIosStatusAddressToolBarHeight from '../clientSideScripts/getIosStatusAddressToolBarHeight';
-import {OFFSETS} from '../helpers/constants';
-import {calculateDprData, getScreenshotSize, waitFor} from '../helpers/utils';
-import {Executor, TakeScreenShot} from './methods.interface';
+import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
+import getIosStatusAddressToolBarOffsets from '../clientSideScripts/getIosStatusAddressToolBarOffsets';
+import { ANDROID_OFFSETS, IOS_OFFSETS } from '../helpers/constants';
+import { calculateDprData, getScreenshotSize, waitFor } from '../helpers/utils';
+import { Executor, TakeScreenShot } from './methods.interface';
 import {
   FullPageScreenshotOptions,
   FullPageScreenshotNativeMobileOptions,
   FullPageScreenshotDataOptions,
   FullPageScreenshotsData,
 } from './screenshots.interfaces';
-import {StatusAddressToolBarHeight} from '../clientSideScripts/statusAddressToolBarHeight.interfaces';
+import { StatusAddressToolBarOffsets } from '../clientSideScripts/statusAddressToolBarOffsets.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
 import hideScrollBars from '../clientSideScripts/hideScrollbars';
-import {LogLevel} from "../helpers/options.interface";
-import {error} from "selenium-webdriver";
+import { LogLevel } from '../helpers/options.interface';
 
 /**
  * Take a full page screenshots for desktop / iOS / Android
@@ -56,23 +55,22 @@ export async function getBase64FullPageScreenshotsData(
 
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
-    const statusAddressBarHeight = (
-      <StatusAddressToolBarHeight>(await executor(getAndroidStatusAddressToolBarHeight, OFFSETS.ANDROID, isHybridApp))
-    ).statusAddressBar.height;
-    const androidNativeMobileOptions = {...nativeMobileOptions, statusAddressBarHeight};
+    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>(
+      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp)
+    )).statusAddressBar.height;
+    const androidNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, androidNativeMobileOptions);
   } else if (isAndroid && isAndroidChromeDriverScreenshot) {
-    const chromeDriverOptions = {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel};
+    const chromeDriverOptions = { devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel };
 
     // Create a fullpage screenshot for Android when the ChromeDriver provides the screenshots
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
   } else if (isIos) {
     // Create a fullpage screenshot for iOS. iOS screenshots will hold the status, address and toolbar so they need to be removed
-    const statusAddressBarHeight = (
-      <StatusAddressToolBarHeight>(await executor(getIosStatusAddressToolBarHeight, OFFSETS.IOS))
-    ).statusAddressBar.height;
-    const iosNativeMobileOptions = {...nativeMobileOptions, statusAddressBarHeight};
+    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS))
+      .statusAddressBar.height;
+    const iosNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, iosNativeMobileOptions);
   }
@@ -124,7 +122,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
       try {
-        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+        await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, true);
       } catch (e) {
         logHiddenRemovedError(e, logLevel);
       }
@@ -136,7 +134,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // Determine scroll height and check if we need to scroll again
     scrollHeight = await executor(getDocumentScrollHeight);
-    if (((scrollY + iosViewportHeight) < scrollHeight)) {
+    if (scrollY + iosViewportHeight < scrollHeight) {
       amountOfScrollsArray.push(amountOfScrollsArray.length);
     }
     // There is no else
@@ -146,17 +144,21 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // The starting position for cropping could be different for the last image
     // The cropping always needs to start at status and address bar height and the address bar shadow padding
-    const imageYPosition = (amountOfScrollsArray.length === i ? innerHeight - imageHeight : 0) + statusAddressBarHeight + addressBarShadowPadding;
+    const imageYPosition =
+      (amountOfScrollsArray.length === i ? innerHeight - imageHeight : 0) + statusAddressBarHeight + addressBarShadowPadding;
 
     // Store all the screenshot data in the screenshot object
     viewportScreenshots.push({
-      ...calculateDprData({
-        canvasWidth: screenshotSizeWidth,
-        canvasYPosition: scrollY,
-        imageHeight: imageHeight,
-        imageWidth: screenshotSizeWidth,
-        imageYPosition: imageYPosition,
-      }, devicePixelRatio),
+      ...calculateDprData(
+        {
+          canvasWidth: screenshotSizeWidth,
+          canvasYPosition: scrollY,
+          imageHeight: imageHeight,
+          imageWidth: screenshotSizeWidth,
+          imageYPosition: imageYPosition,
+        },
+        devicePixelRatio,
+      ),
       screenshot,
     });
 
@@ -167,17 +169,20 @@ export async function getFullPageScreenshotsDataNativeMobile(
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
     try {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+      await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, false);
     } catch (e) {
       logHiddenRemovedError(e, logLevel);
     }
   }
 
   return {
-    ...calculateDprData({
-      fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,
-      fullPageWidth: screenshotSizeWidth,
-    }, devicePixelRatio),
+    ...calculateDprData(
+      {
+        fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,
+        fullPageWidth: screenshotSizeWidth,
+      },
+      devicePixelRatio,
+    ),
     data: viewportScreenshots,
   };
 }
@@ -191,7 +196,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel} = options;
+  const { devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel } = options;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
@@ -212,7 +217,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
       try {
-        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+        await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, true);
       } catch (e) {
         logHiddenRemovedError(e, logLevel);
       }
@@ -224,25 +229,29 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
 
     // Determine scroll height and check if we need to scroll again
     scrollHeight = await executor(getDocumentScrollHeight);
-    if ((scrollY + innerHeight) < scrollHeight) {
+    if (scrollY + innerHeight < scrollHeight) {
       amountOfScrollsArray.push(amountOfScrollsArray.length);
     }
     // There is no else
 
     // The height of the image of the last 1 could be different
-    const imageHeight: number = amountOfScrollsArray.length === i ? scrollHeight - (innerHeight * viewportScreenshots.length) : innerHeight;
+    const imageHeight: number =
+      amountOfScrollsArray.length === i ? scrollHeight - innerHeight * viewportScreenshots.length : innerHeight;
     // The starting position for cropping could be different for the last image (0 means no cropping)
-    const imageYPosition = (amountOfScrollsArray.length === i && amountOfScrollsArray.length !== 0) ? innerHeight - imageHeight : 0;
+    const imageYPosition = amountOfScrollsArray.length === i && amountOfScrollsArray.length !== 0 ? innerHeight - imageHeight : 0;
 
     // Store all the screenshot data in the screenshot object
     viewportScreenshots.push({
-      ...calculateDprData({
-        canvasWidth: screenshotSize.width,
-        canvasYPosition: scrollY,
-        imageHeight: imageHeight,
-        imageWidth: screenshotSize.width,
-        imageYPosition: imageYPosition,
-      }, devicePixelRatio),
+      ...calculateDprData(
+        {
+          canvasWidth: screenshotSize.width,
+          canvasYPosition: scrollY,
+          imageHeight: imageHeight,
+          imageWidth: screenshotSize.width,
+          imageYPosition: imageYPosition,
+        },
+        devicePixelRatio,
+      ),
       screenshot,
     });
 
@@ -253,17 +262,20 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
     try {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+      await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, false);
     } catch (e) {
       logHiddenRemovedError(e, logLevel);
     }
   }
 
   return {
-    ...calculateDprData({
-      fullPageHeight: scrollHeight,
-      fullPageWidth: screenshotSize.width,
-    }, devicePixelRatio),
+    ...calculateDprData(
+      {
+        fullPageHeight: scrollHeight,
+        fullPageWidth: screenshotSize.width,
+      },
+      devicePixelRatio,
+    ),
     data: viewportScreenshots,
   };
 }
@@ -277,7 +289,7 @@ export async function getFullPageScreenshotsDataDesktop(
   options: FullPageScreenshotOptions,
 ): Promise<FullPageScreenshotsData> {
   const viewportScreenshots = [];
-  const {devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel} = options;
+  const { devicePixelRatio, fullPageScrollTimeout, hideAfterFirstScroll, innerHeight, logLevel } = options;
   let actualInnerHeight = innerHeight;
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
@@ -296,7 +308,7 @@ export async function getFullPageScreenshotsDataDesktop(
     // Elements that need to be hidden after the first scroll for a fullpage scroll
     if (i === 1 && hideAfterFirstScroll.length > 0) {
       try {
-        await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, true);
+        await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, true);
       } catch (e) {
         logHiddenRemovedError(e, logLevel);
       }
@@ -319,28 +331,31 @@ export async function getFullPageScreenshotsDataDesktop(
     // Determine scroll height and check if we need to scroll again
     scrollHeight = await executor(getDocumentScrollHeight);
 
-    if (((scrollY + actualInnerHeight) < scrollHeight && screenshotSize.height === actualInnerHeight)) {
+    if (scrollY + actualInnerHeight < scrollHeight && screenshotSize.height === actualInnerHeight) {
       amountOfScrollsArray.push(amountOfScrollsArray.length);
     }
     // There is no else, Lazy load and large screenshots,
     // like with older drivers such as FF <= 47 and IE11, will not work
 
     // The height of the image of the last 1 could be different
-    const imageHeight: number = amountOfScrollsArray.length === i
-      ? scrollHeight - (actualInnerHeight * viewportScreenshots.length)
-      : screenshotSize.height;
+    const imageHeight: number =
+      amountOfScrollsArray.length === i ? scrollHeight - actualInnerHeight * viewportScreenshots.length : screenshotSize.height;
     // The starting position for cropping could be different for the last image (0 means no cropping)
-    const imageYPosition = (amountOfScrollsArray.length === i && amountOfScrollsArray.length !== 0) ? actualInnerHeight - imageHeight : 0;
+    const imageYPosition =
+      amountOfScrollsArray.length === i && amountOfScrollsArray.length !== 0 ? actualInnerHeight - imageHeight : 0;
 
     // Store all the screenshot data in the screenshot object
     viewportScreenshots.push({
-      ...calculateDprData({
-        canvasWidth: screenshotSize.width,
-        canvasYPosition: scrollY,
-        imageHeight: imageHeight,
-        imageWidth: screenshotSize.width,
-        imageYPosition: imageYPosition,
-      }, devicePixelRatio),
+      ...calculateDprData(
+        {
+          canvasWidth: screenshotSize.width,
+          canvasYPosition: scrollY,
+          imageHeight: imageHeight,
+          imageWidth: screenshotSize.width,
+          imageYPosition: imageYPosition,
+        },
+        devicePixelRatio,
+      ),
       screenshot,
     });
   }
@@ -348,17 +363,20 @@ export async function getFullPageScreenshotsDataDesktop(
   // Put back the hidden elements to visible
   if (hideAfterFirstScroll.length > 0) {
     try {
-      await executor(hideRemoveElements, {hide: hideAfterFirstScroll, remove: []}, false);
+      await executor(hideRemoveElements, { hide: hideAfterFirstScroll, remove: [] }, false);
     } catch (e) {
       logHiddenRemovedError(e, logLevel);
     }
   }
 
   return {
-    ...calculateDprData({
-      fullPageHeight: scrollHeight,
-      fullPageWidth: screenshotSize.width,
-    }, devicePixelRatio),
+    ...calculateDprData(
+      {
+        fullPageHeight: scrollHeight,
+        fullPageWidth: screenshotSize.width,
+      },
+      devicePixelRatio,
+    ),
     data: viewportScreenshots,
   };
 }
@@ -375,9 +393,10 @@ export async function takeBase64Screenshot(takeScreenshot: TakeScreenShot): Prom
  *
  * @TODO: remove the any
  */
-function logHiddenRemovedError(error:any, logLevel:LogLevel){
-  if(logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
-    console.log(yellow(`
+function logHiddenRemovedError(error: any, logLevel: LogLevel) {
+  if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
+    console.log(
+      yellow(`
 #####################################################################################
  WARNING:
  (One of) the elements that needed to be hidden or removed could not be found on the
@@ -385,6 +404,7 @@ function logHiddenRemovedError(error:any, logLevel:LogLevel){
  Error: ${error}
  We made sure the test didn't break.
 #####################################################################################
-`));
+`),
+    );
   }
 }

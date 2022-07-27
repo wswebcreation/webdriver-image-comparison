@@ -1,32 +1,31 @@
-import {WebElement} from 'selenium-webdriver';
+import { WebElement } from 'selenium-webdriver';
 
 /**
  * Hide or remove elements on the page
  */
 export default function hideRemoveElements(
-  hideRemoveElements:
-    {
-      hide: (HTMLElement | HTMLElement[] | WebElement | WebElement[])[],
-      remove: (HTMLElement | HTMLElement[])[],
-    },
-  hideRemove: boolean): any {
-
+  hideRemoveElements: {
+    hide: (HTMLElement | HTMLElement[] | WebElement | WebElement[])[];
+    remove: (HTMLElement | HTMLElement[])[];
+  },
+  hideRemove: boolean,
+): any {
   const visitedSelectors: Record<string, boolean> = {};
-  hideRemoveElements.hide.forEach(element => {
+  hideRemoveElements.hide.forEach((element) => {
     if (Array.isArray(element)) {
       return element.forEach((singleElement: HTMLElement | WebElement) => hideRemoveEl(singleElement, 'visibility', hideRemove));
     }
-    hideRemoveEl(element, 'visibility', hideRemove, true);
+    hideRemoveEl(element, 'visibility', hideRemove);
   });
 
-  hideRemoveElements.remove.forEach(element => {
+  hideRemoveElements.remove.forEach((element) => {
     if (Array.isArray(element)) {
       return element.forEach((singleElement: HTMLElement | WebElement) => hideRemoveEl(singleElement, 'display', hideRemove));
     }
-    hideRemoveEl(element, 'display', hideRemove, true);
+    hideRemoveEl(element, 'display', hideRemove);
   });
 
-  function hideRemoveEl(el: HTMLElement | WebElement, prop: string, hideRemove: boolean, singleElement: boolean = false) {
+  function hideRemoveEl(el: HTMLElement | WebElement, prop: string, hideRemove: boolean) {
     // @ts-ignore
     if (el.style) {
       // Here we get the HTMLElement
@@ -44,16 +43,12 @@ export default function hideRemoveElements(
           visitedSelectors[selector] = true;
           const elems = document.querySelectorAll(selector);
 
-          elems.forEach(singleEl =>
-            setPropertyToElement(singleEl, prop, hideRemove)
-          );
+          elems.forEach((singleEl) => setPropertyToElement(singleEl, prop, hideRemove));
         }
       } catch (e) {
         // 99.99% sure that we have XPATH here
         // @ts-ignore
-        return getElementsByXpath(el.selector).forEach(singleEl =>
-          setPropertyToElement(singleEl, prop, hideRemove)
-        );
+        return getElementsByXpath(el.selector).forEach((singleEl) => setPropertyToElement(singleEl, prop, hideRemove));
       }
     }
   }
@@ -67,13 +62,7 @@ export default function hideRemoveElements(
   // Stupid TypeScript =)
   function getElementsByXpath(xpathToExecute: string): any[] {
     const result = [];
-    const nodesSnapshot = document.evaluate(
-      xpathToExecute,
-      document,
-      null,
-      XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-      null,
-    );
+    const nodesSnapshot = document.evaluate(xpathToExecute, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
     for (let i = 0; i < nodesSnapshot.snapshotLength; i++) {
       result.push(nodesSnapshot.snapshotItem(i));

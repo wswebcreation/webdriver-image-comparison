@@ -1,14 +1,14 @@
 import beforeScreenshot from '../helpers/beforeScreenshot';
 import afterScreenshot from '../helpers/afterScreenshot';
-import {getBase64FullPageScreenshotsData} from '../methods/screenshots';
-import {makeFullPageBase64Image} from '../methods/images';
-import {ScreenshotOutput} from '../helpers/afterScreenshot.interfaces';
-import {Methods} from '../methods/methods.interface';
-import {InstanceData} from '../methods/instanceData.interfaces';
-import {Folders} from '../base.interface';
-import {SaveFullPageOptions} from './fullPage.interfaces';
-import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
-import {FullPageScreenshotDataOptions, FullPageScreenshotsData} from '../methods/screenshots.interfaces';
+import { getBase64FullPageScreenshotsData } from '../methods/screenshots';
+import { makeFullPageBase64Image } from '../methods/images';
+import { ScreenshotOutput } from '../helpers/afterScreenshot.interfaces';
+import { Methods } from '../methods/methods.interface';
+import { InstanceData } from '../methods/instanceData.interfaces';
+import { Folders } from '../base.interface';
+import { SaveFullPageOptions } from './fullPage.interfaces';
+import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/beforeScreenshot.interface';
+import { FullPageScreenshotDataOptions, FullPageScreenshotsData } from '../methods/screenshots.interfaces';
 
 /**
  * Saves an image of the full page
@@ -20,7 +20,6 @@ export default async function saveFullPageScreen(
   tag: string,
   saveFullPageOptions: SaveFullPageOptions,
 ): Promise<ScreenshotOutput> {
-
   // 1a. Set some variables
   const {
     addressBarShadowPadding,
@@ -33,15 +32,18 @@ export default async function saveFullPageScreen(
   } = saveFullPageOptions.wic;
 
   // 1b. Set the method options to the right values
-  const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveFullPageOptions.method
-    ? saveFullPageOptions.method.disableCSSAnimation
-    : saveFullPageOptions.wic.disableCSSAnimation;
-  const hideScrollBars: boolean = 'hideScrollBars' in saveFullPageOptions.method
-    ? saveFullPageOptions.method.hideScrollBars
-    : saveFullPageOptions.wic.hideScrollBars;
-  const fullPageScrollTimeout: number = 'fullPageScrollTimeout' in saveFullPageOptions.method
-    ? saveFullPageOptions.method.fullPageScrollTimeout
-    : saveFullPageOptions.wic.fullPageScrollTimeout;
+  const disableCSSAnimation: boolean =
+    'disableCSSAnimation' in saveFullPageOptions.method
+      ? saveFullPageOptions.method.disableCSSAnimation
+      : saveFullPageOptions.wic.disableCSSAnimation;
+  const hideScrollBars: boolean =
+    'hideScrollBars' in saveFullPageOptions.method
+      ? saveFullPageOptions.method.hideScrollBars
+      : saveFullPageOptions.wic.hideScrollBars;
+  const fullPageScrollTimeout: number =
+    'fullPageScrollTimeout' in saveFullPageOptions.method
+      ? saveFullPageOptions.method.fullPageScrollTimeout
+      : saveFullPageOptions.wic.fullPageScrollTimeout;
   const hideElements: HTMLElement[] = saveFullPageOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveFullPageOptions.method.removeElements || [];
   const hideAfterFirstScroll: HTMLElement[] = saveFullPageOptions.method.hideAfterFirstScroll || [];

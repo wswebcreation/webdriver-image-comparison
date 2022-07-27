@@ -1,4 +1,4 @@
-import {ElementPosition} from './elementPosition.interfaces';
+import { ElementPosition } from './elementPosition.interfaces';
 
 /**
  * Get the position of the element to the top of the DOM

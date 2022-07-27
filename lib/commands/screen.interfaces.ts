@@ -1,5 +1,5 @@
-import {DefaultOptions, LogLevel} from '../helpers/options.interface';
-import {CheckMethodOptions} from './check.interfaces';
+import { DefaultOptions } from '../helpers/options.interface';
+import { CheckMethodOptions } from './check.interfaces';
 
 export interface SaveScreenOptions {
   wic: DefaultOptions;
@@ -17,8 +17,7 @@ export interface SaveScreenMethodOptions {
   removeElements?: HTMLElement[];
 }
 
-export interface CheckScreenMethodOptions extends SaveScreenMethodOptions, CheckMethodOptions {
-}
+export interface CheckScreenMethodOptions extends SaveScreenMethodOptions, CheckMethodOptions {}
 
 export interface CheckScreenOptions {
   wic: DefaultOptions;

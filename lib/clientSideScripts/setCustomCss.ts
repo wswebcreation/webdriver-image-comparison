@@ -1,14 +1,14 @@
-import {CssOptions} from './customCss.interfaces';
+import { CssOptions } from './customCss.interfaces';
 
 /**
  * Set some default css
  */
 export default function setCustomCss(cssOptions: CssOptions): void {
-    if (document.head == null) {
-        return;
-    }
-    // disabling CSS animations for everything including pseudo elements
-    const disableTransformationsTransitionsAnimations = `
+  if (document.head == null) {
+    return;
+  }
+  // disabling CSS animations for everything including pseudo elements
+  const disableTransformationsTransitionsAnimations = `
 *, *::before, *::after {
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
@@ -22,14 +22,14 @@ export default function setCustomCss(cssOptions: CssOptions): void {
     animation: none !important;
     caret-color: transparent !important;
 }`;
-	const { addressBarPadding, disableCSSAnimation, id, toolBarPadding } = cssOptions;
-	const bodyTopPadding = addressBarPadding === 0 ? '' : `body{padding-top:${ addressBarPadding }px !important}`;
-	const bodyBottomPadding = toolBarPadding === 0 ? '' : `body{padding-bottom:${ toolBarPadding }px !important}`;
-	const css = (disableCSSAnimation ? disableTransformationsTransitionsAnimations : '') + bodyTopPadding + bodyBottomPadding;
-	const head = document.head;
-	const style = document.createElement('style');
+  const { addressBarPadding, disableCSSAnimation, id, toolBarPadding } = cssOptions;
+  const bodyTopPadding = addressBarPadding === 0 ? '' : `body{padding-top:${addressBarPadding}px !important}`;
+  const bodyBottomPadding = toolBarPadding === 0 ? '' : `body{padding-bottom:${toolBarPadding}px !important}`;
+  const css = (disableCSSAnimation ? disableTransformationsTransitionsAnimations : '') + bodyTopPadding + bodyBottomPadding;
+  const head = document.head;
+  const style = document.createElement('style');
 
-	style.id = id;
-	style.appendChild(document.createTextNode(css));
-	head.appendChild(style);
+  style.id = id;
+  style.appendChild(document.createTextNode(css));
+  head.appendChild(style);
 }

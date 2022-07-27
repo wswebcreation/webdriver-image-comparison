@@ -1,15 +1,15 @@
-import {takeBase64Screenshot} from '../methods/screenshots';
-import {makeCroppedBase64Image} from '../methods/images';
+import { takeBase64Screenshot } from '../methods/screenshots';
+import { makeCroppedBase64Image } from '../methods/images';
 import beforeScreenshot from '../helpers/beforeScreenshot';
 import afterScreenshot from '../helpers/afterScreenshot';
-import {determineScreenRectangles} from '../methods/rectangles';
-import {Methods} from '../methods/methods.interface';
-import {Folders} from '../base.interface';
-import {SaveScreenOptions} from './screen.interfaces';
-import {BeforeScreenshotOptions, BeforeScreenshotResult} from '../helpers/beforeScreenshot.interface';
-import {InstanceData} from '../methods/instanceData.interfaces';
-import {AfterScreenshotOptions, ScreenshotOutput} from '../helpers/afterScreenshot.interfaces';
-import {RectanglesOutput, ScreenRectanglesOptions} from '../methods/rectangles.interfaces';
+import { determineScreenRectangles } from '../methods/rectangles';
+import { Methods } from '../methods/methods.interface';
+import { Folders } from '../base.interface';
+import { SaveScreenOptions } from './screen.interfaces';
+import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/beforeScreenshot.interface';
+import { InstanceData } from '../methods/instanceData.interfaces';
+import { AfterScreenshotOptions, ScreenshotOutput } from '../helpers/afterScreenshot.interfaces';
+import { RectanglesOutput, ScreenRectanglesOptions } from '../methods/rectangles.interfaces';
 
 /**
  * Saves an image of the viewport of the screen
@@ -19,19 +19,18 @@ export default async function saveScreen(
   instanceData: InstanceData,
   folders: Folders,
   tag: string,
-  saveScreenOptions: SaveScreenOptions
+  saveScreenOptions: SaveScreenOptions,
 ): Promise<ScreenshotOutput> {
-
   // 1a. Set some variables
-  const {addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding} = saveScreenOptions.wic;
+  const { addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } = saveScreenOptions.wic;
 
   // 1b. Set the method options to the right values
-  const disableCSSAnimation: boolean = 'disableCSSAnimation' in saveScreenOptions.method
-    ? saveScreenOptions.method.disableCSSAnimation
-    : saveScreenOptions.wic.disableCSSAnimation;
-  const hideScrollBars: boolean = 'hideScrollBars' in saveScreenOptions.method
-    ? saveScreenOptions.method.hideScrollBars
-    : saveScreenOptions.wic.hideScrollBars;
+  const disableCSSAnimation: boolean =
+    'disableCSSAnimation' in saveScreenOptions.method
+      ? saveScreenOptions.method.disableCSSAnimation
+      : saveScreenOptions.wic.disableCSSAnimation;
+  const hideScrollBars: boolean =
+    'hideScrollBars' in saveScreenOptions.method ? saveScreenOptions.method.hideScrollBars : saveScreenOptions.wic.hideScrollBars;
   const hideElements: HTMLElement[] = saveScreenOptions.method.hideElements || [];
   const removeElements: HTMLElement[] = saveScreenOptions.method.removeElements || [];
 
@@ -49,7 +48,7 @@ export default async function saveScreen(
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions);
 
   // 3.  Take the screenshot
-  const base64Image:string = await takeBase64Screenshot(methods.screenShot);
+  const base64Image: string = await takeBase64Screenshot(methods.screenShot);
 
   // Determine the rectangles
   const screenRectangleOptions: ScreenRectanglesOptions = {
@@ -63,7 +62,7 @@ export default async function saveScreen(
   const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
 
   // 4.  Make a cropped base64 image
-  const croppedBase64Image: string = await makeCroppedBase64Image({base64Image, rectangles, logLevel});
+  const croppedBase64Image: string = await makeCroppedBase64Image({ base64Image, rectangles, logLevel });
 
   // 5.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {

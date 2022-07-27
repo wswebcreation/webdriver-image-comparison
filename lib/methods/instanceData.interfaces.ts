@@ -1,4 +1,4 @@
-import {ScreenDimensions} from '../clientSideScripts/screenDimensions.interfaces';
+import { ScreenDimensions } from '../clientSideScripts/screenDimensions.interfaces';
 
 export interface InstanceData {
   // The browser name of the instance

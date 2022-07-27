@@ -1,6 +1,6 @@
-import {DefaultOptions} from '../helpers/options.interface';
-import {ResizeDimensions} from '../methods/images.interfaces';
-import {CheckMethodOptions} from './check.interfaces';
+import { DefaultOptions } from '../helpers/options.interface';
+import { ResizeDimensions } from '../methods/images.interfaces';
+import { CheckMethodOptions } from './check.interfaces';
 
 export interface SaveElementOptions {
   wic: DefaultOptions;
@@ -24,8 +24,7 @@ export interface SaveElementMethodOptions {
   removeElements?: HTMLElement[];
 }
 
-export interface CheckElementMethodOptions extends SaveElementMethodOptions, CheckMethodOptions {
-}
+export interface CheckElementMethodOptions extends SaveElementMethodOptions, CheckMethodOptions {}
 
 export interface CheckElementOptions {
   wic: DefaultOptions;

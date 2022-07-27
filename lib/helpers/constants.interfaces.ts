@@ -9,40 +9,30 @@ export interface AndroidOffsets {
   };
 }
 
-export interface IosOffsets {
-  [key: number]: {
-    // The height of the status bar
-    STATUS_BAR: number;
-    // The height of the status bar for an iPad Pro
-    STATUS_BAR_PRO: number;
-    // The height of the status bar for an iPhone X#
-    STATUS_BAR_X: number;
-    // The height of the address bar
-    ADDRESS_BAR: number;
-    // The home bar data
-    HOME_BAR: {
-      // The default home bar data
-      DEFAULT: {
-        // The height of the home bar
-        height: number;
-        // The width of the home bar
-        width: number;
-        // The x position of the home bar
-        x: number;
-        // The y position of the home bar
-        y: number;
-      };
-      // The large home bar data
-      LARGE: {
-        // The height of the home bar
-        height: number;
-        // The width of the home bar
-        width: number;
-        // The x position of the home bar
-        x: number;
-        // The y position of the home bar
-        y: number;
-      };
-    }
-  };
+enum IosDeviceEnum {
+  IPAD = 'IPAD',
+  IPHONE = 'IPHONE',
 }
+
+enum OrientationEnum {
+  LANDSCAPE = 'LANDSCAPE',
+  PORTRAIT = 'PORTRAIT',
+}
+
+export type IosOffsets = {
+  [key in IosDeviceEnum]: {
+    // The portrait height of the device
+    [key: number]: {
+      [key in OrientationEnum]: {
+        STATUS_BAR: number;
+        ADDRESS_BAR: number;
+        HOME_BAR: {
+          x: number;
+          y: number;
+          height: number;
+          width: number;
+        };
+      };
+    };
+  };
+};

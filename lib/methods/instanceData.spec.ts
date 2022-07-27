@@ -14,32 +14,31 @@ describe('getEnrichedInstanceData', () => {
       platformName: 'platformName',
       platformVersion: 'platformVersion',
     };
-    const MOCKED_EXECUTOR = jest.fn()
-    // getEnrichedInstanceData for: getScreenDimensions
-      .mockResolvedValueOnce(
-        {
-          body: {
-            offsetHeight: 0,
-            scrollHeight: 0,
-          },
-          html: {
-            clientHeight: 0,
-            clientWidth: 0,
-            offsetHeight: 0,
-            scrollHeight: 0,
-            scrollWidth: 0,
-          },
-          window: {
-            devicePixelRatio: 1,
-            innerHeight: 768,
-            innerWidth: 1024,
-            outerHeight: 768,
-            outerWidth: 1024,
-            screenHeight: 0,
-            screenWidth: 0,
-          },
-        }
-      );
+    const MOCKED_EXECUTOR = jest
+      .fn()
+      // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce({
+        body: {
+          offsetHeight: 0,
+          scrollHeight: 0,
+        },
+        html: {
+          clientHeight: 0,
+          clientWidth: 0,
+          offsetHeight: 0,
+          scrollHeight: 0,
+          scrollWidth: 0,
+        },
+        window: {
+          devicePixelRatio: 1,
+          innerHeight: 768,
+          innerWidth: 1024,
+          outerHeight: 768,
+          outerWidth: 1024,
+          screenHeight: 0,
+          screenWidth: 0,
+        },
+      });
 
     expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
   });
@@ -57,32 +56,31 @@ describe('getEnrichedInstanceData', () => {
       platformName: 'Android',
       platformVersion: '8.0',
     };
-    const MOCKED_EXECUTOR = jest.fn()
-    // getEnrichedInstanceData for: getScreenDimensions
-      .mockResolvedValueOnce(
-        {
-          body: {
-            offsetHeight: 0,
-            scrollHeight: 0,
-          },
-          html: {
-            clientHeight: 0,
-            clientWidth: 0,
-            offsetHeight: 0,
-            scrollHeight: 0,
-            scrollWidth: 0,
-          },
-          window: {
-            devicePixelRatio: 1,
-            innerHeight: 768,
-            innerWidth: 1024,
-            outerHeight: 768,
-            outerWidth: 1024,
-            screenHeight: 0,
-            screenWidth: 0,
-          },
-        }
-      );
+    const MOCKED_EXECUTOR = jest
+      .fn()
+      // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce({
+        body: {
+          offsetHeight: 0,
+          scrollHeight: 0,
+        },
+        html: {
+          clientHeight: 0,
+          clientWidth: 0,
+          offsetHeight: 0,
+          scrollHeight: 0,
+          scrollWidth: 0,
+        },
+        window: {
+          devicePixelRatio: 1,
+          innerHeight: 768,
+          innerWidth: 1024,
+          outerHeight: 768,
+          outerWidth: 1024,
+          screenHeight: 0,
+          screenWidth: 0,
+        },
+      });
 
     expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
   });
@@ -100,32 +98,31 @@ describe('getEnrichedInstanceData', () => {
       platformName: 'Android',
       platformVersion: '8.0',
     };
-    const MOCKED_EXECUTOR = jest.fn()
-    // getEnrichedInstanceData for: getScreenDimensions
-      .mockResolvedValueOnce(
-        {
-          body: {
-            offsetHeight: 0,
-            scrollHeight: 0,
-          },
-          html: {
-            clientHeight: 0,
-            clientWidth: 0,
-            offsetHeight: 0,
-            scrollHeight: 0,
-            scrollWidth: 0,
-          },
-          window: {
-            devicePixelRatio: 1,
-            innerHeight: 768,
-            innerWidth: 1024,
-            outerHeight: 768,
-            outerWidth: 1024,
-            screenHeight: 0,
-            screenWidth: 0,
-          },
-        }
-      );
+    const MOCKED_EXECUTOR = jest
+      .fn()
+      // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce({
+        body: {
+          offsetHeight: 0,
+          scrollHeight: 0,
+        },
+        html: {
+          clientHeight: 0,
+          clientWidth: 0,
+          offsetHeight: 0,
+          scrollHeight: 0,
+          scrollWidth: 0,
+        },
+        window: {
+          devicePixelRatio: 1,
+          innerHeight: 768,
+          innerWidth: 1024,
+          outerHeight: 768,
+          outerWidth: 1024,
+          screenHeight: 0,
+          screenWidth: 0,
+        },
+      });
 
     expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, false)).toMatchSnapshot();
   });
@@ -143,32 +140,31 @@ describe('getEnrichedInstanceData', () => {
       platformName: 'iOS',
       platformVersion: '12.4',
     };
-    const MOCKED_EXECUTOR = jest.fn()
-    // getEnrichedInstanceData for: getScreenDimensions
-      .mockResolvedValueOnce(
-        {
-          body: {
-            offsetHeight: 0,
-            scrollHeight: 0,
-          },
-          html: {
-            clientHeight: 0,
-            clientWidth: 0,
-            offsetHeight: 0,
-            scrollHeight: 0,
-            scrollWidth: 0,
-          },
-          window: {
-            devicePixelRatio: 1,
-            innerHeight: 768,
-            innerWidth: 1024,
-            outerHeight: 768,
-            outerWidth: 1024,
-            screenHeight: 0,
-            screenWidth: 0,
-          },
-        }
-      );
+    const MOCKED_EXECUTOR = jest
+      .fn()
+      // getEnrichedInstanceData for: getScreenDimensions
+      .mockResolvedValueOnce({
+        body: {
+          offsetHeight: 0,
+          scrollHeight: 0,
+        },
+        html: {
+          clientHeight: 0,
+          clientWidth: 0,
+          offsetHeight: 0,
+          scrollHeight: 0,
+          scrollWidth: 0,
+        },
+        window: {
+          devicePixelRatio: 1,
+          innerHeight: 768,
+          innerWidth: 1024,
+          outerHeight: 768,
+          outerWidth: 1024,
+          screenHeight: 0,
+          screenWidth: 0,
+        },
+      });
 
     expect(await getEnrichedInstanceData(MOCKED_EXECUTOR, instanceOptions, true)).toMatchSnapshot();
   });

@@ -1,15 +1,15 @@
-import {defaultOptions, methodCompareOptions, screenMethodCompareOptions} from './options';
-import {ClassOptions} from './options.interface';
-import {ScreenMethodImageCompareCompareOptions} from '../methods/images.interfaces';
+import { defaultOptions, methodCompareOptions, screenMethodCompareOptions } from './options';
+import { ClassOptions } from './options.interface';
+import { ScreenMethodImageCompareCompareOptions } from '../methods/images.interfaces';
 
-describe('options', ()=>{
-  describe('defaultOptions', ()=>{
-    it('should return the default options when no options are provided', ()=>{
+describe('options', () => {
+  describe('defaultOptions', () => {
+    it('should return the default options when no options are provided', () => {
       expect(defaultOptions({})).toMatchSnapshot();
     });
 
-    it('should return the provided options when options are provided', ()=>{
-      const options:ClassOptions = {
+    it('should return the provided options when options are provided', () => {
+      const options: ClassOptions = {
         addressBarShadowPadding: 1,
         autoSaveBaseline: true,
         formatImageName: '{foo}-{bar}',
@@ -29,7 +29,7 @@ describe('options', ()=>{
         returnAllCompareData: true,
         saveAboveTolerance: 12,
         scaleImagesToSameSize: true,
-        tabbableOptions:{
+        tabbableOptions: {
           circle: {
             backgroundColor: 'backgroundColor',
             borderColor: 'borderColor',
@@ -51,14 +51,14 @@ describe('options', ()=>{
     });
   });
 
-  describe('methodCompareOptions', ()=>{
-    it('should not return the method options when no options are provided', ()=>{
+  describe('methodCompareOptions', () => {
+    it('should not return the method options when no options are provided', () => {
       expect(methodCompareOptions({})).toMatchSnapshot();
     });
 
-    it('should return the provided options when options are provided', ()=>{
+    it('should return the provided options when options are provided', () => {
       const options = {
-        blockOut: [{height: 1, width: 2, x: 3, y: 4}],
+        blockOut: [{ height: 1, width: 2, x: 3, y: 4 }],
         ignoreAlpha: true,
         ignoreAntialiasing: true,
         ignoreColors: true,
@@ -74,16 +74,16 @@ describe('options', ()=>{
     });
   });
 
-  describe('screenMethodCompareOptions', ()=>{
-    it('should not return the screen method options when no options are provided', ()=>{
+  describe('screenMethodCompareOptions', () => {
+    it('should not return the screen method options when no options are provided', () => {
       expect(screenMethodCompareOptions({})).toMatchSnapshot();
     });
 
-    it('should return the provided options when options are provided', ()=>{
-      const options:ScreenMethodImageCompareCompareOptions = {
+    it('should return the provided options when options are provided', () => {
+      const options: ScreenMethodImageCompareCompareOptions = {
         blockOutStatusBar: false,
         blockOutToolBar: false,
-        blockOut: [{height: 1, width: 2, x: 3, y: 4}],
+        blockOut: [{ height: 1, width: 2, x: 3, y: 4 }],
         ignoreAlpha: true,
         ignoreAntialiasing: true,
         ignoreColors: true,
@@ -92,7 +92,7 @@ describe('options', ()=>{
         rawMisMatchPercentage: true,
         returnAllCompareData: true,
         saveAboveTolerance: 12,
-        scaleImagesToSameSize: true
+        scaleImagesToSameSize: true,
       };
 
       expect(screenMethodCompareOptions(options)).toMatchSnapshot();

@@ -8,7 +8,7 @@ export default function getDocumentScrollHeight(): number {
 
   // In some situations the default scrollheight can be equal to the viewport height
   // but the body scroll height can be different, then return that one
-  if ((viewPortHeight === scrollHeight) && (bodyScrollHeight > scrollHeight)) {
+  if (viewPortHeight === scrollHeight && bodyScrollHeight > scrollHeight) {
     return bodyScrollHeight;
   }
 

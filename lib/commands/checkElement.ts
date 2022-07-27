@@ -1,12 +1,12 @@
-import {executeImageCompare} from '../methods/images';
-import {checkIsMobile} from '../helpers/utils';
+import { executeImageCompare } from '../methods/images';
+import { checkIsMobile } from '../helpers/utils';
 import saveElement from './saveElement';
-import {ImageCompareResult} from '../methods/images.interfaces';
-import {Methods} from '../methods/methods.interface';
-import {InstanceData} from '../methods/instanceData.interfaces';
-import {Folders} from '../base.interface';
-import {CheckElementOptions, SaveElementOptions} from './element.interfaces';
-import {methodCompareOptions} from '../helpers/options';
+import { ImageCompareResult } from '../methods/images.interfaces';
+import { Methods } from '../methods/methods.interface';
+import { InstanceData } from '../methods/instanceData.interfaces';
+import { Folders } from '../base.interface';
+import { CheckElementOptions, SaveElementOptions } from './element.interfaces';
+import { methodCompareOptions } from '../helpers/options';
 
 /**
  * Compare  an image of the element
@@ -19,19 +19,22 @@ export default async function checkElement(
   tag: string,
   checkElementOptions: CheckElementOptions,
 ): Promise<ImageCompareResult | number> {
-
   // 1. Take the actual element screenshot and retrieve the needed data
   const saveElementOptions: SaveElementOptions = {
     wic: checkElementOptions.wic,
     method: {
-      ...('disableCSSAnimation' in checkElementOptions.method ? {disableCSSAnimation: checkElementOptions.method.disableCSSAnimation} : {}),
-      ...('hideScrollBars' in checkElementOptions.method ? {hideScrollBars: checkElementOptions.method.hideScrollBars} : {}),
-      ...('resizeDimensions' in checkElementOptions.method ? {resizeDimensions: checkElementOptions.method.resizeDimensions} : {}),
-      ...{hideElements: checkElementOptions.method.hideElements || []},
-      ...{removeElements: checkElementOptions.method.removeElements || []},
-    }
+      ...('disableCSSAnimation' in checkElementOptions.method
+        ? { disableCSSAnimation: checkElementOptions.method.disableCSSAnimation }
+        : {}),
+      ...('hideScrollBars' in checkElementOptions.method ? { hideScrollBars: checkElementOptions.method.hideScrollBars } : {}),
+      ...('resizeDimensions' in checkElementOptions.method
+        ? { resizeDimensions: checkElementOptions.method.resizeDimensions }
+        : {}),
+      ...{ hideElements: checkElementOptions.method.hideElements || [] },
+      ...{ removeElements: checkElementOptions.method.removeElements || [] },
+    },
   };
-  const {devicePixelRatio, fileName} = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);
+  const { devicePixelRatio, fileName } = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);
 
   // 2a. Determine the options
   const compareOptions = methodCompareOptions(checkElementOptions.method);

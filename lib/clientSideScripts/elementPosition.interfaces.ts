@@ -1,4 +1,3 @@
-import {RectanglesOutput} from '../methods/rectangles.interfaces';
+import { RectanglesOutput } from '../methods/rectangles.interfaces';
 
-export interface ElementPosition extends RectanglesOutput {
-}
+export type ElementPosition = RectanglesOutput;

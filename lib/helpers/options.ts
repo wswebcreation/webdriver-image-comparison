@@ -1,6 +1,6 @@
-import {DEFAULT_FORMAT_STRING, DEFAULT_SHADOW, DEFAULT_TABBABLE_OPTIONS, FULL_PAGE_SCROLL_TIMEOUT,} from './constants';
-import {ClassOptions, DefaultOptions, LogLevel} from './options.interface';
-import {MethodImageCompareCompareOptions, ScreenMethodImageCompareCompareOptions} from '../methods/images.interfaces';
+import { DEFAULT_FORMAT_STRING, DEFAULT_SHADOW, DEFAULT_TABBABLE_OPTIONS, FULL_PAGE_SCROLL_TIMEOUT } from './constants';
+import { ClassOptions, DefaultOptions, LogLevel } from './options.interface';
+import { MethodImageCompareCompareOptions, ScreenMethodImageCompareCompareOptions } from '../methods/images.interfaces';
 
 /**
  * Determine the default options
@@ -40,7 +40,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
       rawMisMatchPercentage: options.rawMisMatchPercentage || false,
       returnAllCompareData: options.returnAllCompareData || false,
       saveAboveTolerance: options.saveAboveTolerance || 0,
-      scaleImagesToSameSize: options.scaleImagesToSameSize || false
+      scaleImagesToSameSize: options.scaleImagesToSameSize || false,
     },
 
     /**
@@ -54,18 +54,20 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
       line: {
         ...DEFAULT_TABBABLE_OPTIONS.line,
         ...(options.tabbableOptions && options.tabbableOptions.line ? options.tabbableOptions.line : {}),
-      }
-    }
+      },
+    },
   };
 }
 
 /**
  * Determine the screen method compare options
  */
-export function screenMethodCompareOptions(options: ScreenMethodImageCompareCompareOptions): ScreenMethodImageCompareCompareOptions {
+export function screenMethodCompareOptions(
+  options: ScreenMethodImageCompareCompareOptions,
+): ScreenMethodImageCompareCompareOptions {
   return {
-    ...('blockOutStatusBar' in options ? {blockOutStatusBar: options.blockOutStatusBar} : {}),
-    ...('blockOutToolBar' in options ? {blockOutToolBar: options.blockOutToolBar} : {}),
+    ...('blockOutStatusBar' in options ? { blockOutStatusBar: options.blockOutStatusBar } : {}),
+    ...('blockOutToolBar' in options ? { blockOutToolBar: options.blockOutToolBar } : {}),
     ...methodCompareOptions(options),
   };
 }
@@ -75,15 +77,15 @@ export function screenMethodCompareOptions(options: ScreenMethodImageCompareComp
  */
 export function methodCompareOptions(options: any): MethodImageCompareCompareOptions {
   return {
-    ...('blockOut' in options ? {blockOut: options.blockOut} : {}),
-    ...('ignoreAlpha' in options ? {ignoreAlpha: options.ignoreAlpha} : {}),
-    ...('ignoreAntialiasing' in options ? {ignoreAntialiasing: options.ignoreAntialiasing} : {}),
-    ...('ignoreColors' in options ? {ignoreColors: options.ignoreColors} : {}),
-    ...('ignoreLess' in options ? {ignoreLess: options.ignoreLess} : {}),
-    ...('ignoreNothing' in options ? {ignoreNothing: options.ignoreNothing} : {}),
-    ...('rawMisMatchPercentage' in options ? {rawMisMatchPercentage: options.rawMisMatchPercentage} : {}),
-    ...('returnAllCompareData' in options ? {returnAllCompareData: options.returnAllCompareData} : {}),
-    ...('saveAboveTolerance' in options ? {saveAboveTolerance: options.saveAboveTolerance} : {}),
-    ...('scaleImagesToSameSize' in options ? {scaleImagesToSameSize: options.scaleImagesToSameSize} : {}),
+    ...('blockOut' in options ? { blockOut: options.blockOut } : {}),
+    ...('ignoreAlpha' in options ? { ignoreAlpha: options.ignoreAlpha } : {}),
+    ...('ignoreAntialiasing' in options ? { ignoreAntialiasing: options.ignoreAntialiasing } : {}),
+    ...('ignoreColors' in options ? { ignoreColors: options.ignoreColors } : {}),
+    ...('ignoreLess' in options ? { ignoreLess: options.ignoreLess } : {}),
+    ...('ignoreNothing' in options ? { ignoreNothing: options.ignoreNothing } : {}),
+    ...('rawMisMatchPercentage' in options ? { rawMisMatchPercentage: options.rawMisMatchPercentage } : {}),
+    ...('returnAllCompareData' in options ? { returnAllCompareData: options.returnAllCompareData } : {}),
+    ...('saveAboveTolerance' in options ? { saveAboveTolerance: options.saveAboveTolerance } : {}),
+    ...('scaleImagesToSameSize' in options ? { scaleImagesToSameSize: options.scaleImagesToSameSize } : {}),
   };
 }

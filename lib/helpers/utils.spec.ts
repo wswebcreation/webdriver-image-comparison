@@ -1,5 +1,5 @@
-import {pathExistsSync, removeSync} from 'fs-extra';
-import {join} from 'path';
+import { pathExistsSync, removeSync } from 'fs-extra';
+import { join } from 'path';
 import {
   calculateDprData,
   checkAndroidChromeDriverScreenshot,
@@ -14,19 +14,17 @@ import {
   getAndCreatePath,
   getScreenshotSize,
   getToolBarShadowPadding,
-  waitFor,
 } from './utils';
-import {FormatFileNameOptions, GetAndCreatePathOptions} from './utils.interfaces';
-import {IMAGE_STRING} from '../mocks/mocks';
+import { FormatFileNameOptions, GetAndCreatePathOptions } from './utils.interfaces';
+import { IMAGE_STRING } from '../mocks/mocks';
 
 describe('utils', () => {
-
   describe('getAndCreatePath', () => {
     const folder = join(process.cwd(), '/.tmp/utils');
 
     afterEach(() => removeSync(folder));
 
-    it('should create the folder and return the folder name for a device that needs to have it\s own folder', () => {
+    it('should create the folder and return the folder name for a device that needs to have its own folder', () => {
       const options: GetAndCreatePathOptions = {
         browserName: '',
         deviceName: 'deviceName',
@@ -40,7 +38,7 @@ describe('utils', () => {
       expect(pathExistsSync(expectedFolderName)).toMatchSnapshot();
     });
 
-    it('should create the folder and return the folder name for a browser that needs to have it\s own folder', () => {
+    it('should create the folder and return the folder name for a browser that needs to have its own folder', () => {
       const options: GetAndCreatePathOptions = {
         browserName: 'browser',
         deviceName: '',
@@ -89,7 +87,8 @@ describe('utils', () => {
     };
 
     it('should format a string with all options provided', () => {
-      formatFileOptions.formatImageName = 'browser.{browserName}-{browserVersion}-platform.{platformName}-{platformVersion}-dpr.{dpr}-{height}-{logName}-{name}-{tag}-{width}';
+      formatFileOptions.formatImageName =
+        'browser.{browserName}-{browserVersion}-platform.{platformName}-{platformVersion}-dpr.{dpr}-{height}-{logName}-{name}-{tag}-{width}';
       formatFileOptions.browserName = 'chrome';
       formatFileOptions.browserVersion = '74';
       formatFileOptions.logName = 'chrome-latest';

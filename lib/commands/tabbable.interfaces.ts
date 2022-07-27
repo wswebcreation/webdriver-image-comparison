@@ -1,5 +1,5 @@
-import {DefaultOptions} from '../helpers/options.interface';
-import {CheckFullPageMethodOptions, SaveFullPageMethodOptions} from "./fullPage.interfaces";
+import { DefaultOptions } from '../helpers/options.interface';
+import { CheckFullPageMethodOptions, SaveFullPageMethodOptions } from './fullPage.interfaces';
 
 export interface SaveTabbableOptions {
   wic: DefaultOptions;

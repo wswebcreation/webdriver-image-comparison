@@ -1,5 +1,5 @@
-import {ElementCoordinate} from './drawTabbableOnCanvas.interfaces';
-import {CircleOptions, LineOptions, TabbableOptions} from '../commands/tabbable.interfaces';
+import { ElementCoordinate } from './drawTabbableOnCanvas.interfaces';
+import { CircleOptions, LineOptions, TabbableOptions } from '../commands/tabbable.interfaces';
 
 /**
  * This method is based on this blog post
@@ -20,16 +20,16 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
   const accessibleElements = tabbable();
 
   // 4a. Iterate over all accessibleElements and get the coordinates
-  const elementCoordinates: ElementCoordinate[] = accessibleElements.map(node => {
+  const elementCoordinates: ElementCoordinate[] = accessibleElements.map((node) => {
     const currentElement = node.getBoundingClientRect();
 
     return {
-      x: currentElement.left + (currentElement.width / 2),
-      y: currentElement.top + (currentElement.height / 2),
+      x: currentElement.left + currentElement.width / 2,
+      y: currentElement.top + currentElement.height / 2,
     };
   });
   // 4b. Add the starting coordinates
-  elementCoordinates.unshift({x: 0, y: 0});
+  elementCoordinates.unshift({ x: 0, y: 0 });
   // 4c. Iterate over all coordinates and draw lines and circles
   elementCoordinates.forEach((elementCoordinate, i) => {
     if (i === 0) {
@@ -93,8 +93,8 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
    * Get all tabbable elements based on tabindex and then regular dom order
    */
   function tabbable(): HTMLElement[] {
-    let regularTabbables = [];
-    let orderedTabbables = [];
+    const regularTabbables = [];
+    const orderedTabbables = [];
     const candidateSelectors = [
       'input',
       'select',
@@ -106,7 +106,7 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
       'video[controls]',
       '[contenteditable]:not([contenteditable="false"])',
     ].join(',');
-    let candidates: NodeListOf<HTMLElement> = document.querySelectorAll(candidateSelectors);
+    const candidates: NodeListOf<HTMLElement> = document.querySelectorAll(candidateSelectors);
 
     for (let i = 0; i < candidates.length; i++) {
       const candidate = candidates[i];
@@ -128,29 +128,26 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
       }
     }
 
-    return Array.prototype.slice.call(orderedTabbables.sort(<any>sortOrderedTabbables).map(a => a.node).concat(regularTabbables));
+    return Array.prototype.slice.call(
+      orderedTabbables
+        .sort(<any>sortOrderedTabbables)
+        .map((a) => a.node)
+        .concat(regularTabbables),
+    );
   }
 
   /**
    * Is the node tabbable
    */
   function isNodeMatchingSelectorTabbable(node: HTMLElement): boolean {
-    return !(
-      !isNodeMatchingSelectorFocusable(node) ||
-      isNonTabbableRadio(node) ||
-      getTabindex(node) < 0
-    );
+    return !(!isNodeMatchingSelectorFocusable(node) || isNonTabbableRadio(node) || getTabindex(node) < 0);
   }
 
   /**
    * Check if the node has a focused state
    */
   function isNodeMatchingSelectorFocusable(node: HTMLElement): boolean {
-    return !(
-      (node.hasAttribute('disabled') || node.getAttribute('disabled'))
-      || isHiddenInput(node)
-      || isHidden(node)
-    );
+    return !(node.hasAttribute('disabled') || node.getAttribute('disabled') || isHiddenInput(node) || isHidden(node));
   }
 
   /**
@@ -176,8 +173,8 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
    */
   function sortOrderedTabbables(nodeA: HTMLElement, nodeB: HTMLElement): number {
     return nodeA.tabIndex === nodeB.tabIndex
-      // This is so bad :(, fix this!
-      ? (<any>nodeA).documentOrder - (<any>nodeB).documentOrder
+      ? // This is so bad :(, fix this!
+        (<any>nodeA).documentOrder - (<any>nodeB).documentOrder
       : nodeA.tabIndex - nodeB.tabIndex;
   }
 
@@ -231,17 +228,15 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
   /**
    * Is the radio input tabbable
    */
-  function isTabbableRadio(node: HTMLInputElement):boolean {
+  function isTabbableRadio(node: HTMLInputElement): boolean {
     if (!node.name) {
       return true;
     }
     // This won't account for the edge case where you have radio groups with the same
     // in separate forms on the same page.
     // This is bad :(, but don't know how to fix this typing
-    let radioSet = (<any>node.ownerDocument).querySelectorAll(
-      `input[type="radio"][name="${node.name}"]`
-    );
-    let checked = getCheckedRadio(radioSet);
+    const radioSet = (<any>node.ownerDocument).querySelectorAll(`input[type="radio"][name="${node.name}"]`);
+    const checked = getCheckedRadio(radioSet);
 
     return !checked || checked === node;
   }
@@ -252,9 +247,7 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
   function isHidden(node: HTMLElement): boolean {
     // offsetParent being null will allow detecting cases where an element is invisible or inside an invisible element,
     // as long as the element does not use position: fixed. For them, their visibility has to be checked directly as well.
-    return (
-      node.offsetParent === null || getComputedStyle(node).visibility === 'hidden'
-    );
+    return node.offsetParent === null || getComputedStyle(node).visibility === 'hidden';
   }
 
   /**
@@ -267,7 +260,7 @@ export default function drawTabbableOnCanvas(drawOptions: TabbableOptions) {
 
     // In some situations the default scrollheight can be equal to the viewport height
     // but the body scroll height can be different, then return that one
-    if ((viewPortHeight === scrollHeight) && (bodyScrollHeight > scrollHeight)) {
+    if (viewPortHeight === scrollHeight && bodyScrollHeight > scrollHeight) {
       return bodyScrollHeight;
     }
 

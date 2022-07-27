@@ -7,8 +7,5 @@
     "variable-name": [true, "ban-keywords"],
     "no-inner-declarations": [true, "function"]
   },
-  "rulesDirectory": [
-    "node_modules/vrsource-tslint-rules/rules",
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"]
 }

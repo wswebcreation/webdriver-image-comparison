@@ -1,23 +1,23 @@
-import {ScreenDimensions} from './screenDimensions.interfaces';
+import { ScreenDimensions } from './screenDimensions.interfaces';
 
 /**
  * Get all the screen dimensions
  */
-export default function getScreenDimensions():ScreenDimensions {
+export default function getScreenDimensions(): ScreenDimensions {
   const body = document.body;
   const html = document.documentElement;
 
   const bodyDimensions = {
     scrollHeight: body == null ? 0 : body.scrollHeight,
-    offsetHeight: body == null ? 0 : body.offsetHeight
+    offsetHeight: body == null ? 0 : body.offsetHeight,
   };
-  
+
   const htmlDimensions = {
     clientHeight: html == null ? 0 : html.clientHeight,
     clientWidth: html == null ? 0 : html.clientWidth,
     scrollHeight: html == null ? 0 : html.scrollHeight,
     scrollWidth: html == null ? 0 : html.scrollWidth,
-    offsetHeight: html == null ? 0 : html.offsetHeight
+    offsetHeight: html == null ? 0 : html.offsetHeight,
   };
 
   const windowDimensions = {
@@ -34,7 +34,7 @@ export default function getScreenDimensions():ScreenDimensions {
     dimensions: {
       body: bodyDimensions,
       html: htmlDimensions,
-      window: windowDimensions
-    }
+      window: windowDimensions,
+    },
   };
 }

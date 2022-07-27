@@ -1,11 +1,11 @@
 import removeElementFromDom from './removeElementFromDom';
 
-describe('removeElementFromDom', ()=>{
-  it('should be able to remove the custom css', ()=>{
+describe('removeElementFromDom', () => {
+  it('should be able to remove the custom css', () => {
     // Set up our document body
     const id = 'test';
     const cssText = 'body:{width:100%}';
-    const head = document.head || document.getElementsByTagName('head')[ 0 ];
+    const head = document.head || document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
 
     style.id = id;
@@ -19,7 +19,6 @@ describe('removeElementFromDom', ()=>{
     expect(document.head.textContent).toMatchSnapshot();
   });
 
-
   it('should do nothing if custom css is not present', () => {
     const id = 'test';
 
@@ -32,7 +31,7 @@ describe('removeElementFromDom', ()=>{
 
   it('should do nothing if document.head is null', () => {
     const id = 'test';
-    Object.defineProperty(document, 'head', {value: null});
+    Object.defineProperty(document, 'head', { value: null });
 
     removeElementFromDom(id);
 

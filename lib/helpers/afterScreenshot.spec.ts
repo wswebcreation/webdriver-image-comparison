@@ -1,7 +1,7 @@
 import afterScreenshot from './afterScreenshot';
-import {join} from 'path';
-import {removeSync} from 'fs-extra';
-import {LogLevel} from "./options.interface";
+import { join } from 'path';
+import { removeSync } from 'fs-extra';
+import { LogLevel } from './options.interface';
 
 describe('afterScreenshot', () => {
   const folder = join(process.cwd(), '/.tmp/afterScreenshot');
@@ -40,15 +40,15 @@ describe('afterScreenshot', () => {
         tag: 'tag',
       },
       logLevel: LogLevel.debug,
-      hideElements: [<HTMLElement><any>'<div></div>'],
+      hideElements: [<HTMLElement>(<any>'<div></div>')],
       platformName: '',
-      removeElements: [<HTMLElement><any>'<div></div>'],
+      removeElements: [<HTMLElement>(<any>'<div></div>')],
     };
 
     expect(await afterScreenshot(MOCKED_EXECUTOR, options)).toEqual({
-      'devicePixelRatio': 2,
-      'fileName': 'tag-browserName-1400x850-dpr-2.png',
-      'path': `${process.cwd()}/.tmp/afterScreenshot/desktop_browserName`,
+      devicePixelRatio: 2,
+      fileName: 'tag-browserName-1400x850-dpr-2.png',
+      path: `${process.cwd()}/.tmp/afterScreenshot/desktop_browserName`,
     });
   });
 });
