@@ -22,18 +22,36 @@ describe('getElementPositionTopScreenNativeMobile', () => {
   it('should get the element position to the top of the screen for a mobile browser', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.innerHeight, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: false,
+        safeArea: 0,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should get the element position to the top of the screen for an app in portrait mode', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.height, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: false,
+        safeArea: 0,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should get the element position to the top of the screen for an app in landscape mode', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.width, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: true,
+        safeArea: 44,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 });

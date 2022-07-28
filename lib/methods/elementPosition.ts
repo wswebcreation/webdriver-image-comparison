@@ -62,8 +62,15 @@ export async function getElementPositionDesktop(
  */
 export async function getElementPositionIos(executor: Executor, element: HTMLElement): Promise<ElementPosition> {
   // Determine status and address bar height
-  const { height } = (<StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS))
-    .statusAddressBar;
+  const {
+    isLandscape,
+    safeArea,
+    statusAddressBar: { height },
+  } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS);
 
-  return executor(getElementPositionTopScreenNativeMobile, height, element);
+  return executor(getElementPositionTopScreenNativeMobile, element, {
+    statusBarAddressBarHeight: height,
+    isLandscape,
+    safeArea,
+  });
 }

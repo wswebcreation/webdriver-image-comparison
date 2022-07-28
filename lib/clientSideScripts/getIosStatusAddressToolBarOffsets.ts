@@ -47,6 +47,8 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
 
   // 5. Return the offsets
   return {
+    isLandscape,
+    safeArea: currentOffsets.SAFE_AREA,
     statusAddressBar: {
       height: statusAddressBarHeight,
       width: deviceWidth,

@@ -5,8 +5,16 @@ import { ElementPosition } from './elementPosition.interfaces';
  * This method is used for Android native and iOS screenshots
  */
 export function getElementPositionTopScreenNativeMobile(
-  statusBarAddressBarHeight: number,
   element: HTMLElement,
+  {
+    isLandscape,
+    safeArea,
+    statusBarAddressBarHeight,
+  }: {
+    isLandscape: boolean;
+    safeArea: number;
+    statusBarAddressBarHeight: number;
+  },
 ): ElementPosition {
   // Get some heights and widths
   const { width, height } = window.screen;
@@ -26,7 +34,7 @@ export function getElementPositionTopScreenNativeMobile(
   return {
     height: elementPosition.height,
     width: elementPosition.width,
-    x: elementPosition.left,
+    x: elementPosition.left + (isLandscape ? safeArea : 0),
     y: y,
   };
 }
