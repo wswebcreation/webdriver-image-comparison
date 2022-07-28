@@ -1,7 +1,7 @@
 import hideScrollBars from '../clientSideScripts/hideScrollbars';
 import setCustomCss from '../clientSideScripts/setCustomCss';
 import { CUSTOM_CSS_ID } from './constants';
-import { checkIsMobile, getAddressBarShadowPadding, getToolBarShadowPadding } from './utils';
+import { checkIsMobile, getAddressBarShadowPadding, getToolBarShadowPadding, waitFor } from './utils';
 import getEnrichedInstanceData from '../methods/instanceData';
 import { BeforeScreenshotOptions, BeforeScreenshotResult } from './beforeScreenshot.interface';
 import { Executor } from '../methods/methods.interface';
@@ -65,6 +65,9 @@ export default async function beforeScreenshot(
   // Set some custom css
   if (disableCSSAnimation || checkIsMobile(platformName)) {
     await executor(setCustomCss, { addressBarPadding, disableCSSAnimation, id: CUSTOM_CSS_ID, toolBarPadding });
+    // Wait at least 500 milliseconds to make sure the css is applied
+    // Not every device is fast enough to apply the css faster
+    await waitFor(500);
   }
 
   // Get all the needed instance data
