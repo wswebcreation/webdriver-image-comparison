@@ -9,22 +9,27 @@ export function getElementPositionTopScreenNativeMobile(
   {
     isLandscape,
     safeArea,
+    screenHeight,
+    screenWidth,
+    sideBarWidth,
     statusBarAddressBarHeight,
   }: {
     isLandscape: boolean;
     safeArea: number;
+    screenHeight: number;
+    screenWidth: number;
+    sideBarWidth: number;
     statusBarAddressBarHeight: number;
   },
 ): ElementPosition {
   // Get some heights and widths
-  const { width, height } = window.screen;
   const { innerHeight } = window;
 
   // Determine element position
   const elementPosition = element.getBoundingClientRect();
   let y;
 
-  if (height === innerHeight || width === innerHeight) {
+  if (screenHeight === innerHeight || screenWidth === innerHeight) {
     /* an app with a transparent statusbar */
     y = elementPosition.top;
   } else {
@@ -34,7 +39,7 @@ export function getElementPositionTopScreenNativeMobile(
   return {
     height: elementPosition.height,
     width: elementPosition.width,
-    x: elementPosition.left + (isLandscape ? safeArea : 0),
+    x: elementPosition.left + (isLandscape ? safeArea : 0) + sideBarWidth,
     y: y,
   };
 }

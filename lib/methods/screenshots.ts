@@ -38,6 +38,8 @@ export async function getBase64FullPageScreenshotsData(
     isHybridApp,
     isIos,
     logLevel,
+    screenHeight,
+    screenWidth,
     toolBarShadowPadding,
   } = options;
   const desktopOptions = {
@@ -50,15 +52,31 @@ export async function getBase64FullPageScreenshotsData(
   const nativeMobileOptions = {
     ...desktopOptions,
     addressBarShadowPadding,
+    screenHeight,
+    screenWidth,
     toolBarShadowPadding,
   };
 
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
-    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>(
-      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp)
-    )).statusAddressBar.height;
-    const androidNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
+    const {
+      isLandscape,
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusAddressBar: { height: statusAddressBarHeight },
+    } = <StatusAddressToolBarOffsets>await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp);
+
+    const androidNativeMobileOptions = {
+      ...nativeMobileOptions,
+      isLandscape,
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusAddressBarHeight,
+    };
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, androidNativeMobileOptions);
   } else if (isAndroid && isAndroidChromeDriverScreenshot) {
@@ -68,9 +86,25 @@ export async function getBase64FullPageScreenshotsData(
     return getFullPageScreenshotsDataAndroidChromeDriver(takeScreenshot, executor, chromeDriverOptions);
   } else if (isIos) {
     // Create a fullpage screenshot for iOS. iOS screenshots will hold the status, address and toolbar so they need to be removed
-    const statusAddressBarHeight = (<StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS))
-      .statusAddressBar.height;
-    const iosNativeMobileOptions = { ...nativeMobileOptions, statusAddressBarHeight };
+    const {
+      isLandscape,
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusAddressBar: { height: statusAddressBarHeight },
+      toolBar: { y: iosHomeBarY },
+    } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS);
+    const iosNativeMobileOptions = {
+      ...nativeMobileOptions,
+      iosHomeBarY,
+      isLandscape,
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusAddressBarHeight,
+    };
 
     return getFullPageScreenshotsDataNativeMobile(takeScreenshot, executor, iosNativeMobileOptions);
   }
@@ -90,18 +124,32 @@ export async function getFullPageScreenshotsDataNativeMobile(
   const viewportScreenshots = [];
 
   // The addressBarShadowPadding and toolBarShadowPadding is used because the viewport has a shadow on the address and the tool bar
-  // so the cutout of the vieport needs to be a little bit smaller
+  // so the cutout of the viewport needs to be a little bit smaller
   const {
     addressBarShadowPadding,
     devicePixelRatio,
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight,
+    iosHomeBarY,
+    safeArea,
+    isLandscape,
     logLevel,
     statusAddressBarHeight,
+    screenHeight,
+    screenWidth,
+    sideBarWidth,
     toolBarShadowPadding,
   } = options;
-  const iosViewportHeight = innerHeight - addressBarShadowPadding - toolBarShadowPadding;
+  const deviceScreenHeight = isLandscape && screenWidth > screenHeight ? screenWidth : screenHeight;
+  const iosViewportHeight =
+    innerHeight -
+    addressBarShadowPadding -
+    toolBarShadowPadding -
+    // This is for iOS devices in landscape mode with a notch. They have a home bar at the bottom of the screen
+    // which is not part of the bottom toolbar. This home bar is not part of the viewport and needs to be subtracted
+    // 1133 is for iPads with a homebar, see the constants
+    (iosHomeBarY && ((isLandscape && safeArea) || deviceScreenHeight >= 1133) ? deviceScreenHeight - iosHomeBarY : 0);
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
@@ -130,7 +178,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // Take the screenshot and get the width
     const screenshot = await takeBase64Screenshot(takeScreenshot);
-    screenshotSizeWidth = getScreenshotSize(screenshot, devicePixelRatio).width;
+    screenshotSizeWidth = getScreenshotSize(screenshot, devicePixelRatio).width - sideBarWidth;
 
     // Determine scroll height and check if we need to scroll again
     scrollHeight = await executor(getDocumentScrollHeight);
@@ -155,6 +203,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
           canvasYPosition: scrollY,
           imageHeight: imageHeight,
           imageWidth: screenshotSizeWidth,
+          imageXPosition: sideBarWidth,
           imageYPosition: imageYPosition,
         },
         devicePixelRatio,
@@ -248,6 +297,7 @@ export async function getFullPageScreenshotsDataAndroidChromeDriver(
           canvasYPosition: scrollY,
           imageHeight: imageHeight,
           imageWidth: screenshotSize.width,
+          imageXPosition: 0,
           imageYPosition: imageYPosition,
         },
         devicePixelRatio,
@@ -352,6 +402,7 @@ export async function getFullPageScreenshotsDataDesktop(
           canvasYPosition: scrollY,
           imageHeight: imageHeight,
           imageWidth: screenshotSize.width,
+          imageXPosition: 0,
           imageYPosition: imageYPosition,
         },
         devicePixelRatio,

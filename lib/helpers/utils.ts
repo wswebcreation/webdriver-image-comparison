@@ -125,7 +125,10 @@ export function getToolBarShadowPadding(options: GetToolBarShadowPaddingOptions)
   const { platformName, browserName, toolBarShadowPadding, addShadowPadding } = options;
 
   return checkTestInMobileBrowser(platformName, browserName) && checkIsIos(platformName) && addShadowPadding
-    ? toolBarShadowPadding
+    ? checkIsIos(platformName)
+      ? // The 9 extra are for iOS home bar for iPhones with a notch or iPads with a home bar
+        toolBarShadowPadding + 9
+      : toolBarShadowPadding
     : 0;
 }
 

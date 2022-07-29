@@ -307,15 +307,14 @@ export async function makeFullPageBase64Image(screenshotsData: FullPageScreensho
 
   // Load all the images
   for (let i = 0; i < amountOfScreenshots; i++) {
-    const { canvasYPosition, imageHeight, imageWidth, imageYPosition } = screenshotsData.data[i];
+    const { canvasYPosition, imageHeight, imageWidth, imageXPosition, imageYPosition } = screenshotsData.data[i];
     const image = await loadImage(`data:image/png;base64,${screenshotsData.data[i].screenshot}`);
 
     ctx.drawImage(
       image,
       // Start at x/y pixels from the left and the top of the image (crop)
-      0,
+      imageXPosition,
       imageYPosition,
-      // 0, 0,
       // 'Get' a (w * h) area from the source image (crop)
       imageWidth,
       imageHeight,

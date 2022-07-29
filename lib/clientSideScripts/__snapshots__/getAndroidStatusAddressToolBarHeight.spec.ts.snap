@@ -2,6 +2,11 @@
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major and minor version in the navigator 1`] = `
 Object {
+  "isLandscape": false,
+  "safeArea": 0,
+  "screenHeight": 732,
+  "screenWidth": 412,
+  "sideBarWidth": 0,
   "statusAddressBar": Object {
     "height": 80,
     "width": 412,
@@ -19,6 +24,11 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
 Object {
+  "isLandscape": false,
+  "safeArea": 0,
+  "screenHeight": 732,
+  "screenWidth": 412,
+  "sideBarWidth": 0,
   "statusAddressBar": Object {
     "height": 80,
     "width": 412,
@@ -36,6 +46,11 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with only a major version in the navigator 1`] = `
 Object {
+  "isLandscape": false,
+  "safeArea": 0,
+  "screenHeight": 732,
+  "screenWidth": 412,
+  "sideBarWidth": 0,
   "statusAddressBar": Object {
     "height": 80,
     "width": 412,
@@ -53,6 +68,11 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the default toolbar height when the toolbar height will become negative 1`] = `
 Object {
+  "isLandscape": false,
+  "safeArea": 0,
+  "screenHeight": 732,
+  "screenWidth": 412,
+  "sideBarWidth": 0,
   "statusAddressBar": Object {
     "height": 24,
     "width": 412,
@@ -64,6 +84,50 @@ Object {
     "width": 412,
     "x": 0,
     "y": 684,
+  },
+}
+`;
+
+exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a device in landscape mode 1`] = `
+Object {
+  "isLandscape": true,
+  "safeArea": 0,
+  "screenHeight": 732,
+  "screenWidth": 732,
+  "sideBarWidth": 0,
+  "statusAddressBar": Object {
+    "height": 24,
+    "width": 412,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 104,
+    "width": 412,
+    "x": 0,
+    "y": 628,
+  },
+}
+`;
+
+exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a table in landscape mode 1`] = `
+Object {
+  "isLandscape": true,
+  "safeArea": 0,
+  "screenHeight": 1024,
+  "screenWidth": 1024,
+  "sideBarWidth": 0,
+  "statusAddressBar": Object {
+    "height": 24,
+    "width": 1024,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 140,
+    "width": 1024,
+    "x": 0,
+    "y": 628,
   },
 }
 `;

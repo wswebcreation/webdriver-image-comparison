@@ -74,6 +74,8 @@ export default async function saveFullPageScreen(
     isHybridApp,
     isIos: enrichedInstanceData.isIos,
     logLevel: logLevel,
+    screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
+    screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
     toolBarShadowPadding: enrichedInstanceData.toolBarShadowPadding,
   };
   const screenshotsData: FullPageScreenshotsData = await getBase64FullPageScreenshotsData(

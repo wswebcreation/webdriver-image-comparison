@@ -8,6 +8,7 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   // 1. Determine screen width/height to determine the current iPhone/iPad offset data
   //    For data on the screen sizes check the constants.ts-file
   const { width, height } = window.screen;
+  const { innerHeight } = window;
   const isIphone = width < 1024 && height < 1024;
   const deviceType = isIphone ? 'IPHONE' : 'IPAD';
   // Need to use matchMedia because the height/size is not always accurate when rotated
@@ -16,14 +17,25 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   const defaultPortraitHeight = isIphone ? 667 : 1024;
   const portraitHeight = width > height ? width : height;
   // Not sure if it's a bug, but in Landscape mode the height is the width
+  const deviceHeight = isLandscape ? width : height;
   const deviceWidth = isLandscape ? height : width;
+  // const deviceInnerHeight = isLandscape ? innerHeight : outerHeight;
   const offsetPortraitHeight =
     Object.keys(iosOffsets[deviceType]).indexOf(portraitHeight.toString()) > -1 ? portraitHeight : defaultPortraitHeight;
   const currentOffsets = iosOffsets[deviceType][offsetPortraitHeight][orientationType];
 
   // 2. Get the statusbar height
-  const statusBarHeight = currentOffsets.STATUS_BAR;
-  // 4. Determine the address bar height
+  let statusBarHeight = currentOffsets.STATUS_BAR;
+  // Dirty little hack, but the status bar of the iPad Pro (12.9 inch) (1st generation) has a status bar of 20px
+  // I wanted the data to be as generic as possible, so I added this hack
+  if (
+    (deviceHeight === 1366 || deviceWidth === 1366) &&
+    deviceType === 'IPAD' &&
+    innerHeight + currentOffsets.ADDRESS_BAR + currentOffsets.STATUS_BAR > deviceHeight
+  ) {
+    statusBarHeight = 20;
+  }
+  // 3. Determine the address bar height
   //    Since iOS 15 the address bar for iPhones is at the bottom by default
   //    This is also what we assume because we can't determine it from the
   //    web context
@@ -33,7 +45,6 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   // 4. Determine the toolbar offsets
   //    In Landscape mode the toolbar is hidden by default and we need to add
   //    home bar data
-  const { innerHeight } = window;
   const toolBarHeight = height - innerHeight - statusAddressBarHeight;
   const toolBarOffsets =
     isLandscape || toolBarHeight <= 0
@@ -49,6 +60,10 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   return {
     isLandscape,
     safeArea: currentOffsets.SAFE_AREA,
+    screenHeight: deviceHeight,
+    screenWidth: deviceWidth,
+    // We only have a side bar with iPads and in landscape mode
+    sideBarWidth: isLandscape && !isIphone ? deviceWidth - document.documentElement.scrollWidth : 0,
     statusAddressBar: {
       height: statusAddressBarHeight,
       width: deviceWidth,

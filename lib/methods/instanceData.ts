@@ -12,6 +12,7 @@ import {
 import getScreenDimensions from '../clientSideScripts/getScreenDimensions';
 import { Executor } from './methods.interface';
 import { EnrichedInstanceData, InstanceOptions } from './instanceData.interfaces';
+import { ScreenDimensions } from '../clientSideScripts/screenDimensions.interfaces';
 
 /**
  * Enrich the instance data with more data
@@ -22,7 +23,7 @@ export default async function getEnrichedInstanceData(
   addShadowPadding: boolean,
 ): Promise<EnrichedInstanceData> {
   // Get the current browser data
-  const browserData: any = await executor(getScreenDimensions);
+  const browserData: ScreenDimensions = await executor(getScreenDimensions);
   const { addressBarShadowPadding, toolBarShadowPadding, browserName, nativeWebScreenshot, platformName } = instanceOptions;
 
   // Determine some constants

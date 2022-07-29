@@ -65,12 +65,18 @@ export async function getElementPositionIos(executor: Executor, element: HTMLEle
   const {
     isLandscape,
     safeArea,
+    screenHeight,
+    screenWidth,
+    sideBarWidth,
     statusAddressBar: { height },
   } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS);
 
   return executor(getElementPositionTopScreenNativeMobile, element, {
-    statusBarAddressBarHeight: height,
     isLandscape,
     safeArea,
+    screenHeight,
+    screenWidth,
+    sideBarWidth,
+    statusBarAddressBarHeight: height,
   });
 }

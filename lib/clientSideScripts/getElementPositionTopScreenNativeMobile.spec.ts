@@ -3,8 +3,6 @@ import { getElementPositionTopScreenNativeMobile } from './getElementPositionTop
 
 describe('getElementPositionTopScreenNativeMobile', () => {
   beforeEach(() => {
-    Object.defineProperty(window.screen, 'width', { value: IOS_DEVICES.IPHONE.width, ...CONFIGURABLE });
-    Object.defineProperty(window.screen, 'height', { value: IOS_DEVICES.IPHONE.height, ...CONFIGURABLE });
     // @ts-ignore
     Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
@@ -26,6 +24,9 @@ describe('getElementPositionTopScreenNativeMobile', () => {
       getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
         isLandscape: false,
         safeArea: 0,
+        screenHeight: IOS_DEVICES.IPHONE.height,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
         statusBarAddressBarHeight: 94,
       }),
     ).toMatchSnapshot();
@@ -38,6 +39,9 @@ describe('getElementPositionTopScreenNativeMobile', () => {
       getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
         isLandscape: false,
         safeArea: 0,
+        screenHeight: IOS_DEVICES.IPHONE.height,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
         statusBarAddressBarHeight: 94,
       }),
     ).toMatchSnapshot();
@@ -50,6 +54,9 @@ describe('getElementPositionTopScreenNativeMobile', () => {
       getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
         isLandscape: true,
         safeArea: 44,
+        screenHeight: IOS_DEVICES.IPHONE.innerHeight,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
         statusBarAddressBarHeight: 94,
       }),
     ).toMatchSnapshot();
