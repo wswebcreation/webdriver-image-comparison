@@ -137,19 +137,17 @@ export async function getFullPageScreenshotsDataNativeMobile(
     logLevel,
     statusAddressBarHeight,
     screenHeight,
-    screenWidth,
     sideBarWidth,
     toolBarShadowPadding,
   } = options;
-  const deviceScreenHeight = isLandscape && screenWidth > screenHeight ? screenWidth : screenHeight;
   const iosViewportHeight =
     innerHeight -
     addressBarShadowPadding -
     toolBarShadowPadding -
     // This is for iOS devices in landscape mode with a notch. They have a home bar at the bottom of the screen
     // which is not part of the bottom toolbar. This home bar is not part of the viewport and needs to be subtracted
-    // 1133 is for iPads with a homebar, see the constants
-    (iosHomeBarY && ((isLandscape && safeArea) || deviceScreenHeight >= 1133) ? deviceScreenHeight - iosHomeBarY : 0);
+    // 1133 is for iPads with a home bar, see the constants
+    (iosHomeBarY && ((isLandscape && safeArea) || screenHeight >= 1133) ? screenHeight - iosHomeBarY : 0);
 
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
