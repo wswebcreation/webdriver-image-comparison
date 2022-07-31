@@ -146,7 +146,16 @@ export interface IgnoreBoxes {
 
 export interface CroppedBase64Image {
   base64Image: string;
-  rectangles: RectanglesOutput;
+  devicePixelRatio: number;
+  isLandscape: boolean;
   logLevel: LogLevel;
+  rectangles: RectanglesOutput;
   resizeDimensions?: number | ResizeDimensions;
+}
+
+export interface RotateBase64ImageOptions {
+  base64Image: string;
+  degrees: number;
+  newHeight: number;
+  newWidth: number;
 }

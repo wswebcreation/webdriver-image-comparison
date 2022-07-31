@@ -10,6 +10,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 678,
         isIos: true,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -53,6 +54,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: true,
         innerHeight: 678,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -96,6 +98,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 678,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -124,6 +127,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -152,6 +156,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 0,
@@ -181,6 +186,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 375,
@@ -210,6 +216,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 375,
@@ -242,6 +249,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: true,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();
@@ -255,6 +263,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: true,
         isIos: false,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();
@@ -268,6 +277,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: false,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();

@@ -37,6 +37,7 @@ export async function getBase64FullPageScreenshotsData(
     isAndroidChromeDriverScreenshot,
     isHybridApp,
     isIos,
+    isLandscape,
     logLevel,
     screenHeight,
     screenWidth,
@@ -60,7 +61,6 @@ export async function getBase64FullPageScreenshotsData(
   if (isAndroid && isAndroidNativeWebScreenshot) {
     // Create a fullpage screenshot for Android when native screenshot (so including status, address and toolbar) is created
     const {
-      isLandscape,
       safeArea,
       screenHeight,
       screenWidth,
@@ -87,14 +87,13 @@ export async function getBase64FullPageScreenshotsData(
   } else if (isIos) {
     // Create a fullpage screenshot for iOS. iOS screenshots will hold the status, address and toolbar so they need to be removed
     const {
-      isLandscape,
       safeArea,
       screenHeight,
       screenWidth,
       sideBarWidth,
       statusAddressBar: { height: statusAddressBarHeight },
       toolBar: { y: iosHomeBarY },
-    } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS);
+    } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape);
     const iosNativeMobileOptions = {
       ...nativeMobileOptions,
       iosHomeBarY,

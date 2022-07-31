@@ -4,7 +4,10 @@ import { IosOffsets } from '../helpers/constants.interfaces';
 /**
  * Get the current height of the iOS status and address bar
  */
-export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets): StatusAddressToolBarOffsets {
+export default function getIosStatusAddressToolBarOffsets(
+  iosOffsets: IosOffsets,
+  isLandscape: boolean,
+): StatusAddressToolBarOffsets {
   // 1. Determine screen width/height to determine the current iPhone/iPad offset data
   //    For data on the screen sizes check the constants.ts-file
   const { width, height } = window.screen;
@@ -12,7 +15,6 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
   const isIphone = width < 1024 && height < 1024;
   const deviceType = isIphone ? 'IPHONE' : 'IPAD';
   // Need to use matchMedia because the height/size is not always accurate when rotated
-  const isLandscape = window.matchMedia('(orientation: landscape)').matches;
   const orientationType = isLandscape ? 'LANDSCAPE' : 'PORTRAIT';
   const defaultPortraitHeight = isIphone ? 667 : 1024;
   const portraitHeight = width > height ? width : height;
@@ -58,7 +60,6 @@ export default function getIosStatusAddressToolBarOffsets(iosOffsets: IosOffsets
 
   // 5. Return the offsets
   return {
-    isLandscape,
     safeArea: currentOffsets.SAFE_AREA,
     screenHeight: deviceHeight,
     screenWidth: deviceWidth,

@@ -6,13 +6,11 @@ import { AndroidOffsets } from '../helpers/constants.interfaces';
  */
 export default function getAndroidStatusAddressToolBarOffsets(
   androidOffsets: AndroidOffsets,
-  isHybridApp: boolean,
+  { isHybridApp, isLandscape }: { isHybridApp: boolean; isLandscape: boolean },
 ): StatusAddressToolBarOffsets {
   // Determine version for the right offsets
   const { height, width } = window.screen;
   const { innerHeight } = window;
-  // Need to use matchMedia because the height/size is not always accurate when rotated
-  const isLandscape = window.matchMedia('(orientation: landscape)').matches;
   const match = navigator.appVersion.match(/Android (\d+).?(\d+)?.?(\d+)?/);
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = androidOffsets[majorVersion];
@@ -28,7 +26,6 @@ export default function getAndroidStatusAddressToolBarOffsets(
 
   // Determine status, address and tool bar height
   return {
-    isLandscape,
     // For now Android doesn't have a safe area
     safeArea: 0,
     screenHeight: deviceHeight,

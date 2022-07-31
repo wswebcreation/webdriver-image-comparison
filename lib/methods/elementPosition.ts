@@ -13,16 +13,29 @@ import { StatusAddressToolBarOffsets } from '../clientSideScripts/statusAddressT
  */
 export async function getElementPositionAndroid(
   executor: Executor,
-  isNativeWebScreenshot: boolean,
   element: HTMLElement,
+  { isAndroidNativeWebScreenshot, isLandscape }: { isAndroidNativeWebScreenshot: boolean; isLandscape: boolean },
 ): Promise<ElementPosition> {
-  // This is the native webscreenshot
-  if (isNativeWebScreenshot) {
-    const { height } = (<StatusAddressToolBarOffsets>(
-      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, false)
-    )).statusAddressBar;
+  // This is the native web screenshot
+  if (isAndroidNativeWebScreenshot) {
+    const {
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusAddressBar: { height },
+    } = <StatusAddressToolBarOffsets>(
+      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp: false, isLandscape })
+    );
 
-    return executor(getElementPositionTopScreenNativeMobile, height, element);
+    return executor(getElementPositionTopScreenNativeMobile, element, {
+      isLandscape,
+      safeArea,
+      screenHeight,
+      screenWidth,
+      sideBarWidth,
+      statusBarAddressBarHeight: height,
+    });
   }
 
   // This is the ChromeDriver screenshot
@@ -46,9 +59,8 @@ export async function getElementPositionAndroid(
  */
 export async function getElementPositionDesktop(
   executor: Executor,
-  innerHeight: number,
-  screenshotHeight: number,
   element: HTMLElement,
+  { innerHeight, screenshotHeight }: { innerHeight: number; screenshotHeight: number },
 ): Promise<ElementPosition> {
   if (screenshotHeight > innerHeight) {
     return executor(getElementPositionTopDom, element);
@@ -60,16 +72,19 @@ export async function getElementPositionDesktop(
 /**
  * Get the element position on iOS Safari
  */
-export async function getElementPositionIos(executor: Executor, element: HTMLElement): Promise<ElementPosition> {
+export async function getElementPositionIos(
+  executor: Executor,
+  element: HTMLElement,
+  { isLandscape }: { isLandscape: boolean },
+): Promise<ElementPosition> {
   // Determine status and address bar height
   const {
-    isLandscape,
     safeArea,
     screenHeight,
     screenWidth,
     sideBarWidth,
     statusAddressBar: { height },
-  } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS);
+  } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape);
 
   return executor(getElementPositionTopScreenNativeMobile, element, {
     isLandscape,

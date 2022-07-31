@@ -63,6 +63,7 @@ export default async function saveElement(
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isAndroid: enrichedInstanceData.isAndroid,
     isIos: enrichedInstanceData.isIos,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
   };
   const rectangles: RectanglesOutput = await determineElementRectangles({
     executor: methods.executor,
@@ -72,7 +73,15 @@ export default async function saveElement(
   });
 
   // 5.  Make a cropped base64 image with resizeDimensions
-  const croppedBase64Image = await makeCroppedBase64Image({ base64Image, rectangles, logLevel, resizeDimensions });
+  // @TODO: we have isLandscape here
+  const croppedBase64Image = await makeCroppedBase64Image({
+    base64Image,
+    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    logLevel,
+    rectangles,
+    resizeDimensions,
+  });
 
   // 6.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {

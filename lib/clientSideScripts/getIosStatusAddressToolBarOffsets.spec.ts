@@ -4,64 +4,64 @@ import { IOS_OFFSETS } from '../helpers/constants';
 
 describe('getIosStatusAddressToolBarOffsets', () => {
   it('should get the correct status, address and toolbar height for a default iPhone with iOS 14 in Portrait mode', () => {
-    setEnvironment('IOS', 14, 'IPHONE', false);
+    setEnvironment('IOS', 14, 'IPHONE');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for a default iPhone with iOS 14 in landscape mode', () => {
-    setEnvironment('IOS', 14, 'IPHONE', true);
+    setEnvironment('IOS', 14, 'IPHONE');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, true)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for a default iPhone with iOS 15 in portrait mode', () => {
-    setEnvironment('IOS', 15, 'IPHONE_X', false);
+    setEnvironment('IOS', 15, 'IPHONE_X');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for a default iPhone with iOS 15 in landscape mode', () => {
-    setEnvironment('IOS', 15, 'IPHONE_X', true);
+    setEnvironment('IOS', 15, 'IPHONE_X');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, true)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for an iPhone with extreme not known dimensions', () => {
-    setEnvironment('IOS', 15, 'IPHONE_HEIGHT', false);
+    setEnvironment('IOS', 15, 'IPHONE_HEIGHT');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for an iPad', () => {
-    setEnvironment('IOS', 15, 'IPAD', false);
+    setEnvironment('IOS', 15, 'IPAD');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for an iPad with big sizes', () => {
-    setEnvironment('IOS', 15, 'IPAD_BIG_SIZE', false);
+    setEnvironment('IOS', 15, 'IPAD_BIG_SIZE');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for an iPad in landscape mode', () => {
-    setEnvironment('IOS', 15, 'IPAD_LANDSCAPE', true);
+    setEnvironment('IOS', 15, 'IPAD_LANDSCAPE');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, true)).toMatchSnapshot();
   });
 
   it('should get the correct status, address and toolbar height for the iPad Pro 12.9 2017 hack in landscape mode', () => {
-    setEnvironment('IOS', 15, 'IPAD_PRO_LANDSCAPE', true);
+    setEnvironment('IOS', 15, 'IPAD_PRO_LANDSCAPE');
 
-    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS)).toMatchSnapshot();
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, true)).toMatchSnapshot();
   });
 });
 
 /**
  * Set the environment for the test
  */
-function setEnvironment(os: string, version: number, deviceType: string, isLandscape: boolean) {
+function setEnvironment(os: string, version: number, deviceType: string) {
   // @ts-ignore
   Object.defineProperty(navigator, 'appVersion', { value: NAVIGATOR_APP_VERSIONS[os][version], ...CONFIGURABLE });
   // @ts-ignore
@@ -78,11 +78,4 @@ function setEnvironment(os: string, version: number, deviceType: string, isLands
   Object.defineProperty(window, 'innerWidth', { value: IOS_DEVICES[deviceType].innerWidth, ...CONFIGURABLE });
   // @ts-ignore
   Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES[deviceType].innerHeight, ...CONFIGURABLE });
-  // @ts-ignore
-  Object.defineProperty(window, 'matchMedia', {
-    value: jest.fn().mockImplementation(() => ({
-      matches: isLandscape,
-    })),
-    ...CONFIGURABLE,
-  });
 }

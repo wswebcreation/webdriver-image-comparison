@@ -73,6 +73,7 @@ export default async function saveFullPageScreen(
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isHybridApp,
     isIos: enrichedInstanceData.isIos,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
     logLevel: logLevel,
     screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
     screenWidth: enrichedInstanceData.dimensions.window.screenWidth,

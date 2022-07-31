@@ -2,7 +2,6 @@
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major and minor version in the navigator 1`] = `
 Object {
-  "isLandscape": false,
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
@@ -24,7 +23,6 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
 Object {
-  "isLandscape": false,
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
@@ -46,7 +44,6 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with only a major version in the navigator 1`] = `
 Object {
-  "isLandscape": false,
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
@@ -68,7 +65,6 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the default toolbar height when the toolbar height will become negative 1`] = `
 Object {
-  "isLandscape": false,
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
@@ -90,7 +86,6 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a device in landscape mode 1`] = `
 Object {
-  "isLandscape": true,
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 732,
@@ -112,7 +107,6 @@ Object {
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a table in landscape mode 1`] = `
 Object {
-  "isLandscape": true,
   "safeArea": 0,
   "screenHeight": 1024,
   "screenWidth": 1024,

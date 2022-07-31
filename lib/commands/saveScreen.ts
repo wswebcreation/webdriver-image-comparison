@@ -58,11 +58,18 @@ export default async function saveScreen(
     isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isIos: enrichedInstanceData.isIos,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
   };
   const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
 
   // 4.  Make a cropped base64 image
-  const croppedBase64Image: string = await makeCroppedBase64Image({ base64Image, rectangles, logLevel });
+  const croppedBase64Image: string = await makeCroppedBase64Image({
+    base64Image,
+    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    logLevel,
+    rectangles,
+  });
 
   // 5.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {

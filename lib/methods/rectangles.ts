@@ -22,17 +22,17 @@ export async function determineElementRectangles({
   element,
 }: ElementRectangles): Promise<RectanglesOutput> {
   // Determine screenshot data
-  const { devicePixelRatio, innerHeight, isAndroid, isAndroidNativeWebScreenshot, isIos } = options;
+  const { devicePixelRatio, innerHeight, isAndroid, isAndroidNativeWebScreenshot, isIos, isLandscape } = options;
   const { height } = getScreenshotSize(base64Image, devicePixelRatio);
   let elementPosition;
 
   // Determine the element position on the screenshot
   if (isIos) {
-    elementPosition = await getElementPositionIos(executor, element);
+    elementPosition = await getElementPositionIos(executor, element, { isLandscape });
   } else if (isAndroid) {
-    elementPosition = await getElementPositionAndroid(executor, isAndroidNativeWebScreenshot, element);
+    elementPosition = await getElementPositionAndroid(executor, element, { isAndroidNativeWebScreenshot, isLandscape });
   } else {
-    elementPosition = await getElementPositionDesktop(executor, innerHeight, height, element);
+    elementPosition = await getElementPositionDesktop(executor, element, { innerHeight, screenshotHeight: height });
   }
 
   // Validate if the element is visible
@@ -62,18 +62,26 @@ export async function determineElementRectangles({
  */
 export function determineScreenRectangles(base64Image: string, options: ScreenRectanglesOptions): RectanglesOutput {
   // Determine screenshot data
-  const { devicePixelRatio, innerHeight, innerWidth, isIos, isAndroidChromeDriverScreenshot, isAndroidNativeWebScreenshot } =
-    options;
+  const {
+    devicePixelRatio,
+    innerHeight,
+    innerWidth,
+    isIos,
+    isAndroidChromeDriverScreenshot,
+    isAndroidNativeWebScreenshot,
+    isLandscape,
+  } = options;
   const { height, width } = getScreenshotSize(base64Image, devicePixelRatio);
 
   // Determine the width
   const screenshotWidth = isIos || isAndroidChromeDriverScreenshot ? width : innerWidth;
+  const screenshotHeight = isIos || isAndroidNativeWebScreenshot ? height : innerHeight;
 
   // Determine the rectangles
   return calculateDprData(
     {
-      height: isIos || isAndroidNativeWebScreenshot ? height : innerHeight,
-      width: screenshotWidth,
+      height: isLandscape ? screenshotWidth : screenshotHeight,
+      width: isLandscape ? screenshotHeight : screenshotWidth,
       x: 0,
       y: 0,
     },

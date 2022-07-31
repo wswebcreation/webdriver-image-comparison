@@ -14,6 +14,8 @@ export interface RectanglesOptions {
 export interface ElementRectanglesOptions extends RectanglesOptions {
   // If this is an Android device
   isAndroid: boolean;
+  // If it's landscape
+  isLandscape: boolean;
 }
 
 export interface ScreenRectanglesOptions extends RectanglesOptions {
@@ -21,6 +23,8 @@ export interface ScreenRectanglesOptions extends RectanglesOptions {
   innerWidth: number;
   // If this is an Android ChromeDriver screenshot
   isAndroidChromeDriverScreenshot: boolean;
+  // If it's landscape
+  isLandscape: boolean;
 }
 
 export interface RectanglesOutput {
