@@ -86,7 +86,10 @@ export default async function saveFullPageScreen(
   );
 
   // 4.  Make a fullpage base64 image
-  const fullPageBase64Image: string = await makeFullPageBase64Image(screenshotsData);
+  const fullPageBase64Image: string = await makeFullPageBase64Image(screenshotsData, {
+    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+  });
 
   // 5.  The after the screenshot methods
   const afterOptions = {

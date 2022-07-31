@@ -66,7 +66,9 @@ export async function getBase64FullPageScreenshotsData(
       screenWidth,
       sideBarWidth,
       statusAddressBar: { height: statusAddressBarHeight },
-    } = <StatusAddressToolBarOffsets>await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp);
+    } = <StatusAddressToolBarOffsets>(
+      await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp, isLandscape })
+    );
 
     const androidNativeMobileOptions = {
       ...nativeMobileOptions,
@@ -151,7 +153,9 @@ export async function getFullPageScreenshotsDataNativeMobile(
   // Start with an empty array, during the scroll it will be filled because a page could also have a lazy loading
   const amountOfScrollsArray = [];
   let scrollHeight: number;
+  let screenshotSizeHeight: number;
   let screenshotSizeWidth: number;
+  let isRotated = false;
 
   for (let i = 0; i <= amountOfScrollsArray.length; i++) {
     // Determine and start scrolling
@@ -175,7 +179,9 @@ export async function getFullPageScreenshotsDataNativeMobile(
 
     // Take the screenshot and get the width
     const screenshot = await takeBase64Screenshot(takeScreenshot);
+    screenshotSizeHeight = getScreenshotSize(screenshot, devicePixelRatio).height - sideBarWidth;
     screenshotSizeWidth = getScreenshotSize(screenshot, devicePixelRatio).width - sideBarWidth;
+    isRotated = isLandscape && screenshotSizeHeight > screenshotSizeWidth;
 
     // Determine scroll height and check if we need to scroll again
     scrollHeight = await executor(getDocumentScrollHeight);
@@ -196,10 +202,10 @@ export async function getFullPageScreenshotsDataNativeMobile(
     viewportScreenshots.push({
       ...calculateDprData(
         {
-          canvasWidth: screenshotSizeWidth,
+          canvasWidth: isRotated ? screenshotSizeHeight : screenshotSizeWidth,
           canvasYPosition: scrollY,
           imageHeight: imageHeight,
-          imageWidth: screenshotSizeWidth,
+          imageWidth: isRotated ? screenshotSizeHeight : screenshotSizeWidth,
           imageXPosition: sideBarWidth,
           imageYPosition: imageYPosition,
         },
@@ -225,7 +231,7 @@ export async function getFullPageScreenshotsDataNativeMobile(
     ...calculateDprData(
       {
         fullPageHeight: scrollHeight - addressBarShadowPadding - toolBarShadowPadding,
-        fullPageWidth: screenshotSizeWidth,
+        fullPageWidth: isRotated ? screenshotSizeHeight : screenshotSizeWidth,
       },
       devicePixelRatio,
     ),

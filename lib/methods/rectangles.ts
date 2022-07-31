@@ -76,12 +76,13 @@ export function determineScreenRectangles(base64Image: string, options: ScreenRe
   // Determine the width
   const screenshotWidth = isIos || isAndroidChromeDriverScreenshot ? width : innerWidth;
   const screenshotHeight = isIos || isAndroidNativeWebScreenshot ? height : innerHeight;
+  const isRotated = isLandscape && height > width;
 
   // Determine the rectangles
   return calculateDprData(
     {
-      height: isLandscape ? screenshotWidth : screenshotHeight,
-      width: isLandscape ? screenshotHeight : screenshotWidth,
+      height: isRotated ? screenshotWidth : screenshotHeight,
+      width: isRotated ? screenshotHeight : screenshotWidth,
       x: 0,
       y: 0,
     },

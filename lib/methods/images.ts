@@ -315,7 +315,10 @@ export async function executeImageCompare(
 /**
  * Make a full page image with Canvas
  */
-export async function makeFullPageBase64Image(screenshotsData: FullPageScreenshotsData): Promise<string> {
+export async function makeFullPageBase64Image(
+  screenshotsData: FullPageScreenshotsData,
+  { devicePixelRatio, isLandscape }: { devicePixelRatio: number; isLandscape: boolean },
+): Promise<string> {
   const amountOfScreenshots = screenshotsData.data.length;
   const { fullPageHeight: canvasHeight, fullPageWidth: canvasWidth } = screenshotsData;
   const canvas = createCanvas(canvasWidth, canvasHeight);
@@ -323,8 +326,21 @@ export async function makeFullPageBase64Image(screenshotsData: FullPageScreensho
 
   // Load all the images
   for (let i = 0; i < amountOfScreenshots; i++) {
+    const currentScreenshot = screenshotsData.data[i].screenshot;
+    // Determine if the image is rotated
+    const { height: screenshotHeight, width: screenshotWidth } = getScreenshotSize(currentScreenshot, devicePixelRatio);
+    const isRotated = isLandscape && screenshotHeight > screenshotWidth;
+    // If so we need to rotate is -90 degrees
+    const newBase64Image = isRotated
+      ? await rotateBase64Image({
+          base64Image: currentScreenshot,
+          degrees: -90,
+          newHeight: screenshotWidth,
+          newWidth: screenshotHeight,
+        })
+      : currentScreenshot;
     const { canvasYPosition, imageHeight, imageWidth, imageXPosition, imageYPosition } = screenshotsData.data[i];
-    const image = await loadImage(`data:image/png;base64,${screenshotsData.data[i].screenshot}`);
+    const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
 
     ctx.drawImage(
       image,
