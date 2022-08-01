@@ -28,6 +28,7 @@ export default function getIosStatusAddressToolBarOffsets(
 
   // 2. Get the statusbar height
   let statusBarHeight = currentOffsets.STATUS_BAR;
+  let isIpadPro129FirstGeneration = false;
   // Dirty little hack, but the status bar of the iPad Pro (12.9 inch) (1st generation) has a status bar of 20px
   // I wanted the data to be as generic as possible, so I added this hack
   if (
@@ -36,6 +37,7 @@ export default function getIosStatusAddressToolBarOffsets(
     innerHeight + currentOffsets.ADDRESS_BAR + currentOffsets.STATUS_BAR > deviceHeight
   ) {
     statusBarHeight = 20;
+    isIpadPro129FirstGeneration = true;
   }
   // 3. Determine the address bar height
   //    Since iOS 15 the address bar for iPhones is at the bottom by default
@@ -50,7 +52,10 @@ export default function getIosStatusAddressToolBarOffsets(
   const toolBarHeight = height - innerHeight - statusAddressBarHeight;
   const toolBarOffsets =
     isLandscape || toolBarHeight <= 0
-      ? currentOffsets.HOME_BAR
+      ? // The iPad Pro (12.9 inch) (1st generation) doesn't have a home bar
+        isIpadPro129FirstGeneration
+        ? { height: 0, width: 0, x: 0, y: 0 }
+        : currentOffsets.HOME_BAR
       : {
           height: toolBarHeight,
           width: deviceWidth,
