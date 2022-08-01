@@ -22,7 +22,7 @@ export async function getElementPositionAndroid(
       safeArea,
       screenHeight,
       screenWidth,
-      sideBarWidth,
+      sideBar: { width: sideBarWidth },
       statusAddressBar: { height },
     } = <StatusAddressToolBarOffsets>(
       await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp: false, isLandscape })
@@ -82,7 +82,7 @@ export async function getElementPositionIos(
     safeArea,
     screenHeight,
     screenWidth,
-    sideBarWidth,
+    sideBar: { width: sideBarWidth },
     statusAddressBar: { height },
   } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape);
 

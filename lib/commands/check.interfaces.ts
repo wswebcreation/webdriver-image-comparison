@@ -3,6 +3,8 @@ import { RectanglesOutput } from '../methods/rectangles.interfaces';
 export interface CheckMethodOptions {
   // Block out array with x, y, width and height values
   blockOut?: RectanglesOutput[];
+  // Block out the side bar on iOS iPads in landscape mode
+  blockOutSideBar?: boolean;
   // Block out the status bar yes or no
   blockOutStatusBar?: boolean;
   // Block out the tool bar yes or no

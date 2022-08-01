@@ -49,6 +49,7 @@ describe('afterScreenshot', () => {
     expect(await afterScreenshot(MOCKED_EXECUTOR, options)).toEqual({
       devicePixelRatio: 2,
       fileName: 'tag-browserName-1400x850-dpr-2.png',
+      isLandscape: false,
       path: `${process.cwd()}/.tmp/afterScreenshot/desktop_browserName`,
     });
   });

@@ -234,6 +234,7 @@ export async function executeImageCompare(
   // 4b.	Determine the ignore rectangles for the blockouts
   const blockOut = 'blockOut' in imageCompareOptions ? imageCompareOptions.blockOut : [];
   const statusAddressToolBarOptions = {
+    blockOutSideBar: imageCompareOptions.blockOutSideBar,
     blockOutStatusBar: imageCompareOptions.blockOutStatusBar,
     blockOutToolBar: imageCompareOptions.blockOutToolBar,
     isHybridApp,

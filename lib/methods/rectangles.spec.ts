@@ -16,6 +16,12 @@ describe('rectangles', () => {
         .fn()
         // getElementPositionIos for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -60,6 +66,12 @@ describe('rectangles', () => {
         .fn()
         // getElementPositionAndroid for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 0,
+            width: 0,
+            x: 0,
+            y: 0,
+          },
           statusAddressBar: {
             height: 20,
             width: 375,
@@ -287,6 +299,7 @@ describe('rectangles', () => {
   describe('determineStatusAddressToolBarRectangles', () => {
     it('should determine the rectangles for the iOS with a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: true,
         blockOutStatusBar: true,
         blockOutToolBar: true,
         isAndroidNativeWebScreenshot: false,
@@ -300,6 +313,12 @@ describe('rectangles', () => {
         .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -319,6 +338,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for the iOS without a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: false,
         blockOutStatusBar: false,
         blockOutToolBar: false,
         isAndroidNativeWebScreenshot: false,
@@ -332,6 +352,12 @@ describe('rectangles', () => {
         .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -351,6 +377,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for Android with a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: true,
         blockOutStatusBar: true,
         blockOutToolBar: true,
         isAndroidNativeWebScreenshot: true,
@@ -364,6 +391,12 @@ describe('rectangles', () => {
         .fn()
         // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 0,
+            width: 0,
+            x: 0,
+            y: 0,
+          },
           statusAddressBar: {
             height: 40,
             width: 320,
@@ -383,6 +416,7 @@ describe('rectangles', () => {
 
     it('should determine the rectangles that there are no rectangles for this device', async () => {
       const options = {
+        blockOutSideBar: false,
         blockOutStatusBar: false,
         blockOutToolBar: false,
         isAndroidNativeWebScreenshot: false,

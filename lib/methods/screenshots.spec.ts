@@ -34,7 +34,7 @@ describe('screenshots', () => {
           statusAddressBar: { height: 56 },
           screenHeight: 768,
           screenWidth: 1366,
-          sideBarWidth: 0,
+          sideBar: { width: 0 },
         })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
@@ -80,7 +80,7 @@ describe('screenshots', () => {
           statusAddressBar: { height: 56 },
           screenHeight: 768,
           screenWidth: 1366,
-          sideBarWidth: 0,
+          sideBar: { width: 0 },
         })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
@@ -233,7 +233,7 @@ describe('screenshots', () => {
           safeArea: 44,
           screenHeight: 768,
           screenWidth: 1366,
-          sideBarWidth: 0,
+          sideBar: { width: 0 },
           statusAddressBar: { height: 94 },
           toolBar: { y: 329 },
         })
@@ -288,7 +288,7 @@ describe('screenshots', () => {
           safeArea: 0,
           screenHeight: 384,
           screenWidth: 683,
-          sideBarWidth: 160,
+          sideBar: { width: 160 },
           statusAddressBar: { height: 47 },
           toolBar: { y: 75 },
         })
@@ -344,7 +344,7 @@ describe('screenshots', () => {
           safeArea: 44,
           screenHeight: 768,
           screenWidth: 1366,
-          sideBarWidth: 0,
+          sideBar: { width: 0 },
           statusAddressBar: { height: 94 },
           toolBar: { y: 329 },
         })

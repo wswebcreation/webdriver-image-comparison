@@ -4,7 +4,7 @@ export interface StatusAddressToolBarOffsets {
   safeArea: number;
   screenHeight: number;
   screenWidth: number;
-  sideBarWidth: number;
+  sideBar: RectanglesOutput;
   statusAddressBar: RectanglesOutput;
   toolBar: RectanglesOutput;
 }

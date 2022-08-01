@@ -35,6 +35,8 @@ export interface RectanglesOutput {
 }
 
 export interface StatusAddressToolBarRectanglesOptions {
+  // If the side bar needs to be blocked out
+  blockOutSideBar: boolean;
   // If the status and address bar needs to be blocked out
   blockOutStatusBar: boolean;
   // If the tool bar needs to be blocked out

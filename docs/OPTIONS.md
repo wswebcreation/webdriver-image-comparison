@@ -574,23 +574,32 @@ Compare options are the options that can be set during instantiation of the plug
 
 Compare images and discard alpha.
 
+### `blockOutSideBar`
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Mandatory:** no
+- **Remark:** _Can only be used for `checkScreen()`. It will override the plugin setting. This is **iPad only**_
+
+Automatically block out the side bar for iPads in landscape mode during comparisons. This prevents failures on the tab/private/bookmark native component.
+
 ### `blockOutStatusBar`
 
 - **Type:** `boolean`
 - **Default:** `false`
 - **Mandatory:** no
-- **Remark:** _Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting_
+- **Remark:** _Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting. This is **Mobile only**_
 
-Automatically blockout the status and address bar during comparions. This prevents failures on time, wifi or battery status. This is mobile only.
+Automatically block out the status and address bar during comparisons. This prevents failures on time, wifi or battery status.
 
 ### `blockOutToolBar`
 
 - **Type:** `boolean`
 - **Default:** `false`
 - **Mandatory:** no
-- **Remark:** _Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting_
+- **Remark:** _Can also be used for `checkElement`, `checkScreen()` and `checkFullPageScreen()`. It will override the plugin setting. This is **Mobile only**_
 
-Automatically blockout the tool bar. This is mobile only.
+Automatically block out the tool bar.
 
 ### `ignoreAntialiasing`
 

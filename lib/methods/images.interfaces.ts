@@ -37,6 +37,8 @@ export interface ImageCompareOptions {
 }
 
 export interface WicImageCompareOptions {
+  // Block out the side bar yes or no
+  blockOutSideBar: boolean;
   // Block out the status bar yes or no
   blockOutStatusBar: boolean;
   // Block out the tool bar yes or no
@@ -67,6 +69,8 @@ export interface DefaultImageCompareCompareOptions extends MethodImageCompareCom
 export interface ScreenMethodImageCompareCompareOptions
   extends DefaultImageCompareCompareOptions,
     MethodImageCompareCompareOptions {
+  // Block out the side bar yes or no
+  blockOutSideBar?: boolean;
   // Block out the status bar yes or no
   blockOutStatusBar?: boolean;
   // Block out the tool bar yes or no

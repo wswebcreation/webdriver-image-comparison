@@ -57,14 +57,24 @@ export default function getIosStatusAddressToolBarOffsets(
           x: 0,
           y: height - toolBarHeight,
         };
+  // 5. Return the sidebar offsets
+  const sideBarOffsets =
+    isLandscape && !isIphone
+      ? {
+          height: deviceHeight - statusAddressBarHeight,
+          width: deviceWidth - document.documentElement.scrollWidth,
+          x: 0,
+          y: statusAddressBarHeight,
+        }
+      : { height: 0, width: 0, x: 0, y: 0 };
 
-  // 5. Return the offsets
+  // 6. Return the offsets
   return {
     safeArea: currentOffsets.SAFE_AREA,
     screenHeight: deviceHeight,
     screenWidth: deviceWidth,
     // We only have a side bar with iPads and in landscape mode
-    sideBarWidth: isLandscape && !isIphone ? deviceWidth - document.documentElement.scrollWidth : 0,
+    sideBar: sideBarOffsets,
     statusAddressBar: {
       height: statusAddressBarHeight,
       width: deviceWidth,

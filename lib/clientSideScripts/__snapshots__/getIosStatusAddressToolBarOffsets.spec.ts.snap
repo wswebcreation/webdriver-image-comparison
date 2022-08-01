@@ -5,7 +5,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 667,
   "screenWidth": 375,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 70,
     "width": 375,
@@ -26,7 +31,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 375,
   "screenWidth": 667,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 50,
     "width": 667,
@@ -47,7 +57,12 @@ Object {
   "safeArea": 44,
   "screenHeight": 375,
   "screenWidth": 812,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 50,
     "width": 812,
@@ -68,7 +83,12 @@ Object {
   "safeArea": 44,
   "screenHeight": 812,
   "screenWidth": 375,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 44,
     "width": 375,
@@ -89,7 +109,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 1366,
   "screenWidth": 1024,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 74,
     "width": 1024,
@@ -110,7 +135,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 1024,
   "screenWidth": 1366,
-  "sideBarWidth": 320,
+  "sideBar": Object {
+    "height": 950,
+    "width": 320,
+    "x": 0,
+    "y": 74,
+  },
   "statusAddressBar": Object {
     "height": 74,
     "width": 1366,
@@ -131,7 +161,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 5432,
   "screenWidth": 9876,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 70,
     "width": 9876,
@@ -152,7 +187,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 896,
   "screenWidth": 1024,
-  "sideBarWidth": 0,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
   "statusAddressBar": Object {
     "height": 70,
     "width": 1024,
@@ -173,7 +213,12 @@ Object {
   "safeArea": 0,
   "screenHeight": 1024,
   "screenWidth": 1366,
-  "sideBarWidth": 320,
+  "sideBar": Object {
+    "height": 954,
+    "width": 320,
+    "x": 0,
+    "y": 70,
+  },
   "statusAddressBar": Object {
     "height": 70,
     "width": 1366,

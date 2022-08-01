@@ -64,7 +64,7 @@ export async function getBase64FullPageScreenshotsData(
       safeArea,
       screenHeight,
       screenWidth,
-      sideBarWidth,
+      sideBar: { width: sideBarWidth },
       statusAddressBar: { height: statusAddressBarHeight },
     } = <StatusAddressToolBarOffsets>(
       await executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp, isLandscape })
@@ -92,7 +92,7 @@ export async function getBase64FullPageScreenshotsData(
       safeArea,
       screenHeight,
       screenWidth,
-      sideBarWidth,
+      sideBar: { width: sideBarWidth },
       statusAddressBar: { height: statusAddressBarHeight },
       toolBar: { y: iosHomeBarY },
     } = <StatusAddressToolBarOffsets>await executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape);

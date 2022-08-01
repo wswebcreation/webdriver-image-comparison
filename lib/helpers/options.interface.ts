@@ -38,10 +38,12 @@ export interface ClassOptions {
   /**
    * Compare options
    */
-  // Automatically blockout the status and address bar during comparions. This prevents failures on time, wifi or battery status.
+  // Automatically block out the side bar for iPads in landscape mode during comparisons. This prevents failures on the tab/private/bookmark native component.
+  blockOutSideBar?: boolean;
+  // Automatically block out the status and address bar during comparisons. This prevents failures on time, wifi or battery status.
   // This is mobile only.
   blockOutStatusBar?: boolean;
-  // Automatically blockout the tool bar. This is mobile only.
+  // Automatically block out the tool bar. This is mobile only.
   blockOutToolBar?: boolean;
   // Compare images and discard alpha.
   ignoreAlpha?: boolean;
@@ -85,6 +87,7 @@ export interface DefaultOptions {
 }
 
 interface CompareOptions {
+  blockOutSideBar: boolean;
   blockOutStatusBar: boolean;
   blockOutToolBar: boolean;
   ignoreAlpha: boolean;
