@@ -33,6 +33,12 @@ describe('getIosStatusAddressToolBarOffsets', () => {
     expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, false)).toMatchSnapshot();
   });
 
+  it('should get the correct status bar height for an iPhone 11 with iOS 13 to validate the iPhone 11 hack in landscape mode', () => {
+    setEnvironment('IOS', 13, 'IPHONE_11');
+
+    expect(getIosStatusAddressToolBarOffsets(IOS_OFFSETS, true)).toMatchSnapshot();
+  });
+
   it('should get the correct status bar height for an iPhone 11 with iOS 15', () => {
     setEnvironment('IOS', 15, 'IPHONE_11');
 

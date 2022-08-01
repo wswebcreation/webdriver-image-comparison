@@ -26,6 +26,32 @@ Object {
 }
 `;
 
+exports[`getIosStatusAddressToolBarOffsets should get the correct status bar height for an iPhone 11 with iOS 13 to validate the iPhone 11 hack in landscape mode 1`] = `
+Object {
+  "safeArea": 44,
+  "screenHeight": 375,
+  "screenWidth": 896,
+  "sideBar": Object {
+    "height": 0,
+    "width": 0,
+    "x": 0,
+    "y": 0,
+  },
+  "statusAddressBar": Object {
+    "height": 50,
+    "width": 896,
+    "x": 0,
+    "y": 0,
+  },
+  "toolBar": Object {
+    "height": 9,
+    "width": 234,
+    "x": 331,
+    "y": 399,
+  },
+}
+`;
+
 exports[`getIosStatusAddressToolBarOffsets should get the correct status bar height for an iPhone 11 with iOS 15 1`] = `
 Object {
   "safeArea": 48,

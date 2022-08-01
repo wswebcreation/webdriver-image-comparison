@@ -28,8 +28,11 @@ export default function getIosStatusAddressToolBarOffsets(
   // 2. Get the statusbar height
   let statusBarHeight = currentOffsets.STATUS_BAR;
   let isIpadPro129FirstGeneration = false;
-  // Dirty little hack, but the status bar of the iPad Pro (12.9 inch) (1st generation) has a status bar of 20px
-  // I wanted the data to be as generic as possible, so I added this hack
+  let safeArea = currentOffsets.SAFE_AREA;
+  /**
+   * Dirty little hack, but the status bar of the iPad Pro (12.9 inch) (1st generation)
+   * has a status bar of 20px I wanted the data to be as generic as possible, so I added this hack
+   */
   if (
     (deviceHeight === 1366 || deviceWidth === 1366) &&
     deviceType === 'IPAD' &&
@@ -38,9 +41,16 @@ export default function getIosStatusAddressToolBarOffsets(
     statusBarHeight = 20;
     isIpadPro129FirstGeneration = true;
   }
-  // Dirty little hack for iPhone XSMax|XR|11|11ProMax for iOS 13. The status bar is 44 when in portrait mode
-  if ((deviceHeight === 896 || deviceWidth === 896) && deviceType === 'IPHONE' && osVersion === 13 && !isLandscape) {
-    statusBarHeight = 44;
+  /**
+   * Dirty little hack for iPhone XSMax|XR|11|11ProMax for iOS 13. The status bar is 44 when in
+   * portrait mode and the safe area is 44 when in landscape mode
+   */
+  if ((deviceHeight === 896 || deviceWidth === 896) && deviceType === 'IPHONE' && osVersion === 13) {
+    if (isLandscape) {
+      safeArea = 44;
+    } else {
+      statusBarHeight = 44;
+    }
   }
   // 3. Determine the address bar height
   //    Since iOS 15 the address bar for iPhones is at the bottom by default
@@ -77,7 +87,7 @@ export default function getIosStatusAddressToolBarOffsets(
 
   // 6. Return the offsets
   return {
-    safeArea: currentOffsets.SAFE_AREA,
+    safeArea,
     screenHeight: deviceHeight,
     screenWidth: deviceWidth,
     // We only have a side bar with iPads and in landscape mode
