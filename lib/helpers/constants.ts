@@ -273,8 +273,6 @@ export const IOS_OFFSETS: IosOffsets = {
       },
       PORTRAIT: {
         SAFE_AREA: 0,
-        // The iPad Pro (12.9 inch) (1st generation) has a status bar of 20px
-        // STATUS_BAR: 24,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
         HOME_BAR: { x: 352, y: 1351, height: 9, width: 320 },
