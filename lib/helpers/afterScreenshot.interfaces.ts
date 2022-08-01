@@ -5,6 +5,8 @@ export interface ScreenshotOutput {
   devicePixelRatio: number;
   // The filename
   fileName: string;
+  // Is Landscape
+  isLandscape: boolean;
   // The path where the file can be found
   path: string;
 }
@@ -24,6 +26,8 @@ export interface AfterScreenshotOptions {
   fileName: ScreenshotFileNameOptions;
   // Elements that need to be hidden (visibility: hidden) before saving a screenshot
   hideElements: (HTMLElement | HTMLElement[])[];
+  // If it's in landscape mode
+  isLandscape: boolean;
   // Level to show logs
   logLevel: LogLevel;
   // The platform name of the instance

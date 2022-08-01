@@ -26,6 +26,8 @@ export interface ImageCompareOptions {
   folderOptions: ImageCompareFolderOptions;
   // Is it an hybrid app or not
   isHybridApp: boolean;
+  // If it's in Landscape mode
+  isLandscape: boolean;
   // Level to show logs
   logLevel: LogLevel;
   // The name of the platform

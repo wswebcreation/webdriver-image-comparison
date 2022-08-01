@@ -204,7 +204,7 @@ export async function executeImageCompare(
   isViewPortScreenshot = false,
 ): Promise<ImageCompareResult | number> {
   // 1. Set some variables
-  const { devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, logLevel, platformName } = options;
+  const { devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, isLandscape, logLevel, platformName } = options;
   const { actualFolder, autoSaveBaseline, baselineFolder, browserName, deviceName, diffFolder, isMobile, savePerInstance } =
     options.folderOptions;
   let diffFilePath;
@@ -234,13 +234,14 @@ export async function executeImageCompare(
   // 4b.	Determine the ignore rectangles for the blockouts
   const blockOut = 'blockOut' in imageCompareOptions ? imageCompareOptions.blockOut : [];
   const statusAddressToolBarOptions = {
-    isHybridApp,
-    isMobile,
-    isViewPortScreenshot,
-    platformName,
-    isAndroidNativeWebScreenshot,
     blockOutStatusBar: imageCompareOptions.blockOutStatusBar,
     blockOutToolBar: imageCompareOptions.blockOutToolBar,
+    isHybridApp,
+    isLandscape,
+    isMobile,
+    isViewPortScreenshot,
+    isAndroidNativeWebScreenshot,
+    platformName,
   };
 
   const ignoredBoxes = blockOut

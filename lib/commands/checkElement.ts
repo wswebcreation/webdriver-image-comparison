@@ -34,7 +34,14 @@ export default async function checkElement(
       ...{ removeElements: checkElementOptions.method.removeElements || [] },
     },
   };
-  const { devicePixelRatio, fileName } = await saveElement(methods, instanceData, folders, element, tag, saveElementOptions);
+  const { devicePixelRatio, fileName, isLandscape } = await saveElement(
+    methods,
+    instanceData,
+    folders,
+    element,
+    tag,
+    saveElementOptions,
+  );
 
   // 2a. Determine the options
   const compareOptions = methodCompareOptions(checkElementOptions.method);
@@ -57,6 +64,7 @@ export default async function checkElement(
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkElementOptions.wic.isHybridApp,
+    isLandscape,
     logLevel: checkElementOptions.wic.logLevel,
     platformName: instanceData.platformName,
   };

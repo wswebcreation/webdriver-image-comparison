@@ -35,20 +35,22 @@ export interface RectanglesOutput {
 }
 
 export interface StatusAddressToolBarRectanglesOptions {
+  // If the status and address bar needs to be blocked out
+  blockOutStatusBar: boolean;
+  // If the tool bar needs to be blocked out
+  blockOutToolBar: boolean;
+  // The name of the platform
+  isAndroidNativeWebScreenshot: boolean;
   // Is it an hybrid app or not
   isHybridApp: boolean;
+  // If it's in landscape mode
+  isLandscape: boolean;
   // If the instance is a mobile phone
   isMobile: boolean;
   // If the comparison needs to be done for a viewport screenshot or not
   isViewPortScreenshot: boolean;
   // The name of the platform
   platformName: string;
-  // The name of the platform
-  isAndroidNativeWebScreenshot: boolean;
-  // If the status and address bar needs to be blocked out
-  blockOutStatusBar: boolean;
-  // If the tool bar needs to be blocked out
-  blockOutToolBar: boolean;
 }
 
 export type StatusAddressToolBarRectangles = Array<RectanglesOutput>;

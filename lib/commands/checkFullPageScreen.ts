@@ -34,7 +34,13 @@ export default async function checkFullPageScreen(
       ...{ hideAfterFirstScroll: checkFullPageOptions.method.hideAfterFirstScroll || [] },
     },
   };
-  const { devicePixelRatio, fileName } = await saveFullPageScreen(methods, instanceData, folders, tag, saveFullPageOptions);
+  const { devicePixelRatio, fileName, isLandscape } = await saveFullPageScreen(
+    methods,
+    instanceData,
+    folders,
+    tag,
+    saveFullPageOptions,
+  );
 
   // 2a. Determine the options
   const compareOptions = methodCompareOptions(checkFullPageOptions.method);
@@ -57,6 +63,7 @@ export default async function checkFullPageScreen(
     },
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkFullPageOptions.wic.isHybridApp,
+    isLandscape,
     logLevel: checkFullPageOptions.wic.logLevel,
     platformName: instanceData.platformName,
   };

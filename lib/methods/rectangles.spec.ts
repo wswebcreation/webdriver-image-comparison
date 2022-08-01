@@ -287,13 +287,14 @@ describe('rectangles', () => {
   describe('determineStatusAddressToolBarRectangles', () => {
     it('should determine the rectangles for the iOS with a status and toolbar blockout', async () => {
       const options = {
+        blockOutStatusBar: true,
+        blockOutToolBar: true,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: true,
-        blockOutToolBar: true,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -318,13 +319,14 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for the iOS without a status and toolbar blockout', async () => {
       const options = {
+        blockOutStatusBar: false,
+        blockOutToolBar: false,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: false,
-        blockOutToolBar: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -349,13 +351,14 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for Android with a status and toolbar blockout', async () => {
       const options = {
+        blockOutStatusBar: true,
+        blockOutToolBar: true,
+        isAndroidNativeWebScreenshot: true,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'Android',
-        isAndroidNativeWebScreenshot: true,
-        blockOutStatusBar: true,
-        blockOutToolBar: true,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -380,13 +383,14 @@ describe('rectangles', () => {
 
     it('should determine the rectangles that there are no rectangles for this device', async () => {
       const options = {
+        blockOutStatusBar: false,
+        blockOutToolBar: false,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: false,
         platformName: 'Android',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: false,
-        blockOutToolBar: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()

@@ -52,18 +52,20 @@ export default async function saveElement(
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
+  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
+  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
 
   // 3.  Take the screenshot
   const base64Image: string = await takeBase64Screenshot(methods.screenShot);
 
   // 4.  Determine the rectangles
   const elementRectangleOptions: ElementRectanglesOptions = {
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    devicePixelRatio,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isAndroid: enrichedInstanceData.isAndroid,
     isIos: enrichedInstanceData.isIos,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    isLandscape,
   };
   const rectangles: RectanglesOutput = await determineElementRectangles({
     executor: methods.executor,
@@ -76,8 +78,8 @@ export default async function saveElement(
   // @TODO: we have isLandscape here
   const croppedBase64Image = await makeCroppedBase64Image({
     base64Image,
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    devicePixelRatio,
+    isLandscape,
     logLevel,
     rectangles,
     resizeDimensions,
@@ -88,8 +90,6 @@ export default async function saveElement(
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
     disableCSSAnimation,
-    hideElements,
-    hideScrollBars,
     filePath: {
       browserName: enrichedInstanceData.browserName,
       deviceName: enrichedInstanceData.deviceName,
@@ -114,6 +114,9 @@ export default async function saveElement(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    hideElements,
+    hideScrollBars,
+    isLandscape,
     logLevel,
     platformName: instanceData.platformName,
     removeElements,

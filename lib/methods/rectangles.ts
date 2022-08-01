@@ -100,11 +100,12 @@ export async function determineStatusAddressToolBarRectangles(
   const {
     blockOutStatusBar,
     blockOutToolBar,
+    isAndroidNativeWebScreenshot,
     isHybridApp,
+    isLandscape,
     isMobile,
     isViewPortScreenshot,
     platformName,
-    isAndroidNativeWebScreenshot,
   } = options;
   const rectangles = [];
 
@@ -114,8 +115,8 @@ export async function determineStatusAddressToolBarRectangles(
     (checkAndroidNativeWebScreenshot(platformName, isAndroidNativeWebScreenshot) || checkIsIos(platformName))
   ) {
     const { statusAddressBar, toolBar } = await (checkIsIos(platformName)
-      ? executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS)
-      : executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, isHybridApp));
+      ? executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape)
+      : executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp, isLandscape }));
 
     if (blockOutStatusBar) {
       rectangles.push(statusAddressBar);

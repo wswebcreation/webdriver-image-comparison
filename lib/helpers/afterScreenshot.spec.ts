@@ -14,7 +14,6 @@ describe('afterScreenshot', () => {
       actualFolder: folder,
       base64Image: 'string',
       disableCSSAnimation: false,
-      hideScrollBars: true,
       filePath: {
         browserName: 'browserName',
         deviceName: 'deviceName',
@@ -39,6 +38,8 @@ describe('afterScreenshot', () => {
         screenWidth: 1440,
         tag: 'tag',
       },
+      hideScrollBars: true,
+      isLandscape: false,
       logLevel: LogLevel.debug,
       hideElements: [<HTMLElement>(<any>'<div></div>')],
       platformName: '',

@@ -60,11 +60,13 @@ export default async function saveFullPageScreen(
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
+  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
+  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
 
   // 3.  Fullpage screenshots are taken per scrolled viewport
   const fullPageScreenshotOptions: FullPageScreenshotDataOptions = {
     addressBarShadowPadding: enrichedInstanceData.addressBarShadowPadding,
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    devicePixelRatio,
     fullPageScrollTimeout,
     hideAfterFirstScroll,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
@@ -73,7 +75,7 @@ export default async function saveFullPageScreen(
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isHybridApp,
     isIos: enrichedInstanceData.isIos,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    isLandscape,
     logLevel: logLevel,
     screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
     screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
@@ -87,8 +89,8 @@ export default async function saveFullPageScreen(
 
   // 4.  Make a fullpage base64 image
   const fullPageBase64Image: string = await makeFullPageBase64Image(screenshotsData, {
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    devicePixelRatio,
+    isLandscape,
   });
 
   // 5.  The after the screenshot methods
@@ -96,8 +98,6 @@ export default async function saveFullPageScreen(
     actualFolder: folders.actualFolder,
     base64Image: fullPageBase64Image,
     disableCSSAnimation,
-    hideElements,
-    hideScrollBars,
     filePath: {
       autoSaveBaseline,
       browserName: enrichedInstanceData.browserName,
@@ -123,6 +123,9 @@ export default async function saveFullPageScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    hideElements,
+    hideScrollBars,
+    isLandscape,
     logLevel,
     platformName: instanceData.platformName,
     removeElements,

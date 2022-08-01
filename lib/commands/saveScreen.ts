@@ -46,27 +46,29 @@ export default async function saveScreen(
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions);
+  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
+  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
 
   // 3.  Take the screenshot
   const base64Image: string = await takeBase64Screenshot(methods.screenShot);
 
   // Determine the rectangles
   const screenRectangleOptions: ScreenRectanglesOptions = {
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    devicePixelRatio,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
     innerWidth: enrichedInstanceData.dimensions.window.innerWidth,
     isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isIos: enrichedInstanceData.isIos,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    isLandscape,
   };
   const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
 
   // 4.  Make a cropped base64 image
   const croppedBase64Image: string = await makeCroppedBase64Image({
     base64Image,
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
-    isLandscape: enrichedInstanceData.dimensions.window.isLandscape,
+    devicePixelRatio,
+    isLandscape,
     logLevel,
     rectangles,
   });
@@ -76,8 +78,6 @@ export default async function saveScreen(
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
     disableCSSAnimation,
-    hideElements,
-    hideScrollBars,
     filePath: {
       browserName: enrichedInstanceData.browserName,
       deviceName: enrichedInstanceData.deviceName,
@@ -88,7 +88,7 @@ export default async function saveScreen(
       browserName: enrichedInstanceData.browserName,
       browserVersion: enrichedInstanceData.browserVersion,
       deviceName: enrichedInstanceData.deviceName,
-      devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+      devicePixelRatio,
       formatImageName,
       isMobile: enrichedInstanceData.isMobile,
       isTestInBrowser: enrichedInstanceData.isTestInBrowser,
@@ -102,6 +102,9 @@ export default async function saveScreen(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    hideElements,
+    hideScrollBars,
+    isLandscape,
     logLevel,
     platformName: instanceData.platformName,
     removeElements,
