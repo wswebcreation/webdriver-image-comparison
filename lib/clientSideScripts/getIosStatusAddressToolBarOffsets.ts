@@ -14,17 +14,16 @@ export default function getIosStatusAddressToolBarOffsets(
   const { innerHeight } = window;
   const isIphone = width < 1024 && height < 1024;
   const deviceType = isIphone ? 'IPHONE' : 'IPAD';
-  // Need to use matchMedia because the height/size is not always accurate when rotated
   const orientationType = isLandscape ? 'LANDSCAPE' : 'PORTRAIT';
   const defaultPortraitHeight = isIphone ? 667 : 1024;
   const portraitHeight = width > height ? width : height;
   // Not sure if it's a bug, but in Landscape mode the height is the width
   const deviceHeight = isLandscape ? width : height;
   const deviceWidth = isLandscape ? height : width;
-  // const deviceInnerHeight = isLandscape ? innerHeight : outerHeight;
   const offsetPortraitHeight =
     Object.keys(iosOffsets[deviceType]).indexOf(portraitHeight.toString()) > -1 ? portraitHeight : defaultPortraitHeight;
   const currentOffsets = iosOffsets[deviceType][offsetPortraitHeight][orientationType];
+  const osVersion = parseInt(navigator.appVersion.match(/(?:OS |Version\/)(\d+)(?:_|\.)(\d+)(?:_|\.)?(\d+)?/)[1], 10);
 
   // 2. Get the statusbar height
   let statusBarHeight = currentOffsets.STATUS_BAR;
@@ -39,11 +38,14 @@ export default function getIosStatusAddressToolBarOffsets(
     statusBarHeight = 20;
     isIpadPro129FirstGeneration = true;
   }
+  // Dirty little hack for iPhone XSMax|XR|11|11ProMax for iOS 13. The status bar is 44 when in portrait mode
+  if ((deviceHeight === 896 || deviceWidth === 896) && deviceType === 'IPHONE' && osVersion === 13 && !isLandscape) {
+    statusBarHeight = 44;
+  }
   // 3. Determine the address bar height
   //    Since iOS 15 the address bar for iPhones is at the bottom by default
   //    This is also what we assume because we can't determine it from the
   //    web context
-  const osVersion = parseInt(navigator.appVersion.match(/(?:OS |Version\/)(\d+)(?:_|\.)(\d+)(?:_|\.)?(\d+)?/)[1], 10);
   const addressBarOnTop = (!isLandscape && isIphone && osVersion < 15) || isLandscape || !isIphone;
   const statusAddressBarHeight = statusBarHeight + (addressBarOnTop ? currentOffsets.ADDRESS_BAR : 0);
   // 4. Determine the toolbar offsets

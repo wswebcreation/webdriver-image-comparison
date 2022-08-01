@@ -91,6 +91,14 @@ export const IOS_DEVICES = {
     scrollWidth: 414,
     sideBar: 0,
   },
+  IPHONE_11: {
+    height: 896,
+    width: 375,
+    innerHeight: 635,
+    innerWidth: 375,
+    scrollWidth: 375,
+    sideBar: 0,
+  },
   IPAD: {
     height: 1366,
     width: 1024,
