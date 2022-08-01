@@ -6,6 +6,7 @@ Object {
   "autoSaveBaseline": false,
   "clearFolder": false,
   "compareOptions": Object {
+    "blockOutSideBar": false,
     "blockOutStatusBar": false,
     "blockOutToolBar": false,
     "ignoreAlpha": false,
@@ -51,6 +52,7 @@ Object {
   "autoSaveBaseline": true,
   "clearFolder": false,
   "compareOptions": Object {
+    "blockOutSideBar": true,
     "blockOutStatusBar": true,
     "blockOutToolBar": true,
     "ignoreAlpha": true,
@@ -126,6 +128,7 @@ Object {
       "y": 4,
     },
   ],
+  "blockOutSideBar": false,
   "blockOutStatusBar": false,
   "blockOutToolBar": false,
   "ignoreAlpha": true,

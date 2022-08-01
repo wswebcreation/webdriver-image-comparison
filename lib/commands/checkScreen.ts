@@ -30,7 +30,7 @@ export default async function checkScreen(
       ...{ removeElements: checkScreenOptions.method.removeElements || [] },
     },
   };
-  const { devicePixelRatio, fileName } = await saveScreen(methods, instanceData, folders, tag, saveScreenOptions);
+  const { devicePixelRatio, fileName, isLandscape } = await saveScreen(methods, instanceData, folders, tag, saveScreenOptions);
 
   // 2a. Determine the compare options
   const methodCompareOptions = screenMethodCompareOptions(checkScreenOptions.method);
@@ -51,9 +51,10 @@ export default async function checkScreen(
       isMobile: checkIsMobile(instanceData.platformName),
       savePerInstance: checkScreenOptions.wic.savePerInstance,
     },
-    logLevel: checkScreenOptions.wic.logLevel,
     isAndroidNativeWebScreenshot: instanceData.nativeWebScreenshot,
     isHybridApp: checkScreenOptions.wic.isHybridApp,
+    isLandscape,
+    logLevel: checkScreenOptions.wic.logLevel,
     platformName: instanceData.platformName,
   };
 

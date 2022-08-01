@@ -13,7 +13,7 @@ exports[`getElementPositionTopScreenNativeMobile should get the element position
 Object {
   "height": 120,
   "width": 120,
-  "x": 100,
+  "x": 144,
   "y": 10,
 }
 `;

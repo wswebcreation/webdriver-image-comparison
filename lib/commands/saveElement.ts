@@ -12,6 +12,9 @@ import { ElementRectanglesOptions, RectanglesOutput } from '../methods/rectangle
 import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/beforeScreenshot.interface';
 import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
 import { ResizeDimensions } from '../methods/images.interfaces';
+import scrollElementIntoView from '../clientSideScripts/scrollElementIntoView';
+import { waitFor } from '../helpers/utils';
+import scrollToPosition from '../clientSideScripts/scrollToPosition';
 
 /**
  * Saves an image of an element
@@ -26,7 +29,7 @@ export default async function saveElement(
 ): Promise<ScreenshotOutput> {
   // 1a. Set some variables
   const { addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } = saveElementOptions.wic;
-
+  const { executor } = methods;
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean =
     'disableCSSAnimation' in saveElementOptions.method
@@ -51,36 +54,54 @@ export default async function saveElement(
     removeElements,
     toolBarShadowPadding,
   };
-  const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions, true);
+  const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(executor, beforeOptions, true);
+  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
+  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
+
+  // Scroll the element into top of the viewport and return the current scroll position
+  const currentPosition = await executor(scrollElementIntoView, element, addressBarShadowPadding);
+  await waitFor(500);
 
   // 3.  Take the screenshot
   const base64Image: string = await takeBase64Screenshot(methods.screenShot);
 
   // 4.  Determine the rectangles
   const elementRectangleOptions: ElementRectanglesOptions = {
-    devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+    devicePixelRatio,
     innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
     isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
     isAndroid: enrichedInstanceData.isAndroid,
     isIos: enrichedInstanceData.isIos,
+    isLandscape,
   };
   const rectangles: RectanglesOutput = await determineElementRectangles({
-    executor: methods.executor,
+    executor,
     base64Image,
     options: elementRectangleOptions,
     element,
   });
 
+  // When the screenshot has been taken and the element position has been determined,
+  // we can scroll back to the original position
+  // We don't need to wait for the scroll here because we don't take a screenshot after this
+  await executor(scrollToPosition, currentPosition);
+
   // 5.  Make a cropped base64 image with resizeDimensions
-  const croppedBase64Image = await makeCroppedBase64Image({ base64Image, rectangles, logLevel, resizeDimensions });
+  // @TODO: we have isLandscape here
+  const croppedBase64Image = await makeCroppedBase64Image({
+    base64Image,
+    devicePixelRatio,
+    isLandscape,
+    logLevel,
+    rectangles,
+    resizeDimensions,
+  });
 
   // 6.  The after the screenshot methods
   const afterOptions: AfterScreenshotOptions = {
     actualFolder: folders.actualFolder,
     base64Image: croppedBase64Image,
     disableCSSAnimation,
-    hideElements,
-    hideScrollBars,
     filePath: {
       browserName: enrichedInstanceData.browserName,
       deviceName: enrichedInstanceData.deviceName,
@@ -105,11 +126,14 @@ export default async function saveElement(
       screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
       tag,
     },
+    hideElements,
+    hideScrollBars,
+    isLandscape,
     logLevel,
     platformName: instanceData.platformName,
     removeElements,
   };
 
   // 7.  Return the data
-  return afterScreenshot(methods.executor, afterOptions);
+  return afterScreenshot(executor, afterOptions);
 }

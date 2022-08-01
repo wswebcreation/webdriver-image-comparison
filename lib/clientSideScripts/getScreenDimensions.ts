@@ -23,6 +23,7 @@ export default function getScreenDimensions(): ScreenDimensions {
   const windowDimensions = {
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight,
+    isLandscape: window.matchMedia('(orientation: landscape)').matches,
     outerHeight: window.outerHeight === 0 ? htmlDimensions.clientHeight : window.outerHeight,
     outerWidth: window.outerWidth === 0 ? htmlDimensions.clientWidth : window.outerWidth,
     devicePixelRatio: window.devicePixelRatio,

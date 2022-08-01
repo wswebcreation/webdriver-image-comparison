@@ -26,6 +26,8 @@ export interface ImageCompareOptions {
   folderOptions: ImageCompareFolderOptions;
   // Is it an hybrid app or not
   isHybridApp: boolean;
+  // If it's in Landscape mode
+  isLandscape: boolean;
   // Level to show logs
   logLevel: LogLevel;
   // The name of the platform
@@ -35,6 +37,8 @@ export interface ImageCompareOptions {
 }
 
 export interface WicImageCompareOptions {
+  // Block out the side bar yes or no
+  blockOutSideBar: boolean;
   // Block out the status bar yes or no
   blockOutStatusBar: boolean;
   // Block out the tool bar yes or no
@@ -65,6 +69,8 @@ export interface DefaultImageCompareCompareOptions extends MethodImageCompareCom
 export interface ScreenMethodImageCompareCompareOptions
   extends DefaultImageCompareCompareOptions,
     MethodImageCompareCompareOptions {
+  // Block out the side bar yes or no
+  blockOutSideBar?: boolean;
   // Block out the status bar yes or no
   blockOutStatusBar?: boolean;
   // Block out the tool bar yes or no
@@ -146,7 +152,16 @@ export interface IgnoreBoxes {
 
 export interface CroppedBase64Image {
   base64Image: string;
-  rectangles: RectanglesOutput;
+  devicePixelRatio: number;
+  isLandscape: boolean;
   logLevel: LogLevel;
+  rectangles: RectanglesOutput;
   resizeDimensions?: number | ResizeDimensions;
+}
+
+export interface RotateBase64ImageOptions {
+  base64Image: string;
+  degrees: number;
+  newHeight: number;
+  newWidth: number;
 }

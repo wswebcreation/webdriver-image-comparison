@@ -6,7 +6,14 @@ import compareImages from '../resemble/compareImages';
 import { calculateDprData, getAndCreatePath, getScreenshotSize } from '../helpers/utils';
 import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
 import { determineStatusAddressToolBarRectangles } from './rectangles';
-import { CompareOptions, CroppedBase64Image, IgnoreBoxes, ImageCompareOptions, ImageCompareResult } from './images.interfaces';
+import {
+  CompareOptions,
+  CroppedBase64Image,
+  IgnoreBoxes,
+  ImageCompareOptions,
+  ImageCompareResult,
+  RotateBase64ImageOptions,
+} from './images.interfaces';
 import { FullPageScreenshotsData } from './screenshots.interfaces';
 import { Executor } from './methods.interface';
 import { CompareData } from '../resemble/compare.interfaces';
@@ -73,10 +80,19 @@ export async function checkBaselineImageExists(
  */
 export async function makeCroppedBase64Image({
   base64Image,
-  rectangles,
+  devicePixelRatio,
+  isLandscape,
   logLevel,
+  rectangles,
   resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
 }: CroppedBase64Image): Promise<string> {
+  // Determine if the image is rotated
+  const { height: screenshotHeight, width: screenshotWidth } = getScreenshotSize(base64Image, devicePixelRatio);
+  const isRotated = isLandscape && screenshotHeight > screenshotWidth;
+  // If so we need to rotate is -90 degrees
+  const newBase64Image = isRotated
+    ? await rotateBase64Image({ base64Image, degrees: -90, newHeight: screenshotWidth, newWidth: screenshotHeight })
+    : base64Image;
   /**
    * This is in for backwards compatibility, it will be removed in the future
    */
@@ -124,7 +140,7 @@ export async function makeCroppedBase64Image({
   const canvasWidth = width + left + right;
   const canvasHeight = height + top + bottom;
   const canvas = createCanvas(canvasWidth, canvasHeight);
-  const image = await loadImage(`data:image/png;base64,${base64Image}`);
+  const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
   const ctx = canvas.getContext('2d');
 
   let sourceXStart = x - left;
@@ -188,7 +204,7 @@ export async function executeImageCompare(
   isViewPortScreenshot = false,
 ): Promise<ImageCompareResult | number> {
   // 1. Set some variables
-  const { devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, logLevel, platformName } = options;
+  const { devicePixelRatio, fileName, isAndroidNativeWebScreenshot, isHybridApp, isLandscape, logLevel, platformName } = options;
   const { actualFolder, autoSaveBaseline, baselineFolder, browserName, deviceName, diffFolder, isMobile, savePerInstance } =
     options.folderOptions;
   let diffFilePath;
@@ -218,13 +234,15 @@ export async function executeImageCompare(
   // 4b.	Determine the ignore rectangles for the blockouts
   const blockOut = 'blockOut' in imageCompareOptions ? imageCompareOptions.blockOut : [];
   const statusAddressToolBarOptions = {
-    isHybridApp,
-    isMobile,
-    isViewPortScreenshot,
-    platformName,
-    isAndroidNativeWebScreenshot,
+    blockOutSideBar: imageCompareOptions.blockOutSideBar,
     blockOutStatusBar: imageCompareOptions.blockOutStatusBar,
     blockOutToolBar: imageCompareOptions.blockOutToolBar,
+    isHybridApp,
+    isLandscape,
+    isMobile,
+    isViewPortScreenshot,
+    isAndroidNativeWebScreenshot,
+    platformName,
   };
 
   const ignoredBoxes = blockOut
@@ -299,7 +317,10 @@ export async function executeImageCompare(
 /**
  * Make a full page image with Canvas
  */
-export async function makeFullPageBase64Image(screenshotsData: FullPageScreenshotsData): Promise<string> {
+export async function makeFullPageBase64Image(
+  screenshotsData: FullPageScreenshotsData,
+  { devicePixelRatio, isLandscape }: { devicePixelRatio: number; isLandscape: boolean },
+): Promise<string> {
   const amountOfScreenshots = screenshotsData.data.length;
   const { fullPageHeight: canvasHeight, fullPageWidth: canvasWidth } = screenshotsData;
   const canvas = createCanvas(canvasWidth, canvasHeight);
@@ -307,15 +328,27 @@ export async function makeFullPageBase64Image(screenshotsData: FullPageScreensho
 
   // Load all the images
   for (let i = 0; i < amountOfScreenshots; i++) {
-    const { canvasYPosition, imageHeight, imageWidth, imageYPosition } = screenshotsData.data[i];
-    const image = await loadImage(`data:image/png;base64,${screenshotsData.data[i].screenshot}`);
+    const currentScreenshot = screenshotsData.data[i].screenshot;
+    // Determine if the image is rotated
+    const { height: screenshotHeight, width: screenshotWidth } = getScreenshotSize(currentScreenshot, devicePixelRatio);
+    const isRotated = isLandscape && screenshotHeight > screenshotWidth;
+    // If so we need to rotate is -90 degrees
+    const newBase64Image = isRotated
+      ? await rotateBase64Image({
+          base64Image: currentScreenshot,
+          degrees: -90,
+          newHeight: screenshotWidth,
+          newWidth: screenshotHeight,
+        })
+      : currentScreenshot;
+    const { canvasYPosition, imageHeight, imageWidth, imageXPosition, imageYPosition } = screenshotsData.data[i];
+    const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
 
     ctx.drawImage(
       image,
       // Start at x/y pixels from the left and the top of the image (crop)
-      0,
+      imageXPosition,
       imageYPosition,
-      // 0, 0,
       // 'Get' a (w * h) area from the source image (crop)
       imageWidth,
       imageHeight,
@@ -381,5 +414,24 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
   });
 
   // Return the screenshot
+  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+}
+
+/**
+ * Rotate a base64 image
+ * Tnx to https://gist.github.com/Zyndoras/6897abdf53adbedf02564808aaab94db
+ */
+async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: RotateBase64ImageOptions): Promise<string> {
+  const canvas = createCanvas(newWidth, newHeight);
+  const ctx = canvas.getContext('2d');
+  const image = await loadImage(`data:image/png;base64,${base64Image}`);
+
+  canvas.width = degrees % 180 === 0 ? image.width : image.height;
+  canvas.height = degrees % 180 === 0 ? image.height : image.width;
+
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate((degrees * Math.PI) / 180);
+  ctx.drawImage(image, image.width / -2, image.height / -2);
+
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
 }

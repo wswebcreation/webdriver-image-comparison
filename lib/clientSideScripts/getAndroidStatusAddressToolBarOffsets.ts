@@ -6,7 +6,7 @@ import { AndroidOffsets } from '../helpers/constants.interfaces';
  */
 export default function getAndroidStatusAddressToolBarOffsets(
   androidOffsets: AndroidOffsets,
-  isHybridApp: boolean,
+  { isHybridApp, isLandscape }: { isHybridApp: boolean; isLandscape: boolean },
 ): StatusAddressToolBarOffsets {
   // Determine version for the right offsets
   const { height, width } = window.screen;
@@ -14,6 +14,9 @@ export default function getAndroidStatusAddressToolBarOffsets(
   const match = navigator.appVersion.match(/Android (\d+).?(\d+)?.?(\d+)?/);
   const majorVersion = parseInt(match[1], 10);
   const versionOffsets = androidOffsets[majorVersion];
+  // Not sure if it's a bug, but in Landscape mode the height is the width
+  const deviceHeight = isLandscape && width > height ? width : height;
+  const deviceWidth = isLandscape && height > width ? height : width;
   const statusAddressBarHeight = versionOffsets.STATUS_BAR + (isHybridApp ? 0 : versionOffsets.ADDRESS_BAR);
   let toolBarHeight = height - innerHeight - statusAddressBarHeight;
 
@@ -23,12 +26,18 @@ export default function getAndroidStatusAddressToolBarOffsets(
 
   // Determine status, address and tool bar height
   return {
+    // For now Android doesn't have a safe area
+    safeArea: 0,
+    screenHeight: deviceHeight,
+    screenWidth: deviceWidth,
     statusAddressBar: {
       height: statusAddressBarHeight,
       width,
       x: 0,
       y: 0,
     },
+    // For now Android doesn't have a side bar
+    sideBar: { height: 0, width: 0, x: 0, y: 0 },
     toolBar: {
       height: toolBarHeight,
       width,

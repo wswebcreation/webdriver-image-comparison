@@ -10,11 +10,18 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 678,
         isIos: true,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // getElementPositionIos for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -53,11 +60,18 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: true,
         innerHeight: 678,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // getElementPositionAndroid for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 0,
+            width: 0,
+            x: 0,
+            y: 0,
+          },
           statusAddressBar: {
             height: 20,
             width: 375,
@@ -96,6 +110,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 678,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -124,6 +139,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -152,6 +168,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 0,
@@ -181,6 +198,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 375,
@@ -210,6 +228,7 @@ describe('rectangles', () => {
         isAndroidNativeWebScreenshot: false,
         innerHeight: 500,
         isIos: false,
+        isLandscape: false,
       };
       const MOCKED_EXECUTOR = jest.fn().mockResolvedValueOnce({
         height: 375,
@@ -242,6 +261,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: true,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();
@@ -255,6 +275,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: true,
         isIos: false,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();
@@ -268,6 +289,7 @@ describe('rectangles', () => {
         isAndroidChromeDriverScreenshot: false,
         isIos: false,
         devicePixelRatio: 2,
+        isLandscape: false,
       };
 
       expect(await determineScreenRectangles(IMAGE_STRING, options)).toMatchSnapshot();
@@ -277,18 +299,26 @@ describe('rectangles', () => {
   describe('determineStatusAddressToolBarRectangles', () => {
     it('should determine the rectangles for the iOS with a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: true,
+        blockOutStatusBar: true,
+        blockOutToolBar: true,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: true,
-        blockOutToolBar: true,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -308,18 +338,26 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for the iOS without a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: false,
+        blockOutStatusBar: false,
+        blockOutToolBar: false,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'iOS',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: false,
-        blockOutToolBar: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // determineStatusAddressToolBarRectangles for: getIosStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 240,
+            width: 120,
+            x: 0,
+            y: 70,
+          },
           statusAddressBar: {
             height: 94,
             width: 375,
@@ -339,18 +377,26 @@ describe('rectangles', () => {
 
     it('should determine the rectangles for Android with a status and toolbar blockout', async () => {
       const options = {
+        blockOutSideBar: true,
+        blockOutStatusBar: true,
+        blockOutToolBar: true,
+        isAndroidNativeWebScreenshot: true,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: true,
         platformName: 'Android',
-        isAndroidNativeWebScreenshot: true,
-        blockOutStatusBar: true,
-        blockOutToolBar: true,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // determineStatusAddressToolBarRectangles for: getAndroidStatusAddressToolBarOffsets
         .mockResolvedValueOnce({
+          sideBar: {
+            height: 0,
+            width: 0,
+            x: 0,
+            y: 0,
+          },
           statusAddressBar: {
             height: 40,
             width: 320,
@@ -370,13 +416,15 @@ describe('rectangles', () => {
 
     it('should determine the rectangles that there are no rectangles for this device', async () => {
       const options = {
+        blockOutSideBar: false,
+        blockOutStatusBar: false,
+        blockOutToolBar: false,
+        isAndroidNativeWebScreenshot: false,
         isHybridApp: false,
+        isLandscape: false,
         isMobile: true,
         isViewPortScreenshot: false,
         platformName: 'Android',
-        isAndroidNativeWebScreenshot: false,
-        blockOutStatusBar: false,
-        blockOutToolBar: false,
       };
       const MOCKED_EXECUTOR = jest
         .fn()

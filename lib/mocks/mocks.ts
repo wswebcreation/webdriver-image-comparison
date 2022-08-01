@@ -53,6 +53,18 @@ export const ANDROID_DEVICES = {
     innerHeight: 604,
     innerWidth: 412,
   },
+  NEXUS_5X_INNER_HEIGHT: {
+    height: 732,
+    width: 412,
+    innerHeight: 800,
+    innerWidth: 412,
+  },
+  TABLET_WIDTH: {
+    height: 768,
+    width: 1024,
+    innerHeight: 604,
+    innerWidth: 412,
+  },
 };
 export const IOS_DEVICES = {
   IPHONE: {
@@ -60,30 +72,64 @@ export const IOS_DEVICES = {
     width: 375,
     innerHeight: 553,
     innerWidth: 375,
+    scrollWidth: 375,
+    sideBar: 0,
   },
   IPHONE_X: {
     height: 812,
     width: 375,
     innerHeight: 635,
     innerWidth: 375,
+    scrollWidth: 375,
+    sideBar: 0,
   },
   IPHONE_HEIGHT: {
     height: 896,
     width: 1024,
     innerHeight: 719,
     innerWidth: 414,
+    scrollWidth: 414,
+    sideBar: 0,
+  },
+  IPHONE_11: {
+    height: 896,
+    width: 375,
+    innerHeight: 635,
+    innerWidth: 375,
+    scrollWidth: 375,
+    sideBar: 0,
   },
   IPAD: {
     height: 1366,
     width: 1024,
     innerHeight: 1292,
     innerWidth: 1024,
+    scrollWidth: 1024,
+    sideBar: 0,
+  },
+  IPAD_LANDSCAPE: {
+    height: 1366,
+    width: 1024,
+    innerHeight: 746,
+    innerWidth: 1046,
+    scrollWidth: 1046,
+    sideBar: 320,
   },
   IPAD_BIG_SIZE: {
     height: 5432,
     width: 9876,
     innerHeight: 5324,
     innerWidth: 9768,
+    scrollWidth: 9768,
+    sideBar: 108,
+  },
+  IPAD_PRO_LANDSCAPE: {
+    height: 1366,
+    width: 1024,
+    innerHeight: 954,
+    innerWidth: 1046,
+    scrollWidth: 1046,
+    sideBar: 320,
   },
 };
 export const IMAGE_STRING =

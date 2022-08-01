@@ -17,6 +17,8 @@ interface ScreenshotData {
   imageHeight: number;
   // The width of the image
   imageWidth: number;
+  // The x position in the image to start from
+  imageXPosition: number;
   // The y position in the image to start from
   imageYPosition: number;
   // The screenshot itself
@@ -32,7 +34,7 @@ export interface FullPageScreenshotDataOptions {
   fullPageScrollTimeout: number;
   // Elements that need to be hidden after the first scroll for a fullpage scroll
   hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
-  // The innerheight
+  // The inner height
   innerHeight: number;
   // If the instance is an Android device
   isAndroid: boolean;
@@ -44,8 +46,14 @@ export interface FullPageScreenshotDataOptions {
   isHybridApp: boolean;
   // If the instance is an iOS device
   isIos: boolean;
+  // If it's landscape or not
+  isLandscape: boolean;
   // Level to show logs
   logLevel: LogLevel;
+  // Height of the screen
+  screenHeight: number;
+  // Width of the screen
+  screenWidth: number;
   // The address bar padding for iOS or Android
   toolBarShadowPadding: number;
 }
@@ -57,16 +65,28 @@ export interface FullPageScreenshotNativeMobileOptions {
   devicePixelRatio: number;
   // The amount of milliseconds to wait for a new scroll
   fullPageScrollTimeout: number;
+  // Elements that need to be hidden after the first scroll for a fullpage scroll
+  hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
+  // Position of the home bar for iOS
+  iosHomeBarY?: number;
+  // If the device is in landscape mode
+  isLandscape?: boolean;
   // The innerheight
   innerHeight: number;
   // Level to show logs
   logLevel: LogLevel;
+  // The size of the safe area for iOS
+  safeArea: number;
   // The height of the status and the address bar
   statusAddressBarHeight: number;
   // The address bar padding for iOS or Android
   toolBarShadowPadding: number;
-  // Elements that need to be hidden after the first scroll for a fullpage scroll
-  hideAfterFirstScroll: (HTMLElement | HTMLElement[])[];
+  // Height of the screen
+  screenHeight: number;
+  // Width of the screen
+  screenWidth: number;
+  // When iOS is in landscape mode and it's an iPad there will be a side bar
+  sideBarWidth: number;
 }
 
 export interface FullPageScreenshotOptions {

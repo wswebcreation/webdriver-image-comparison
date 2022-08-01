@@ -115,4 +115,4 @@ exports[`utils getToolBarShadowPadding should return 0 when this is a check for 
 
 exports[`utils getToolBarShadowPadding should return 0 when this is a check for an iOS app with adding a shadow padding 1`] = `0`;
 
-exports[`utils getToolBarShadowPadding should return 6 when this is a check for iOS browser and adding a shadow padding 1`] = `6`;
+exports[`utils getToolBarShadowPadding should return 15 when this is a check for iOS browser and adding a shadow padding 1`] = `15`;

@@ -3,8 +3,6 @@ import { getElementPositionTopScreenNativeMobile } from './getElementPositionTop
 
 describe('getElementPositionTopScreenNativeMobile', () => {
   beforeEach(() => {
-    Object.defineProperty(window.screen, 'width', { value: IOS_DEVICES.IPHONE.width, ...CONFIGURABLE });
-    Object.defineProperty(window.screen, 'height', { value: IOS_DEVICES.IPHONE.height, ...CONFIGURABLE });
     // @ts-ignore
     Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
@@ -22,18 +20,45 @@ describe('getElementPositionTopScreenNativeMobile', () => {
   it('should get the element position to the top of the screen for a mobile browser', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.innerHeight, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: false,
+        safeArea: 0,
+        screenHeight: IOS_DEVICES.IPHONE.height,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should get the element position to the top of the screen for an app in portrait mode', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.height, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: false,
+        safeArea: 0,
+        screenHeight: IOS_DEVICES.IPHONE.height,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 
   it('should get the element position to the top of the screen for an app in landscape mode', () => {
     Object.defineProperty(window, 'innerHeight', { value: IOS_DEVICES.IPHONE.width, ...CONFIGURABLE });
 
-    expect(getElementPositionTopScreenNativeMobile(94, document.querySelector('#username'))).toMatchSnapshot();
+    expect(
+      getElementPositionTopScreenNativeMobile(document.querySelector('#username'), {
+        isLandscape: true,
+        safeArea: 44,
+        screenHeight: IOS_DEVICES.IPHONE.innerHeight,
+        screenWidth: IOS_DEVICES.IPHONE.width,
+        sideBarWidth: IOS_DEVICES.IPHONE.sideBar,
+        statusBarAddressBarHeight: 94,
+      }),
+    ).toMatchSnapshot();
   });
 });

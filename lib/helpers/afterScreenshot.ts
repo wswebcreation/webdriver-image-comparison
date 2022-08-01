@@ -23,6 +23,7 @@ export default async function afterScreenshot(executor: Executor, options: After
     filePath,
     hideElements,
     hideScrollBars: noScrollBars,
+    isLandscape,
     logLevel,
     platformName,
     removeElements,
@@ -34,7 +35,7 @@ export default async function afterScreenshot(executor: Executor, options: After
   // Get the filePath
   const fileName = formatFileName(fileNameOptions);
 
-  // Save the element
+  // Save the screenshot
   await saveBase64Image(base64Image, join(path, fileName));
 
   // Show the scrollbars again
@@ -73,8 +74,9 @@ export default async function afterScreenshot(executor: Executor, options: After
 
   // Return the needed data
   return {
-    fileName,
-    path,
     devicePixelRatio: fileNameOptions.devicePixelRatio,
+    fileName,
+    isLandscape,
+    path,
   };
 }

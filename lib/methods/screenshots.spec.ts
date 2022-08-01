@@ -18,14 +18,24 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // For await executor(getAndroidStatusAddressToolBarOffsets, OFFSETS.ANDROID))
-        .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
+        .mockResolvedValueOnce({
+          isLandscape: false,
+          safeArea: 0,
+          statusAddressBar: { height: 56 },
+          screenHeight: 768,
+          screenWidth: 1366,
+          sideBar: { width: 0 },
+        })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -54,14 +64,24 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
         // For await executor(getAndroidStatusAddressToolBarOffsets, OFFSETS.ANDROID))
-        .mockResolvedValueOnce({ statusAddressBar: { height: 56 } })
+        .mockResolvedValueOnce({
+          isLandscape: false,
+          safeArea: 0,
+          statusAddressBar: { height: 56 },
+          screenHeight: 768,
+          screenWidth: 1366,
+          sideBar: { width: 0 },
+        })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -103,9 +123,12 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: true,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -146,9 +169,12 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: true,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -193,13 +219,24 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: true,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        .mockResolvedValueOnce({ statusAddressBar: { height: 94 } })
+        .mockResolvedValueOnce({
+          isLandscape: false,
+          safeArea: 44,
+          screenHeight: 768,
+          screenWidth: 1366,
+          sideBar: { width: 0 },
+          statusAddressBar: { height: 94 },
+          toolBar: { y: 329 },
+        })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -226,6 +263,61 @@ describe('screenshots', () => {
       expect(result).toMatchSnapshot();
     });
 
+    it('should get the iOS fullpage screenshot data for a landscape iPad', async () => {
+      const options: FullPageScreenshotDataOptions = {
+        addressBarShadowPadding: 6,
+        devicePixelRatio: 2,
+        fullPageScrollTimeout: 1,
+        innerHeight: 400,
+        isAndroid: false,
+        isAndroidNativeWebScreenshot: false,
+        isAndroidChromeDriverScreenshot: false,
+        isHybridApp: false,
+        isIos: true,
+        isLandscape: false,
+        logLevel: LogLevel.debug,
+        toolBarShadowPadding: 6,
+        hideAfterFirstScroll: [],
+        screenHeight: 0,
+        screenWidth: 0,
+      };
+      const MOCKED_EXECUTOR = jest
+        .fn()
+        .mockResolvedValueOnce({
+          isLandscape: true,
+          safeArea: 0,
+          screenHeight: 384,
+          screenWidth: 683,
+          sideBar: { width: 160 },
+          statusAddressBar: { height: 47 },
+          toolBar: { y: 75 },
+        })
+        // THIS NEEDS TO BE FIXED IN THE FUTURE
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(600)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
+        .mockResolvedValueOnce({})
+        // RUN 2
+        // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, true);
+        .mockResolvedValueOnce({})
+        // getFullPageScreenshotsDataNativeMobile: For await executor(getDocumentScrollHeight)
+        .mockResolvedValueOnce(600)
+        // getFullPageScreenshotsDataNativeMobile: For await executor(hideScrollBars, false);
+        .mockResolvedValueOnce({});
+
+      // Replace the screenshot with a `mocked-screenshot-string`;
+      const result = await getBase64FullPageScreenshotsData(MOCKED_TAKESCREENSHOT, MOCKED_EXECUTOR, options);
+      result.data.forEach((dataObject) => (dataObject.screenshot = 'mocked-screenshot-string'));
+
+      expect(result).toMatchSnapshot();
+    });
+
     it('should hide elements for the iOS fullpage screenshot', async () => {
       const options: FullPageScreenshotDataOptions = {
         addressBarShadowPadding: 6,
@@ -237,13 +329,25 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: true,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
-        .mockResolvedValueOnce({ statusAddressBar: { height: 94 } })
+        // getBase64FullPageScreenshotsData: For await executor(getIosStatusAddressToolBarOffsets)
+        .mockResolvedValueOnce({
+          isLandscape: false,
+          safeArea: 44,
+          screenHeight: 768,
+          screenWidth: 1366,
+          sideBar: { width: 0 },
+          statusAddressBar: { height: 94 },
+          toolBar: { y: 329 },
+        })
         // THIS NEEDS TO BE FIXED IN THE FUTURE
         // getFullPageScreenshotsDataNativeMobile: For await executor(scrollToPosition, scrollY)
         .mockResolvedValueOnce({})
@@ -285,9 +389,12 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()
@@ -335,9 +442,12 @@ describe('screenshots', () => {
         isAndroidChromeDriverScreenshot: false,
         isHybridApp: false,
         isIos: false,
+        isLandscape: false,
         logLevel: LogLevel.debug,
         toolBarShadowPadding: 6,
         hideAfterFirstScroll: [<HTMLElement>(<unknown>'<div/>')],
+        screenHeight: 0,
+        screenWidth: 0,
       };
       const MOCKED_EXECUTOR = jest
         .fn()

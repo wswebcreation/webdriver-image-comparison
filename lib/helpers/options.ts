@@ -30,6 +30,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
      * Compare options
      */
     compareOptions: {
+      blockOutSideBar: !!options.blockOutSideBar,
       blockOutStatusBar: !!options.blockOutStatusBar,
       blockOutToolBar: !!options.blockOutToolBar,
       ignoreAlpha: options.ignoreAlpha || false,
@@ -66,6 +67,7 @@ export function screenMethodCompareOptions(
   options: ScreenMethodImageCompareCompareOptions,
 ): ScreenMethodImageCompareCompareOptions {
   return {
+    ...('blockOutSideBar' in options ? { blockOutSideBar: options.blockOutSideBar } : {}),
     ...('blockOutStatusBar' in options ? { blockOutStatusBar: options.blockOutStatusBar } : {}),
     ...('blockOutToolBar' in options ? { blockOutToolBar: options.blockOutToolBar } : {}),
     ...methodCompareOptions(options),

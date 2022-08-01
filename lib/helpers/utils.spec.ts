@@ -349,7 +349,7 @@ describe('utils', () => {
       expect(getToolBarShadowPadding(getToolBarShadowPaddingOptions)).toMatchSnapshot();
     });
 
-    it('should return 6 when this is a check for iOS browser and adding a shadow padding', () => {
+    it('should return 15 when this is a check for iOS browser and adding a shadow padding', () => {
       const getToolBarShadowPaddingOptions = {
         platformName: 'ios',
         browserName: 'safari',

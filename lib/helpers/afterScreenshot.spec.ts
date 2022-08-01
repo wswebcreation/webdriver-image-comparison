@@ -14,7 +14,6 @@ describe('afterScreenshot', () => {
       actualFolder: folder,
       base64Image: 'string',
       disableCSSAnimation: false,
-      hideScrollBars: true,
       filePath: {
         browserName: 'browserName',
         deviceName: 'deviceName',
@@ -39,6 +38,8 @@ describe('afterScreenshot', () => {
         screenWidth: 1440,
         tag: 'tag',
       },
+      hideScrollBars: true,
+      isLandscape: false,
       logLevel: LogLevel.debug,
       hideElements: [<HTMLElement>(<any>'<div></div>')],
       platformName: '',
@@ -48,6 +49,7 @@ describe('afterScreenshot', () => {
     expect(await afterScreenshot(MOCKED_EXECUTOR, options)).toEqual({
       devicePixelRatio: 2,
       fileName: 'tag-browserName-1400x850-dpr-2.png',
+      isLandscape: false,
       path: `${process.cwd()}/.tmp/afterScreenshot/desktop_browserName`,
     });
   });

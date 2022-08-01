@@ -36,6 +36,8 @@ export interface ScreenDimensions {
       innerWidth?: number;
       // Height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
       innerHeight?: number;
+      // Determines based on `window.matchMedia` if the screen is in landscape mode
+      isLandscape: boolean;
       // Width of the outside of the browser window. It represents the width of the whole browser window including sidebar (if expanded),
       // window chrome and window resizing borders/handles.
       outerWidth?: number;

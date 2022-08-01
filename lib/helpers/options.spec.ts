@@ -18,6 +18,7 @@ describe('options', () => {
         disableCSSAnimation: true,
         fullPageScrollTimeout: 12345,
         hideScrollBars: true,
+        blockOutSideBar: true,
         blockOutStatusBar: true,
         blockOutToolBar: true,
         ignoreAlpha: true,
@@ -81,6 +82,7 @@ describe('options', () => {
 
     it('should return the provided options when options are provided', () => {
       const options: ScreenMethodImageCompareCompareOptions = {
+        blockOutSideBar: false,
         blockOutStatusBar: false,
         blockOutToolBar: false,
         blockOut: [{ height: 1, width: 2, x: 3, y: 4 }],
