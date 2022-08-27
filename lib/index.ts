@@ -7,8 +7,8 @@ import checkScreen from './commands/checkScreen';
 import checkElement from './commands/checkElement';
 import checkFullPageScreen from './commands/checkFullPageScreen';
 import checkTabbablePage from './commands/checkTabbablePage';
-import {ClassOptions} from './helpers/options.interface';
-import {ImageCompareResult} from './methods/images.interfaces';
+import { ClassOptions } from './helpers/options.interface';
+import { ImageCompareResult } from './methods/images.interfaces';
 
 export {
   BaseClass,

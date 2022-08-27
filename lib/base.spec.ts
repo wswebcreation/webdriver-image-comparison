@@ -1,12 +1,12 @@
-import {ensureDirSync, pathExistsSync} from 'fs-extra';
-import {join} from 'path';
+import { ensureDirSync, pathExistsSync } from 'fs-extra';
+import { join } from 'path';
 import BaseClass from './base';
 
 describe('BaseClass', () => {
   it('should be able to create BaseClass with options', () => {
     const instance = new BaseClass({
       baselineFolder: './subfolder//../baseline',
-      screenshotPath: './../my_folder//screenshots'
+      screenshotPath: './../my_folder//screenshots',
     });
     expect(instance.folders.actualFolder).toBe('../my_folder/screenshots/actual');
     expect(instance.folders.baselineFolder).toBe('baseline');
@@ -16,19 +16,19 @@ describe('BaseClass', () => {
   it('should be able to create baselineFolder with a function', () => {
     const options = {
       baseline: './subfolder//../baseline',
-      screenshot: './../my_folder//screenshots'
+      screenshot: './../my_folder//screenshots',
     };
     const setPath = (folderPath: any) => {
       return folderPath;
     };
     const instance = new BaseClass({
       baselineFolder: setPath(options.baseline),
-      screenshotPath: setPath(options.screenshot)
+      screenshotPath: setPath(options.screenshot),
     });
     expect(instance.folders.actualFolder).toBe('../my_folder/screenshots/actual');
     expect(instance.folders.baselineFolder).toBe('baseline');
     expect(instance.folders.diffFolder).toBe('../my_folder/screenshots/diff');
-  });  
+  });
 
   it('should be able to create BaseClass with default options', () => {
     const instance = new BaseClass({});
@@ -47,7 +47,7 @@ describe('BaseClass', () => {
     expect(pathExistsSync(actual)).toEqual(true);
     expect(pathExistsSync(diff)).toEqual(true);
 
-    const instance = new BaseClass({clearRuntimeFolder: true});
+    const instance = new BaseClass({ clearRuntimeFolder: true });
 
     expect(pathExistsSync(actual)).toEqual(false);
     expect(pathExistsSync(diff)).toEqual(false);
