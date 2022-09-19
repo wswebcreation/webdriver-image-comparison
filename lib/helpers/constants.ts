@@ -157,13 +157,13 @@ export const IOS_OFFSETS: IosOffsets = {
       LANDSCAPE: {
         SAFE_AREA: 59,
         STATUS_BAR: 0,
-        ADDRESS_BAR: 48,
-        HOME_BAR: { x: 316, y: 379, height: 9, width: 220 },
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 316, y: 378, height: 9, width: 220 },
       },
       PORTRAIT: {
         SAFE_AREA: 59,
         STATUS_BAR: 59,
-        ADDRESS_BAR: 48,
+        ADDRESS_BAR: 50,
         HOME_BAR: { x: 125, y: 837, height: 9, width: 143 },
       },
     },
@@ -202,13 +202,13 @@ export const IOS_OFFSETS: IosOffsets = {
       LANDSCAPE: {
         SAFE_AREA: 59,
         STATUS_BAR: 0,
-        ADDRESS_BAR: 48,
-        HOME_BAR: { x: 345, y: 416, height: 9, width: 242 },
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 345, y: 415, height: 9, width: 242 },
       },
       PORTRAIT: {
         SAFE_AREA: 59,
         STATUS_BAR: 59,
-        ADDRESS_BAR: 48,
+        ADDRESS_BAR: 50,
         HOME_BAR: { x: 137, y: 917, height: 9, width: 158 },
       },
     },
