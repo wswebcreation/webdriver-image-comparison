@@ -10,6 +10,7 @@ import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/befo
 import { InstanceData } from '../methods/instanceData.interfaces';
 import { AfterScreenshotOptions, ScreenshotOutput } from '../helpers/afterScreenshot.interfaces';
 import { RectanglesOutput, ScreenRectanglesOptions } from '../methods/rectangles.interfaces';
+import { determineIOSDeviceBezelCorners, determineIOSNotchData } from '../helpers/utils';
 
 /**
  * Saves an image of the viewport of the screen
@@ -63,13 +64,33 @@ export default async function saveScreen(
     isLandscape,
   };
   const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
-
+  // NEW and BETA
+  const bezelCornerRadius = enrichedInstanceData.isIos
+    ? determineIOSDeviceBezelCorners({
+        deviceName: enrichedInstanceData.deviceName,
+        devicePixelRatio,
+        height: enrichedInstanceData.dimensions.window.screenHeight,
+        isLandscape,
+        width: enrichedInstanceData.dimensions.window.screenWidth,
+      })
+    : 0;
+  const notchData = enrichedInstanceData.isIos
+    ? determineIOSNotchData({
+        devicePixelRatio,
+        height: enrichedInstanceData.dimensions.window.screenHeight,
+        isLandscape,
+        width: enrichedInstanceData.dimensions.window.screenWidth,
+      })
+    : { x: 0, y: 0, width: 0, height: 0 };
+  // NEW and BETA
   // 4.  Make a cropped base64 image
   const croppedBase64Image: string = await makeCroppedBase64Image({
     base64Image,
+    bezelCornerRadius,
     devicePixelRatio,
     isLandscape,
     logLevel,
+    notchData,
     rectangles,
   });
 

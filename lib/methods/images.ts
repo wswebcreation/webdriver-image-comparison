@@ -80,9 +80,11 @@ export async function checkBaselineImageExists(
  */
 export async function makeCroppedBase64Image({
   base64Image,
+  bezelCornerRadius,
   devicePixelRatio,
   isLandscape,
   logLevel,
+  notchData,
   rectangles,
   resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
 }: CroppedBase64Image): Promise<string> {
@@ -142,6 +144,8 @@ export async function makeCroppedBase64Image({
   const canvas = createCanvas(canvasWidth, canvasHeight);
   const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
   const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
   let sourceXStart = x - left;
   let sourceYStart = y - top;
@@ -175,6 +179,10 @@ export async function makeCroppedBase64Image({
     }
     sourceYStart = 0;
   }
+  ctx.save();
+  // Add the bezels
+  createDeviceBezelCorners({ ctx, x: 0, y: 0, width, height, radius: Math.round(bezelCornerRadius) });
+  ctx.clip();
 
   ctx.drawImage(
     image,
@@ -190,6 +198,20 @@ export async function makeCroppedBase64Image({
     // With as width / height: 100 * 100 (scale)
     canvasWidth,
     canvasHeight,
+  );
+
+  // Draw the notch
+  const notchCanvas = createCanvas(notchData.width, notchData.height);
+  const notchContext = notchCanvas.getContext('2d');
+  createNotch({ ctx: notchContext, x: 0, y: 0, width: notchData.width, height: notchData.height });
+  notchContext.fillStyle = '#000000';
+  notchContext.fill();
+  // add to canvasContext
+  ctx.drawImage(
+    notchCanvas,
+    // Start at x/y pixels from the left and the top of the image
+    notchData.x,
+    notchData.y,
   );
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
@@ -434,4 +456,62 @@ async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: 
   ctx.drawImage(image, image.width / -2, image.height / -2);
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+}
+
+/**
+ * Create the device bezel corners
+ */
+function createDeviceBezelCorners({
+  ctx,
+  x,
+  y,
+  width,
+  height,
+  radius,
+}: {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  radius: number;
+}) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+/**
+ * Create the notch
+ */
+function createNotch({
+  ctx,
+  x,
+  y,
+  width,
+  height,
+}: {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}) {
+  const radius = Math.round((height > width ? width : height) / 2);
+  createDeviceBezelCorners({
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    radius,
+  });
 }

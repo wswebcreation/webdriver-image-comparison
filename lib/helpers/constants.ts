@@ -70,6 +70,13 @@ export const ANDROID_OFFSETS = {
 //  - ask for the screen dimensions in WebdriverIO `getWindowSize`
 //  - with `screen.height` in Safari devtools
 //  - with http://whatismyscreenresolution.net/
+// You can also check:
+// - mydevice.io
+// - https://useyourloaf.com/archives/
+// Corners come from:
+// - https://github.com/kylebshr/ScreenCorners
+//   One point is the equivalent of 1.333(3) pixels.
+//   On the other hand, one pixel is the equivalent of 0.75 points.
 //------------------------------------------------------------------
 // iPhones
 // 6/7/8/SE/2020:                                667
@@ -90,6 +97,7 @@ export const ANDROID_OFFSETS = {
 // Pro 11 2018/2021 (notch):                    1194
 // Pro 12.9 2017 (no notch)/2018/2021 (notch):  1366
 //------------------------------------------------------------------
+const pointsToPixels = (points: number) => Math.round(points / 0.75);
 export const IOS_OFFSETS: IosOffsets = {
   IPHONE: {
     // 6/7/8/SE/2020
@@ -98,12 +106,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
@@ -113,12 +127,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
@@ -128,12 +148,24 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 44,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone X/Xs/11 Pro/11ProMax	39.0
+          default: pointsToPixels(39),
+          // iPhone 12mini/13mini	44.0
+          medium: pointsToPixels(344),
+        },
         HOME_BAR: { x: 300, y: 359, height: 9, width: 212 },
       },
       PORTRAIT: {
         SAFE_AREA: 44,
         STATUS_BAR: 44,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone X/Xs/11 Pro/11ProMax	39.0
+          default: pointsToPixels(39),
+          // iPhone 12mini/13mini	44.0
+          medium: pointsToPixels(344),
+        },
         HOME_BAR: { x: 118, y: 796, height: 9, width: 137 },
       },
     },
@@ -143,12 +175,20 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 47,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 13/13Pro/14	47.33
+          default: pointsToPixels(47.33),
+        },
         HOME_BAR: { x: 312, y: 375, height: 9, width: 220 },
       },
       PORTRAIT: {
         SAFE_AREA: 47,
         STATUS_BAR: 47,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 13/13Pro/14	47.33
+          default: pointsToPixels(47.33),
+        },
         HOME_BAR: { x: 124, y: 829, height: 9, width: 143 },
       },
     },
@@ -158,12 +198,20 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 59,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 14Pro	55.0
+          default: pointsToPixels(55),
+        },
         HOME_BAR: { x: 316, y: 378, height: 9, width: 220 },
       },
       PORTRAIT: {
         SAFE_AREA: 59,
         STATUS_BAR: 59,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 14Pro	55.0
+          default: pointsToPixels(55),
+        },
         HOME_BAR: { x: 125, y: 837, height: 9, width: 143 },
       },
     },
@@ -173,12 +221,24 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 48,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // XsMax 39.0
+          default: pointsToPixels(39),
+          // iPhone 12/12Pro	47.33
+          medium: pointsToPixels(47.33),
+        },
         HOME_BAR: { x: 331, y: 399, height: 9, width: 234 },
       },
       PORTRAIT: {
         SAFE_AREA: 48,
         STATUS_BAR: 48,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // XsMax 39.0
+          default: pointsToPixels(39),
+          // iPhone 12/12Pro	47.33
+          medium: pointsToPixels(47.33),
+        },
         HOME_BAR: { x: 131, y: 881, height: 9, width: 152 },
       },
     },
@@ -188,12 +248,20 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 47,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 12ProMax/13ProMax/14PluS	53.33
+          default: pointsToPixels(53.33),
+        },
         HOME_BAR: { x: 342, y: 413, height: 9, width: 242 },
       },
       PORTRAIT: {
         SAFE_AREA: 47,
         STATUS_BAR: 47,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 12ProMax/13ProMax/14PluS	53.33
+          default: pointsToPixels(53.33),
+        },
         HOME_BAR: { x: 136, y: 911, height: 9, width: 156 },
       },
     },
@@ -203,13 +271,23 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 59,
         STATUS_BAR: 0,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 14ProMax	55.0
+          default: pointsToPixels(55),
+        },
         HOME_BAR: { x: 345, y: 415, height: 9, width: 242 },
+        NOTCH: { x: 11, y: 152, height: 126, width: 38 },
       },
       PORTRAIT: {
         SAFE_AREA: 59,
         STATUS_BAR: 59,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          // iPhone 14ProMax	55.0
+          default: pointsToPixels(55),
+        },
         HOME_BAR: { x: 137, y: 917, height: 9, width: 158 },
+        NOTCH: { x: 152, y: 11, height: 38, width: 126 },
       },
     },
   },
@@ -220,12 +298,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
@@ -235,12 +319,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
@@ -250,12 +340,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 20,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: 0,
+        },
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
@@ -266,12 +362,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 408, y: 729, height: 9, width: 318 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 234, y: 1118, height: 9, width: 276 },
       },
     },
@@ -281,12 +383,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 431, y: 805, height: 9, width: 318 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 272, y: 1165, height: 9, width: 276 },
       },
     },
@@ -296,12 +404,18 @@ export const IOS_OFFSETS: IosOffsets = {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 438, y: 819, height: 9, width: 318 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 279, y: 1179, height: 9, width: 276 },
       },
     },
@@ -313,14 +427,69 @@ export const IOS_OFFSETS: IosOffsets = {
         // STATUS_BAR: 24,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 508, y: 1009, height: 9, width: 350 },
       },
       PORTRAIT: {
         SAFE_AREA: 0,
         STATUS_BAR: 24,
         ADDRESS_BAR: 50,
+        BEZEL_CORNERS: {
+          default: pointsToPixels(18),
+        },
         HOME_BAR: { x: 352, y: 1351, height: 9, width: 320 },
       },
+    },
+  },
+};
+
+export const IOS_CORNERS = {
+  IPHONE: {
+    812: {
+      // iPhone X/Xs/11 Pro/11ProMax	39.0
+      default: pointsToPixels(39),
+      // iPhone 12mini/13mini	44.0
+      medium: pointsToPixels(344),
+    },
+    844: {
+      // iPhone 13/13Pro/14	47.33
+      default: pointsToPixels(47.33),
+    },
+    852: {
+      // iPhone 14Pro	55.0
+      default: pointsToPixels(55),
+    },
+    896: {
+      // XsMax 39.0
+      default: pointsToPixels(39),
+      // iPhone 12/12Pro	47.33
+      medium: pointsToPixels(47.33),
+    },
+    926: {
+      // iPhone 12ProMax/13ProMax/14PluS	53.33
+      default: pointsToPixels(53.33),
+    },
+    932: {
+      // iPhone 14ProMax	55.0
+      default: pointsToPixels(55),
+    },
+  },
+  IPAD: {
+    // 1133/1180/1194/1366
+    // iPad Air/iPadPro11-inch/12.9-inch	18.0
+    1133: {
+      default: pointsToPixels(18),
+    },
+    1180: {
+      default: pointsToPixels(18),
+    },
+    1194: {
+      default: pointsToPixels(18),
+    },
+    1366: {
+      default: pointsToPixels(18),
     },
   },
 };

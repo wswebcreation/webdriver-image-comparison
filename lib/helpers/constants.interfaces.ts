@@ -24,15 +24,24 @@ export type IosOffsets = {
     // The portrait height of the device
     [key: number]: {
       [key in OrientationEnum]: {
-        SAFE_AREA: number;
-        STATUS_BAR: number;
         ADDRESS_BAR: number;
+        BEZEL_CORNERS: {
+          [key: number | string]: number;
+        };
         HOME_BAR: {
           x: number;
           y: number;
           height: number;
           width: number;
         };
+        NOTCH?: {
+          x: number;
+          y: number;
+          height: number;
+          width: number;
+        };
+        SAFE_AREA: number;
+        STATUS_BAR: number;
       };
     };
   };

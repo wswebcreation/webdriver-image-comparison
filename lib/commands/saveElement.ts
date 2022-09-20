@@ -90,9 +90,11 @@ export default async function saveElement(
   // @TODO: we have isLandscape here
   const croppedBase64Image = await makeCroppedBase64Image({
     base64Image,
+    bezelCornerRadius: 0,
     devicePixelRatio,
     isLandscape,
     logLevel,
+    notchData: { x: 0, y: 0, width: 0, height: 0 },
     rectangles,
     resizeDimensions,
   });

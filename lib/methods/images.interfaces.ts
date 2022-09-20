@@ -152,9 +152,12 @@ export interface IgnoreBoxes {
 
 export interface CroppedBase64Image {
   base64Image: string;
+  bezelCornerRadius: number;
   devicePixelRatio: number;
   isLandscape: boolean;
   logLevel: LogLevel;
+  // @TODO: make a type of it
+  notchData: { x: number; y: number; width: number; height: number };
   rectangles: RectanglesOutput;
   resizeDimensions?: number | ResizeDimensions;
 }

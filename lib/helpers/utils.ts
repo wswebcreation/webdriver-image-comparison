@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { DESKTOP, PLATFORMS } from './constants';
+import { DESKTOP, IOS_OFFSETS, PLATFORMS } from './constants';
 import { ensureDirSync } from 'fs-extra';
 import {
   FormatFileDefaults,
@@ -159,4 +159,61 @@ export function getScreenshotSize(screenshot: string, devicePixelRation = 1): Sc
     height: Buffer.from(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
     width: Buffer.from(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
   };
+}
+
+function determineIOSOffsets({ height, isLandscape, width }: { height: number; isLandscape: boolean; width: number }) {
+  const isIphone = width < 1024 && height < 1024;
+  const deviceType = isIphone ? 'IPHONE' : 'IPAD';
+  const orientationType = isLandscape ? 'LANDSCAPE' : 'PORTRAIT';
+  const defaultPortraitHeight = isIphone ? 667 : 1024;
+  const portraitHeight = width > height ? width : height;
+  const offsetPortraitHeight =
+    Object.keys(IOS_OFFSETS[deviceType]).indexOf(portraitHeight.toString()) > -1 ? portraitHeight : defaultPortraitHeight;
+
+  return IOS_OFFSETS[deviceType][offsetPortraitHeight][orientationType];
+}
+
+/**
+ * Get the device bezel corner radius
+ */
+export function determineIOSDeviceBezelCorners({
+  deviceName,
+  devicePixelRatio,
+  height,
+  isLandscape,
+  width,
+}: {
+  deviceName: string;
+  devicePixelRatio: number;
+  height: number;
+  isLandscape: boolean;
+  width: number;
+}): number {
+  const currentBezelCorners = determineIOSOffsets({ height, isLandscape, width }).BEZEL_CORNERS;
+
+  return currentBezelCorners.default * devicePixelRatio;
+}
+
+/**
+ * Determine the notch data
+ */
+export function determineIOSNotchData({
+  devicePixelRatio,
+  height,
+  isLandscape,
+  width,
+}: {
+  devicePixelRatio: number;
+  height: number;
+  isLandscape: boolean;
+  width: number;
+}): {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+} {
+  const currentNotchOffsets = determineIOSOffsets({ height, isLandscape, width }).NOTCH;
+
+  return calculateDprData(currentNotchOffsets, devicePixelRatio);
 }
