@@ -203,6 +203,7 @@ export const IOS_OFFSETS: IosOffsets = {
           default: pointsToPixels(55),
         },
         HOME_BAR: { x: 316, y: 378, height: 9, width: 220 },
+        NOTCH: { x: 12, y: 132, height: 125, width: 38 },
       },
       PORTRAIT: {
         SAFE_AREA: 59,
@@ -213,6 +214,7 @@ export const IOS_OFFSETS: IosOffsets = {
           default: pointsToPixels(55),
         },
         HOME_BAR: { x: 125, y: 837, height: 9, width: 143 },
+        NOTCH: { x: 134, y: 11, height: 38, width: 125 },
       },
     },
     // XSMax|XR|11|11ProMax (notch)
