@@ -11,3 +11,4 @@ localBaseline/
 docs/
 lib/
 .eslintcache
+tsconfig.json
