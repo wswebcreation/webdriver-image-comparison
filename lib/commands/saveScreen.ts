@@ -10,7 +10,6 @@ import { BeforeScreenshotOptions, BeforeScreenshotResult } from '../helpers/befo
 import { InstanceData } from '../methods/instanceData.interfaces';
 import { AfterScreenshotOptions, ScreenshotOutput } from '../helpers/afterScreenshot.interfaces';
 import { RectanglesOutput, ScreenRectanglesOptions } from '../methods/rectangles.interfaces';
-import { determineIOSDeviceBezelCorners, determineIOSNotchData } from '../helpers/utils';
 
 /**
  * Saves an image of the viewport of the screen
@@ -23,7 +22,8 @@ export default async function saveScreen(
   saveScreenOptions: SaveScreenOptions,
 ): Promise<ScreenshotOutput> {
   // 1a. Set some variables
-  const { addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } = saveScreenOptions.wic;
+  const { addressBarShadowPadding, addIOSBezelCorners, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } =
+    saveScreenOptions.wic;
 
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean =
@@ -47,8 +47,23 @@ export default async function saveScreen(
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(methods.executor, beforeOptions);
-  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
-  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
+  const {
+    browserName,
+    browserVersion,
+    deviceName,
+    dimensions: {
+      window: { devicePixelRatio, innerHeight, innerWidth, isLandscape, outerHeight, outerWidth, screenHeight, screenWidth },
+    },
+    isAndroidChromeDriverScreenshot,
+    isAndroidNativeWebScreenshot,
+    isIos,
+    isMobile,
+    isTestInBrowser,
+    logName,
+    name,
+    platformName,
+    platformVersion,
+  } = enrichedInstanceData;
 
   // 3.  Take the screenshot
   const base64Image: string = await takeBase64Screenshot(methods.screenShot);
@@ -56,41 +71,23 @@ export default async function saveScreen(
   // Determine the rectangles
   const screenRectangleOptions: ScreenRectanglesOptions = {
     devicePixelRatio,
-    innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
-    innerWidth: enrichedInstanceData.dimensions.window.innerWidth,
-    isAndroidChromeDriverScreenshot: enrichedInstanceData.isAndroidChromeDriverScreenshot,
-    isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
-    isIos: enrichedInstanceData.isIos,
+    innerHeight,
+    innerWidth,
+    isAndroidChromeDriverScreenshot,
+    isAndroidNativeWebScreenshot,
+    isIos,
     isLandscape,
   };
   const rectangles: RectanglesOutput = determineScreenRectangles(base64Image, screenRectangleOptions);
-  // NEW and BETA
-  const bezelCornerRadius = enrichedInstanceData.isIos
-    ? determineIOSDeviceBezelCorners({
-        deviceName: enrichedInstanceData.deviceName,
-        devicePixelRatio,
-        height: enrichedInstanceData.dimensions.window.screenHeight,
-        isLandscape,
-        width: enrichedInstanceData.dimensions.window.screenWidth,
-      })
-    : 0;
-  const notchData = enrichedInstanceData.isIos
-    ? determineIOSNotchData({
-        devicePixelRatio,
-        height: enrichedInstanceData.dimensions.window.screenHeight,
-        isLandscape,
-        width: enrichedInstanceData.dimensions.window.screenWidth,
-      })
-    : { x: 0, y: 0, width: 0, height: 0 };
-  // NEW and BETA
   // 4.  Make a cropped base64 image
   const croppedBase64Image: string = await makeCroppedBase64Image({
+    addIOSBezelCorners,
     base64Image,
-    bezelCornerRadius,
+    deviceName,
     devicePixelRatio,
+    isIos,
     isLandscape,
     logLevel,
-    notchData,
     rectangles,
   });
 
@@ -100,27 +97,27 @@ export default async function saveScreen(
     base64Image: croppedBase64Image,
     disableCSSAnimation,
     filePath: {
-      browserName: enrichedInstanceData.browserName,
-      deviceName: enrichedInstanceData.deviceName,
-      isMobile: enrichedInstanceData.isMobile,
+      browserName,
+      deviceName,
+      isMobile,
       savePerInstance,
     },
     fileName: {
-      browserName: enrichedInstanceData.browserName,
-      browserVersion: enrichedInstanceData.browserVersion,
-      deviceName: enrichedInstanceData.deviceName,
+      browserName,
+      browserVersion,
+      deviceName,
       devicePixelRatio,
       formatImageName,
-      isMobile: enrichedInstanceData.isMobile,
-      isTestInBrowser: enrichedInstanceData.isTestInBrowser,
-      logName: enrichedInstanceData.logName,
-      name: enrichedInstanceData.name,
-      outerHeight: enrichedInstanceData.dimensions.window.outerHeight,
-      outerWidth: enrichedInstanceData.dimensions.window.outerWidth,
-      platformName: enrichedInstanceData.platformName,
-      platformVersion: enrichedInstanceData.platformVersion,
-      screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
-      screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
+      isMobile,
+      isTestInBrowser,
+      logName,
+      name,
+      outerHeight,
+      outerWidth,
+      platformName,
+      platformVersion,
+      screenHeight,
+      screenWidth,
       tag,
     },
     hideElements,

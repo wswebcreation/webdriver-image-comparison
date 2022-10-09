@@ -25,16 +25,7 @@ export type IosOffsets = {
     [key: number]: {
       [key in OrientationEnum]: {
         ADDRESS_BAR: number;
-        BEZEL_CORNERS: {
-          [key: number | string]: number;
-        };
         HOME_BAR: {
-          x: number;
-          y: number;
-          height: number;
-          width: number;
-        };
-        NOTCH?: {
           x: number;
           y: number;
           height: number;

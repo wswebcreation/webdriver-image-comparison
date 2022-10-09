@@ -161,59 +161,107 @@ export function getScreenshotSize(screenshot: string, devicePixelRation = 1): Sc
   };
 }
 
-function determineIOSOffsets({ height, isLandscape, width }: { height: number; isLandscape: boolean; width: number }) {
-  const isIphone = width < 1024 && height < 1024;
-  const deviceType = isIphone ? 'IPHONE' : 'IPAD';
-  const orientationType = isLandscape ? 'LANDSCAPE' : 'PORTRAIT';
-  const defaultPortraitHeight = isIphone ? 667 : 1024;
-  const portraitHeight = width > height ? width : height;
-  const offsetPortraitHeight =
-    Object.keys(IOS_OFFSETS[deviceType]).indexOf(portraitHeight.toString()) > -1 ? portraitHeight : defaultPortraitHeight;
-
-  return IOS_OFFSETS[deviceType][offsetPortraitHeight][orientationType];
-}
-
 /**
- * Get the device bezel corner radius
+ * Get the iOS bezel image names
  */
-export function determineIOSDeviceBezelCorners({
-  deviceName,
-  devicePixelRatio,
-  height,
-  isLandscape,
-  width,
-}: {
-  deviceName: string;
-  devicePixelRatio: number;
-  height: number;
-  isLandscape: boolean;
-  width: number;
-}): number {
-  const currentBezelCorners = determineIOSOffsets({ height, isLandscape, width }).BEZEL_CORNERS;
+export function getIosBezelImageNames(normalizedDeviceName: string): { topImageName: string; bottomImageName: string } {
+  let topImageName, bottomImageName;
 
-  return currentBezelCorners.default * devicePixelRatio;
-}
+  switch (normalizedDeviceName) {
+    case 'iphonex':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphonexs':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphonexsmax':
+      topImageName = 'iphonexsmax-top';
+      bottomImageName = 'iphonexsmax-bottom';
+      break;
+    case 'iphonexr':
+      topImageName = 'iphonexr.iphone11-top';
+      bottomImageName = 'iphonexr.iphone11-bottom';
+      break;
+    case 'iphone11':
+      topImageName = 'iphonexr.iphone11-top';
+      bottomImageName = 'iphonexr.iphone11-bottom';
+      break;
+    case 'iphone11pro':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphone11promax':
+      topImageName = 'iphone11promax-top';
+      bottomImageName = 'iphone11promax-bottom';
+      break;
+    case 'iphone12':
+      topImageName = 'iphone12.iphone12pro-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone12mini':
+      topImageName = 'iphone12mini-top';
+      bottomImageName = 'iphone12mini.iphone13mini-bottom';
+      break;
+    case 'iphone12pro':
+      topImageName = 'iphone12.iphone12pro-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone12promax':
+      topImageName = 'iphone12promax-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone13':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone13mini':
+      topImageName = 'iphone13mini-top';
+      bottomImageName = 'iphone12mini.iphone13mini-bottom';
+      break;
+    case 'iphone13pro':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone13promax':
+      topImageName = 'iphone13promax.iphone14plus-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone14':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone14plus':
+      topImageName = 'iphone13promax.iphone14plus-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone14pro':
+      topImageName = 'iphone14pro-top';
+      bottomImageName = 'iphone14pro-bottom';
+      break;
+    case 'iphone14promax':
+      topImageName = 'iphone14promax-top';
+      bottomImageName = 'iphone14promax-bottom';
+      break;
+    // iPad
+    case 'ipadmini':
+      topImageName = 'ipadmini6th-top';
+      bottomImageName = 'ipadmini6th-bottom';
+      break;
+    case 'ipadair':
+      topImageName = 'ipadair4th.ipadair5th-top';
+      bottomImageName = 'ipadair4th.ipadair5th-bottom';
+      break;
+    case 'ipadpro11':
+      topImageName = 'ipadpro11-top';
+      bottomImageName = 'ipadpro11-bottom';
+      break;
+    case 'ipadpro129':
+      topImageName = 'ipadpro129-top';
+      bottomImageName = 'ipadpro129-bottom';
+      break;
+  }
 
-/**
- * Determine the notch data
- */
-export function determineIOSNotchData({
-  devicePixelRatio,
-  height,
-  isLandscape,
-  width,
-}: {
-  devicePixelRatio: number;
-  height: number;
-  isLandscape: boolean;
-  width: number;
-}): {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-} {
-  const currentNotchOffsets = determineIOSOffsets({ height, isLandscape, width }).NOTCH;
-
-  return calculateDprData(currentNotchOffsets, devicePixelRatio);
+  return { topImageName, bottomImageName };
 }

@@ -151,13 +151,13 @@ export interface IgnoreBoxes {
 }
 
 export interface CroppedBase64Image {
+  addIOSBezelCorners: boolean;
   base64Image: string;
-  bezelCornerRadius: number;
+  deviceName: string;
   devicePixelRatio: number;
+  isIos: boolean;
   isLandscape: boolean;
   logLevel: LogLevel;
-  // @TODO: make a type of it
-  notchData: { x: number; y: number; width: number; height: number };
   rectangles: RectanglesOutput;
   resizeDimensions?: number | ResizeDimensions;
 }

@@ -3,8 +3,8 @@ import { access, copySync, outputFile, readFileSync } from 'fs-extra';
 import { join } from 'path';
 import { createCanvas, loadImage } from 'canvas';
 import compareImages from '../resemble/compareImages';
-import { calculateDprData, getAndCreatePath, getScreenshotSize } from '../helpers/utils';
-import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
+import { calculateDprData, getAndCreatePath, getIosBezelImageNames, getScreenshotSize } from '../helpers/utils';
+import { DEFAULT_RESIZE_DIMENSIONS, supportedIosBezelDevices } from '../helpers/constants';
 import { determineStatusAddressToolBarRectangles } from './rectangles';
 import {
   CompareOptions,
@@ -79,12 +79,13 @@ export async function checkBaselineImageExists(
  * Make a cropped image with Canvas
  */
 export async function makeCroppedBase64Image({
+  addIOSBezelCorners,
   base64Image,
-  bezelCornerRadius,
+  deviceName,
   devicePixelRatio,
+  isIos,
   isLandscape,
   logLevel,
-  notchData,
   rectangles,
   resizeDimensions = DEFAULT_RESIZE_DIMENSIONS,
 }: CroppedBase64Image): Promise<string> {
@@ -144,8 +145,6 @@ export async function makeCroppedBase64Image({
   const canvas = createCanvas(canvasWidth, canvasHeight);
   const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
   let sourceXStart = x - left;
   let sourceYStart = y - top;
@@ -179,10 +178,6 @@ export async function makeCroppedBase64Image({
     }
     sourceYStart = 0;
   }
-  ctx.save();
-  // Add the bezels
-  createDeviceBezelCorners({ ctx, x: 0, y: 0, width, height, radius: Math.round(bezelCornerRadius) });
-  ctx.clip();
 
   ctx.drawImage(
     image,
@@ -200,19 +195,76 @@ export async function makeCroppedBase64Image({
     canvasHeight,
   );
 
-  // Draw the notch
-  const notchCanvas = createCanvas(notchData.width, notchData.height);
-  const notchContext = notchCanvas.getContext('2d');
-  createNotch({ ctx: notchContext, x: 0, y: 0, width: notchData.width, height: notchData.height });
-  notchContext.fillStyle = '#000000';
-  notchContext.fill();
-  // add to canvasContext
-  ctx.drawImage(
-    notchCanvas,
-    // Start at x/y pixels from the left and the top of the image
-    notchData.x,
-    notchData.y,
-  );
+  // Add the bezel corners to the iOS image if we need to
+  const normalizedDeviceName = deviceName
+    .toLowerCase()
+    // (keep alphanumeric|remove simulator|remove inch|remove 1st/2nd/3rd/4th generation)
+    .replace(/([^A-Za-z0-9]|simulator|inch|(\d(st|nd|rd|th)) generation)/gi, '');
+  const isSupported =
+    // For iPhone
+    (normalizedDeviceName.includes('iphone') && supportedIosBezelDevices.includes(normalizedDeviceName)) ||
+    // For iPad
+    (normalizedDeviceName.includes('ipad') &&
+      supportedIosBezelDevices.includes(normalizedDeviceName) &&
+      (canvasHeight / devicePixelRatio >= 1133 || canvasWidth / devicePixelRatio >= 1133));
+  let isIosBezelError = false;
+
+  if (addIOSBezelCorners && isIos && isSupported) {
+    // Determine the bezel images
+    const { topImageName, bottomImageName } = getIosBezelImageNames(normalizedDeviceName);
+
+    if (topImageName && bottomImageName) {
+      const topImage = readFileSync(join(__dirname, `../assets/ios/${topImageName}.png`)).toString('base64');
+      const bottomImage = readFileSync(join(__dirname, `../assets/ios/${bottomImageName}.png`)).toString('base64');
+
+      // If the screen is rotated the images need to be rotated
+      const topBase64Image = isLandscape
+        ? await rotateBase64Image({
+            base64Image: topImage,
+            degrees: -90,
+            newHeight: getScreenshotSize(topImage).width,
+            newWidth: getScreenshotSize(topImage).height,
+          })
+        : topImage;
+      const bottomBase64Image = isLandscape
+        ? await rotateBase64Image({
+            base64Image: bottomImage,
+            degrees: -90,
+            newHeight: getScreenshotSize(topImage).width,
+            newWidth: getScreenshotSize(topImage).height,
+          })
+        : bottomImage;
+      // Draw top image, always place it at x=0 and y=0
+      ctx.drawImage(await loadImage(`data:image/png;base64,${topBase64Image}`), 0, 0);
+      // Draw bottom image, depending if the screen is rotated it needs to be placed
+      // y = heightScreen - heightBottom or x = widthScreen - heightBottom
+      ctx.drawImage(
+        await loadImage(`data:image/png;base64,${bottomBase64Image}`),
+        isLandscape ? canvasWidth - getScreenshotSize(bottomImage).height : 0,
+        isLandscape ? 0 : canvasHeight - getScreenshotSize(bottomImage).height,
+      );
+    } else {
+      isIosBezelError = true;
+    }
+  }
+
+  if (addIOSBezelCorners && isIos && !isSupported) {
+    isIosBezelError = true;
+  }
+
+  if (isIosBezelError) {
+    console.log(
+      yellow(`
+#####################################################################################
+ WARNING:
+ We could not find the bezel corners for the device '${deviceName}'.
+ The normalized device name is '${normalizedDeviceName}'
+ and couldn't be found in the supported devices:
+ ${supportedIosBezelDevices.join(', ')}
+#####################################################################################
+`),
+    );
+  }
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
 }

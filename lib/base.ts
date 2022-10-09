@@ -1,9 +1,9 @@
-import {join, normalize} from 'path';
-import {removeSync} from 'fs-extra';
-import {defaultOptions} from './helpers/options';
-import {FOLDERS} from './helpers/constants';
-import {Folders} from './base.interface';
-import {ClassOptions, DefaultOptions} from './helpers/options.interface';
+import { join, normalize } from 'path';
+import { removeSync } from 'fs-extra';
+import { defaultOptions } from './helpers/options';
+import { FOLDERS } from './helpers/constants';
+import { Folders } from './base.interface';
+import { ClassOptions, DefaultOptions } from './helpers/options.interface';
 
 export default class BaseClass {
   defaultOptions: DefaultOptions;
