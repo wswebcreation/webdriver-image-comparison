@@ -52,7 +52,7 @@
     "jest": "^27.5.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "release-it": "^14.14.0",
+    "release-it": "^15.5.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.9.1",
