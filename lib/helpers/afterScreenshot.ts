@@ -7,7 +7,6 @@ import { join } from 'path';
 import { Executor } from '../methods/methods.interface';
 import { AfterScreenshotOptions, ScreenshotOutput } from './afterScreenshot.interfaces';
 import hideRemoveElements from '../clientSideScripts/hideRemoveElements';
-import { yellow } from 'chalk';
 import { LogLevel } from './options.interface';
 
 /**
@@ -52,7 +51,8 @@ export default async function afterScreenshot(executor: Executor, options: After
     } catch (e) {
       if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
         console.log(
-          yellow(`
+          '\x1b[33m%s\x1b[0m',
+          `
 #####################################################################################
  WARNING:
  (One of) the elements that needed to be hidden or removed could not be found on the
@@ -60,7 +60,7 @@ export default async function afterScreenshot(executor: Executor, options: After
  Error: ${e}
  We made sure the test didn't break.
 #####################################################################################
-`),
+`,
         );
       }
     }

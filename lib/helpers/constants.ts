@@ -70,6 +70,13 @@ export const ANDROID_OFFSETS = {
 //  - ask for the screen dimensions in WebdriverIO `getWindowSize`
 //  - with `screen.height` in Safari devtools
 //  - with http://whatismyscreenresolution.net/
+// You can also check:
+// - mydevice.io
+// - https://useyourloaf.com/archives/
+// Corners come from:
+// - https://github.com/kylebshr/ScreenCorners
+//   One point is the equivalent of 1.333(3) pixels.
+//   On the other hand, one pixel is the equivalent of 0.75 points.
 //------------------------------------------------------------------
 // iPhones
 // 6/7/8/SE/2020:                                667
@@ -260,7 +267,7 @@ export const IOS_OFFSETS: IosOffsets = {
       },
     },
     // With Home bar
-    // Mini 2021 (notch)
+    // Mini 2021
     1133: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -275,7 +282,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 234, y: 1118, height: 9, width: 276 },
       },
     },
-    // Air 2020/2022 (notch)
+    // Air 2020/2022
     1180: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -290,7 +297,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 272, y: 1165, height: 9, width: 276 },
       },
     },
-    // Pro 11 2018/2021 (notch)
+    // Pro 11 2018/2021
     1194: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -305,7 +312,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 279, y: 1179, height: 9, width: 276 },
       },
     },
-    // Pro 12.9 2017 (no notch)/2018/2021 (notch)
+    // Pro 12.9 2017/2018/2021
     1366: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -324,3 +331,31 @@ export const IOS_OFFSETS: IosOffsets = {
     },
   },
 };
+
+export const supportedIosBezelDevices = [
+  // iPhones
+  'iphonex',
+  'iphonexs',
+  'iphonexsmax',
+  'iphonexr',
+  'iphone11',
+  'iphone11pro',
+  'iphone11promax',
+  'iphone12',
+  'iphone12mini',
+  'iphone12pro',
+  'iphone12promax',
+  'iphone13',
+  'iphone13mini',
+  'iphone13pro',
+  'iphone13promax',
+  'iphone14',
+  'iphone14plus',
+  'iphone14pro',
+  'iphone14promax',
+  // // iPads
+  'ipadmini', // 1133
+  'ipadair', // 1180
+  'ipadpro11', // 1194
+  'ipadpro129', // 1366
+];

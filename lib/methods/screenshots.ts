@@ -1,5 +1,3 @@
-// @ts-ignore
-import { yellow } from 'chalk';
 import scrollToPosition from '../clientSideScripts/scrollToPosition';
 import getDocumentScrollHeight from '../clientSideScripts/getDocumentScrollHeight';
 import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
@@ -450,7 +448,8 @@ export async function takeBase64Screenshot(takeScreenshot: TakeScreenShot): Prom
 function logHiddenRemovedError(error: any, logLevel: LogLevel) {
   if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
     console.log(
-      yellow(`
+      '\x1b[33m%s\x1b[0m',
+      `
 #####################################################################################
  WARNING:
  (One of) the elements that needed to be hidden or removed could not be found on the
@@ -458,7 +457,7 @@ function logHiddenRemovedError(error: any, logLevel: LogLevel) {
  Error: ${error}
  We made sure the test didn't break.
 #####################################################################################
-`),
+`,
     );
   }
 }

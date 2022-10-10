@@ -12,6 +12,52 @@ Plugin options are the options that can be set when the plugin is instantiated.
 
 The padding that needs to be added to the address bar on iOS and Android to do a proper cutout of the the viewport.
 
+### `addIOSBezelCorners`
+
+- **Type:** `boolean`
+- **Mandatory:** No
+- **Default:** `false`
+
+Add bezel corners and notch/dynamic island to the screenshot for iOS devices.
+
+> **NOTE**
+>
+> This can only be done when the device name **CAN** automatically be determined and matches the following list of normalized devices names:. Normalizing will be done by this module.
+>
+> **iPhone:**
+>
+> - iPhone X: `iphonex`
+> - iPhone XS: `iphonexs`
+> - iPhone XS Max: `iphonexsmax`
+> - iPhone XR: `iphonexr`
+> - iPhone 11: `iphone11`
+> - iPhone 11 Pro: `iphone11pro`
+> - iPhone 11 Pro Max: `iphone11promax`
+> - iPhone 12: `iphone12`
+> - iPhone 12 Mini: `iphone12mini`
+> - iPhone 12 Pro: `iphone12pro`
+> - iPhone 12 Pro Max: `iphone12promax`
+> - iPhone 13: `iphone13`
+> - iPhone 13 Mini: `iphone13mini`
+> - iPhone 13 Pro: `iphone13pro`
+> - iPhone 13 Pro Max: `iphone13promax`
+> - iPhone 14: `iphone14`
+> - iPhone 14 Plus: `iphone14plus`
+> - iPhone 14 Pro: `iphone14pro`
+> - iPhone 14 Pro Max: `iphone14promax`
+>
+> **iPads:**
+>
+> - iPad Mini 6th Generation: `ipadmini`
+> - iPad Air 4th Generation: `ipadair`
+> - iPad Air 5th Generation: `ipadair`
+> - iPad Pro (11-inch) 1st Generation: `ipadpro11`
+> - iPad Pro (11-inch) 2nd Generation: `ipadpro11`
+> - iPad Pro (11-inch) 3rd Generation: `ipadpro11`
+> - iPad Pro (12.9-inch) 3rd Generation: `ipadpro129`
+> - iPad Pro (12.9-inch) 4th Generation: `ipadpro129`
+> - iPad Pro (12.9-inch) 5th Generation: `ipadpro129`
+
 ### `autoSaveBaseline`
 
 - **Type:** `boolean`

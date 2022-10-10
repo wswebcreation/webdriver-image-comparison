@@ -151,8 +151,11 @@ export interface IgnoreBoxes {
 }
 
 export interface CroppedBase64Image {
+  addIOSBezelCorners: boolean;
   base64Image: string;
+  deviceName: string;
   devicePixelRatio: number;
+  isIos: boolean;
   isLandscape: boolean;
   logLevel: LogLevel;
   rectangles: RectanglesOutput;

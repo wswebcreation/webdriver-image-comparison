@@ -24,8 +24,6 @@ export type IosOffsets = {
     // The portrait height of the device
     [key: number]: {
       [key in OrientationEnum]: {
-        SAFE_AREA: number;
-        STATUS_BAR: number;
         ADDRESS_BAR: number;
         HOME_BAR: {
           x: number;
@@ -33,6 +31,8 @@ export type IosOffsets = {
           height: number;
           width: number;
         };
+        SAFE_AREA: number;
+        STATUS_BAR: number;
       };
     };
   };

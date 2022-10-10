@@ -55,8 +55,23 @@ export default async function saveElement(
     toolBarShadowPadding,
   };
   const enrichedInstanceData: BeforeScreenshotResult = await beforeScreenshot(executor, beforeOptions, true);
-  const devicePixelRatio = enrichedInstanceData.dimensions.window.devicePixelRatio;
-  const isLandscape = enrichedInstanceData.dimensions.window.isLandscape;
+  const {
+    browserName,
+    browserVersion,
+    deviceName,
+    dimensions: {
+      window: { devicePixelRatio, innerHeight, isLandscape, outerHeight, outerWidth, screenHeight, screenWidth },
+    },
+    isAndroid,
+    isAndroidNativeWebScreenshot,
+    isIos,
+    isMobile,
+    isTestInBrowser,
+    logName,
+    name,
+    platformName,
+    platformVersion,
+  } = enrichedInstanceData;
 
   // Scroll the element into top of the viewport and return the current scroll position
   const currentPosition = await executor(scrollElementIntoView, element, addressBarShadowPadding);
@@ -68,10 +83,10 @@ export default async function saveElement(
   // 4.  Determine the rectangles
   const elementRectangleOptions: ElementRectanglesOptions = {
     devicePixelRatio,
-    innerHeight: enrichedInstanceData.dimensions.window.innerHeight,
-    isAndroidNativeWebScreenshot: enrichedInstanceData.isAndroidNativeWebScreenshot,
-    isAndroid: enrichedInstanceData.isAndroid,
-    isIos: enrichedInstanceData.isIos,
+    innerHeight,
+    isAndroidNativeWebScreenshot,
+    isAndroid,
+    isIos,
     isLandscape,
   };
   const rectangles: RectanglesOutput = await determineElementRectangles({
@@ -89,8 +104,11 @@ export default async function saveElement(
   // 5.  Make a cropped base64 image with resizeDimensions
   // @TODO: we have isLandscape here
   const croppedBase64Image = await makeCroppedBase64Image({
+    addIOSBezelCorners: false,
     base64Image,
+    deviceName,
     devicePixelRatio,
+    isIos,
     isLandscape,
     logLevel,
     rectangles,
@@ -103,27 +121,27 @@ export default async function saveElement(
     base64Image: croppedBase64Image,
     disableCSSAnimation,
     filePath: {
-      browserName: enrichedInstanceData.browserName,
-      deviceName: enrichedInstanceData.deviceName,
-      isMobile: enrichedInstanceData.isMobile,
+      browserName,
+      deviceName,
+      isMobile,
       savePerInstance: savePerInstance,
     },
     fileName: {
-      browserName: enrichedInstanceData.browserName,
-      browserVersion: enrichedInstanceData.browserVersion,
-      deviceName: enrichedInstanceData.deviceName,
-      devicePixelRatio: enrichedInstanceData.dimensions.window.devicePixelRatio,
+      browserName,
+      browserVersion,
+      deviceName,
+      devicePixelRatio,
       formatImageName,
-      isMobile: enrichedInstanceData.isMobile,
-      isTestInBrowser: enrichedInstanceData.isTestInBrowser,
-      logName: enrichedInstanceData.logName,
-      name: enrichedInstanceData.name,
-      outerHeight: enrichedInstanceData.dimensions.window.outerHeight,
-      outerWidth: enrichedInstanceData.dimensions.window.outerWidth,
-      platformName: enrichedInstanceData.platformName,
-      platformVersion: enrichedInstanceData.platformVersion,
-      screenHeight: enrichedInstanceData.dimensions.window.screenHeight,
-      screenWidth: enrichedInstanceData.dimensions.window.screenWidth,
+      isMobile,
+      isTestInBrowser,
+      logName,
+      name,
+      outerHeight,
+      outerWidth,
+      platformName,
+      platformVersion,
+      screenHeight,
+      screenWidth,
       tag,
     },
     hideElements,
