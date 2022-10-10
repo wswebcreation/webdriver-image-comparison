@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { DESKTOP, PLATFORMS } from './constants';
+import { DESKTOP, IOS_OFFSETS, PLATFORMS } from './constants';
 import { ensureDirSync } from 'fs-extra';
 import {
   FormatFileDefaults,
@@ -159,4 +159,109 @@ export function getScreenshotSize(screenshot: string, devicePixelRation = 1): Sc
     height: Buffer.from(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
     width: Buffer.from(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
   };
+}
+
+/**
+ * Get the iOS bezel image names
+ */
+export function getIosBezelImageNames(normalizedDeviceName: string): { topImageName: string; bottomImageName: string } {
+  let topImageName, bottomImageName;
+
+  switch (normalizedDeviceName) {
+    case 'iphonex':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphonexs':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphonexsmax':
+      topImageName = 'iphonexsmax-top';
+      bottomImageName = 'iphonexsmax-bottom';
+      break;
+    case 'iphonexr':
+      topImageName = 'iphonexr.iphone11-top';
+      bottomImageName = 'iphonexr.iphone11-bottom';
+      break;
+    case 'iphone11':
+      topImageName = 'iphonexr.iphone11-top';
+      bottomImageName = 'iphonexr.iphone11-bottom';
+      break;
+    case 'iphone11pro':
+      topImageName = 'iphonex.iphonexs.iphone11pro-top';
+      bottomImageName = 'iphonex.iphonexs.iphone11pro-bottom';
+      break;
+    case 'iphone11promax':
+      topImageName = 'iphone11promax-top';
+      bottomImageName = 'iphone11promax-bottom';
+      break;
+    case 'iphone12':
+      topImageName = 'iphone12.iphone12pro-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone12mini':
+      topImageName = 'iphone12mini-top';
+      bottomImageName = 'iphone12mini.iphone13mini-bottom';
+      break;
+    case 'iphone12pro':
+      topImageName = 'iphone12.iphone12pro-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone12promax':
+      topImageName = 'iphone12promax-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone13':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone13mini':
+      topImageName = 'iphone13mini-top';
+      bottomImageName = 'iphone12mini.iphone13mini-bottom';
+      break;
+    case 'iphone13pro':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone13promax':
+      topImageName = 'iphone13promax.iphone14plus-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone14':
+      topImageName = 'iphone13.iphone13pro.iphone14-top';
+      bottomImageName = 'iphone12.iphone12pro.iphone13.iphone13pro.iphone14-bottom';
+      break;
+    case 'iphone14plus':
+      topImageName = 'iphone13promax.iphone14plus-top';
+      bottomImageName = 'iphone12promax.iphone13promax.iphone14plus-bottom';
+      break;
+    case 'iphone14pro':
+      topImageName = 'iphone14pro-top';
+      bottomImageName = 'iphone14pro-bottom';
+      break;
+    case 'iphone14promax':
+      topImageName = 'iphone14promax-top';
+      bottomImageName = 'iphone14promax-bottom';
+      break;
+    // iPad
+    case 'ipadmini':
+      topImageName = 'ipadmini6th-top';
+      bottomImageName = 'ipadmini6th-bottom';
+      break;
+    case 'ipadair':
+      topImageName = 'ipadair4th.ipadair5th-top';
+      bottomImageName = 'ipadair4th.ipadair5th-bottom';
+      break;
+    case 'ipadpro11':
+      topImageName = 'ipadpro11-top';
+      bottomImageName = 'ipadpro11-bottom';
+      break;
+    case 'ipadpro129':
+      topImageName = 'ipadpro129-top';
+      bottomImageName = 'ipadpro129-bottom';
+      break;
+  }
+
+  return { topImageName, bottomImageName };
 }

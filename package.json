@@ -5,9 +5,10 @@
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
-    "compile": "tsc --allowJs true --declaration false && tsc",
+    "compile": "npm run copy-files && tsc --allowJs true --declaration false && tsc",
     "lint": "eslint lib/**/*.ts",
     "clean": "rimraf coverage build tmp",
+    "copy-files": "npx copyfiles -u 1 lib/assets/**/*.png build/",
     "pretest": "npm run lint",
     "test": "jest",
     "release": "release-it --github.release",
@@ -34,17 +35,16 @@
   "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
   "dependencies": {
     "canvas": "^2.10.1",
-    "chalk": "^4.1.2",
     "fs-extra": "^10.0.1"
   },
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
     "@types/selenium-webdriver": "^4.0.18",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

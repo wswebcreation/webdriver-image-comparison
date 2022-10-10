@@ -1,10 +1,9 @@
-import { red, yellow } from 'chalk';
 import { access, copySync, outputFile, readFileSync } from 'fs-extra';
 import { join } from 'path';
 import { createCanvas, loadImage } from 'canvas';
 import compareImages from '../resemble/compareImages';
-import { calculateDprData, getAndCreatePath, getScreenshotSize } from '../helpers/utils';
-import { DEFAULT_RESIZE_DIMENSIONS } from '../helpers/constants';
+import { calculateDprData, getAndCreatePath, getIosBezelImageNames, getScreenshotSize } from '../helpers/utils';
+import { DEFAULT_RESIZE_DIMENSIONS, supportedIosBezelDevices } from '../helpers/constants';
 import { determineStatusAddressToolBarRectangles } from './rectangles';
 import {
   CompareOptions,
@@ -36,29 +35,30 @@ export async function checkBaselineImageExists(
             copySync(actualFilePath, baselineFilePath);
             if (logLevel === LogLevel.info) {
               console.log(
-                yellow(`
+                '\x1b[33m%s\x1b[0m',
+                `
 #####################################################################################
  INFO:
  Autosaved the image to
  ${baselineFilePath}
 #####################################################################################
-`),
+`,
               );
             }
           } catch (error) {
             /* istanbul ignore next */
             reject(
-              red(`
+              `
 #####################################################################################
  Image could not be copied. The following error was thrown:
  ${error}
 #####################################################################################
-`),
+`,
             );
           }
         } else {
           reject(
-            red(`
+            `
 #####################################################################################
  Baseline image not found, save the actual image manually to the baseline.
  The image can be found here:
@@ -66,7 +66,7 @@ export async function checkBaselineImageExists(
  If you want the module to auto save a non existing image to the baseline you
  can provide 'autoSaveBaseline: true' to the options.
 #####################################################################################
-`),
+`,
           );
         }
       }
@@ -79,8 +79,11 @@ export async function checkBaselineImageExists(
  * Make a cropped image with Canvas
  */
 export async function makeCroppedBase64Image({
+  addIOSBezelCorners,
   base64Image,
+  deviceName,
   devicePixelRatio,
+  isIos,
   isLandscape,
   logLevel,
   rectangles,
@@ -106,7 +109,8 @@ export async function makeCroppedBase64Image({
     };
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  WARNING:
  THE 'resizeDimensions' NEEDS TO BE AN OBJECT LIKE
@@ -123,9 +127,9 @@ export async function makeCroppedBase64Image({
     bottom: ${resizeDimensions},
     left: ${resizeDimensions},
  }
- THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
+ THIS IS DEPRECATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
 #####################################################################################
-`),
+`,
       );
     }
   } else {
@@ -149,13 +153,14 @@ export async function makeCroppedBase64Image({
   if (sourceXStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${left}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceXStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`),
+`,
       );
     }
     sourceXStart = 0;
@@ -164,13 +169,14 @@ export async function makeCroppedBase64Image({
   if (sourceYStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${top}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceYStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`),
+`,
       );
     }
     sourceYStart = 0;
@@ -191,6 +197,78 @@ export async function makeCroppedBase64Image({
     canvasWidth,
     canvasHeight,
   );
+
+  // Add the bezel corners to the iOS image if we need to
+  const normalizedDeviceName = deviceName
+    .toLowerCase()
+    // (keep alphanumeric|remove simulator|remove inch|remove 1st/2nd/3rd/4th generation)
+    .replace(/([^A-Za-z0-9]|simulator|inch|(\d(st|nd|rd|th)) generation)/gi, '');
+  const isSupported =
+    // For iPhone
+    (normalizedDeviceName.includes('iphone') && supportedIosBezelDevices.includes(normalizedDeviceName)) ||
+    // For iPad
+    (normalizedDeviceName.includes('ipad') &&
+      supportedIosBezelDevices.includes(normalizedDeviceName) &&
+      (canvasHeight / devicePixelRatio >= 1133 || canvasWidth / devicePixelRatio >= 1133));
+  let isIosBezelError = false;
+
+  if (addIOSBezelCorners && isIos && isSupported) {
+    // Determine the bezel images
+    const { topImageName, bottomImageName } = getIosBezelImageNames(normalizedDeviceName);
+
+    if (topImageName && bottomImageName) {
+      const topImage = readFileSync(join(__dirname, `../assets/ios/${topImageName}.png`)).toString('base64');
+      const bottomImage = readFileSync(join(__dirname, `../assets/ios/${bottomImageName}.png`)).toString('base64');
+
+      // If the screen is rotated the images need to be rotated
+      const topBase64Image = isLandscape
+        ? await rotateBase64Image({
+            base64Image: topImage,
+            degrees: -90,
+            newHeight: getScreenshotSize(topImage).width,
+            newWidth: getScreenshotSize(topImage).height,
+          })
+        : topImage;
+      const bottomBase64Image = isLandscape
+        ? await rotateBase64Image({
+            base64Image: bottomImage,
+            degrees: -90,
+            newHeight: getScreenshotSize(topImage).width,
+            newWidth: getScreenshotSize(topImage).height,
+          })
+        : bottomImage;
+      // Draw top image, always place it at x=0 and y=0
+      ctx.drawImage(await loadImage(`data:image/png;base64,${topBase64Image}`), 0, 0);
+      // Draw bottom image, depending if the screen is rotated it needs to be placed
+      // y = heightScreen - heightBottom or x = widthScreen - heightBottom
+      ctx.drawImage(
+        await loadImage(`data:image/png;base64,${bottomBase64Image}`),
+        isLandscape ? canvasWidth - getScreenshotSize(bottomImage).height : 0,
+        isLandscape ? 0 : canvasHeight - getScreenshotSize(bottomImage).height,
+      );
+    } else {
+      isIosBezelError = true;
+    }
+  }
+
+  if (addIOSBezelCorners && isIos && !isSupported) {
+    isIosBezelError = true;
+  }
+
+  if (isIosBezelError) {
+    console.log(
+      '\x1b[33m%s\x1b[0m',
+      `
+#####################################################################################
+ WARNING:
+ We could not find the bezel corners for the device '${deviceName}'.
+ The normalized device name is '${normalizedDeviceName}'
+ and couldn't be found in the supported devices:
+ ${supportedIosBezelDevices.join(', ')}
+#####################################################################################
+`,
+    );
+  }
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
 }
@@ -274,13 +352,12 @@ export async function executeImageCompare(
 
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
-  const misMatchPercentage = imageCompareOptions.rawMisMatchPercentage
-    ? data.rawMisMatchPercentage
-    : Number(data.rawMisMatchPercentage.toFixed(2));
+  const rawMisMatchPercentage = data.rawMisMatchPercentage;
+  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage ? rawMisMatchPercentage : data.misMatchPercentage;
 
   // 6.		Save the diff when there is a diff or when debug mode is on
-  if (misMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
-    const isDifference = misMatchPercentage > imageCompareOptions.saveAboveTolerance;
+  if (rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
+    const isDifference = rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance;
     const isDifferenceMessage = 'WARNING:\n There was a difference. Saved the difference to';
     const debugMessage = 'INFO:\n Debug mode is enabled. Saved the debug file to:';
     const diffFolderPath = getAndCreatePath(diffFolder, createFolderOptions);
@@ -290,12 +367,13 @@ export async function executeImageCompare(
 
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  ${isDifference ? isDifferenceMessage : debugMessage}
  ${diffFilePath}
 #####################################################################################
-`),
+`,
       );
     }
   }
@@ -309,9 +387,9 @@ export async function executeImageCompare(
           baseline: baselineFilePath,
           ...(diffFilePath ? { diff: diffFilePath } : {}),
         },
-        misMatchPercentage,
+        misMatchPercentage: reportMisMatchPercentage,
       }
-    : misMatchPercentage;
+    : reportMisMatchPercentage;
 }
 
 /**
@@ -434,4 +512,62 @@ async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: 
   ctx.drawImage(image, image.width / -2, image.height / -2);
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+}
+
+/**
+ * Create the device bezel corners
+ */
+function createDeviceBezelCorners({
+  ctx,
+  x,
+  y,
+  width,
+  height,
+  radius,
+}: {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  radius: number;
+}) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+/**
+ * Create the notch
+ */
+function createNotch({
+  ctx,
+  x,
+  y,
+  width,
+  height,
+}: {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}) {
+  const radius = Math.round((height > width ? width : height) / 2);
+  createDeviceBezelCorners({
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    radius,
+  });
 }

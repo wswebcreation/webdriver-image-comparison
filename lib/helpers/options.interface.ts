@@ -6,11 +6,13 @@ export interface ClassOptions {
    */
   // The padding that needs to be added to the address bar on iOS and Android to do a proper cutout of the the viewport.
   addressBarShadowPadding?: number;
+  // Add iOS bezel corners and notch/dynamic island to the screenshot
+  addIOSBezelCorners?: boolean;
   // If no baseline image is found during the comparison the image is automatically copied to the baseline folder when this is set to `true`
   autoSaveBaseline?: boolean;
   // The directory that will hold all the baseline images that are used to during the comparison
   baselineFolder?: any;
-  // Delete runtime folder (actual & diff) on initialisation
+  // Delete runtime folder (actual & diff) on initialization
   clearRuntimeFolder?: boolean;
   // The naming of the saved images can be customized by passing the parameter `formatImageName` with a format string
   formatImageName?: string;
@@ -72,18 +74,19 @@ export interface ClassOptions {
 
 export interface DefaultOptions {
   addressBarShadowPadding: number;
+  addIOSBezelCorners: boolean;
   autoSaveBaseline: boolean;
   clearFolder: boolean;
-  formatImageName: string;
-  isHybridApp: boolean;
-  savePerInstance: boolean;
-  toolBarShadowPadding: number;
+  compareOptions: CompareOptions;
   disableCSSAnimation: boolean;
+  formatImageName: string;
   fullPageScrollTimeout: number;
   hideScrollBars: boolean;
+  isHybridApp: boolean;
   logLevel: LogLevel;
-  compareOptions: CompareOptions;
+  savePerInstance: boolean;
   tabbableOptions: TabbableOptions;
+  toolBarShadowPadding: number;
 }
 
 interface CompareOptions {
