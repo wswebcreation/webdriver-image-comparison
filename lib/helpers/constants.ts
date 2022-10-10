@@ -72,24 +72,27 @@ export const ANDROID_OFFSETS = {
 //  - with http://whatismyscreenresolution.net/
 //------------------------------------------------------------------
 // iPhones
-// 6/7/8/SE/2020:                                667 (DEFAULT)
-// 6/7/8/Plus:                                   736 (PLUS)
-// X|XS|11Pro|12Mini|13Mini (notch):             812 (SMALL)
-// 12|12Pro|13|13Pro (notch):                    844 (MEDIUM)
-// XSMax|XR|11|11ProMax (notch):                 896 (LARGE)
-// 12ProMax|13ProMax (notch):                    926 (EXTRA_LARGE)
+// 6/7/8/SE/2020:                                667
+// 6/7/8/Plus:                                   736
+// X|XS|11Pro|12Mini|13Mini (notch):             812
+// 12|12Pro|13|13Pro|14 (notch):                 844
+// 14Pro (notch):                                852
+// XSMax|XR|11|11ProMax (notch):                 896
+// 12ProMax|13ProMax|14Plus (notch):             926
+// 14ProMax (notch):                             932
 //------------------------------------------------------------------
 // iPads
-// 9.7|Air 1/2|Mini 1/2/3/4/2019|Pro 9.7:       1024 (DEFAULT)
-// 10.2 1/2019/2020/2021                        1080 (IPAD_10_2)
-// Pro 10.5/2017/2019:                          1112 (PRO_10_5)
-// Mini 2021 (notch):                           1133 (SMALL)
-// Air 2020/2022 (notch):                       1180 (MEDIUM)
-// Pro 11 2018/2021 (notch):                    1194 (LARGE)
-// Pro 12.9 2017 (no notch)/2018/2021 (notch):  1366 (EXTRA_LARGE)
+// 9.7|Air 1/2|Mini 1/2/3/4/2019|Pro 9.7:       1024
+// 10.2 1/2019/2020/2021                        1080
+// Pro 10.5/2017/2019:                          1112
+// Mini 2021 (notch):                           1133
+// Air 2020/2022 (notch):                       1180
+// Pro 11 2018/2021 (notch):                    1194
+// Pro 12.9 2017 (no notch)/2018/2021 (notch):  1366
 //------------------------------------------------------------------
 export const IOS_OFFSETS: IosOffsets = {
   IPHONE: {
+    // 6/7/8/SE/2020
     667: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -104,6 +107,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
+    // 6/7/8/Plus
     736: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -118,7 +122,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
-    // With Notch
+    // X|XS|11Pro|12Mini|13Mini (notch)
     812: {
       LANDSCAPE: {
         SAFE_AREA: 44,
@@ -133,6 +137,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 118, y: 796, height: 9, width: 137 },
       },
     },
+    // 12|12Pro|13|13Pro|14 (notch)
     844: {
       LANDSCAPE: {
         SAFE_AREA: 47,
@@ -147,6 +152,22 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 124, y: 829, height: 9, width: 143 },
       },
     },
+    // 14Pro (notch)
+    852: {
+      LANDSCAPE: {
+        SAFE_AREA: 59,
+        STATUS_BAR: 0,
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 316, y: 378, height: 9, width: 220 },
+      },
+      PORTRAIT: {
+        SAFE_AREA: 59,
+        STATUS_BAR: 59,
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 125, y: 837, height: 9, width: 143 },
+      },
+    },
+    // XSMax|XR|11|11ProMax (notch)
     896: {
       LANDSCAPE: {
         SAFE_AREA: 48,
@@ -161,6 +182,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 131, y: 881, height: 9, width: 152 },
       },
     },
+    // 12ProMax|13ProMax|14Plus (notch)
     926: {
       LANDSCAPE: {
         SAFE_AREA: 47,
@@ -175,8 +197,24 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 136, y: 911, height: 9, width: 156 },
       },
     },
+    // 14ProMax (notch)
+    932: {
+      LANDSCAPE: {
+        SAFE_AREA: 59,
+        STATUS_BAR: 0,
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 345, y: 415, height: 9, width: 242 },
+      },
+      PORTRAIT: {
+        SAFE_AREA: 59,
+        STATUS_BAR: 59,
+        ADDRESS_BAR: 50,
+        HOME_BAR: { x: 137, y: 917, height: 9, width: 158 },
+      },
+    },
   },
   IPAD: {
+    // 9.7|Air 1/2|Mini 1/2/3/4/2019|Pro 9.7
     1024: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -191,6 +229,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
+    // 10.2 1/2019/2020/2021
     1080: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -205,6 +244,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 0, y: 0, height: 0, width: 0 },
       },
     },
+    // Pro 10.5/2017/2019
     1112: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -220,6 +260,7 @@ export const IOS_OFFSETS: IosOffsets = {
       },
     },
     // With Home bar
+    // Mini 2021 (notch)
     1133: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -234,6 +275,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 234, y: 1118, height: 9, width: 276 },
       },
     },
+    // Air 2020/2022 (notch)
     1180: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -248,6 +290,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 272, y: 1165, height: 9, width: 276 },
       },
     },
+    // Pro 11 2018/2021 (notch)
     1194: {
       LANDSCAPE: {
         SAFE_AREA: 0,
@@ -262,6 +305,7 @@ export const IOS_OFFSETS: IosOffsets = {
         HOME_BAR: { x: 279, y: 1179, height: 9, width: 276 },
       },
     },
+    // Pro 12.9 2017 (no notch)/2018/2021 (notch)
     1366: {
       LANDSCAPE: {
         SAFE_AREA: 0,
