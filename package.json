@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
   "dependencies": {
-    "canvas": "^2.9.3",
+    "canvas": "^2.10.1",
     "fs-extra": "^10.0.1"
   },
   "devDependencies": {
