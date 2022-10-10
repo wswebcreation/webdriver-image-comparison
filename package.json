@@ -35,11 +35,9 @@
   "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
   "dependencies": {
     "canvas": "^2.9.3",
-    "chalk": "^4.1.2",
     "fs-extra": "^10.0.1"
   },
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",

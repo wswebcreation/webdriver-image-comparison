@@ -1,4 +1,3 @@
-import { red, yellow } from 'chalk';
 import { access, copySync, outputFile, readFileSync } from 'fs-extra';
 import { join } from 'path';
 import { createCanvas, loadImage } from 'canvas';
@@ -36,29 +35,30 @@ export async function checkBaselineImageExists(
             copySync(actualFilePath, baselineFilePath);
             if (logLevel === LogLevel.info) {
               console.log(
-                yellow(`
+                '\x1b[33m%s\x1b[0m',
+                `
 #####################################################################################
  INFO:
  Autosaved the image to
  ${baselineFilePath}
 #####################################################################################
-`),
+`,
               );
             }
           } catch (error) {
             /* istanbul ignore next */
             reject(
-              red(`
+              `
 #####################################################################################
  Image could not be copied. The following error was thrown:
  ${error}
 #####################################################################################
-`),
+`,
             );
           }
         } else {
           reject(
-            red(`
+            `
 #####################################################################################
  Baseline image not found, save the actual image manually to the baseline.
  The image can be found here:
@@ -66,7 +66,7 @@ export async function checkBaselineImageExists(
  If you want the module to auto save a non existing image to the baseline you
  can provide 'autoSaveBaseline: true' to the options.
 #####################################################################################
-`),
+`,
           );
         }
       }
@@ -109,7 +109,8 @@ export async function makeCroppedBase64Image({
     };
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  WARNING:
  THE 'resizeDimensions' NEEDS TO BE AN OBJECT LIKE
@@ -128,7 +129,7 @@ export async function makeCroppedBase64Image({
  }
  THIS IS DEPRACATED AND WILL BE REMOVED IN A NEW MAJOR RELEASE
 #####################################################################################
-`),
+`,
       );
     }
   } else {
@@ -152,13 +153,14 @@ export async function makeCroppedBase64Image({
   if (sourceXStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${left}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceXStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`),
+`,
       );
     }
     sourceXStart = 0;
@@ -167,13 +169,14 @@ export async function makeCroppedBase64Image({
   if (sourceYStart < 0) {
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  THE RESIZE DIMENSION LEFT '${top}' MADE THE CROPPING GO OUT OF
  THE IMAGE BOUNDARIES RESULTING IN AN IMAGE STARTPOSITION '${sourceYStart}'.
  THIS HAS BEEN DEFAULTED TO '0'
 #####################################################################################
-`),
+`,
       );
     }
     sourceYStart = 0;
@@ -254,7 +257,8 @@ export async function makeCroppedBase64Image({
 
   if (isIosBezelError) {
     console.log(
-      yellow(`
+      '\x1b[33m%s\x1b[0m',
+      `
 #####################################################################################
  WARNING:
  We could not find the bezel corners for the device '${deviceName}'.
@@ -262,7 +266,7 @@ export async function makeCroppedBase64Image({
  and couldn't be found in the supported devices:
  ${supportedIosBezelDevices.join(', ')}
 #####################################################################################
-`),
+`,
     );
   }
 
@@ -364,12 +368,13 @@ export async function executeImageCompare(
 
     if (logLevel === LogLevel.debug || logLevel === LogLevel.warn) {
       console.log(
-        yellow(`
+        '\x1b[33m%s\x1b[0m',
+        `
 #####################################################################################
  ${isDifference ? isDifferenceMessage : debugMessage}
  ${diffFilePath}
 #####################################################################################
-`),
+`,
       );
     }
   }
