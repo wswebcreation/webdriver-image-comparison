@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/wswebcreation/webdriver-image-comparison#readme",
   "dependencies": {
-    "canvas": "^2.9.3",
+    "canvas": "^2.10.1",
     "chalk": "^4.1.2",
     "fs-extra": "^10.0.1"
   },
