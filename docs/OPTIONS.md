@@ -12,6 +12,14 @@ Plugin options are the options that can be set when the plugin is instantiated.
 
 The padding that needs to be added to the address bar on iOS and Android to do a proper cutout of the the viewport.
 
+### `autoElementScroll`
+
+- **Type:** `boolean`
+- **Mandatory:** No
+- **Default:** `true`
+
+This option allows you to disable the automatic scrolling of the element into the view when an element screenshot is created.
+
 ### `addIOSBezelCorners`
 
 - **Type:** `boolean`

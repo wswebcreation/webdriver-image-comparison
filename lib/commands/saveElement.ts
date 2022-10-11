@@ -28,7 +28,8 @@ export default async function saveElement(
   saveElementOptions: SaveElementOptions,
 ): Promise<ScreenshotOutput> {
   // 1a. Set some variables
-  const { addressBarShadowPadding, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } = saveElementOptions.wic;
+  const { addressBarShadowPadding, autoElementScroll, formatImageName, logLevel, savePerInstance, toolBarShadowPadding } =
+    saveElementOptions.wic;
   const { executor } = methods;
   // 1b. Set the method options to the right values
   const disableCSSAnimation: boolean =
@@ -74,8 +75,11 @@ export default async function saveElement(
   } = enrichedInstanceData;
 
   // Scroll the element into top of the viewport and return the current scroll position
-  const currentPosition = await executor(scrollElementIntoView, element, addressBarShadowPadding);
-  await waitFor(500);
+  let currentPosition: number;
+  if (autoElementScroll) {
+    currentPosition = await executor(scrollElementIntoView, element, addressBarShadowPadding);
+    await waitFor(500);
+  }
 
   // 3.  Take the screenshot
   const base64Image: string = await takeBase64Screenshot(methods.screenShot);
@@ -96,10 +100,12 @@ export default async function saveElement(
     element,
   });
 
-  // When the screenshot has been taken and the element position has been determined,
-  // we can scroll back to the original position
-  // We don't need to wait for the scroll here because we don't take a screenshot after this
-  await executor(scrollToPosition, currentPosition);
+  if (autoElementScroll) {
+    // When the screenshot has been taken and the element position has been determined,
+    // we can scroll back to the original position
+    // We don't need to wait for the scroll here because we don't take a screenshot after this
+    await executor(scrollToPosition, currentPosition);
+  }
 
   // 5.  Make a cropped base64 image with resizeDimensions
   // @TODO: we have isLandscape here
