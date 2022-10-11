@@ -11,6 +11,7 @@ export function defaultOptions(options: ClassOptions): DefaultOptions {
      * Module options
      */
     addressBarShadowPadding: options.addressBarShadowPadding || DEFAULT_SHADOW.ADDRESS_BAR,
+    autoElementScroll: options.hasOwnProperty('autoElementScroll') ? options.autoElementScroll : true,
     addIOSBezelCorners: options.addIOSBezelCorners || false,
     autoSaveBaseline: options.autoSaveBaseline || false,
     clearFolder: options.clearRuntimeFolder || false,

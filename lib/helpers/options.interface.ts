@@ -6,6 +6,8 @@ export interface ClassOptions {
    */
   // The padding that needs to be added to the address bar on iOS and Android to do a proper cutout of the the viewport.
   addressBarShadowPadding?: number;
+  // Automatically scroll to an element before taking a screenshot.
+  autoElementScroll?: boolean;
   // Add iOS bezel corners and notch/dynamic island to the screenshot
   addIOSBezelCorners?: boolean;
   // If no baseline image is found during the comparison the image is automatically copied to the baseline folder when this is set to `true`
@@ -74,6 +76,7 @@ export interface ClassOptions {
 
 export interface DefaultOptions {
   addressBarShadowPadding: number;
+  autoElementScroll: boolean;
   addIOSBezelCorners: boolean;
   autoSaveBaseline: boolean;
   clearFolder: boolean;
