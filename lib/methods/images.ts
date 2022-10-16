@@ -353,7 +353,9 @@ export async function executeImageCompare(
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
   const rawMisMatchPercentage = data.rawMisMatchPercentage;
-  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage ? rawMisMatchPercentage : data.misMatchPercentage;
+  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage
+    ? rawMisMatchPercentage
+    : Number(data.rawMisMatchPercentage.toFixed(3));
 
   // 6.		Save the diff when there is a diff or when debug mode is on
   if (rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
