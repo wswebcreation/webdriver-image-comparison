@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { DESKTOP, IOS_OFFSETS, PLATFORMS } from './constants';
+import { DESKTOP, PLATFORMS } from './constants';
 import { ensureDirSync } from 'fs-extra';
 import {
   FormatFileDefaults,

@@ -353,7 +353,9 @@ export async function executeImageCompare(
   // 5.		Execute the compare and retrieve the data
   const data: CompareData = await compareImages(readFileSync(baselineFilePath), readFileSync(actualFilePath), compareOptions);
   const rawMisMatchPercentage = data.rawMisMatchPercentage;
-  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage ? rawMisMatchPercentage : data.misMatchPercentage;
+  const reportMisMatchPercentage = imageCompareOptions.rawMisMatchPercentage
+    ? rawMisMatchPercentage
+    : Number(data.rawMisMatchPercentage.toFixed(3));
 
   // 6.		Save the diff when there is a diff or when debug mode is on
   if (rawMisMatchPercentage > imageCompareOptions.saveAboveTolerance || logLevel === LogLevel.debug) {
@@ -512,62 +514,4 @@ async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: 
   ctx.drawImage(image, image.width / -2, image.height / -2);
 
   return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
-}
-
-/**
- * Create the device bezel corners
- */
-function createDeviceBezelCorners({
-  ctx,
-  x,
-  y,
-  width,
-  height,
-  radius,
-}: {
-  ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  radius: number;
-}) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}
-
-/**
- * Create the notch
- */
-function createNotch({
-  ctx,
-  x,
-  y,
-  width,
-  height,
-}: {
-  ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}) {
-  const radius = Math.round((height > width ? width : height) / 2);
-  createDeviceBezelCorners({
-    ctx,
-    x,
-    y,
-    width,
-    height,
-    radius,
-  });
 }

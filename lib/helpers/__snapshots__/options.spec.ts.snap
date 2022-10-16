@@ -2,7 +2,9 @@
 
 exports[`options defaultOptions should return the default options when no options are provided 1`] = `
 Object {
+  "addIOSBezelCorners": false,
   "addressBarShadowPadding": 6,
+  "autoElementScroll": true,
   "autoSaveBaseline": false,
   "clearFolder": false,
   "compareOptions": Object {
@@ -48,7 +50,9 @@ Object {
 
 exports[`options defaultOptions should return the provided options when options are provided 1`] = `
 Object {
+  "addIOSBezelCorners": false,
   "addressBarShadowPadding": 1,
+  "autoElementScroll": true,
   "autoSaveBaseline": true,
   "clearFolder": false,
   "compareOptions": Object {
