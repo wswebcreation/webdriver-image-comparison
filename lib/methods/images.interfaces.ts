@@ -3,13 +3,13 @@ import { LogLevel } from '../helpers/options.interface';
 
 export interface ResizeDimensions {
   // The bottom margin
-  bottom: number;
+  bottom?: number;
   // The left margin
-  left: number;
+  left?: number;
   // The right margin
-  right: number;
+  right?: number;
   // The top margin
-  top: number;
+  top?: number;
 }
 
 export interface ImageCompareOptions {
