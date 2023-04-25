@@ -11,6 +11,7 @@ import {
 import { Executor } from './methods.interface';
 import getIosStatusAddressToolBarOffsets from '../clientSideScripts/getIosStatusAddressToolBarOffsets';
 import getAndroidStatusAddressToolBarOffsets from '../clientSideScripts/getAndroidStatusAddressToolBarOffsets';
+import { StatusAddressToolBarOffsets } from '../clientSideScripts/statusAddressToolBarOffsets.interfaces';
 
 /**
  * Determine the element rectangles on the page / screenshot
@@ -115,9 +116,12 @@ export async function determineStatusAddressToolBarRectangles(
     isMobile &&
     (checkAndroidNativeWebScreenshot(platformName, isAndroidNativeWebScreenshot) || checkIsIos(platformName))
   ) {
-    const { sideBar, statusAddressBar, toolBar } = await (checkIsIos(platformName)
+    const { sideBar, statusAddressBar, toolBar } = (await (checkIsIos(platformName)
       ? executor(getIosStatusAddressToolBarOffsets, IOS_OFFSETS, isLandscape)
-      : executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, { isHybridApp, isLandscape }));
+      : executor(getAndroidStatusAddressToolBarOffsets, ANDROID_OFFSETS, {
+          isHybridApp,
+          isLandscape,
+        }))) as StatusAddressToolBarOffsets;
 
     if (blockOutStatusBar) {
       rectangles.push(statusAddressBar);
