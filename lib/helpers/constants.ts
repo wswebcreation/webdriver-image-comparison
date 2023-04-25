@@ -1,4 +1,5 @@
 import { IosOffsets } from './constants.interfaces';
+import { ResizeDimensions } from '../methods/images.interfaces';
 
 export const DEFAULT_FORMAT_STRING = '{tag}-{browserName}-{width}x{height}-dpr-{dpr}';
 export const PLATFORMS = {
@@ -20,7 +21,7 @@ export const DEFAULT_SHADOW = {
 };
 export const DESKTOP = 'desktop';
 export const CUSTOM_CSS_ID = 'pic-css';
-export const DEFAULT_RESIZE_DIMENSIONS = {
+export const DEFAULT_RESIZE_DIMENSIONS: Required<ResizeDimensions> = {
   top: 0,
   right: 0,
   bottom: 0,
