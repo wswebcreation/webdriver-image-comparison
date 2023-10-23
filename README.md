@@ -14,3 +14,6 @@ More information and documentation will soon come
 - [ ] Make proper documentation
 - [ ] Optimize UT's and increase coverage
 - [ ] Look at the execute methods, maybe they could be optimized
+
+## Dependencies
+- Dropped support for NodeJS 16
