@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x, 20.x]
 
     steps:
     - name: Checkout Repository
@@ -25,7 +25,7 @@ jobs:
     # Testing steps
     - name: Install dependencies
       working-directory: ./
-      run: npm install
+      run: npm ci
 
     - name: Run Unit Tests and generate coverage report
       working-directory: ./
