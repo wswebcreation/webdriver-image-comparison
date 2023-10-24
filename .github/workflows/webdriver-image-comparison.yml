@@ -25,7 +25,7 @@ jobs:
     # Testing steps
     - name: Install dependencies
       working-directory: ./
-      run: npm install
+      run: npm ci
 
     - name: Run Unit Tests and generate coverage report
       working-directory: ./

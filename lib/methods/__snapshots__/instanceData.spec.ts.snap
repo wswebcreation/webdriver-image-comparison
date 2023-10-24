@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getEnrichedInstanceData should be able to enrich the instance data with all the defaults for Android ChromeDriver with no shadow padding 1`] = `
-{
+Object {
   "addressBarShadowPadding": 0,
-  "body": {
+  "body": Object {
     "offsetHeight": 0,
     "scrollHeight": 0,
   },
   "browserName": "browserName",
   "browserVersion": "browserVersion",
   "deviceName": "deviceName",
-  "html": {
+  "html": Object {
     "clientHeight": 0,
     "clientWidth": 0,
     "offsetHeight": 0,
@@ -30,7 +30,7 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
   "platformName": "Android",
   "platformVersion": "8.0",
   "toolBarShadowPadding": 0,
-  "window": {
+  "window": Object {
     "devicePixelRatio": 1,
     "innerHeight": 768,
     "innerWidth": 1024,
@@ -43,16 +43,16 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
 `;
 
 exports[`getEnrichedInstanceData should be able to enrich the instance data with all the defaults for Android Native Webscreenshot with no shadow padding 1`] = `
-{
+Object {
   "addressBarShadowPadding": 0,
-  "body": {
+  "body": Object {
     "offsetHeight": 0,
     "scrollHeight": 0,
   },
   "browserName": "browserName",
   "browserVersion": "browserVersion",
   "deviceName": "deviceName",
-  "html": {
+  "html": Object {
     "clientHeight": 0,
     "clientWidth": 0,
     "offsetHeight": 0,
@@ -72,7 +72,7 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
   "platformName": "Android",
   "platformVersion": "8.0",
   "toolBarShadowPadding": 0,
-  "window": {
+  "window": Object {
     "devicePixelRatio": 1,
     "innerHeight": 768,
     "innerWidth": 1024,
@@ -85,16 +85,16 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
 `;
 
 exports[`getEnrichedInstanceData should be able to enrich the instance data with all the defaults for desktop with no shadow padding 1`] = `
-{
+Object {
   "addressBarShadowPadding": 0,
-  "body": {
+  "body": Object {
     "offsetHeight": 0,
     "scrollHeight": 0,
   },
   "browserName": "browserName",
   "browserVersion": "browserVersion",
   "deviceName": "deviceName",
-  "html": {
+  "html": Object {
     "clientHeight": 0,
     "clientWidth": 0,
     "offsetHeight": 0,
@@ -114,7 +114,7 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
   "platformName": "platformName",
   "platformVersion": "platformVersion",
   "toolBarShadowPadding": 0,
-  "window": {
+  "window": Object {
     "devicePixelRatio": 1,
     "innerHeight": 768,
     "innerWidth": 1024,
@@ -127,16 +127,16 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
 `;
 
 exports[`getEnrichedInstanceData should be able to enrich the instance data with all the defaults for iOS with shadow padding 1`] = `
-{
+Object {
   "addressBarShadowPadding": 6,
-  "body": {
+  "body": Object {
     "offsetHeight": 0,
     "scrollHeight": 0,
   },
   "browserName": "browserName",
   "browserVersion": "browserVersion",
   "deviceName": "deviceName",
-  "html": {
+  "html": Object {
     "clientHeight": 0,
     "clientWidth": 0,
     "offsetHeight": 0,
@@ -156,7 +156,7 @@ exports[`getEnrichedInstanceData should be able to enrich the instance data with
   "platformName": "iOS",
   "platformVersion": "12.4",
   "toolBarShadowPadding": 15,
-  "window": {
+  "window": Object {
     "devicePixelRatio": 1,
     "innerHeight": 768,
     "innerWidth": 1024,

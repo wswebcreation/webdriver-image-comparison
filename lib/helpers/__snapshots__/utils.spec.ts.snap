@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`utils calculateDprData should multiple all number values by the dpr value 1`] = `
-{
+Object {
   "1": 6,
   "a": 2,
   "a1": 18,
@@ -90,14 +90,14 @@ exports[`utils getAndCreatePath should create the folder and return the folder n
 exports[`utils getAndCreatePath should create the folder and return the folder name for a device that needs to have its own folder 2`] = `true`;
 
 exports[`utils getScreenshotSize should get the screenshot size of a screenshot string with DRP 2 1`] = `
-{
+Object {
   "height": 768,
   "width": 1366,
 }
 `;
 
 exports[`utils getScreenshotSize should get the screenshot size of a screenshot string with the default DPR 1`] = `
-{
+Object {
   "height": 1536,
   "width": 2732,
 }

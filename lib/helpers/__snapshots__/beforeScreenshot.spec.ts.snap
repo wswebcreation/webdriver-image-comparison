@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`beforeScreenshot should be able to return the enriched instance data with \`addShadowPadding: true\` 1`] = `
-{
+Object {
   "addressBarShadowPadding": 0,
   "browserName": "browserName",
   "browserVersion": "browserVersion",
@@ -23,7 +23,7 @@ exports[`beforeScreenshot should be able to return the enriched instance data wi
 `;
 
 exports[`beforeScreenshot should be able to return the enriched instance data with default options 1`] = `
-{
+Object {
   "addressBarShadowPadding": 0,
   "browserName": "browserName",
   "browserVersion": "browserVersion",

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`options defaultOptions should return the default options when no options are provided 1`] = `
-{
+Object {
   "addIOSBezelCorners": false,
   "addressBarShadowPadding": 6,
   "autoElementScroll": true,
   "autoSaveBaseline": false,
   "clearFolder": false,
-  "compareOptions": {
+  "compareOptions": Object {
     "blockOutSideBar": false,
     "blockOutStatusBar": false,
     "blockOutToolBar": false,
@@ -28,8 +28,8 @@ exports[`options defaultOptions should return the default options when no option
   "isHybridApp": false,
   "logLevel": "info",
   "savePerInstance": false,
-  "tabbableOptions": {
-    "circle": {
+  "tabbableOptions": Object {
+    "circle": Object {
       "backgroundColor": "#ff0000",
       "borderColor": "#000",
       "borderWidth": 1,
@@ -39,7 +39,7 @@ exports[`options defaultOptions should return the default options when no option
       "showNumber": true,
       "size": 10,
     },
-    "line": {
+    "line": Object {
       "color": "#000",
       "width": 1,
     },
@@ -49,13 +49,13 @@ exports[`options defaultOptions should return the default options when no option
 `;
 
 exports[`options defaultOptions should return the provided options when options are provided 1`] = `
-{
+Object {
   "addIOSBezelCorners": false,
   "addressBarShadowPadding": 1,
   "autoElementScroll": true,
   "autoSaveBaseline": true,
   "clearFolder": false,
-  "compareOptions": {
+  "compareOptions": Object {
     "blockOutSideBar": true,
     "blockOutStatusBar": true,
     "blockOutToolBar": true,
@@ -76,8 +76,8 @@ exports[`options defaultOptions should return the provided options when options 
   "isHybridApp": false,
   "logLevel": "info",
   "savePerInstance": true,
-  "tabbableOptions": {
-    "circle": {
+  "tabbableOptions": Object {
+    "circle": Object {
       "backgroundColor": "backgroundColor",
       "borderColor": "borderColor",
       "borderWidth": 123,
@@ -87,7 +87,7 @@ exports[`options defaultOptions should return the provided options when options 
       "showNumber": false,
       "size": 567,
     },
-    "line": {
+    "line": Object {
       "color": "color",
       "width": 987,
     },
@@ -96,12 +96,12 @@ exports[`options defaultOptions should return the provided options when options 
 }
 `;
 
-exports[`options methodCompareOptions should not return the method options when no options are provided 1`] = `{}`;
+exports[`options methodCompareOptions should not return the method options when no options are provided 1`] = `Object {}`;
 
 exports[`options methodCompareOptions should return the provided options when options are provided 1`] = `
-{
-  "blockOut": [
-    {
+Object {
+  "blockOut": Array [
+    Object {
       "height": 1,
       "width": 2,
       "x": 3,
@@ -120,12 +120,12 @@ exports[`options methodCompareOptions should return the provided options when op
 }
 `;
 
-exports[`options screenMethodCompareOptions should not return the screen method options when no options are provided 1`] = `{}`;
+exports[`options screenMethodCompareOptions should not return the screen method options when no options are provided 1`] = `Object {}`;
 
 exports[`options screenMethodCompareOptions should return the provided options when options are provided 1`] = `
-{
-  "blockOut": [
-    {
+Object {
+  "blockOut": Array [
+    Object {
       "height": 1,
       "width": 2,
       "x": 3,
