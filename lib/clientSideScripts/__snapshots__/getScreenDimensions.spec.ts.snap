@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getScreenDimensions should get the needed screen dimensions 1`] = `
-Object {
-  "dimensions": Object {
-    "body": Object {
+{
+  "dimensions": {
+    "body": {
       "offsetHeight": 0,
       "scrollHeight": 0,
     },
-    "html": Object {
+    "html": {
       "clientHeight": 0,
       "clientWidth": 0,
       "offsetHeight": 0,
       "scrollHeight": 0,
       "scrollWidth": 0,
     },
-    "window": Object {
+    "window": {
       "devicePixelRatio": 1,
       "innerHeight": 768,
       "innerWidth": 1024,
@@ -29,20 +29,20 @@ Object {
 `;
 
 exports[`getScreenDimensions should get the needed screen dimensions if the outerHeight and outerWidth are set to 0 1`] = `
-Object {
-  "dimensions": Object {
-    "body": Object {
+{
+  "dimensions": {
+    "body": {
       "offsetHeight": 0,
       "scrollHeight": 0,
     },
-    "html": Object {
+    "html": {
       "clientHeight": 1234,
       "clientWidth": 4321,
       "offsetHeight": 0,
       "scrollHeight": 0,
       "scrollWidth": 0,
     },
-    "window": Object {
+    "window": {
       "devicePixelRatio": 1,
       "innerHeight": 768,
       "innerWidth": 1024,
@@ -57,20 +57,20 @@ Object {
 `;
 
 exports[`getScreenDimensions should return zeroed dimensions if the document attributes are null 1`] = `
-Object {
-  "dimensions": Object {
-    "body": Object {
+{
+  "dimensions": {
+    "body": {
       "offsetHeight": 0,
       "scrollHeight": 0,
     },
-    "html": Object {
+    "html": {
       "clientHeight": 0,
       "clientWidth": 0,
       "offsetHeight": 0,
       "scrollHeight": 0,
       "scrollWidth": 0,
     },
-    "window": Object {
+    "window": {
       "devicePixelRatio": 1,
       "innerHeight": 768,
       "innerWidth": 1024,

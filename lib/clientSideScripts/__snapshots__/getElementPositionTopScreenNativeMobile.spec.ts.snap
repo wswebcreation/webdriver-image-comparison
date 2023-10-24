@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getElementPositionTopScreenNativeMobile should get the element position to the top of the screen for a mobile browser 1`] = `
-Object {
+{
   "height": 120,
   "width": 120,
   "x": 100,
@@ -10,7 +10,7 @@ Object {
 `;
 
 exports[`getElementPositionTopScreenNativeMobile should get the element position to the top of the screen for an app in landscape mode 1`] = `
-Object {
+{
   "height": 120,
   "width": 120,
   "x": 144,
@@ -19,7 +19,7 @@ Object {
 `;
 
 exports[`getElementPositionTopScreenNativeMobile should get the element position to the top of the screen for an app in portrait mode 1`] = `
-Object {
+{
   "height": 120,
   "width": 120,
   "x": 100,

@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major and minor version in the navigator 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 80,
     "width": 412,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 48,
     "width": 412,
     "x": 0,
@@ -27,23 +27,23 @@ Object {
 `;
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with major, minor and patch version in the navigator 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 80,
     "width": 412,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 48,
     "width": 412,
     "x": 0,
@@ -53,23 +53,23 @@ Object {
 `;
 
 exports[`getAndroidStatusAddressToolBarOffsets should get the android status, address and toolbar height with only a major version in the navigator 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 80,
     "width": 412,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 48,
     "width": 412,
     "x": 0,
@@ -79,23 +79,23 @@ Object {
 `;
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the default toolbar height when the toolbar height will become negative 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 412,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 24,
     "width": 412,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 48,
     "width": 412,
     "x": 0,
@@ -105,23 +105,23 @@ Object {
 `;
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a device in landscape mode 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 732,
   "screenWidth": 732,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 24,
     "width": 412,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 104,
     "width": 412,
     "x": 0,
@@ -131,23 +131,23 @@ Object {
 `;
 
 exports[`getAndroidStatusAddressToolBarOffsets should set the dimensions properly for a table in landscape mode 1`] = `
-Object {
+{
   "safeArea": 0,
   "screenHeight": 1024,
   "screenWidth": 1024,
-  "sideBar": Object {
+  "sideBar": {
     "height": 0,
     "width": 0,
     "x": 0,
     "y": 0,
   },
-  "statusAddressBar": Object {
+  "statusAddressBar": {
     "height": 24,
     "width": 1024,
     "x": 0,
     "y": 0,
   },
-  "toolBar": Object {
+  "toolBar": {
     "height": 140,
     "width": 1024,
     "x": 0,

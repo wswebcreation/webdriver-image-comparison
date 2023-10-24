@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`screenshots getBase64FullPageScreenshotsData should get hide elements for the Android nativeWebScreenshot fullpage screenshot 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1176,
@@ -12,7 +12,7 @@ Object {
       "imageYPosition": 124,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1176,
       "imageHeight": 400,
@@ -28,9 +28,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should get the Android ChromeDriver fullpage screenshot data 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1600,
@@ -39,7 +39,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1600,
       "imageHeight": 800,
@@ -55,9 +55,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should get the Android nativeWebScreenshot fullpage screenshot data 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1576,
@@ -73,9 +73,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should get the desktop browser fullpage screenshot data 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1536,
@@ -84,7 +84,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1536,
       "imageHeight": 1536,
@@ -93,7 +93,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 3072,
       "imageHeight": 1536,
@@ -102,7 +102,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 4608,
       "imageHeight": 1536,
@@ -111,7 +111,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 6144,
       "imageHeight": 256,
@@ -127,9 +127,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should get the iOS fullpage screenshot data 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1576,
@@ -138,7 +138,7 @@ Object {
       "imageYPosition": 200,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1576,
       "imageHeight": 824,
@@ -154,9 +154,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should get the iOS fullpage screenshot data for a landscape iPad 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2412,
       "canvasYPosition": 0,
       "imageHeight": 776,
@@ -165,7 +165,7 @@ Object {
       "imageYPosition": 106,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2412,
       "canvasYPosition": 776,
       "imageHeight": 424,
@@ -181,9 +181,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should hide elements for the Android ChromeDriver fullpage screenshot 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1600,
@@ -192,7 +192,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1600,
       "imageHeight": 800,
@@ -208,9 +208,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should hide elements for the desktop browser fullpage screenshot 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1536,
@@ -219,7 +219,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1536,
       "imageHeight": 1536,
@@ -228,7 +228,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 3072,
       "imageHeight": 1536,
@@ -237,7 +237,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 4608,
       "imageHeight": 1536,
@@ -246,7 +246,7 @@ Object {
       "imageYPosition": 0,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 6144,
       "imageHeight": 256,
@@ -262,9 +262,9 @@ Object {
 `;
 
 exports[`screenshots getBase64FullPageScreenshotsData should hide elements for the iOS fullpage screenshot 1`] = `
-Object {
-  "data": Array [
-    Object {
+{
+  "data": [
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 0,
       "imageHeight": 1576,
@@ -273,7 +273,7 @@ Object {
       "imageYPosition": 200,
       "screenshot": "mocked-screenshot-string",
     },
-    Object {
+    {
       "canvasWidth": 2732,
       "canvasYPosition": 1576,
       "imageHeight": 824,
