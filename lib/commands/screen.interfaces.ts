@@ -1,3 +1,4 @@
+import { Folders } from '../base.interface';
 import { DefaultOptions } from '../helpers/options.interface';
 import { CheckMethodOptions } from './check.interfaces';
 
@@ -6,7 +7,7 @@ export interface SaveScreenOptions {
   method: SaveScreenMethodOptions;
 }
 
-export interface SaveScreenMethodOptions {
+export interface SaveScreenMethodOptions extends Partial<Folders> {
   // Disable all css animations
   disableCSSAnimation?: boolean;
   // Hide scrollbars, this is optional
