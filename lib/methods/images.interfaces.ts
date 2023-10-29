@@ -1,5 +1,6 @@
 import { RectanglesOutput } from './rectangles.interfaces';
 import { LogLevel } from '../helpers/options.interface';
+import { Folders } from '../base.interface';
 
 export interface ResizeDimensions {
   // The bottom margin
@@ -100,19 +101,13 @@ export interface MethodImageCompareCompareOptions {
   scaleImagesToSameSize?: boolean;
 }
 
-export interface ImageCompareFolderOptions {
+export interface ImageCompareFolderOptions extends Folders {
   // Auto save image to baseline
   autoSaveBaseline: boolean;
-  // The actual folder
-  actualFolder: string;
-  // The baseline folder
-  baselineFolder: any;
   // The name of the browser
   browserName: string;
   // The name of the device
   deviceName: string;
-  // The diff folder
-  diffFolder: string;
   // Is the instance a mobile instance
   isMobile: boolean;
   // If the folder needs to have the instance name in it

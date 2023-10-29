@@ -1,3 +1,4 @@
+import { Folders } from '../base.interface';
 import { DefaultOptions } from '../helpers/options.interface';
 import { ResizeDimensions } from '../methods/images.interfaces';
 import { CheckMethodOptions } from './check.interfaces';
@@ -7,7 +8,7 @@ export interface SaveElementOptions {
   method: SaveElementMethodOptions;
 }
 
-export interface SaveElementMethodOptions {
+export interface SaveElementMethodOptions extends Partial<Folders> {
   // The padding that needs to be added to the address bar on iOS and Android
   addressBarShadowPadding?: number;
   // Disable all css animations
