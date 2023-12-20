@@ -1,8 +1,16 @@
 import { access, copySync, outputFile, readFileSync } from 'fs-extra';
 import { join } from 'path';
-import { createCanvas, loadImage } from 'canvas';
+import { Bitmap, decodePNGFromStream, make } from 'pureimage';
+import { Readable } from 'stream';
 import compareImages from '../resemble/compareImages';
-import { calculateDprData, getAndCreatePath, getIosBezelImageNames, getScreenshotSize } from '../helpers/utils';
+import {
+  base64ToBuffer,
+  calculateDprData,
+  encodeBitmapToBuffer,
+  getAndCreatePath,
+  getIosBezelImageNames,
+  getScreenshotSize,
+} from '../helpers/utils';
 import { DEFAULT_RESIZE_DIMENSIONS, supportedIosBezelDevices } from '../helpers/constants';
 import { determineStatusAddressToolBarRectangles } from './rectangles';
 import {
@@ -17,6 +25,25 @@ import { FullPageScreenshotsData } from './screenshots.interfaces';
 import { Executor } from './methods.interface';
 import { CompareData } from '../resemble/compare.interfaces';
 import { LogLevel } from '../helpers/options.interface';
+
+/**
+ * Read the image from a buffer
+ */
+async function readImageFromBuffer(buffer: Buffer): Promise<Bitmap> {
+  const stream = new Readable({
+    read() {},
+  });
+
+  stream.push(buffer);
+  stream.push(null);
+
+  try {
+    const img = await decodePNGFromStream(stream);
+    return img;
+  } catch (err) {
+    throw new Error(`Error decoding image: ${err}`);
+  }
+}
 
 /**
  * Check if the image exists and create a new baseline image if needed
@@ -143,8 +170,8 @@ export async function makeCroppedBase64Image({
   const { height, width, x, y } = rectangles;
   const canvasWidth = width + left + right;
   const canvasHeight = height + top + bottom;
-  const canvas = createCanvas(canvasWidth, canvasHeight);
-  const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
+  const canvas = make(canvasWidth, canvasHeight);
+  const image = await readImageFromBuffer(base64ToBuffer(newBase64Image));
   const ctx = canvas.getContext('2d');
 
   let sourceXStart = x - left;
@@ -238,11 +265,11 @@ export async function makeCroppedBase64Image({
           })
         : bottomImage;
       // Draw top image, always place it at x=0 and y=0
-      ctx.drawImage(await loadImage(`data:image/png;base64,${topBase64Image}`), 0, 0);
+      ctx.drawImage(await readImageFromBuffer(base64ToBuffer(topBase64Image)), 0, 0);
       // Draw bottom image, depending if the screen is rotated it needs to be placed
       // y = heightScreen - heightBottom or x = widthScreen - heightBottom
       ctx.drawImage(
-        await loadImage(`data:image/png;base64,${bottomBase64Image}`),
+        await readImageFromBuffer(base64ToBuffer(bottomBase64Image)),
         isLandscape ? canvasWidth - getScreenshotSize(bottomImage).height : 0,
         isLandscape ? 0 : canvasHeight - getScreenshotSize(bottomImage).height,
       );
@@ -270,7 +297,8 @@ export async function makeCroppedBase64Image({
     );
   }
 
-  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+  const buffer = await encodeBitmapToBuffer(canvas);
+  return buffer.toString('base64');
 }
 
 /**
@@ -403,7 +431,7 @@ export async function makeFullPageBase64Image(
 ): Promise<string> {
   const amountOfScreenshots = screenshotsData.data.length;
   const { fullPageHeight: canvasHeight, fullPageWidth: canvasWidth } = screenshotsData;
-  const canvas = createCanvas(canvasWidth, canvasHeight);
+  const canvas = make(canvasWidth, canvasHeight);
   const ctx = canvas.getContext('2d');
 
   // Load all the images
@@ -422,7 +450,7 @@ export async function makeFullPageBase64Image(
         })
       : currentScreenshot;
     const { canvasYPosition, imageHeight, imageWidth, imageXPosition, imageYPosition } = screenshotsData.data[i];
-    const image = await loadImage(`data:image/png;base64,${newBase64Image}`);
+    const image = await readImageFromBuffer(base64ToBuffer(newBase64Image));
 
     ctx.drawImage(
       image,
@@ -441,7 +469,8 @@ export async function makeFullPageBase64Image(
     );
   }
 
-  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+  const buffer = await encodeBitmapToBuffer(canvas);
+  return buffer.toString('base64');
 }
 
 /**
@@ -457,8 +486,8 @@ export async function saveBase64Image(base64Image: string, filePath: string): Pr
 export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes[]): Promise<string> {
   // Create canvas and load image
   const { height, width } = getScreenshotSize(screenshot);
-  const canvas = createCanvas(width, height);
-  const image = await loadImage(`data:image/png;base64,${screenshot}`);
+  const canvas = make(width, height);
+  const image = await readImageFromBuffer(base64ToBuffer(screenshot));
   const canvasContext = canvas.getContext('2d');
 
   // Draw the image on canvas
@@ -481,7 +510,7 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
   // Loop over all ignored areas and add them to the current canvas
   ignoredBoxes.forEach((ignoredBox) => {
     const { right: ignoredBoxWidth, bottom: ignoredBoxHeight, left: x, top: y } = ignoredBox;
-    const ignoreCanvas = createCanvas(ignoredBoxWidth - x, ignoredBoxHeight - y);
+    const ignoreCanvas = make(ignoredBoxWidth - x, ignoredBoxHeight - y);
     const ignoreContext = ignoreCanvas.getContext('2d');
 
     // Add a background color to the ignored box
@@ -494,7 +523,8 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
   });
 
   // Return the screenshot
-  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+  const buffer = await encodeBitmapToBuffer(canvas);
+  return buffer.toString('base64');
 }
 
 /**
@@ -502,9 +532,9 @@ export async function addBlockOuts(screenshot: string, ignoredBoxes: IgnoreBoxes
  * Tnx to https://gist.github.com/Zyndoras/6897abdf53adbedf02564808aaab94db
  */
 async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: RotateBase64ImageOptions): Promise<string> {
-  const canvas = createCanvas(newWidth, newHeight);
+  const canvas = make(newWidth, newHeight);
   const ctx = canvas.getContext('2d');
-  const image = await loadImage(`data:image/png;base64,${base64Image}`);
+  const image = await readImageFromBuffer(base64ToBuffer(base64Image));
 
   canvas.width = degrees % 180 === 0 ? image.width : image.height;
   canvas.height = degrees % 180 === 0 ? image.height : image.width;
@@ -513,5 +543,6 @@ async function rotateBase64Image({ base64Image, degrees, newHeight, newWidth }: 
   ctx.rotate((degrees * Math.PI) / 180);
   ctx.drawImage(image, image.width / -2, image.height / -2);
 
-  return canvas.toDataURL().replace(/^data:image\/png;base64,/, '');
+  const buffer = await encodeBitmapToBuffer(canvas);
+  return buffer.toString('base64');
 }

@@ -9,6 +9,8 @@ import {
   GetToolBarShadowPaddingOptions,
   ScreenshotSize,
 } from './utils.interfaces';
+import { Bitmap, encodePNGToStream } from 'pureimage';
+import { Writable } from 'stream';
 
 /**
  * Get and create a folder
@@ -159,6 +161,29 @@ export function getScreenshotSize(screenshot: string, devicePixelRation = 1): Sc
     height: Buffer.from(screenshot, 'base64').readUInt32BE(20) / devicePixelRation,
     width: Buffer.from(screenshot, 'base64').readUInt32BE(16) / devicePixelRation,
   };
+}
+
+/**
+ * Convert a base64 string to a buffer
+ */
+export function base64ToBuffer(base64String: string): Buffer {
+  return Buffer.from(base64String, 'base64');
+}
+
+/**
+ * Convert a buffer to a base64 string
+ */
+export async function encodeBitmapToBuffer(bitmap: Bitmap): Promise<Buffer> {
+  const buffers: Buffer[] = [];
+  const stream = new Writable({
+    write(chunk, _encoding, callback) {
+      buffers.push(chunk);
+      callback();
+    },
+  });
+
+  await encodePNGToStream(bitmap, stream);
+  return Buffer.concat(buffers);
 }
 
 /**
