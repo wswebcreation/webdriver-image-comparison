@@ -1,6 +1,8 @@
 # webdriver-image-comparison
 
-> **Ultra low-maintenance mode: One or two times a year the library author will spend some time to keep the library useful. Feel free to raise issues and contribute improvements, but please be aware that it may be sometime before a response is given.**
+> **~~Ultra low-maintenance mode: One or two times a year the library author will spend some time to keep the library useful. Feel free to raise issues and contribute improvements, but please be aware that it may be sometime before a response is given.~~**
+
+> **This project has been moved to the WebdriverIO core package and is part of the "NEW" [Visual Testing](https://github.com/webdriverio/visual-testing) packages of WebdriverIO.**
 
 ![webdriver-image-comparison workflow](https://github.com/wswebcreation/webdriver-image-comparison/actions/workflows/webdriver-image-comparison.yml/badge.svg)
 [![codecov](https://codecov.io/gh/wswebcreation/webdriver-image-comparison/branch/master/graph/badge.svg?token=Q4UsgDSRd3)](https://codecov.io/gh/wswebcreation/webdriver-image-comparison)
